@@ -1,0 +1,303 @@
+[
+ {
+  "route": "/",
+  "url": "https://www.ssproperty.in/",
+  "stats": {
+   "textLen": 9994,
+   "h1": [
+    "Find a Property\nYou'll Love to\nCall Home."
+   ],
+   "imgs": 24,
+   "imgsBroken": 0,
+   "links": [
+    "/",
+    "/properties",
+    "/projects",
+    "/sell-property",
+    "/work-with-us",
+    "/videos",
+    "/sell-property",
+    "/properties?location=Newtown",
+    "/properties?location=Rajarhat",
+    "/properties?location=Salt%20Lake",
+    "/properties?location=Chinar%20Park",
+    "/properties?location=Garia",
+    "/properties?location=Ballygunge",
+    "/properties?category=Premium",
+    "/properties?category=Budget",
+    "/properties?category=Ready%20to%20Move",
+    "/properties?category=Under%20Construction",
+    "/properties?category=Resale",
+    "/properties?category=Developers",
+    "/properties?category=Owners",
+    "/properties",
+    "/property/75de911b-220e-4e2c-89e8-d7d901a06b1b",
+    "/property/75de911b-220e-4e2c-89e8-d7d901a06b1b",
+    "/property/75de911b-220e-4e2c-89e8-d7d901a06b1b",
+    "/property/54be72e8-3311-4382-9fe7-112685d64b0f",
+    "/property/54be72e8-3311-4382-9fe7-112685d64b0f",
+    "/property/54be72e8-3311-4382-9fe7-112685d64b0f",
+    "/property/e1534117-1acb-45a8-a338-f769ca259f12",
+    "/property/e1534117-1acb-45a8-a338-f769ca259f12",
+    "/property/e1534117-1acb-45a8-a338-f769ca259f12",
+    "/property/69d2779d-3777-4b4f-aa89-684084518fc6",
+    "/property/69d2779d-3777-4b4f-aa89-684084518fc6",
+    "/property/69d2779d-3777-4b4f-aa89-684084518fc6",
+    "/property/b9501e47-d299-4ecf-bc5c-96a6d2257177",
+    "/property/b9501e47-d299-4ecf-bc5c-96a6d2257177",
+    "/property/b9501e47-d299-4ecf-bc5c-96a6d2257177",
+    "/property/4bf62e21-000e-47a2-bc4f-a6a8d52bd2f1",
+    "/property/4bf62e21-000e-47a2-bc4f-a6a8d52bd2f1",
+    "/property/4bf62e21-000e-47a2-bc4f-a6a8d52bd2f1",
+    "/property/3249a160-c7ad-408a-bb7a-6913496c401f",
+    "/property/3249a160-c7ad-408a-bb7a-6913496c401f",
+    "/property/3249a160-c7ad-408a-bb7a-6913496c401f",
+    "/property/9befed83-ea12-42c0-b588-48fa9c5add9e",
+    "/property/9befed83-ea12-42c0-b588-48fa9c5add9e",
+    "/property/9befed83-ea12-42c0-b588-48fa9c5add9e",
+    "/property/9093c621-fa9b-45f2-be6e-5cb8483d0480",
+    "/property/9093c621-fa9b-45f2-be6e-5cb8483d0480",
+    "/property/9093c621-fa9b-45f2-be6e-5cb8483d0480",
+    "/property/d97b4b66-08e0-4962-8e6b-6ad9a160a110",
+    "/property/d97b4b66-08e0-4962-8e6b-6ad9a160a110",
+    "/property/d97b4b66-08e0-4962-8e6b-6ad9a160a110",
+    "/property/d4a181c1-07ea-47b3-ae9b-60a34b673f71",
+    "/property/d4a181c1-07ea-47b3-ae9b-60a34b673f71",
+    "/property/d4a181c1-07ea-47b3-ae9b-60a34b673f71",
+    "/property/9918382c-8a94-43fa-a160-fcb1b00e453c",
+    "/property/9918382c-8a94-43fa-a160-fcb1b00e453c",
+    "/property/9918382c-8a94-43fa-a160-fcb1b00e453c",
+    "/property/1cf3cbaa-7933-45b3-9451-137d8b663e3a",
+    "/property/1cf3cbaa-7933-45b3-9451-137d8b663e3a",
+    "/property/1cf3cbaa-7933-45b3-9451-137d8b663e3a",
+    "/property/e911f87a-f3bf-41ff-8d84-331cde9a4e09",
+    "/property/e911f87a-f3bf-41ff-8d84-331cde9a4e09",
+    "/property/e911f87a-f3bf-41ff-8d84-331cde9a4e09",
+    "/property/b2d7ca00-a249-4411-a5ef-c57f03170891",
+    "/property/b2d7ca00-a249-4411-a5ef-c57f03170891",
+    "/property/b2d7ca00-a249-4411-a5ef-c57f03170891",
+    "/",
+    "/properties",
+    "/blog",
+    "/#about",
+    "/#contact",
+    "/properties",
+    "/#sell-property",
+    "/#developers",
+    "/#buyer-requirement",
+    "/#get-in-touch"
+   ]
+  },
+  "requestCount": 68,
+  "console": [
+   "error: Error loading Instagram feed: SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
+  ]
+ },
+ {
+  "route": "/properties",
+  "url": "https://www.ssproperty.in/properties",
+  "stats": {
+   "textLen": 750,
+   "h1": [
+    "Explore Properties"
+   ],
+   "imgs": 2,
+   "imgsBroken": 0,
+   "links": [
+    "/",
+    "/properties",
+    "/projects",
+    "/sell-property",
+    "/work-with-us",
+    "/videos",
+    "/sell-property",
+    "/",
+    "/properties",
+    "/blog",
+    "/#about",
+    "/#contact",
+    "/properties",
+    "/#sell-property",
+    "/#developers",
+    "/#buyer-requirement",
+    "/#get-in-touch"
+   ]
+  },
+  "requestCount": 29,
+  "console": []
+ },
+ {
+  "route": "/videos",
+  "url": "https://www.ssproperty.in/videos",
+  "stats": {
+   "textLen": 1350,
+   "h1": [
+    "Property Videos"
+   ],
+   "imgs": 12,
+   "imgsBroken": 0,
+   "links": [
+    "/",
+    "/properties",
+    "/projects",
+    "/sell-property",
+    "/work-with-us",
+    "/videos",
+    "/sell-property",
+    "/properties",
+    "/",
+    "/properties",
+    "/blog",
+    "/#about",
+    "/#contact",
+    "/properties",
+    "/#sell-property",
+    "/#developers",
+    "/#buyer-requirement",
+    "/#get-in-touch"
+   ]
+  },
+  "requestCount": 37,
+  "console": []
+ },
+ {
+  "route": "/blog",
+  "url": "https://www.ssproperty.in/blog",
+  "stats": {
+   "textLen": 3788,
+   "h1": [
+    "Real Estate Insights"
+   ],
+   "imgs": 8,
+   "imgsBroken": 0,
+   "links": [
+    "/",
+    "/properties",
+    "/projects",
+    "/sell-property",
+    "/work-with-us",
+    "/videos",
+    "/sell-property",
+    "/blog/bca161f6-8586-46ea-ab37-1f1b415243f2",
+    "/blog/f002d0ad-d12b-4387-bab3-6ab64f855db0",
+    "/blog/935c5579-a97d-4365-99cb-90cae07d09ad",
+    "/blog/47ea5159-5508-4052-b1fb-a66a72c23994",
+    "/blog/f552939a-015d-47d7-9629-5ee4b1163091",
+    "/blog/7cdffa12-2922-4018-afc1-4bec360a04e7",
+    "/",
+    "/properties",
+    "/blog",
+    "/#about",
+    "/#contact",
+    "/properties",
+    "/#sell-property",
+    "/#developers",
+    "/#buyer-requirement",
+    "/#get-in-touch"
+   ]
+  },
+  "requestCount": 33,
+  "console": []
+ },
+ {
+  "route": "/work-with-us",
+  "url": "https://www.ssproperty.in/work-with-us",
+  "stats": {
+   "textLen": 1339,
+   "h1": [
+    "Work With Us"
+   ],
+   "imgs": 2,
+   "imgsBroken": 0,
+   "links": [
+    "/",
+    "/properties",
+    "/projects",
+    "/sell-property",
+    "/work-with-us",
+    "/videos",
+    "/sell-property",
+    "/",
+    "/properties",
+    "/blog",
+    "/#about",
+    "/#contact",
+    "/properties",
+    "/#sell-property",
+    "/#developers",
+    "/#buyer-requirement",
+    "/#get-in-touch"
+   ]
+  },
+  "requestCount": 25,
+  "console": []
+ },
+ {
+  "route": "/sell-property",
+  "url": "https://www.ssproperty.in/sell-property",
+  "stats": {
+   "textLen": 1111,
+   "h1": [
+    "Sell Your Property"
+   ],
+   "imgs": 2,
+   "imgsBroken": 0,
+   "links": [
+    "/",
+    "/properties",
+    "/projects",
+    "/sell-property",
+    "/work-with-us",
+    "/videos",
+    "/sell-property",
+    "/",
+    "/properties",
+    "/blog",
+    "/#about",
+    "/#contact",
+    "/properties",
+    "/#sell-property",
+    "/#developers",
+    "/#buyer-requirement",
+    "/#get-in-touch"
+   ]
+  },
+  "requestCount": 25,
+  "console": []
+ },
+ {
+  "route": "/projects",
+  "url": "https://www.ssproperty.in/projects",
+  "stats": {
+   "textLen": 849,
+   "h1": [
+    "New Projects"
+   ],
+   "imgs": 2,
+   "imgsBroken": 0,
+   "links": [
+    "/",
+    "/properties",
+    "/projects",
+    "/sell-property",
+    "/work-with-us",
+    "/videos",
+    "/sell-property",
+    "/properties",
+    "/",
+    "/",
+    "/properties",
+    "/blog",
+    "/#about",
+    "/#contact",
+    "/properties",
+    "/#sell-property",
+    "/#developers",
+    "/#buyer-requirement",
+    "/#get-in-touch"
+   ]
+  },
+  "requestCount": 25,
+  "console": []
+ }
+]

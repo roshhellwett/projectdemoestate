@@ -1,0 +1,115 @@
+[
+ {
+  "route": "/property/007e57c0-b818-4005-b8e2-3c67c9a26cb5",
+  "textLen": 1207,
+  "h1": [
+   "Ready-to-Move 2 BHK Furnished Flat Near Acropolis Mall, Kasba"
+  ],
+  "imgs": 3,
+  "imgsBroken": 0,
+  "extUrls": 2,
+  "nonLocalReqs": [
+   "200 https://static.parastorage.com/services/cookie-consent-policy-client/1.983.0/headlessApp.bundle.min.",
+   "200 https://static.parastorage.com/services/site-consent-policy/1.10.0/site-consent-policy.umd.min.js",
+   "200 https://static.parastorage.com/services/site-bi/1.17.0/site-bi.umd.min.js",
+   "200 https://static.parastorage.com/services/site-analytics/1.14.0/site-analytics.umd.min.js",
+   "200 https://static.parastorage.com/services/tag-manager-client/1.1075.0/siteTags.bundle.min.js",
+   "204 https://www.wixapis.com/oauth2/token",
+   "200 https://www.wixapis.com/oauth2/token",
+   "200 https://static.wixstatic.com/media/216404_cdb7bfa69955412eb69f5756fe3d7ee4~mv2.jpg",
+   "200 https://static.wixstatic.com/media/216404_de1db352e6914ada8f4e946fbc8349ec~mv2.jpg",
+   "204 https://www.wixapis.com/oauth2/token"
+  ],
+  "console": []
+ },
+ {
+  "route": "/property/75de911b-220e-4e2c-89e8-d7d901a06b1b",
+  "textLen": 1376,
+  "h1": [
+   "Brand New 3 BHK Flat in Bangur Avenue, Lake Town"
+  ],
+  "imgs": 3,
+  "imgsBroken": 0,
+  "extUrls": 2,
+  "nonLocalReqs": [
+   "200 https://static.parastorage.com/services/cookie-consent-policy-client/1.983.0/headlessApp.bundle.min.",
+   "200 https://static.parastorage.com/services/site-consent-policy/1.10.0/site-consent-policy.umd.min.js",
+   "200 https://static.parastorage.com/services/site-bi/1.17.0/site-bi.umd.min.js",
+   "200 https://static.parastorage.com/services/site-analytics/1.14.0/site-analytics.umd.min.js",
+   "200 https://static.parastorage.com/services/tag-manager-client/1.1075.0/siteTags.bundle.min.js",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "200 https://static.wixstatic.com/media/216404_cdb7bfa69955412eb69f5756fe3d7ee4~mv2.jpg",
+   "200 https://static.wixstatic.com/media/216404_de1db352e6914ada8f4e946fbc8349ec~mv2.jpg",
+   "403 https://edge.wixapis.com/members/v1/members/my"
+  ],
+  "console": []
+ },
+ {
+  "route": "/property/03965c67-6e19-4c8d-af1b-d8bacf5e3ea4",
+  "textLen": 1323,
+  "h1": [
+   "4 BHK Flat in Lake Town Block A"
+  ],
+  "imgs": 2,
+  "imgsBroken": 0,
+  "extUrls": 2,
+  "nonLocalReqs": [
+   "200 https://static.parastorage.com/services/cookie-consent-policy-client/1.983.0/headlessApp.bundle.min.",
+   "200 https://static.parastorage.com/services/site-consent-policy/1.10.0/site-consent-policy.umd.min.js",
+   "200 https://static.parastorage.com/services/site-bi/1.17.0/site-bi.umd.min.js",
+   "200 https://static.parastorage.com/services/site-analytics/1.14.0/site-analytics.umd.min.js",
+   "200 https://static.parastorage.com/services/tag-manager-client/1.1075.0/siteTags.bundle.min.js",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "200 https://static.wixstatic.com/media/216404_cdb7bfa69955412eb69f5756fe3d7ee4~mv2.jpg",
+   "200 https://static.wixstatic.com/media/216404_de1db352e6914ada8f4e946fbc8349ec~mv2.jpg",
+   "403 https://edge.wixapis.com/members/v1/members/my"
+  ],
+  "console": []
+ },
+ {
+  "route": "/blog/47ea5159-5508-4052-b1fb-a66a72c23994",
+  "textLen": 1188,
+  "h1": [
+   "First-Time Homebuyer's Checklist: What You Need to Know"
+  ],
+  "imgs": 3,
+  "imgsBroken": 0,
+  "extUrls": 3,
+  "nonLocalReqs": [
+   "200 https://static.parastorage.com/services/cookie-consent-policy-client/1.983.0/headlessApp.bundle.min.",
+   "200 https://static.parastorage.com/services/site-consent-policy/1.10.0/site-consent-policy.umd.min.js",
+   "200 https://static.parastorage.com/services/site-bi/1.17.0/site-bi.umd.min.js",
+   "200 https://static.parastorage.com/services/site-analytics/1.14.0/site-analytics.umd.min.js",
+   "200 https://static.parastorage.com/services/tag-manager-client/1.1075.0/siteTags.bundle.min.js",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "200 https://static.wixstatic.com/media/216404_cdb7bfa69955412eb69f5756fe3d7ee4~mv2.jpg",
+   "200 https://static.wixstatic.com/media/216404_de1db352e6914ada8f4e946fbc8349ec~mv2.jpg",
+   "403 https://edge.wixapis.com/members/v1/members/my"
+  ],
+  "console": []
+ },
+ {
+  "route": "/videos",
+  "textLen": 1350,
+  "h1": [
+   "Property Videos"
+  ],
+  "imgs": 12,
+  "imgsBroken": 0,
+  "extUrls": 10,
+  "nonLocalReqs": [
+   "200 https://static.parastorage.com/services/cookie-consent-policy-client/1.983.0/headlessApp.bundle.min.",
+   "200 https://static.parastorage.com/services/site-consent-policy/1.10.0/site-consent-policy.umd.min.js",
+   "200 https://static.parastorage.com/services/site-bi/1.17.0/site-bi.umd.min.js",
+   "200 https://static.parastorage.com/services/site-analytics/1.14.0/site-analytics.umd.min.js",
+   "200 https://static.parastorage.com/services/tag-manager-client/1.1075.0/siteTags.bundle.min.js",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "200 https://static.wixstatic.com/media/12d367_4f26ccd17f8f4e3a8958306ea08c2332~mv2.png"
+  ],
+  "console": []
+ }
+]

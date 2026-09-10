@@ -1,0 +1,14 @@
+{
+ "https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9?wixSite=false&htmlsiteId=dummy-site-id&language=en": {
+  "status": 200,
+  "body": "{\"tags\":[],\"errors\":[],\"config\":{\"consentPolicy\":null,\"geo\":\"IN\",\"experiments\":{\"specs.tagManagerConfigOverrides\":\"true\",\"specs.tagManagerRenderTagByPageID\":\"true\",\"wixBannerUseNewCipaDesign\":\"A\",\"specs.tagManagerUseRouterAndPremiumForSiteMetadata\":\"true\",\"specs.ignoreDisabledAppMarketTemplates\":\"false\",\"specs.tagManagerEmbedScriptsFreeSites\":\"true\",\"specs.cookieConsent.gtmDeferredDataLayerPush\":\"false\",\"specs.tagManagerRenderGoogleConsentModeTags\":\"true\",\"specs.migrateGetAppEmbeddedScriptComponentsToGetAppsRuntimeData\":\"true\",\"specs.tagManagerNewSiteEmbedsService\":\"true\",\"specs.cookieConsent.CcpHostsIntegration\":\"true\",\"specs.cookieConsent.CcpML_MigrationUoU\":\"true\",\"specs.returnNonEssentialCustomEmbeds\":\"true\"},\"gdprEnforcedGeo\":false,\"dynamicConfigs\":{}}}"
+ },
+ "https://edge.wixapis.com/members/v1/members/my?fieldsets=FULL": {
+  "status": 403,
+  "body": "{\"message\":\"Missing site member id\",\"details\":{\"applicationError\":{\"code\":\"PERMISSION_DENIED\"}}}"
+ },
+ "https://www.wixapis.com/code/v1/public-config": {
+  "status": 200,
+  "body": "{\"publicConfig\":{\"createdDate\":\"2026-08-16T15:04:30.481Z\",\"updatedDate\":\"2026-08-16T15:04:32.395Z\"}}"
+ }
+}

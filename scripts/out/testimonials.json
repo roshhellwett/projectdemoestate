@@ -1,0 +1,32 @@
+[
+ {
+  "id": "7215429f-2aa6-4dab-817d-b5e29c32eb6d",
+  "client_name": "Emily R.",
+  "client_location": "Chicago, IL",
+  "rating": 5,
+  "review_text": "I was skeptical at first, but this service truly delivered. My expectations were exceeded, and I'm a very happy customer.",
+  "review_date": "2023-11-01",
+  "is_published": false,
+  "client_photo": "thumb/216404_01d3dabba9334f19a05a9aa71b45c6be-mv2.webp"
+ },
+ {
+  "id": "824410e7-63ab-45be-aaf8-d5d5d8b3f58e",
+  "client_name": "Michael Chen",
+  "client_location": "Los Angeles, CA",
+  "rating": 4,
+  "review_text": "A fantastic experience from start to finish. The product quality is exceptional, and customer support was very responsive.",
+  "review_date": "2023-09-15",
+  "is_published": false,
+  "client_photo": "thumb/216404_dbdc123df9f7407899733f48d6a58fe3-mv2.webp"
+ },
+ {
+  "id": "33aabcf2-fabb-47fb-8f9f-3b0d6fb6a23a",
+  "client_name": "Sarah J.",
+  "client_location": "New York, NY",
+  "rating": 5,
+  "review_text": "Absolutely thrilled with the service! The team went above and beyond to ensure everything was perfect. Highly recommend!",
+  "review_date": "2023-10-26",
+  "is_published": false,
+  "client_photo": "thumb/216404_0f382974514846a5b739d5f0efe7bc3e-mv2.webp"
+ }
+]

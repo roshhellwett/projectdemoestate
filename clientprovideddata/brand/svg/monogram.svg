@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- SS monogram — interlocked letterforms on a brass ring -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#C9A24B"/>
+      <stop offset="1" stop-color="#A9862F"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="none" stroke="url(#g)" stroke-width="1.5"/>
+  <text x="32" y="41" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+        font-size="26" font-style="italic" font-weight="600" fill="currentColor" letter-spacing="-1">SS</text>
+</svg>

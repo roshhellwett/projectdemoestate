@@ -1,0 +1,145 @@
+[
+ {
+  "route": "/",
+  "textLen": 9932,
+  "h1": [
+   "Find a Property\nYou'll Love to\nCall Home."
+  ],
+  "imgs": 39,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI"
+  ],
+  "console": [
+   "error: Error loading Instagram feed: SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
+  ]
+ },
+ {
+  "route": "/properties",
+  "textLen": 3293,
+  "h1": [
+   "Explore Properties"
+  ],
+  "imgs": 14,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI"
+  ],
+  "console": []
+ },
+ {
+  "route": "/videos",
+  "textLen": 1350,
+  "h1": [
+   "Property Videos"
+  ],
+  "imgs": 12,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [],
+  "console": []
+ },
+ {
+  "route": "/blog",
+  "textLen": 3788,
+  "h1": [
+   "Real Estate Insights"
+  ],
+  "imgs": 8,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [],
+  "console": []
+ },
+ {
+  "route": "/work-with-us",
+  "textLen": 1339,
+  "h1": [
+   "Work With Us"
+  ],
+  "imgs": 2,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [],
+  "console": []
+ },
+ {
+  "route": "/sell-property",
+  "textLen": 1111,
+  "h1": [
+   "Sell Your Property"
+  ],
+  "imgs": 2,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [],
+  "console": []
+ },
+ {
+  "route": "/projects",
+  "textLen": 849,
+  "h1": [
+   "New Projects"
+  ],
+  "imgs": 2,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [],
+  "console": []
+ },
+ {
+  "route": "/property/007e57c0-b818-4005-b8e2-3c67c9a26cb5",
+  "textLen": 1240,
+  "h1": [
+   "Ready-to-Move 2 BHK Furnished Flat Near Acropolis Mall, Kasba"
+  ],
+  "imgs": 2,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [],
+  "console": []
+ },
+ {
+  "route": "/property/75de911b-220e-4e2c-89e8-d7d901a06b1b",
+  "textLen": 1376,
+  "h1": [
+   "Brand New 3 BHK Flat in Bangur Avenue, Lake Town"
+  ],
+  "imgs": 3,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI"
+  ],
+  "console": []
+ },
+ {
+  "route": "/blog/47ea5159-5508-4052-b1fb-a66a72c23994",
+  "textLen": 1188,
+  "h1": [
+   "First-Time Homebuyer's Checklist: What You Need to Know"
+  ],
+  "imgs": 3,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [],
+  "console": []
+ }
+]

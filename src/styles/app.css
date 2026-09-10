@@ -1,0 +1,150 @@
+/* =====================================================================
+   SS Property - Ivory & Brass design system (Tailwind v4 tokens)
+   ===================================================================== */
+
+@import "tailwindcss";
+
+@import "@fontsource-variable/plus-jakarta-sans";
+@import "@fontsource-variable/fraunces";
+
+/* ---------------------------------------------------------------------
+   theme tokens
+   --------------------------------------------------------------------- */
+
+@theme {
+  /* color */
+  --color-ink: #12100e;
+  --color-ink-2: #1c1915;
+  --color-ink-3: #2a2622;
+  --color-paper: #faf7f2;
+  --color-paper-2: #f3eee6;
+  --color-paper-3: #ede6d9;
+  --color-brass: #a9862f;
+  --color-brass-2: #c9a24b;
+  --color-brass-soft: #ebe0c8;
+  --color-brass-ghost: rgb(169 134 47 / 0.12);
+  --color-muted: #6e675c;
+  --color-muted-2: #8a8378;
+  --color-line: #e4dcce;
+  --color-line-dark: rgb(250 247 242 / 0.14);
+  --color-verdigris: #2e6e4e;
+  --color-verdigris-soft: #dfeae2;
+  --color-danger: #b3392e;
+
+  /* type */
+  --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
+  --font-body: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* shape */
+  --radius-card: 18px;
+  --radius-input: 12px;
+  --radius-img: 14px;
+
+  /* motion */
+  --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* layout */
+  --spacing-section: clamp(72px, 12vw, 160px);
+}
+
+/* ---------------------------------------------------------------------
+   base
+   --------------------------------------------------------------------- */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-brass-ghost);
+    color: var(--color-ink);
+  }
+
+  /* focus visibility, everywhere */
+  :focus-visible {
+    outline: 2px solid var(--color-brass);
+    outline-offset: 2px;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   utilities
+   --------------------------------------------------------------------- */
+
+@layer utilities {
+  /* section container */
+  .shell {
+    @apply mx-auto w-full max-w-[1200px] px-5 sm:px-8;
+  }
+  .shell-wide {
+    @apply mx-auto w-full max-w-[1360px] px-5 sm:px-8;
+  }
+
+  /* display serif */
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* uppercase micro label */
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-muted;
+  }
+
+  /* brass hairline rule */
+  .rule {
+    @apply block h-px w-full bg-line;
+  }
+
+  /* on-dark text helpers */
+  .on-dark {
+    color: rgb(250 247 242 / 0.7);
+  }
+  .on-dark-soft {
+    color: rgb(250 247 242 / 0.55);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   motion
+   --------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* reveal on scroll (activated by IntersectionObserver in motion.ts) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 640ms var(--ease-lux),
+    transform 640ms var(--ease-lux);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

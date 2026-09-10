@@ -1,0 +1,75 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { Header } from "../components/header";
+import { Footer } from "../components/footer";
+import { SellForm } from "../components/sell-form";
+import { initRevealOnScroll } from "../lib/reveal";
+
+export const Route = createFileRoute("/partner")({
+  head: () => ({
+    meta: [
+      { title: "Partner With Us · SS Property" },
+      { name: "description", content: "Developers, interior brands and financial services - reach Kolkata's qualified property buyers." },
+    ],
+  }),
+  component: PartnerPage,
+});
+
+const PARTNERS = [
+  {
+    title: "Real estate developers",
+    body: "Showcase upcoming projects to thousands of qualified buyers and investors across Kolkata.",
+  },
+  {
+    title: "Interior and home brands",
+    body: "Reach new homeowners and design-minded buyers through our engaged community.",
+  },
+  {
+    title: "Financial services",
+    body: "Connect with homebuyers actively looking for financing and mortgage solutions.",
+  },
+];
+
+function PartnerPage() {
+  useEffect(() => {
+    initRevealOnScroll();
+  }, []);
+
+  return (
+    <div className="min-h-dvh">
+      <Header />
+      <main className="pt-16">
+        <section className="border-b border-line bg-paper-2/60">
+          <div className="shell py-14 md:py-20">
+            <p className="eyebrow">Partnerships</p>
+            <h1 className="mt-4 max-w-2xl font-display text-4xl font-medium leading-tight tracking-tight text-ink md:text-5xl">
+              Put your brand where Kolkata's buyers are looking.
+            </h1>
+          </div>
+        </section>
+
+        <section className="shell-wide py-14">
+          <div className="grid gap-6 md:grid-cols-3">
+            {PARTNERS.map((p) => (
+              <div key={p.title} className="reveal rounded-[var(--radius-card)] border border-line bg-white p-7">
+                <h2 className="font-display text-xl font-medium text-ink">{p.title}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{p.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="shell max-w-3xl pb-24">
+          <div className="rounded-[var(--radius-card)] border border-line bg-paper-2/50 p-6 md:p-10">
+            <h2 className="font-display text-2xl font-medium tracking-tight text-ink">Get in touch</h2>
+            <p className="mt-1 text-sm text-muted">Tell us about your proposal and we will reach out.</p>
+            <div className="mt-8">
+              <SellForm kind="partner" />
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+}

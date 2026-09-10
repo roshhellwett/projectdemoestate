@@ -1,0 +1,80 @@
+/* ============================================================
+   TOKENS — Ivory & Brass design system
+   Single source of truth. No selectors allowed in this file.
+   ============================================================ */
+:root {
+  /* ---- color ---- */
+  --ink: #12100E;
+  --ink-2: #1C1915;
+  --ink-3: #2A2622;
+  --paper: #FAF7F2;
+  --paper-2: #F3EEE6;
+  --paper-3: #EDE6D9;
+  --brass: #A9862F;
+  --brass-2: #C9A24B;
+  --brass-soft: #EBE0C8;
+  --brass-ghost: rgba(169, 134, 47, 0.12);
+  --muted: #6E675C;
+  --muted-2: #8A8378;
+  --line: #E4DCCE;
+  --line-dark: rgba(250, 247, 242, 0.14);
+  --verdigris: #2E6E4E;
+  --verdigris-soft: #DFEAE2;
+  --danger: #B3392E;
+  --white: #FFFFFF;
+
+  /* on-dark text tints */
+  --paper-70: rgba(250, 247, 242, 0.7);
+  --paper-55: rgba(250, 247, 242, 0.55);
+
+  /* ---- type ---- */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --fs--2: clamp(11px, 0.7vw, 12px);
+  --fs--1: clamp(13px, 0.85vw, 14px);
+  --fs-0: clamp(15px, 1vw, 16.5px);
+  --fs-1: clamp(18px, 1.3vw, 20px);
+  --fs-2: clamp(23px, 2.4vw, 28px);
+  --fs-3: clamp(30px, 4vw, 40px);
+  --fs-4: clamp(38px, 5.6vw, 56px);
+  --fs-5: clamp(46px, 7.4vw, 72px);
+  --fs-6: clamp(56px, 10vw, 96px);
+
+  /* ---- space (4px grid) ---- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --sp-10: 128px;
+  --section-pad: clamp(72px, 12vw, 160px);
+  --gutter: minmax(24px, 7vw);
+
+  /* ---- shape ---- */
+  --r-card: 18px;
+  --r-chip: 999px;
+  --r-input: 12px;
+  --r-img: 14px;
+  --r-btn: 999px;
+
+  /* ---- shadow ---- */
+  --shadow-sm: 0 1px 2px rgba(18, 16, 14, 0.05);
+  --shadow-md: 0 8px 24px -8px rgba(18, 16, 14, 0.12);
+  --shadow-lift: 0 24px 48px -16px rgba(18, 16, 14, 0.22);
+
+  /* ---- motion ---- */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-micro: 160ms;
+  --t-base: 320ms;
+  --t-hero: 640ms;
+  --t-marquee: 40s;
+
+  /* ---- layout ---- */
+  --content: 1200px;
+  --content-wide: 1360px;
+}

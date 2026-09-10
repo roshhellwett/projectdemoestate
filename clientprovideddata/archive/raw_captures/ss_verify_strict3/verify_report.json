@@ -1,0 +1,179 @@
+[
+ {
+  "route": "/",
+  "textLen": 9932,
+  "h1": [
+   "Find a Property\nYou'll Love to\nCall Home."
+  ],
+  "imgs": 39,
+  "imgsBroken": 0,
+  "extUrls": 6,
+  "nonLocalReqs": [
+   "200 https://static.wixstatic.com/media/216404_cdb7bfa69955412eb69f5756fe3d7ee4~mv2.jpg",
+   "200 https://static.wixstatic.com/media/216404_90d216724e3248f28c690e727e262972~mv2.png/v1/fill/w_49,h_27",
+   "200 https://static.wixstatic.com/media/216404_f65cc54333d24be5a89bdcee1dc23533~mv2.png",
+   "200 https://static.wixstatic.com/media/216404_97db3425711a4c47b7e323bcddf4e809~mv2.png",
+   "200 https://static.wixstatic.com/media/216404_37832f9939cc42bf807f2f4c05a2de54~mv2.png",
+   "200 https://static.wixstatic.com/media/216404_9de56b8d718f451a8228d5eb070e81cf~mv2.png",
+   "200 https://static.wixstatic.com/media/216404_945072a242df4460bb36d3642ca3a305~mv2.png",
+   "200 https://static.wixstatic.com/media/216404_c7a14c3ddf6a43eeadedd5140e908866~mv2.png",
+   "200 https://static.wixstatic.com/media/216404_eec2b3792c3c41848a9055b7ada55ad2~mv2.png",
+   "200 https://static.wixstatic.com/media/216404_9353e73c5618436f98728bfdb3f4af7f~mv2.png"
+  ],
+  "console": [
+   "error: Error loading Instagram feed: SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
+  ]
+ },
+ {
+  "route": "/properties",
+  "textLen": 3293,
+  "h1": [
+   "Explore Properties"
+  ],
+  "imgs": 14,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [
+   "200 https://static.wixstatic.com/media/216404_cdb7bfa69955412eb69f5756fe3d7ee4~mv2.jpg",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI"
+  ],
+  "console": []
+ },
+ {
+  "route": "/videos",
+  "textLen": 1350,
+  "h1": [
+   "Property Videos"
+  ],
+  "imgs": 12,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [
+   "200 https://static.wixstatic.com/media/216404_cdb7bfa69955412eb69f5756fe3d7ee4~mv2.jpg",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9"
+  ],
+  "console": []
+ },
+ {
+  "route": "/blog",
+  "textLen": 3788,
+  "h1": [
+   "Real Estate Insights"
+  ],
+  "imgs": 8,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9"
+  ],
+  "console": []
+ },
+ {
+  "route": "/work-with-us",
+  "textLen": 1339,
+  "h1": [
+   "Work With Us"
+  ],
+  "imgs": 2,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [
+   "net::ERR_ABORTED https://static.wixstatic.com/media/216404_cdb7bfa69955412eb69f5756fe3d7ee4~mv2.jpg",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9"
+  ],
+  "console": []
+ },
+ {
+  "route": "/sell-property",
+  "textLen": 1111,
+  "h1": [
+   "Sell Your Property"
+  ],
+  "imgs": 2,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [
+   "net::ERR_ABORTED https://static.wixstatic.com/media/216404_cdb7bfa69955412eb69f5756fe3d7ee4~mv2.jpg",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9"
+  ],
+  "console": []
+ },
+ {
+  "route": "/projects",
+  "textLen": 849,
+  "h1": [
+   "New Projects"
+  ],
+  "imgs": 2,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [
+   "net::ERR_ABORTED https://static.wixstatic.com/media/216404_cdb7bfa69955412eb69f5756fe3d7ee4~mv2.jpg",
+   "net::ERR_ABORTED https://static.wixstatic.com/media/216404_de1db352e6914ada8f4e946fbc8349ec~mv2.jpg",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9"
+  ],
+  "console": []
+ },
+ {
+  "route": "/property/007e57c0-b818-4005-b8e2-3c67c9a26cb5",
+  "textLen": 1240,
+  "h1": [
+   "Ready-to-Move 2 BHK Furnished Flat Near Acropolis Mall, Kasba"
+  ],
+  "imgs": 2,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [
+   "net::ERR_ABORTED https://static.wixstatic.com/media/216404_cdb7bfa69955412eb69f5756fe3d7ee4~mv2.jpg",
+   "net::ERR_ABORTED https://static.wixstatic.com/media/216404_de1db352e6914ada8f4e946fbc8349ec~mv2.jpg",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9"
+  ],
+  "console": []
+ },
+ {
+  "route": "/property/75de911b-220e-4e2c-89e8-d7d901a06b1b",
+  "textLen": 1376,
+  "h1": [
+   "Brand New 3 BHK Flat in Bangur Avenue, Lake Town"
+  ],
+  "imgs": 3,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9"
+  ],
+  "console": []
+ },
+ {
+  "route": "/blog/47ea5159-5508-4052-b1fb-a66a72c23994",
+  "textLen": 1188,
+  "h1": [
+   "First-Time Homebuyer's Checklist: What You Need to Know"
+  ],
+  "imgs": 3,
+  "imgsBroken": 0,
+  "extUrls": 0,
+  "nonLocalReqs": [
+   "200 https://static.wixstatic.com/media/216404_cdb7bfa69955412eb69f5756fe3d7ee4~mv2.jpg",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9"
+  ],
+  "console": []
+ }
+]

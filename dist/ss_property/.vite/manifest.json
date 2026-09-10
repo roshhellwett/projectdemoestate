@@ -1,0 +1,116 @@
+{
+  "A:/projectssproperty/site/src/styles/app.css": {
+    "file": "assets/app-vANFs1ro.css",
+    "src": "A:/projectssproperty/site/src/styles/app.css"
+  },
+  "_createServerFn-4zhk7iGT.js": {
+    "file": "assets/createServerFn-4zhk7iGT.js",
+    "name": "createServerFn",
+    "imports": [
+      "_rolldown-runtime-BPOCksWG.js"
+    ]
+  },
+  "_rolldown-runtime-BPOCksWG.js": {
+    "file": "assets/rolldown-runtime-BPOCksWG.js",
+    "name": "rolldown-runtime"
+  },
+  "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-ext-wght-normal.woff2": {
+    "file": "assets/fraunces-latin-ext-wght-normal-Ca2vKHc0.woff2",
+    "src": "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-ext-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2": {
+    "file": "assets/fraunces-latin-wght-normal-ukD16Tqj.woff2",
+    "src": "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/fraunces/files/fraunces-vietnamese-wght-normal.woff2": {
+    "file": "assets/fraunces-vietnamese-wght-normal-CnvboYUG.woff2",
+    "src": "node_modules/@fontsource-variable/fraunces/files/fraunces-vietnamese-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-ext-wght-normal.woff2": {
+    "file": "assets/plus-jakarta-sans-latin-ext-wght-normal-DmpS2jIq.woff2",
+    "src": "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-ext-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2": {
+    "file": "assets/plus-jakarta-sans-latin-wght-normal-eXO_dkmS.woff2",
+    "src": "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-vietnamese-wght-normal.woff2": {
+    "file": "assets/plus-jakarta-sans-vietnamese-wght-normal-qRpaaN48.woff2",
+    "src": "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-vietnamese-wght-normal.woff2"
+  },
+  "node_modules/@tanstack/react-start/dist/plugin/default-entry/start.ts": {
+    "file": "assets/start-5Z2QO8AU.js",
+    "name": "start",
+    "src": "node_modules/@tanstack/react-start/dist/plugin/default-entry/start.ts",
+    "isDynamicEntry": true
+  },
+  "node_modules/@tanstack/start-server-core/dist/esm/empty-plugin-adapters.js": {
+    "file": "assets/empty-plugin-adapters-D9UWiqvJ.js",
+    "name": "empty-plugin-adapters",
+    "src": "node_modules/@tanstack/start-server-core/dist/esm/empty-plugin-adapters.js",
+    "isDynamicEntry": true
+  },
+  "src/lib/queries.ts": {
+    "file": "assets/queries-DXyvN8QF.js",
+    "name": "queries",
+    "src": "src/lib/queries.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/router.tsx"
+    ]
+  },
+  "src/lib/route-supabase.ts": {
+    "file": "assets/route-supabase-DqwYVHzR.js",
+    "name": "route-supabase",
+    "src": "src/lib/route-supabase.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/router.tsx"
+    ]
+  },
+  "src/router.tsx": {
+    "file": "assets/router-B5W2BhOt.js",
+    "name": "router",
+    "src": "src/router.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-BPOCksWG.js",
+      "_createServerFn-4zhk7iGT.js"
+    ],
+    "dynamicImports": [
+      "src/lib/route-supabase.ts",
+      "src/lib/queries.ts"
+    ],
+    "assets": [
+      "assets/plus-jakarta-sans-vietnamese-wght-normal-qRpaaN48.woff2",
+      "assets/plus-jakarta-sans-latin-ext-wght-normal-DmpS2jIq.woff2",
+      "assets/plus-jakarta-sans-latin-wght-normal-eXO_dkmS.woff2",
+      "assets/fraunces-vietnamese-wght-normal-CnvboYUG.woff2",
+      "assets/fraunces-latin-ext-wght-normal-Ca2vKHc0.woff2",
+      "assets/fraunces-latin-wght-normal-ukD16Tqj.woff2",
+      "assets/app-vANFs1ro.css"
+    ]
+  },
+  "tanstack-start-manifest:v": {
+    "file": "assets/_tanstack-start-manifest_v-DkaYdMPL.js",
+    "name": "_tanstack-start-manifest_v",
+    "src": "tanstack-start-manifest:v",
+    "isDynamicEntry": true
+  },
+  "virtual:cloudflare/worker-entry": {
+    "file": "index.js",
+    "name": "index",
+    "src": "virtual:cloudflare/worker-entry",
+    "isEntry": true,
+    "imports": [
+      "_rolldown-runtime-BPOCksWG.js",
+      "_createServerFn-4zhk7iGT.js"
+    ],
+    "dynamicImports": [
+      "tanstack-start-manifest:v",
+      "src/router.tsx",
+      "node_modules/@tanstack/react-start/dist/plugin/default-entry/start.ts",
+      "node_modules/@tanstack/start-server-core/dist/esm/empty-plugin-adapters.js"
+    ]
+  }
+}

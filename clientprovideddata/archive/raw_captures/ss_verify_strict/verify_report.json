@@ -1,0 +1,120 @@
+[
+ {
+  "route": "/",
+  "textLen": 9932,
+  "h1": [
+   "Find a Property\nYou'll Love to\nCall Home."
+  ],
+  "imgs": 39,
+  "imgsBroken": 0,
+  "extUrls": 4,
+  "nonLocalReqs": [
+   "200 https://static.parastorage.com/services/cookie-consent-policy-client/1.983.0/headlessApp.bundle.min.",
+   "200 https://static.parastorage.com/services/site-consent-policy/1.10.0/site-consent-policy.umd.min.js",
+   "200 https://static.parastorage.com/services/site-bi/1.17.0/site-bi.umd.min.js",
+   "200 https://static.parastorage.com/services/site-analytics/1.14.0/site-analytics.umd.min.js",
+   "200 https://static.parastorage.com/services/tag-manager-client/1.1075.0/siteTags.bundle.min.js",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 https://static.wixstatic.com/media/216404_33bdfc3a1e7040b6a18d74d7ffbd5e4d~mv2.png",
+   "200 https://static.wixstatic.com/media/216404_a3878909b7204e959504e7193bc90801~mv2.png"
+  ],
+  "console": [
+   "error: Error loading Instagram feed: SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
+  ]
+ },
+ {
+  "route": "/properties",
+  "textLen": 3188,
+  "h1": [
+   "Explore Properties"
+  ],
+  "imgs": 14,
+  "imgsBroken": 0,
+  "extUrls": 5,
+  "nonLocalReqs": [
+   "200 https://static.parastorage.com/services/cookie-consent-policy-client/1.983.0/headlessApp.bundle.min.",
+   "200 https://static.parastorage.com/services/site-consent-policy/1.10.0/site-consent-policy.umd.min.js",
+   "200 https://static.parastorage.com/services/site-bi/1.17.0/site-bi.umd.min.js",
+   "200 https://static.parastorage.com/services/site-analytics/1.14.0/site-analytics.umd.min.js",
+   "200 https://static.parastorage.com/services/tag-manager-client/1.1075.0/siteTags.bundle.min.js",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "200 https://static.wixstatic.com/media/216404_985fbc54067346d48edd2436a27ee304~mv2.png",
+   "200 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCI",
+   "200 https://static.wixstatic.com/media/216404_33bdfc3a1e7040b6a18d74d7ffbd5e4d~mv2.png"
+  ],
+  "console": []
+ },
+ {
+  "route": "/videos",
+  "textLen": 1350,
+  "h1": [
+   "Property Videos"
+  ],
+  "imgs": 12,
+  "imgsBroken": 0,
+  "extUrls": 10,
+  "nonLocalReqs": [
+   "200 https://static.parastorage.com/services/cookie-consent-policy-client/1.983.0/headlessApp.bundle.min.",
+   "200 https://static.parastorage.com/services/site-consent-policy/1.10.0/site-consent-policy.umd.min.js",
+   "200 https://static.parastorage.com/services/site-bi/1.17.0/site-bi.umd.min.js",
+   "200 https://static.parastorage.com/services/site-analytics/1.14.0/site-analytics.umd.min.js",
+   "200 https://static.parastorage.com/services/tag-manager-client/1.1075.0/siteTags.bundle.min.js",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "200 https://static.wixstatic.com/media/12d367_4f26ccd17f8f4e3a8958306ea08c2332~mv2.png"
+  ],
+  "console": []
+ },
+ {
+  "route": "/blog",
+  "textLen": 3788,
+  "h1": [
+   "Real Estate Insights"
+  ],
+  "imgs": 8,
+  "imgsBroken": 0,
+  "extUrls": 6,
+  "nonLocalReqs": [
+   "200 https://static.parastorage.com/services/cookie-consent-policy-client/1.983.0/headlessApp.bundle.min.",
+   "200 https://static.parastorage.com/services/site-consent-policy/1.10.0/site-consent-policy.umd.min.js",
+   "200 https://static.parastorage.com/services/site-bi/1.17.0/site-bi.umd.min.js",
+   "200 https://static.parastorage.com/services/site-analytics/1.14.0/site-analytics.umd.min.js",
+   "200 https://static.parastorage.com/services/tag-manager-client/1.1075.0/siteTags.bundle.min.js",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "200 https://static.wixstatic.com/media/12d367_4f26ccd17f8f4e3a8958306ea08c2332~mv2.png"
+  ],
+  "console": []
+ },
+ {
+  "route": "/property/007e57c0-b818-4005-b8e2-3c67c9a26cb5",
+  "textLen": 626,
+  "h1": [],
+  "imgs": 2,
+  "imgsBroken": 0,
+  "extUrls": 2,
+  "nonLocalReqs": [
+   "200 https://static.parastorage.com/services/cookie-consent-policy-client/1.983.0/headlessApp.bundle.min.",
+   "200 https://static.parastorage.com/services/site-consent-policy/1.10.0/site-consent-policy.umd.min.js",
+   "200 https://static.parastorage.com/services/site-bi/1.17.0/site-bi.umd.min.js",
+   "200 https://static.parastorage.com/services/site-analytics/1.14.0/site-analytics.umd.min.js",
+   "200 https://static.parastorage.com/services/tag-manager-client/1.1075.0/siteTags.bundle.min.js",
+   "200 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "204 https://www.wixapis.com/_api/tag-manager/api/v1/tags/sites/d536d138-8337-44ec-9152-3b2a11e52ae9",
+   "200 https://static.wixstatic.com/media/216404_cdb7bfa69955412eb69f5756fe3d7ee4~mv2.jpg",
+   "200 https://static.wixstatic.com/media/216404_de1db352e6914ada8f4e946fbc8349ec~mv2.jpg",
+   "403 https://edge.wixapis.com/members/v1/members/my"
+  ],
+  "console": [
+   "error: Error fetching properties by ID: Error: WDE0117: MetaSite not found.\n    at bc (http://localhost:8123/_astro/Router.BPj9U-nC.js:26:3916)\n    at xi (http://localhost:8123/_astro/Router.BPj9U-nC.js:26:3",
+   "error: Error fetching properties by ID: Error: WDE0117: MetaSite not found.\n    at bc (http://localhost:8123/_astro/Router.BPj9U-nC.js:26:3916)\n    at xi (http://localhost:8123/_astro/Router.BPj9U-nC.js:26:3",
+   "error: Error fetching propertiess: Error: WDE0117: MetaSite not found.\n    at bc (http://localhost:8123/_astro/Router.BPj9U-nC.js:26:3916)\n    at xi (http://localhost:8123/_astro/Router.BPj9U-nC.js:26:3666)\n",
+   "error: Error fetching propertiess: Error: WDE0117: MetaSite not found.\n    at bc (http://localhost:8123/_astro/Router.BPj9U-nC.js:26:3916)\n    at xi (http://localhost:8123/_astro/Router.BPj9U-nC.js:26:3666)\n",
+   "error: Error fetching propertiess: Error: WDE0117: MetaSite not found.\n    at bc (http://localhost:8123/_astro/Router.BPj9U-nC.js:26:3916)\n    at xi (http://localhost:8123/_astro/Router.BPj9U-nC.js:26:3666)\n",
+   "error: Error fetching propertiess: Error: WDE0117: MetaSite not found.\n    at bc (http://localhost:8123/_astro/Router.BPj9U-nC.js:26:3916)\n    at xi (http://localhost:8123/_astro/Router.BPj9U-nC.js:26:3666)\n"
+  ]
+ }
+]

@@ -1,0 +1,50 @@
+[
+ {
+  "id": "c5b44225-54bf-4fb7-a7aa-ae49571d8b9f",
+  "question": "What makes your real estate service unique?",
+  "answer": "Our unique value proposition lies in our blend of cutting-edge technology for efficient property matching, personalized human-centric service from dedicated agents, and a commitment to transparency and ethical practices. We prioritize building long-term relationships and ensuring a seamless, stress-free experience for all our clients.",
+  "category": "About Us",
+  "display_order": 6,
+  "is_published": true
+ },
+ {
+  "id": "b4dfab9e-e867-4b48-930a-c7a5ac5bb648",
+  "question": "How do you provide personalized property recommendations?",
+  "answer": "We use a combination of advanced algorithms and human expertise. After understanding your specific preferences, budget, and lifestyle needs through a detailed consultation, our system filters properties, and our agents hand-pick the best matches, ensuring you only see homes that truly fit your criteria.",
+  "category": "General",
+  "display_order": 5,
+  "is_published": true
+ },
+ {
+  "id": "7038b4be-1a96-4f81-8399-ce2f16607906",
+  "question": "What support do you offer for selling my property?",
+  "answer": "We provide comprehensive selling assistance, including professional property valuation, high-quality photography and virtual tours, extensive marketing across multiple platforms, and expert negotiation to ensure you get the best possible price. We guide you through every step from listing to closing.",
+  "category": "Selling",
+  "display_order": 4,
+  "is_published": true
+ },
+ {
+  "id": "f6c79e07-074b-4c08-a8f9-32a6a3bfbc2e",
+  "question": "Can you help me with real estate investment advice?",
+  "answer": "Absolutely! Our team of experienced real estate advisors offers personalized investment consultations. We can help you identify high-potential properties, analyze market trends, and develop a strategy tailored to your financial goals, whether you're a first-time investor or looking to expand your portfolio.",
+  "category": "Investment",
+  "display_order": 3,
+  "is_published": true
+ },
+ {
+  "id": "795e0596-4b45-4fda-9689-6d480ff107ff",
+  "question": "What kind of property verification do you provide?",
+  "answer": "We conduct thorough due diligence on all listed properties, including verifying ownership documents, checking for any encumbrances or legal disputes, and assessing the property's physical condition. Our aim is to ensure transparency and peace of mind for our buyers.",
+  "category": "Buying",
+  "display_order": 2,
+  "is_published": true
+ },
+ {
+  "id": "8bec49b7-ed80-4ec4-b769-3990d9a40efb",
+  "question": "How do I schedule a property viewing?",
+  "answer": "You can easily schedule a property viewing by visiting the property's detail page on our website and clicking the 'Schedule a Viewing' button. Alternatively, you can contact our sales team directly via phone or email, and they will assist you in arranging a suitable time.",
+  "category": "Buying",
+  "display_order": 1,
+  "is_published": true
+ }
+]
