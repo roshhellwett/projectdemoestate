@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { getSupabaseBrowser } from "../lib/supabase";
-import { Wordmark } from "./brand";
+import { LogoImage } from "./brand";
 
 /** CMS login. Supabase email + password; the session lives in localStorage. */
 export function LoginForm() {
@@ -29,7 +29,7 @@ export function LoginForm() {
     <div className="flex min-h-dvh items-center justify-center bg-paper px-6">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex justify-center">
-          <Wordmark />
+          <LogoImage className="h-12" />
         </div>
         <form onSubmit={onSubmit} className="rounded-[var(--radius-card)] border border-line bg-white p-8">
           <h1 className="font-display text-xl font-medium text-ink">Admin sign in</h1>

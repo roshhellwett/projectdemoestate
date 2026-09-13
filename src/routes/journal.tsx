@@ -2,15 +2,20 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
+import { FooterSettingsContext } from "../components/footer-settings";
 import { initRevealOnScroll } from "../lib/reveal";
 import { getSupabaseForRoute } from "../lib/route-supabase";
-import { listBlogPosts } from "../lib/queries";
+import { getSiteSettings, listBlogPosts } from "../lib/queries";
 import { formatDate } from "../lib/format";
 
 export const Route = createFileRoute("/journal")({
   loader: async () => {
-    const posts = await listBlogPosts(getSupabaseForRoute());
-    return { posts };
+    const supabase = getSupabaseForRoute();
+    const [posts, settings] = await Promise.all([
+      listBlogPosts(supabase),
+      getSiteSettings(supabase),
+    ]);
+    return { posts, settings };
   },
   head: () => ({
     meta: [
@@ -22,7 +27,7 @@ export const Route = createFileRoute("/journal")({
 });
 
 function JournalPage() {
-  const { posts } = Route.useLoaderData();
+  const { posts, settings } = Route.useLoaderData();
 
   useEffect(() => {
     initRevealOnScroll();
@@ -41,7 +46,8 @@ function JournalPage() {
               The Journal
             </h1>
             <p className="mt-3 max-w-md text-sm text-muted">
-              Buyer guides, market notes and honest advice on Kolkata real estate.
+              {settings.journal_intro ??
+                "Buyer guides, market notes and honest advice on Kolkata real estate."}
             </p>
           </div>
         </section>
@@ -108,7 +114,9 @@ function JournalPage() {
           </section>
         )}
       </main>
-      <Footer />
+      <FooterSettingsContext.Provider value={settings}>
+        <Footer />
+      </FooterSettingsContext.Provider>
     </div>
   );
 }

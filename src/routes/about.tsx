@@ -2,15 +2,19 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
+import { FooterSettingsContext } from "../components/footer-settings";
 import { initRevealOnScroll } from "../lib/reveal";
 import { getSupabaseForRoute } from "../lib/route-supabase";
-import { listProperties } from "../lib/queries";
-import { SITE } from "../lib/site";
+import { getSiteSettings, listProperties } from "../lib/queries";
 
 export const Route = createFileRoute("/about")({
   loader: async () => {
-    const properties = await listProperties(getSupabaseForRoute(), {});
-    return { count: properties.length };
+    const supabase = getSupabaseForRoute();
+    const [properties, settings] = await Promise.all([
+      listProperties(supabase, {}),
+      getSiteSettings(supabase),
+    ]);
+    return { count: properties.length, settings };
   },
   head: () => ({
     meta: [
@@ -22,11 +26,29 @@ export const Route = createFileRoute("/about")({
 });
 
 function AboutPage() {
-  const { count } = Route.useLoaderData();
+  const { count, settings } = Route.useLoaderData();
 
   useEffect(() => {
     initRevealOnScroll();
   }, []);
+
+  const stats = [
+    {
+      value: settings.about_stat_1_value ?? `${count}+`,
+      label: settings.about_stat_1_label ?? "Live verified listings",
+      note: settings.about_stat_1_note ?? "Across 10 Kolkata localities.",
+    },
+    {
+      value: settings.about_stat_2_value ?? "100%",
+      label: settings.about_stat_2_label ?? "Papers checked",
+      note: settings.about_stat_2_note ?? "Title, dues and approvals verified before listing.",
+    },
+    {
+      value: settings.about_stat_3_value ?? "1:1",
+      label: settings.about_stat_3_label ?? "Dedicated advisor",
+      note: settings.about_stat_3_note ?? "One person owns your search end to end.",
+    },
+  ];
 
   return (
     <div className="min-h-dvh">
@@ -39,29 +61,21 @@ function AboutPage() {
               We walk through every home before we list it.
             </h1>
             <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted">
-              SS Property is a Kolkata-based real estate advisory. We verify every listing in person -
-              structure, papers, neighbourhood - so buyers see only what is real, and sellers deal only
-              with serious people.
+              {settings.about_intro ??
+                "SS Property is a Kolkata-based real estate advisory. We verify every listing in person - structure, papers, neighbourhood - so buyers see only what is real, and sellers deal only with serious people."}
             </p>
           </div>
         </section>
 
         <section className="shell-wide grid gap-14 py-14 lg:grid-cols-3">
-          <div className="reveal">
-            <p className="font-display text-5xl font-medium text-ink">{count}+</p>
-            <p className="mt-2 text-sm font-semibold text-ink">Live verified listings</p>
-            <p className="mt-1 text-sm text-muted">Across 10 Kolkata localities.</p>
-          </div>
-          <div className="reveal">
-            <p className="font-display text-5xl font-medium text-ink">100%</p>
-            <p className="mt-2 text-sm font-semibold text-ink">Papers checked</p>
-            <p className="mt-1 text-sm text-muted">Title, dues and approvals verified before listing.</p>
-          </div>
-          <div className="reveal">
-            <p className="font-display text-5xl font-medium text-ink">1:1</p>
-            <p className="mt-2 text-sm font-semibold text-ink">Dedicated advisor</p>
-            <p className="mt-1 text-sm text-muted">One person owns your search end to end.</p>
-          </div>
+          {stats.map((s, i) => (
+            <div key={s.label} className="reveal">
+              <p className="stat-value font-display text-5xl font-medium text-ink">{s.value}</p>
+              <p className="mt-2 text-sm font-semibold text-ink">{s.label}</p>
+              <p className="mt-1 text-sm text-muted">{s.note}</p>
+              {i === 0 && count > 0 && !settings.about_stat_1_value ? null : null}
+            </div>
+          ))}
         </section>
 
         <section className="shell-wide pb-24">
@@ -81,10 +95,10 @@ function AboutPage() {
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
-                  href={SITE.phoneHref}
+                  href={settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, "")}` : "tel:+919429693786"}
                   className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-transform hover:-translate-y-0.5"
                 >
-                  {SITE.phone}
+                  {settings.phone ?? "+91 94296 93786"}
                 </a>
                 <Link
                   to="/properties"
@@ -97,7 +111,9 @@ function AboutPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <FooterSettingsContext.Provider value={settings}>
+        <Footer />
+      </FooterSettingsContext.Provider>
     </div>
   );
 }

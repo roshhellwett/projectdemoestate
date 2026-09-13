@@ -54,8 +54,24 @@ export interface Reel {
   cover_image: string;
   cover_thumb: string;
   display_order: number;
+  is_published: boolean;
   created_at: string;
 }
+
+export interface Partner {
+  id: string;
+  name: string;
+  slug: string;
+  logo_url: string;
+  website_url: string;
+  description: string;
+  display_order: number;
+  is_published: boolean;
+  created_at: string;
+}
+
+/** Key -> value map from the site_settings table. */
+export type SiteSettings = Record<string, string>;
 
 export interface BlogPost {
   id: string;

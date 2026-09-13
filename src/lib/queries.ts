@@ -4,7 +4,7 @@
  */
 
 import type { SupabaseClient } from "@supabase/supabase-js";
-import type { BlogPost, Faq, Property, PropertyImage, Reel } from "./types";
+import type { BlogPost, Faq, Partner, Property, PropertyImage, Reel, SiteSettings } from "./types";
 
 export interface PropertyQuery {
   q?: string;
@@ -94,10 +94,31 @@ export async function getSimilarProperties(
   return scored.map((s) => s.r);
 }
 
-export async function listReels(client: SupabaseClient): Promise<Reel[]> {
-  const { data, error } = await client.from("reels").select("*").order("display_order");
+export async function listReels(client: SupabaseClient, onlyPublished = true): Promise<Reel[]> {
+  let q = client.from("reels").select("*");
+  if (onlyPublished) q = q.eq("is_published", true);
+  const { data, error } = await q.order("display_order");
   if (error) throw error;
   return (data ?? []) as Reel[];
+}
+
+export async function listPartners(client: SupabaseClient, onlyPublished = true): Promise<Partner[]> {
+  let q = client.from("partners").select("*");
+  if (onlyPublished) q = q.eq("is_published", true);
+  const { data, error } = await q.order("display_order");
+  if (error) throw error;
+  return (data ?? []) as Partner[];
+}
+
+/** Site settings as a key->value map. Missing keys are simply absent. */
+export async function getSiteSettings(client: SupabaseClient): Promise<SiteSettings> {
+  const { data, error } = await client.from("site_settings").select("key, value");
+  if (error) throw error;
+  const map: SiteSettings = {};
+  for (const row of (data ?? []) as { key: string; value: string }[]) {
+    map[row.key] = row.value;
+  }
+  return map;
 }
 
 export async function listBlogPosts(client: SupabaseClient, limit?: number): Promise<BlogPost[]> {

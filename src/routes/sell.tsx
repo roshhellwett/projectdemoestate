@@ -2,10 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
+import { FooterSettingsContext } from "../components/footer-settings";
 import { SellForm } from "../components/sell-form";
 import { initRevealOnScroll } from "../lib/reveal";
+import { getSupabaseForRoute } from "../lib/route-supabase";
+import { getSiteSettings } from "../lib/queries";
 
 export const Route = createFileRoute("/sell")({
+  loader: async () => ({ settings: await getSiteSettings(getSupabaseForRoute()) }),
   head: () => ({
     meta: [
       { title: "Sell Your Property · SS Property" },
@@ -23,6 +27,8 @@ const STEPS = [
 ];
 
 function SellPage() {
+  const { settings } = Route.useLoaderData();
+
   useEffect(() => {
     initRevealOnScroll();
   }, []);
@@ -38,8 +44,8 @@ function SellPage() {
               Your property deserves the right buyers, not just any buyers.
             </h1>
             <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-muted">
-              Thousands of qualified buyers search with us every month. We verify, photograph and market
-              your listing so serious people come to you.
+              {settings.sell_intro ??
+                "Thousands of qualified buyers search with us every month. We verify, photograph and market your listing so serious people come to you."}
             </p>
           </div>
         </section>
@@ -71,7 +77,9 @@ function SellPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <FooterSettingsContext.Provider value={settings}>
+        <Footer />
+      </FooterSettingsContext.Provider>
     </div>
   );
 }

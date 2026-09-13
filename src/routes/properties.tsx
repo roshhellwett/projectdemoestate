@@ -2,10 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
+import { FooterSettingsContext } from "../components/footer-settings";
 import { PropertyCard } from "../components/property-card";
 import { initRevealOnScroll } from "../lib/reveal";
 import { getSupabaseForRoute } from "../lib/route-supabase";
-import { listLocalities, listProperties } from "../lib/queries";
+import { getSiteSettings, listLocalities, listProperties } from "../lib/queries";
 
 export interface Search {
   q?: string;
@@ -31,15 +32,16 @@ export const Route = createFileRoute("/properties")({
   loaderDeps: ({ search: { q = "", locality = "All", bhk = "" } }) => ({ q, locality, bhk }),
   loader: async ({ deps }) => {
     const supabase = getSupabaseForRoute();
-    const [properties, localities] = await Promise.all([
+    const [properties, localities, settings] = await Promise.all([
       listProperties(supabase, {
         q: deps.q || undefined,
         locality: deps.locality,
         bhk: deps.bhk || undefined,
       }),
       listLocalities(supabase),
+      getSiteSettings(supabase),
     ]);
-    return { properties, localities };
+    return { properties, localities, settings };
   },
   component: PropertiesPage,
 });
@@ -54,7 +56,7 @@ const BHK_LABELS: Record<string, string> = {
 };
 
 function PropertiesPage() {
-  const { properties, localities } = Route.useLoaderData();
+  const { properties, localities, settings } = Route.useLoaderData();
   const search = Route.useSearch() as Required<Search>;
   const navigate = Route.useNavigate();
   const [q, setQ] = useState(search.q);
@@ -94,6 +96,10 @@ function PropertiesPage() {
             <h1 className="mt-4 font-display text-4xl font-medium tracking-tight text-ink md:text-5xl">
               Find your address in Kolkata
             </h1>
+            <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted">
+              {settings.properties_intro ??
+                "Filter by locality, configuration and budget - every listing verified in person."}
+            </p>
           </div>
         </section>
 
@@ -167,7 +173,9 @@ function PropertiesPage() {
           )}
         </section>
       </main>
-      <Footer />
+      <FooterSettingsContext.Provider value={settings}>
+        <Footer />
+      </FooterSettingsContext.Provider>
     </div>
   );
 }

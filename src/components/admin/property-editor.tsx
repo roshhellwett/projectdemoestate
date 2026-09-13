@@ -3,6 +3,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getSupabaseBrowser } from "../../lib/supabase";
+import { LogoImage } from "../brand";
 import {
   addImageRow,
   createProperty,
@@ -537,6 +538,7 @@ function EditorShell({
         <div className="shell-wide flex h-16 items-center justify-between">
           <div className="flex items-center gap-5">
             <Link to={back.to} className="text-sm text-muted hover:text-ink">← Back</Link>
+            <LogoImage className="hidden h-8 sm:block" />
             <h1 className="font-display text-xl font-medium text-ink">{title}</h1>
           </div>
           {onDelete ? (

@@ -2,11 +2,12 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
+import { FooterSettingsContext } from "../components/footer-settings";
 import { PropertyCard } from "../components/property-card";
 import { EnquiryForm } from "../components/enquiry-form";
 import { initRevealOnScroll } from "../lib/reveal";
 import { getSupabaseForRoute } from "../lib/route-supabase";
-import { getImagesForProperty, getPropertyBySlug, getSimilarProperties } from "../lib/queries";
+import { getImagesForProperty, getPropertyBySlug, getSimilarProperties, getSiteSettings } from "../lib/queries";
 import { formatArea, formatPrice } from "../lib/format";
 
 export const Route = createFileRoute("/property/$slug")({
@@ -14,11 +15,12 @@ export const Route = createFileRoute("/property/$slug")({
     const supabase = getSupabaseForRoute();
     const property = await getPropertyBySlug(supabase, params.slug);
     if (!property) throw notFound();
-    const [images, similar] = await Promise.all([
+    const [images, similar, settings] = await Promise.all([
       getImagesForProperty(supabase, property.id),
       getSimilarProperties(supabase, property, 3),
+      getSiteSettings(supabase),
     ]);
-    return { property, images, similar };
+    return { property, images, similar, settings };
   },
   head: ({ loaderData }) => {
     const p = loaderData?.property;
@@ -40,7 +42,7 @@ export const Route = createFileRoute("/property/$slug")({
 });
 
 function PropertyDetailPage() {
-  const { property, images, similar } = Route.useLoaderData();
+  const { property, images, similar, settings } = Route.useLoaderData();
 
   useEffect(() => {
     initRevealOnScroll();
@@ -178,7 +180,9 @@ function PropertyDetailPage() {
           </section>
         ) : null}
       </main>
-      <Footer />
+      <FooterSettingsContext.Provider value={settings}>
+        <Footer />
+      </FooterSettingsContext.Provider>
     </div>
   );
 }

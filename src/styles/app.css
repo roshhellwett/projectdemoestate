@@ -148,3 +148,86 @@
     transition: none;
   }
 }
+
+/* ---------------------------------------------------------------------
+   hero entrance: masked line rise
+   --------------------------------------------------------------------- */
+
+.hero-line {
+  display: block;
+  overflow: hidden;
+}
+.hero-line > span {
+  display: block;
+  transform: translateY(110%);
+  animation: hero-rise 900ms var(--ease-lux) forwards;
+}
+.hero-line:nth-child(2) > span { animation-delay: 120ms; }
+@keyframes hero-rise {
+  to { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-line > span {
+    animation: none;
+    transform: none;
+  }
+}
+
+/* soft ambient drift for the hero glow */
+.hero-glow {
+  animation: glow-drift 14s ease-in-out infinite alternate;
+}
+@keyframes glow-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(-6%, 8%, 0) scale(1.12); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow { animation: none; }
+}
+
+/* ---------------------------------------------------------------------
+   logo wall marquee (partners)
+   --------------------------------------------------------------------- */
+
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 42s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .marquee { overflow-x: auto; }
+}
+
+/* ---------------------------------------------------------------------
+   instagram reel tiles: hover sheen
+   --------------------------------------------------------------------- */
+
+.reel-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgb(250 247 242 / 0.14) 48%, transparent 62%);
+  transform: translateX(-120%);
+  transition: transform 900ms var(--ease-lux);
+  pointer-events: none;
+}
+.reel-tile:hover::after { transform: translateX(120%); }
+@media (prefers-reduced-motion: reduce) {
+  .reel-tile::after { display: none; }
+}
+
+/* stat count-up number */
+.stat-value {
+  font-variant-numeric: tabular-nums;
+}

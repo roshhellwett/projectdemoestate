@@ -2,16 +2,21 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
+import { FooterSettingsContext } from "../components/footer-settings";
 import { initRevealOnScroll } from "../lib/reveal";
 import { getSupabaseForRoute } from "../lib/route-supabase";
-import { getBlogPostBySlug } from "../lib/queries";
+import { getBlogPostBySlug, getSiteSettings } from "../lib/queries";
 import { formatDate } from "../lib/format";
 
 export const Route = createFileRoute("/journal/$slug")({
   loader: async ({ params }) => {
-    const post = await getBlogPostBySlug(getSupabaseForRoute(), params.slug);
+    const supabase = getSupabaseForRoute();
+    const [post, settings] = await Promise.all([
+      getBlogPostBySlug(supabase, params.slug),
+      getSiteSettings(supabase),
+    ]);
     if (!post) throw notFound();
-    return { post };
+    return { post, settings };
   },
   head: ({ loaderData }) => {
     const post = loaderData?.post;
@@ -29,7 +34,7 @@ export const Route = createFileRoute("/journal/$slug")({
 });
 
 function JournalPostPage() {
-  const { post } = Route.useLoaderData();
+  const { post, settings } = Route.useLoaderData();
   const paragraphs = post.content.split(/\n\s*\n/).filter(Boolean);
 
   useEffect(() => {
@@ -67,7 +72,9 @@ function JournalPostPage() {
           </div>
         </article>
       </main>
-      <Footer />
+      <FooterSettingsContext.Provider value={settings}>
+        <Footer />
+      </FooterSettingsContext.Provider>
     </div>
   );
 }

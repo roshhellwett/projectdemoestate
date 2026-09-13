@@ -5,7 +5,7 @@
  */
 
 import { getSupabaseBrowser } from "./supabase";
-import type { Property, PropertyImage } from "./types";
+import type { BlogPost, Faq, Partner, Property, PropertyImage, Reel, Testimonial } from "./types";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
 
@@ -121,4 +121,242 @@ export async function reorderImages(propertyId: string, orderedIds: string[]) {
       supabase.from("property_images").update({ sort_order: i }).eq("id", imgId),
     ),
   );
+}
+
+/* ---------------- content: reels, posts, testimonials, faqs, partners, settings ---------------- */
+
+/**
+ * Instagram reel URL -> id + embed URL. Accepts:
+ *   https://www.instagram.com/reel/DbqdwlJPfz2/
+ *   https://instagram.com/reel/DbqdwlJPfz2/?igsh=...
+ *   https://www.instagram.com/p/DbqdwlJPfz2/   (post-style, also works in embeds)
+ *   https://www.instagram.com/sspropertykol/reel/DbqdwlJPfz2/
+ */
+export function parseInstagramUrl(raw: string): { id: string; reelUrl: string; embedUrl: string } | null {
+  const url = raw.trim();
+  const m = url.match(/instagram\.com\/(?:[^/]+\/)?(?:reel|reels|p)\/([A-Za-z0-9_-]+)/i);
+  if (!m) return null;
+  const id = m[1]!;
+  return {
+    id,
+    reelUrl: `https://www.instagram.com/reel/${id}/`,
+    embedUrl: `https://www.instagram.com/reel/${id}/embed`,
+  };
+}
+
+export async function saveReel(input: {
+  id?: string;
+  title: string;
+  url: string;
+  cover?: string;
+  coverThumb?: string;
+  displayOrder: number;
+  isPublished: boolean;
+}) {
+  const supabase = getSupabaseBrowser();
+  const parsed = parseInstagramUrl(input.url);
+  if (!parsed) throw new Error("That does not look like an Instagram reel link.");
+  const row = {
+    id: input.id ?? `reel-${parsed.id.toLowerCase()}`,
+    title: input.title.trim() || "Untitled reel",
+    reel_url: parsed.reelUrl,
+    embed_url: parsed.embedUrl,
+    cover_image: input.cover ?? "",
+    cover_thumb: input.coverThumb ?? "",
+    display_order: input.displayOrder,
+    is_published: input.isPublished,
+  };
+  const { data, error } = await supabase.from("reels").upsert(row).select().single();
+  if (error) throw error;
+  return data as Reel;
+}
+
+export async function deleteReel(id: string) {
+  const supabase = getSupabaseBrowser();
+  const { error } = await supabase.from("reels").delete().eq("id", id);
+  if (error) throw error;
+}
+
+export async function uploadReelCover(file: File): Promise<{ cover: string; thumb: string }> {
+  const { full, thumb } = await encodeVariants(file);
+  const stamp = Date.now().toString(36);
+  const rand = Math.random().toString(36).slice(2, 8);
+  const base = `reel-cover-${stamp}-${rand}`;
+  const supabase = getSupabaseBrowser();
+  const { error: e1 } = await supabase.storage
+    .from("media")
+    .upload(`full/${base}.webp`, full, { contentType: "image/webp" });
+  if (e1) throw e1;
+  const { error: e2 } = await supabase.storage
+    .from("media")
+    .upload(`thumb/${base}.webp`, thumb, { contentType: "image/webp" });
+  if (e2) throw e2;
+  return { cover: publicUrl(`full/${base}.webp`), thumb: publicUrl(`thumb/${base}.webp`) };
+}
+
+/* ---- journal ---- */
+
+export async function upsertBlogPost(input: {
+  id?: string;
+  slug: string;
+  title: string;
+  publishDate: string;
+  author: string;
+  cover?: string;
+  coverThumb?: string;
+  content: string;
+  excerpt: string;
+  isPublished: boolean;
+}) {
+  const supabase = getSupabaseBrowser();
+  const row = {
+    id: input.id ?? input.slug,
+    slug: input.slug,
+    title: input.title.trim(),
+    publish_date: input.publishDate || new Date().toISOString().slice(0, 10),
+    author: input.author.trim() || "SS Property",
+    cover_image: input.cover ?? "",
+    cover_thumb: input.coverThumb ?? "",
+    content: input.content,
+    excerpt: input.excerpt,
+    is_published: input.isPublished,
+    updated_at: new Date().toISOString(),
+  };
+  const { data, error } = await supabase.from("blog_posts").upsert(row).select().single();
+  if (error) throw error;
+  return data as BlogPost;
+}
+
+export async function deleteBlogPost(id: string) {
+  const supabase = getSupabaseBrowser();
+  const { error } = await supabase.from("blog_posts").delete().eq("id", id);
+  if (error) throw error;
+}
+
+/* ---- testimonials ---- */
+
+export async function upsertTestimonial(input: {
+  id?: string;
+  clientName: string;
+  clientLocation: string;
+  rating: number;
+  reviewText: string;
+  reviewDate: string | null;
+  isPublished: boolean;
+}) {
+  const supabase = getSupabaseBrowser();
+  const row = {
+    ...(input.id ? { id: input.id } : {}),
+    client_name: input.clientName.trim(),
+    client_location: input.clientLocation.trim(),
+    rating: Math.min(5, Math.max(1, input.rating)),
+    review_text: input.reviewText.trim(),
+    review_date: input.reviewDate,
+    is_published: input.isPublished,
+  };
+  const { data, error } = await supabase.from("testimonials").upsert(row).select().single();
+  if (error) throw error;
+  return data as Testimonial;
+}
+
+export async function deleteTestimonial(id: string) {
+  const supabase = getSupabaseBrowser();
+  const { error } = await supabase.from("testimonials").delete().eq("id", id);
+  if (error) throw error;
+}
+
+/* ---- faqs ---- */
+
+export async function upsertFaq(input: {
+  id?: string;
+  question: string;
+  answer: string;
+  category: string;
+  displayOrder: number;
+  isPublished: boolean;
+}) {
+  const supabase = getSupabaseBrowser();
+  const slug = input.id ?? `faq-${slugFromTitle(input.question)}`;
+  const row = {
+    id: slug,
+    question: input.question.trim(),
+    answer: input.answer.trim(),
+    category: input.category.trim() || "General",
+    display_order: input.displayOrder,
+    is_published: input.isPublished,
+  };
+  const { data, error } = await supabase.from("faqs").upsert(row).select().single();
+  if (error) throw error;
+  return data as Faq;
+}
+
+export async function deleteFaq(id: string) {
+  const supabase = getSupabaseBrowser();
+  const { error } = await supabase.from("faqs").delete().eq("id", id);
+  if (error) throw error;
+}
+
+/* ---- partners ---- */
+
+export async function upsertPartner(input: {
+  id?: string;
+  name: string;
+  slug: string;
+  logoUrl: string;
+  websiteUrl: string;
+  description: string;
+  displayOrder: number;
+  isPublished: boolean;
+}) {
+  const supabase = getSupabaseBrowser();
+  const row = {
+    ...(input.id ? { id: input.id } : {}),
+    name: input.name.trim(),
+    slug: input.slug.trim() || slugFromTitle(input.name),
+    logo_url: input.logoUrl.trim(),
+    website_url: input.websiteUrl.trim(),
+    description: input.description.trim(),
+    display_order: input.displayOrder,
+    is_published: input.isPublished,
+  };
+  const { data, error } = await supabase.from("partners").upsert(row).select().single();
+  if (error) throw error;
+  return data as Partner;
+}
+
+export async function deletePartner(id: string) {
+  const supabase = getSupabaseBrowser();
+  const { error } = await supabase.from("partners").delete().eq("id", id);
+  if (error) throw error;
+}
+
+/** Partner logo upload -> media bucket, returns public URL (single size). */
+export async function uploadPartnerLogo(file: File): Promise<string> {
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(1, 1600 / bitmap.width);
+  const canvas = new OffscreenCanvas(
+    Math.round(bitmap.width * scale),
+    Math.round(bitmap.height * scale),
+  );
+  canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  const blob = await canvas.convertToBlob({ type: "image/webp", quality: 0.9 });
+  bitmap.close();
+  const stamp = Date.now().toString(36);
+  const rand = Math.random().toString(36).slice(2, 8);
+  const base = `partner-${stamp}-${rand}`;
+  const supabase = getSupabaseBrowser();
+  const { error } = await supabase.storage
+    .from("media")
+    .upload(`full/${base}.webp`, blob, { contentType: "image/webp" });
+  if (error) throw error;
+  return publicUrl(`full/${base}.webp`);
+}
+
+/* ---- site settings ---- */
+
+export async function saveSettings(entries: Record<string, string>) {
+  const supabase = getSupabaseBrowser();
+  const rows = Object.entries(entries).map(([key, value]) => ({ key, value }));
+  const { error } = await supabase.from("site_settings").upsert(rows, { onConflict: "key" });
+  if (error) throw error;
 }

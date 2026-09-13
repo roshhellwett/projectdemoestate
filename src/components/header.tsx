@@ -2,7 +2,7 @@
 
 import { Link, useMatchRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Wordmark } from "./brand";
+import { LogoImage } from "./brand";
 import { NAV_LINKS, SITE } from "../lib/site";
 
 /**
@@ -48,7 +48,7 @@ export function Header() {
       >
         <div className="shell flex h-16 items-center justify-between">
           <Link to="/" aria-label="SS Property home" onClick={() => setOpen(false)}>
-            <Wordmark />
+            <LogoImage className="h-8 md:h-9" />
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">

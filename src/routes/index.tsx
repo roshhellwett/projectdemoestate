@@ -2,13 +2,15 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
+import { FooterSettingsContext } from "../components/footer-settings";
 import { PropertyCard } from "../components/property-card";
+import { PartnerWall, ReelsSection, TestimonialStrip } from "../components/sections";
 import { initRevealOnScroll } from "../lib/reveal";
 import { formatDate } from "../lib/format";
-import { SITE } from "../lib/site";
 import { getSupabaseForRoute } from "../lib/route-supabase";
-import { listBlogPosts, listFaqs, listProperties, listPublishedTestimonials, listReels } from "../lib/queries";
-import type { Faq, Property, Reel } from "../lib/types";
+import { applySettings } from "../lib/site";
+import { listBlogPosts, listFaqs, listPartners, listProperties, listPublishedTestimonials, listReels, getSiteSettings } from "../lib/queries";
+import type { Faq, Property } from "../lib/types";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,25 +25,56 @@ export const Route = createFileRoute("/")({
   }),
   loader: async () => {
     const supabase = getSupabaseForRoute();
-    const [featured, latest, reels, posts, faqs, testimonials] = await Promise.all([
+    const [featured, latest, reels, posts, faqs, testimonials, partners, settings] = await Promise.all([
       listProperties(supabase, { featuredOnly: true, limit: 3 }),
       listProperties(supabase, { limit: 6 }),
       listReels(supabase),
       listBlogPosts(supabase, 3),
       listFaqs(supabase),
       listPublishedTestimonials(supabase),
+      listPartners(supabase),
+      getSiteSettings(supabase),
     ]);
-    return { featured, latest, reels, posts, faqs, hasTestimonials: testimonials.length > 0 };
+    return {
+      featured,
+      latest,
+      reels,
+      posts,
+      faqs,
+      testimonials,
+      partners,
+      settings,
+      site: applySettings(settings),
+    };
   },
   component: HomePage,
 });
 
 function HomePage() {
-  const { featured, latest, reels, posts, faqs } = Route.useLoaderData();
+  const { featured, latest, reels, posts, faqs, testimonials, partners, settings, site } =
+    Route.useLoaderData();
 
   useEffect(() => {
     initRevealOnScroll();
   }, []);
+
+  // hero copy: admin-editable via settings, split into 2 masked lines
+  const heroTitle = settings.hero_title ?? "Homes worth the grand tour.";
+  const [line1, line2 = ""] = heroTitle.split("\n").length > 1
+    ? heroTitle.split("\n")
+    : heroTitle.split(". ").length > 1
+      ? [`${heroTitle.split(". ")[0]}.`, heroTitle.split(". ").slice(1).join(". ")]
+      : [heroTitle, ""];
+  const lastWordItalic = (line: string) => {
+    if (!line) return null;
+    const words = line.trim().split(" ");
+    const last = words.pop()!;
+    return (
+      <>
+        {words.join(" ")} <em className="italic">{last}</em>
+      </>
+    );
+  };
 
   return (
     <div className="min-h-dvh">
@@ -52,20 +85,19 @@ function HomePage() {
           {/* backdrop */}
           <div className="absolute inset-0 -z-10">
             <div className="absolute inset-0 bg-gradient-to-b from-paper-2/70 via-paper to-paper" />
-            <div className="absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-brass-ghost blur-3xl" />
+            <div className="hero-glow absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-brass-ghost blur-3xl" />
           </div>
 
           <div className="shell-wide grid items-center gap-14 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:py-28">
             <div>
-              <p className="eyebrow reveal">Kolkata · Verified Listings</p>
-              <h1 className="reveal mt-5 font-display text-[clamp(2.75rem,6vw,5rem)] font-medium leading-[1.05] tracking-tight text-ink">
-                Homes worth the
-                <br />
-                <em className="italic">grand tour.</em>
+              <p className="eyebrow reveal">{settings.hero_eyebrow ?? "Kolkata · Verified Listings"}</p>
+              <h1 className="mt-5 font-display text-[clamp(2.75rem,6vw,5rem)] font-medium leading-[1.05] tracking-tight text-ink">
+                <span className="hero-line"><span>{line1}</span></span>
+                {line2 ? <span className="hero-line"><span>{lastWordItalic(line2)}</span></span> : null}
               </h1>
               <p className="reveal mt-6 max-w-md text-[15px] leading-relaxed text-muted">
-                Hand-verified flats, penthouses and commercial spaces across Kolkata. Every listing walked
-                through, every paper checked.
+                {settings.hero_subtitle ??
+                  "Hand-verified flats, penthouses and commercial spaces across Kolkata. Every listing walked through, every paper checked."}
               </p>
               <div className="reveal mt-9 flex flex-wrap items-center gap-4">
                 <Link
@@ -75,7 +107,7 @@ function HomePage() {
                   Browse Properties
                 </Link>
                 <a
-                  href={SITE.whatsapp}
+                  href={site.whatsapp}
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-full border border-ink/20 px-7 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-ink/50"
@@ -91,6 +123,9 @@ function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* ---------------- partner logo wall ---------------- */}
+        <PartnerWall partners={partners} />
 
         {/* ---------------- featured residences ---------------- */}
         <section className="shell-wide py-20 md:py-28">
@@ -137,25 +172,11 @@ function HomePage() {
           </section>
         ) : null}
 
-        {/* ---------------- reels ---------------- */}
-        {reels.length > 0 ? (
-          <section className="shell-wide py-20 md:py-28">
-            <div className="reveal flex items-end justify-between gap-6">
-              <h2 className="font-display text-3xl font-medium tracking-tight text-ink md:text-4xl">
-                Straight from our reels
-              </h2>
-              <a
-                href={SITE.instagram}
-                target="_blank"
-                rel="noreferrer"
-                className="hidden shrink-0 text-sm font-semibold text-brass transition-colors hover:text-ink sm:block"
-              >
-                Follow @sspropertykol →
-              </a>
-            </div>
-            <ReelRow reels={reels} />
-          </section>
-        ) : null}
+        {/* ---------------- instagram reels (admin-managed) ---------------- */}
+        <ReelsSection reels={reels} instagram={site.instagram} />
+
+        {/* ---------------- testimonials ---------------- */}
+        <TestimonialStrip testimonials={testimonials} />
 
         {/* ---------------- journal ---------------- */}
         {posts.length > 0 ? (
@@ -209,10 +230,10 @@ function HomePage() {
           <div className="reveal relative overflow-hidden rounded-[var(--radius-card)] bg-ink px-8 py-16 text-center text-paper md:py-20">
             <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-brass/20 blur-3xl" />
             <h2 className="relative font-display text-3xl font-medium tracking-tight md:text-5xl">
-              Selling? We put your property in front of the right buyers.
+              {settings.cta_title ?? "Selling? We put your property in front of the right buyers."}
             </h2>
             <p className="relative mx-auto mt-4 max-w-md text-sm text-paper/60">
-              Fair valuation, verified footfalls, zero pressure.
+              {settings.cta_subtitle ?? "Fair valuation, verified footfalls, zero pressure."}
             </p>
             <Link
               to="/sell"
@@ -223,7 +244,9 @@ function HomePage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <FooterSettingsContext.Provider value={settings}>
+        <Footer />
+      </FooterSettingsContext.Provider>
     </div>
   );
 }
@@ -264,35 +287,6 @@ function HeroCluster({ properties }: { properties: Property[] }) {
           />
         </div>
       ) : null}
-    </div>
-  );
-}
-
-function ReelRow({ reels }: { reels: Reel[] }) {
-  return (
-    <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {reels.map((reel) => (
-        <a
-          key={reel.id}
-          href={reel.reel_url}
-          target="_blank"
-          rel="noreferrer"
-          className="reveal group relative block overflow-hidden rounded-2xl border border-line"
-        >
-          <img
-            src={reel.cover_thumb || reel.cover_image}
-            alt={reel.title}
-            width={400}
-            height={500}
-            loading="lazy"
-            className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
-          />
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 to-transparent p-4">
-            <p className="text-sm font-medium text-paper">{reel.title}</p>
-            <p className="text-xs text-paper/70">Watch on Instagram</p>
-          </div>
-        </a>
-      ))}
     </div>
   );
 }
