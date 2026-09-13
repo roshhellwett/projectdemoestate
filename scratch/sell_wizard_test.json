@@ -1,0 +1,7 @@
+[
+  { "type": "type", "selector": "#sf-address", "text": "Greenwood Heights, Flat 4B, Lake Town", "delay": 20 },
+  { "type": "type", "selector": "#sf-area", "text": "1450", "delay": 20 },
+  { "type": "click", "selector": "#btn-sell-step1-next", "wait": 1000 },
+  { "type": "type", "selector": "#sf-price", "text": "1.25 Cr", "delay": 20 },
+  { "type": "click", "selector": "#btn-sell-step2-next", "wait": 1000 }
+]

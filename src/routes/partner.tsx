@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
 import { FooterSettingsContext } from "../components/footer-settings";
+import { FloatingConcierge } from "../components/floating-concierge";
 import { SellForm } from "../components/sell-form";
 import { PartnerWall } from "../components/sections";
 import { initRevealOnScroll } from "../lib/reveal";
@@ -49,6 +50,7 @@ function PartnerPage() {
   return (
     <div className="min-h-dvh">
       <Header />
+      <FloatingConcierge />
       <main className="pt-16">
         <section className="border-b border-line bg-paper-2/60">
           <div className="shell py-14 md:py-20">

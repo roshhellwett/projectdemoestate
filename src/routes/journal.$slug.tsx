@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
 import { FooterSettingsContext } from "../components/footer-settings";
+import { FloatingConcierge } from "../components/floating-concierge";
 import { initRevealOnScroll } from "../lib/reveal";
 import { getSupabaseForRoute } from "../lib/route-supabase";
 import { getBlogPostBySlug, getSiteSettings } from "../lib/queries";
@@ -44,6 +45,7 @@ function JournalPostPage() {
   return (
     <div className="min-h-dvh">
       <Header />
+      <FloatingConcierge />
       <main className="pt-16">
         <article className="shell max-w-[720px] py-14">
           <time className="text-xs text-muted">

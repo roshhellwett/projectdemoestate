@@ -26,13 +26,7 @@ export function formatArea(areaSqft: number | null): string {
   return `${areaSqft.toLocaleString("en-IN")} sq.ft`;
 }
 
-export function priceBucket(priceInr: number | null): string {
-  if (priceInr == null) return "On Request";
-  if (priceInr < 6_000_000) return "Under \u20B960 L";
-  if (priceInr < CRORE) return "\u20B960 L - 1 Cr";
-  if (priceInr < 2 * CRORE) return "\u20B91 - 2 Cr";
-  return "\u20B92 Cr+";
-}
+
 
 export function formatDate(iso: string | null | undefined): string {
   if (!iso) return "";
@@ -41,8 +35,4 @@ export function formatDate(iso: string | null | undefined): string {
   return d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 }
 
-/** BHK label like "2 BHK" -> numeric 2; "Commercial Office Space" -> null */
-export function bhkNumber(bhkType: string): number | null {
-  const m = bhkType.match(/^(\d)\s*BHK/i);
-  return m ? Number(m[1]) : null;
-}
+

@@ -3,27 +3,49 @@ import { useEffect } from "react";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
 import { FooterSettingsContext } from "../components/footer-settings";
+import { FloatingConcierge } from "../components/floating-concierge";
 import { SellForm } from "../components/sell-form";
 import { initRevealOnScroll } from "../lib/reveal";
 import { getSupabaseForRoute } from "../lib/route-supabase";
 import { getSiteSettings } from "../lib/queries";
+import { Sparkle, ShieldCheck, Camera, Users, Certificate } from "@phosphor-icons/react";
 
 export const Route = createFileRoute("/sell")({
   loader: async () => ({ settings: await getSiteSettings(getSupabaseForRoute()) }),
   head: () => ({
     meta: [
-      { title: "Sell Your Property · SS Property" },
-      { name: "description", content: "List your Kolkata property with SS Property. Fair valuation, verified buyers, zero pressure." },
+      { title: "Sell or Lease Your Kolkata Property · SS Property" },
+      {
+        name: "description",
+        content:
+          "List your Kolkata flat, penthouse, or commercial space with SS Property. Accurate market valuation, professional photography, verified HNI buyers, zero spam.",
+      },
     ],
   }),
   component: SellPage,
 });
 
 const STEPS = [
-  { title: "Tell us about the property", body: "Fill the form. Our valuation team calls within one working day." },
-  { title: "We visit and verify", body: "A walkthrough, papers checked, honest price estimate - no obligation." },
-  { title: "We list and screen buyers", body: "Professional photos, verified listing, only serious buyers reach you." },
-  { title: "Deal closed, paperwork done", body: "Negotiation, agreement and registration handled end to end." },
+  {
+    icon: Certificate,
+    title: "1. Share Property Coordinates",
+    body: "Submit your address, layout, and expected valuation. Our market appraisal desk analyses active comps within 24 hours.",
+  },
+  {
+    icon: Camera,
+    title: "2. Walkthrough & Professional Media",
+    body: "Our team conducts a physical on-ground visit, reviews title documents, and records high-definition walkthrough reels.",
+  },
+  {
+    icon: Users,
+    title: "3. Direct HNI & Buyer Marketing",
+    body: "Your listing is showcased across our verified network of serious home seekers and investors. No tire-kickers or spam brokers.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "4. Closing & Legal Registration",
+    body: "We assist with agreement drafts, bank loan coordination, municipal tax clearances, and West Bengal deed registration.",
+  },
 ];
 
 function SellPage() {
@@ -34,52 +56,71 @@ function SellPage() {
   }, []);
 
   return (
-    <div className="min-h-dvh">
-      <Header />
-      <main className="pt-16">
-        <section className="border-b border-line bg-paper-2/60">
-          <div className="shell py-14 md:py-20">
-            <p className="eyebrow">Sell with SS Property</p>
-            <h1 className="mt-4 max-w-2xl font-display text-4xl font-medium leading-tight tracking-tight text-ink md:text-5xl">
-              Your property deserves the right buyers, not just any buyers.
-            </h1>
-            <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-muted">
-              {settings.sell_intro ??
-                "Thousands of qualified buyers search with us every month. We verify, photograph and market your listing so serious people come to you."}
-            </p>
-          </div>
-        </section>
+    <FooterSettingsContext.Provider value={settings}>
+      <div className="min-h-dvh bg-paper text-ink selection:bg-brass-ghost">
+        <Header />
+        <FloatingConcierge />
 
-        <section className="shell-wide grid gap-14 py-14 lg:grid-cols-[1fr_1.2fr]">
-          <div>
-            <h2 className="font-display text-2xl font-medium tracking-tight text-ink">How it works</h2>
-            <ol className="mt-6 space-y-6">
-              {STEPS.map((s, i) => (
-                <li key={s.title} className="reveal flex gap-4">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-brass/50 text-xs font-semibold text-brass">
-                    {i + 1}
-                  </span>
-                  <div>
-                    <p className="text-[15px] font-semibold text-ink">{s.title}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-muted">{s.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
+        <main className="pt-20">
+          <section className="border-b border-line bg-paper-2/70 py-14 md:py-20">
+            <div className="shell-wide">
+              <div className="inline-flex items-center gap-2 rounded-full border border-brass/40 bg-white px-3.5 py-1 text-xs font-semibold text-ink shadow-sm">
+                <Sparkle size={14} weight="fill" className="text-brass" />
+                <span>Premier Property Representation</span>
+              </div>
+              <h1 className="mt-4 max-w-3xl font-display text-4xl md:text-5xl font-medium leading-tight tracking-tight text-ink">
+                Your Kolkata Property Deserves Qualified Buyers, Not Cold Calls.
+              </h1>
+              <p className="mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-muted">
+                {settings.sell_intro ??
+                  "SS Property connects your flat, penthouse or commercial floor directly with high-intent buyers across Lake Town, Newtown, Kasba, and Greater Kolkata."}
+              </p>
+            </div>
+          </section>
 
-          <div className="rounded-[var(--radius-card)] border border-line bg-paper-2/50 p-6 md:p-10">
-            <h2 className="font-display text-2xl font-medium tracking-tight text-ink">List your property</h2>
-            <p className="mt-1 text-sm text-muted">Free to submit. No obligation to list.</p>
-            <div className="mt-8">
+          <section className="shell-wide grid gap-12 py-16 lg:grid-cols-[1fr_1.35fr]">
+            {/* Left: How it works */}
+            <div>
+              <p className="eyebrow text-brass">The Listing Protocol</p>
+              <h2 className="mt-2 font-display text-3xl font-medium tracking-tight text-ink">
+                How we represent your property
+              </h2>
+
+              <div className="mt-8 space-y-6">
+                {STEPS.map((s) => {
+                  const Icon = s.icon;
+                  return (
+                    <div
+                      key={s.title}
+                      className="rounded-2xl border border-line bg-white p-5 shadow-sm flex items-start gap-4"
+                    >
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brass-ghost text-brass">
+                        <Icon size={20} weight="duotone" />
+                      </div>
+                      <div>
+                        <h3 className="font-display text-base font-bold text-ink">{s.title}</h3>
+                        <p className="mt-1 text-xs text-muted leading-relaxed">{s.body}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-8 rounded-2xl bg-paper-2 border border-line p-6 text-xs text-muted leading-relaxed">
+                <p className="font-bold text-ink mb-1">Zero Upfront Listing Fee</p>
+                <p>Listing with SS Property is free of charge. We only succeed when your property is successfully closed with complete satisfaction.</p>
+              </div>
+            </div>
+
+            {/* Right: 3-step luxury valuation wizard */}
+            <div>
               <SellForm kind="sell" />
             </div>
-          </div>
-        </section>
-      </main>
-      <FooterSettingsContext.Provider value={settings}>
+          </section>
+        </main>
+
         <Footer />
-      </FooterSettingsContext.Provider>
-    </div>
+      </div>
+    </FooterSettingsContext.Provider>
   );
 }

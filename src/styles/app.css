@@ -106,6 +106,30 @@
     @apply block h-px w-full bg-line;
   }
 
+  /* luxury metallic brass gradient */
+  .bg-brass-gradient {
+    background: linear-gradient(135deg, #c9a24b 0%, #e8dcc3 45%, #a9862f 100%);
+  }
+  .text-brass-gradient {
+    background: linear-gradient(135deg, #a9862f 0%, #c9a24b 50%, #8a6c1e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* glassmorphism panels */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(228, 220, 206, 0.8);
+  }
+  .glass-card-dark {
+    background: rgba(28, 25, 21, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(250, 247, 242, 0.12);
+  }
+
   /* on-dark text helpers */
   .on-dark {
     color: rgb(250 247 242 / 0.7);
@@ -116,7 +140,7 @@
 }
 
 /* ---------------------------------------------------------------------
-   motion
+   motion & reveal (progressive enhancement: never stays blank)
    --------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -129,23 +153,87 @@
   }
 }
 
-/* reveal on scroll (activated by IntersectionObserver in motion.ts) */
+/* reveal on scroll: defaults to visible so no blank voids if JS is delayed */
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);
+  opacity: 1;
+  transform: none;
   transition:
     opacity 640ms var(--ease-lux),
     transform 640ms var(--ease-lux);
 }
+html.js-loaded .reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(20px);
+}
 .reveal.is-visible {
-  opacity: 1;
-  transform: none;
+  opacity: 1 !important;
+  transform: none !important;
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   interactive range sliders (luxury brass theme)
+   --------------------------------------------------------------------- */
+input[type="range"].slider-brass {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: #e4dcce;
+  outline: none;
+  transition: background 0.2s ease;
+}
+input[type="range"].slider-brass:hover {
+  background: #d5cabb;
+}
+input[type="range"].slider-brass::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #a9862f;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(18, 16, 14, 0.25);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+input[type="range"].slider-brass::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: #c9a24b;
+}
+input[type="range"].slider-brass::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #a9862f;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(18, 16, 14, 0.25);
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------------------------
+   print styles for luxury property brochure & spec sheet
+   --------------------------------------------------------------------- */
+@media print {
+  header, footer, nav, .no-print, button, .floating-concierge {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .print-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
   }
 }
 
@@ -230,4 +318,70 @@
 /* stat count-up number */
 .stat-value {
   font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------------
+   Executive Dossier - Architectural Print Stylesheet
+   --------------------------------------------------------------------- */
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 1.2cm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt;
+  }
+
+  header,
+  footer,
+  nav,
+  #floating-concierge,
+  #compare-floating-drawer,
+  #lightbox-modal,
+  #spotlight-search-modal,
+  .no-print,
+  button,
+  .slider-brass,
+  #enquiry-section {
+    display: none !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  .shell,
+  .shell-wide {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .shadow-sm,
+  .shadow-md,
+  .shadow-lg,
+  .shadow-2xl {
+    box-shadow: none !important;
+  }
+
+  .border {
+    border-color: #d1d5db !important;
+  }
+
+  /* Prevent bad page splits */
+  section,
+  .rounded-3xl,
+  .rounded-2xl {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  h1, h2, h3 {
+    color: #000000 !important;
+    break-after: avoid;
+  }
 }

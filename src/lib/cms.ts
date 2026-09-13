@@ -9,7 +9,7 @@ import type { BlogPost, Faq, Partner, Property, PropertyImage, Reel, Testimonial
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
 
-export const publicUrl = (path: string) => `${SUPABASE_URL}/storage/v1/object/public/media/${path}`;
+const publicUrl = (path: string) => `${SUPABASE_URL}/storage/v1/object/public/media/${path}`;
 
 /**
  * Client-side image prep: re-encodes to WebP at two sizes.

@@ -30,9 +30,4 @@ export function getSupabaseBrowser(): SupabaseClient {
   return browserClient;
 }
 
-/** Server-side client using the secret key. Server contexts only. */
-export function getSupabaseServer(secretKey: string): SupabaseClient {
-  return createClient(SUPABASE_URL, secretKey, {
-    auth: { persistSession: false },
-  });
-}
+

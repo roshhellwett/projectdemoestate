@@ -1,5 +1,3 @@
-import { Link } from "@tanstack/react-router";
-
 /**
  * Brand lockup. Uses the client's real logo (public/images/ss-logo-*.webp):
  * - default: ink + brass recolor for the cream header
@@ -18,11 +16,3 @@ export function LogoImage({ className = "h-9", dark = false }: { className?: str
   );
 }
 
-/** Full logo, links home. */
-export function Wordmark({ className = "", dark = false }: { className?: string; dark?: boolean }) {
-  return (
-    <Link to="/" aria-label="SS Property home" className={`inline-flex items-center ${className}`}>
-      <LogoImage dark={dark} className="h-8 md:h-9" />
-    </Link>
-  );
-}

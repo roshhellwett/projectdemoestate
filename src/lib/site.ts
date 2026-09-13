@@ -21,7 +21,9 @@ export const SITE = {
 
 export const NAV_LINKS = [
   { label: "Properties", to: "/properties" },
+  { label: "Compare", to: "/compare" },
   { label: "Sell", to: "/sell" },
+  { label: "Calculator", to: "/calculator" },
   { label: "Journal", to: "/journal" },
   { label: "About", to: "/about" },
 ] as const;

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { submitEnquiry } from "../server/enquiries";
 import { SITE } from "../lib/site";
 import type { Property } from "../lib/types";
+import { Car } from "@phosphor-icons/react";
 
 /**
  * Sticky enquiry card on the property detail page. Client island:
@@ -13,6 +14,7 @@ export function EnquiryForm({ property }: { property: Property }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [chauffeur, setChauffeur] = useState(false);
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState("");
 
@@ -20,13 +22,20 @@ export function EnquiryForm({ property }: { property: Property }) {
     e.preventDefault();
     setState("sending");
     setError("");
+    const formattedMessage = [
+      message,
+      chauffeur ? "[VIP Service] Complimentary Chauffeur Pickup Requested." : null,
+    ]
+      .filter(Boolean)
+      .join("\n\n");
+
     const res = await submitEnquiry({
       data: {
         kind: "property",
         propertyId: property.id,
         name,
         phone,
-        message: message || `Interested in: ${property.title}`,
+        message: formattedMessage || `Interested in: ${property.title}`,
       },
     });
     if (res.ok) {
@@ -99,6 +108,25 @@ export function EnquiryForm({ property }: { property: Property }) {
             placeholder="Preferred visit time, questions…"
           />
         </div>
+
+        {/* Executive Chauffeur Option */}
+        <label className="flex items-start gap-2.5 cursor-pointer rounded-xl border border-brass/30 bg-brass/5 p-3 text-xs transition-colors hover:bg-brass/10">
+          <input
+            type="checkbox"
+            checked={chauffeur}
+            onChange={(e) => setChauffeur(e.target.checked)}
+            className="mt-0.5 rounded border-line text-brass focus:ring-brass"
+          />
+          <div>
+            <span className="font-semibold text-ink flex items-center gap-1.5">
+              <Car size={15} weight="fill" className="text-brass" />
+              Complimentary Chauffeur Pickup
+            </span>
+            <p className="text-[11px] text-muted mt-0.5">
+              Request an executive vehicle pickup for your private site visit.
+            </p>
+          </div>
+        </label>
 
         {state === "error" ? (
           <p role="alert" className="text-xs text-danger">

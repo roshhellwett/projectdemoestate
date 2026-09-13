@@ -12,6 +12,9 @@ export interface PropertyQuery {
   bhk?: string; // "2" | "3" | "4" | "commercial"
   minPrice?: number;
   maxPrice?: number;
+  possession?: string;
+  furnishing?: string;
+  sort?: string; // "price_asc" | "price_desc" | "area_desc" | "newest" | "featured"
   featuredOnly?: boolean;
   limit?: number;
 }
@@ -30,15 +33,29 @@ function applyFilters(query: QueryBuilder, f: PropertyQuery) {
   else if (f.bhk) q = q.ilike("bhk_type", `${f.bhk}%`);
   if (f.minPrice != null) q = q.gte("price_inr", f.minPrice);
   if (f.maxPrice != null) q = q.lte("price_inr", f.maxPrice);
+  if (f.possession && f.possession !== "All") q = q.eq("possession_status", f.possession);
+  if (f.furnishing && f.furnishing !== "All") q = q.ilike("furnishing_status", `%${f.furnishing}%`);
   if (f.featuredOnly) q = q.eq("is_featured", true);
   return q;
 }
 
 export async function listProperties(client: SupabaseClient, f: PropertyQuery = {}): Promise<Property[]> {
-  let q = applyFilters(
-    client.from("properties").select("*").order("is_featured", { ascending: false }),
-    f,
-  );
+  let builder = client.from("properties").select("*");
+  let q = applyFilters(builder, f);
+
+  if (f.sort === "price_asc") {
+    q = q.order("price_inr", { ascending: true, nullsFirst: false });
+  } else if (f.sort === "price_desc") {
+    q = q.order("price_inr", { ascending: false, nullsFirst: false });
+  } else if (f.sort === "area_desc") {
+    q = q.order("area_sqft", { ascending: false, nullsFirst: false });
+  } else if (f.sort === "newest") {
+    q = q.order("created_at", { ascending: false });
+  } else {
+    // Default: featured first, then newest
+    q = q.order("is_featured", { ascending: false }).order("created_at", { ascending: false });
+  }
+
   if (f.limit) q = q.limit(f.limit);
   const { data, error } = await q;
   if (error) throw error;

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
 import { FooterSettingsContext } from "../components/footer-settings";
+import { FloatingConcierge } from "../components/floating-concierge";
 import { initRevealOnScroll } from "../lib/reveal";
 import { getSupabaseForRoute } from "../lib/route-supabase";
 import { getSiteSettings, listProperties } from "../lib/queries";
@@ -53,6 +54,7 @@ function AboutPage() {
   return (
     <div className="min-h-dvh">
       <Header />
+      <FloatingConcierge />
       <main className="pt-16">
         <section className="border-b border-line bg-paper-2/60">
           <div className="shell py-14 md:py-20">
