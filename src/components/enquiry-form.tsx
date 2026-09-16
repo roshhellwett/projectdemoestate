@@ -74,7 +74,7 @@ export function EnquiryForm({ property }: { property: Property }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             autoComplete="name"
-            className="w-full rounded-[var(--radius-input)] border border-line bg-paper px-4 py-2.5 text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:outline-none"
+            className="w-full rounded-[var(--radius-input)] border border-line bg-paper px-4 py-3 text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:outline-none min-h-[48px]"
             placeholder="Full name"
           />
         </div>
@@ -91,7 +91,7 @@ export function EnquiryForm({ property }: { property: Property }) {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             autoComplete="tel"
-            className="w-full rounded-[var(--radius-input)] border border-line bg-paper px-4 py-2.5 text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:outline-none"
+            className="w-full rounded-[var(--radius-input)] border border-line bg-paper px-4 py-2.5 text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:outline-none min-h-[48px]"
             placeholder="10-digit mobile"
           />
         </div>
@@ -137,7 +137,7 @@ export function EnquiryForm({ property }: { property: Property }) {
         <button
           type="submit"
           disabled={state === "sending"}
-          className="w-full rounded-full bg-ink py-3 text-sm font-semibold text-paper transition-all hover:-translate-y-0.5 active:translate-y-0 disabled:translate-y-0 disabled:opacity-60"
+          className="w-full rounded-full bg-ink py-3.5 text-sm font-semibold text-paper transition-all hover:-translate-y-0.5 active:translate-y-0 disabled:translate-y-0 disabled:opacity-60 cursor-pointer min-h-[48px]"
         >
           {state === "sending" ? "Sending…" : "Request a Visit"}
         </button>

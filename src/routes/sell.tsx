@@ -61,7 +61,7 @@ function SellPage() {
         <Header />
         <FloatingConcierge />
 
-        <main className="pt-20">
+        <main className="pt-14 lg:pt-20">
           <section className="border-b border-line bg-paper-2/70 py-14 md:py-20">
             <div className="shell-wide">
               <div className="inline-flex items-center gap-2 rounded-full border border-brass/40 bg-white px-3.5 py-1 text-xs font-semibold text-ink shadow-sm">

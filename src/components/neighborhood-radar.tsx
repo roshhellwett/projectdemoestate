@@ -95,7 +95,7 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
   const [selectedCorridor, setSelectedCorridor] = useState<CorridorDetail>(CORRIDORS_DATA[0]!);
 
   return (
-    <section className="shell-wide py-24 border-t border-line">
+    <section className="shell-wide py-14 sm:py-20 md:py-24 border-t border-line">
       {/* Title Header */}
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
         <div>
@@ -103,7 +103,7 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
             <Compass size={14} weight="fill" className="text-brass" />
             <span>Kolkata Spatial & Transit Intelligence</span>
           </div>
-          <h2 className="mt-3 font-display text-3xl md:text-4xl font-medium tracking-tight text-ink">
+          <h2 className="mt-3 font-display text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight text-ink">
             Corridor Radar & Commute Matrix
           </h2>
           <p className="mt-2 text-xs md:text-sm text-muted max-w-xl leading-relaxed">
@@ -124,9 +124,9 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
       </div>
 
       {/* Main Interactive Grid */}
-      <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_1.9fr] items-start">
+      <div className="mt-6 sm:mt-10 grid gap-6 sm:gap-8 lg:grid-cols-[1.1fr_1.9fr] items-start">
         {/* Left Column: Corridor Selector Pills */}
-        <div className="space-y-3">
+        <div className="scroll-rail lg:flex lg:flex-col gap-3">
           {CORRIDORS_DATA.map((c) => {
             const isSelected = selectedCorridor.name === c.name;
             const primaryKey = c.name.split(" ")[0] ?? "";
@@ -136,7 +136,7 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
                 key={c.name}
                 type="button"
                 onClick={() => setSelectedCorridor(c)}
-                className={`w-full text-left rounded-2xl p-5 border transition-all duration-300 ${
+                className={`w-full min-w-[260px] sm:min-w-0 text-left rounded-2xl p-4 sm:p-5 border transition-all duration-300 cursor-pointer ${
                   isSelected
                     ? "border-brass bg-white shadow-lg shadow-brass/10 -translate-y-0.5"
                     : "border-line bg-white/60 hover:bg-white hover:border-brass/40 text-muted"
@@ -170,7 +170,7 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
         </div>
 
         {/* Right Column: Active Corridor Deep-Dive Spec Card */}
-        <div className="rounded-3xl border border-line bg-white p-8 md:p-10 shadow-sm relative overflow-hidden">
+        <div className="rounded-2xl sm:rounded-3xl border border-line bg-white p-5 sm:p-8 md:p-10 shadow-sm relative overflow-hidden">
           {/* Subtle Ambient Glow */}
           <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-brass/5 blur-3xl pointer-events-none" />
 

@@ -57,10 +57,10 @@ function PartnerLogo({ partner }: { partner: Partner }) {
 export function ReelsSection({ reels, instagram }: { reels: Reel[]; instagram: string }) {
   if (reels.length === 0) return null;
   return (
-    <section aria-label="Instagram reels" className="shell-wide py-20 md:py-28">
+    <section aria-label="Instagram reels" className="shell-wide py-14 sm:py-20 md:py-28">
       <div className="reveal flex items-end justify-between gap-6">
         <div>
-          <h2 className="font-display text-3xl font-medium tracking-tight text-ink md:text-4xl">
+          <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink md:text-4xl">
             Straight from our Instagram
           </h2>
           <p className="mt-3 max-w-md text-sm text-muted">
@@ -76,14 +76,14 @@ export function ReelsSection({ reels, instagram }: { reels: Reel[]; instagram: s
           Follow @sspropertykol →
         </a>
       </div>
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 sm:mt-10 scroll-rail sm:grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {reels.map((reel) => (
           <a
             key={reel.id}
             href={reel.reel_url}
             target="_blank"
             rel="noreferrer"
-            className="reel-tile reveal group relative block overflow-hidden rounded-2xl border border-line bg-ink"
+            className="reel-tile reveal group relative block overflow-hidden rounded-2xl border border-line bg-ink min-w-[260px] sm:min-w-0"
           >
             <img
               src={reel.cover_thumb || reel.cover_image}
@@ -118,15 +118,15 @@ export function ReelsSection({ reels, instagram }: { reels: Reel[]; instagram: s
 export function TestimonialStrip({ testimonials }: { testimonials: Testimonial[] }) {
   if (testimonials.length === 0) return null;
   return (
-    <section aria-label="Client testimonials" className="shell py-20 md:py-24">
-      <h2 className="reveal font-display text-3xl font-medium tracking-tight text-ink md:text-4xl">
+    <section aria-label="Client testimonials" className="shell py-14 sm:py-20 md:py-24">
+      <h2 className="reveal font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink md:text-4xl">
         What our clients say
       </h2>
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
+      <div className="mt-6 sm:mt-10 grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {testimonials.slice(0, 6).map((t) => (
           <figure
             key={t.id}
-            className="reveal flex h-full flex-col justify-between rounded-[var(--radius-card)] border border-line bg-white p-7"
+            className="reveal flex h-full flex-col justify-between rounded-[var(--radius-card)] border border-line bg-white p-5 sm:p-7"
           >
             <blockquote className="text-[15px] leading-relaxed text-ink/80">
               <span aria-hidden="true" className="font-display text-3xl leading-none text-brass">“</span>

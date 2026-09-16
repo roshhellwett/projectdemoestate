@@ -1,5 +1,6 @@
 /* =====================================================================
    SS Property - Ivory & Brass design system (Tailwind v4 tokens)
+   Mobile-first · Touch-optimized · WCAG AA contrast
    ===================================================================== */
 
 @import "tailwindcss";
@@ -12,7 +13,7 @@
    --------------------------------------------------------------------- */
 
 @theme {
-  /* color */
+  /* ── color ── */
   --color-ink: #12100e;
   --color-ink-2: #1c1915;
   --color-ink-3: #2a2622;
@@ -23,28 +24,37 @@
   --color-brass-2: #c9a24b;
   --color-brass-soft: #ebe0c8;
   --color-brass-ghost: rgb(169 134 47 / 0.12);
-  --color-muted: #6e675c;
-  --color-muted-2: #8a8378;
+  /* muted: darkened from #6e675c to #5a5347 for 4.5:1 on paper (#faf7f2) */
+  --color-muted: #5a5347;
+  --color-muted-2: #7a7368;
   --color-line: #e4dcce;
   --color-line-dark: rgb(250 247 242 / 0.14);
   --color-verdigris: #2e6e4e;
   --color-verdigris-soft: #dfeae2;
   --color-danger: #b3392e;
 
-  /* type */
+  /* ── type ── */
   --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
   --font-body: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  /* shape */
+  /* ── shape ── */
   --radius-card: 18px;
   --radius-input: 12px;
   --radius-img: 14px;
 
-  /* motion */
+  /* ── motion ── */
   --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* layout */
+  /* ── layout ── */
   --spacing-section: clamp(72px, 12vw, 160px);
+
+  /* ── mobile-first tokens ── */
+  --touch-min: 44px;
+  --header-h-mobile: 56px;
+  --header-h-desktop: 80px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --shell-px: 16px;
 }
 
 /* ---------------------------------------------------------------------
@@ -54,6 +64,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Prevent horizontal overflow globally on mobile */
+    overflow-x: hidden;
   }
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -64,6 +76,10 @@
   body {
     @apply bg-paper text-ink font-body antialiased;
     text-rendering: optimizeLegibility;
+    /* Prevent pull-to-refresh interference on scroll containers */
+    overscroll-behavior-y: contain;
+    /* Full viewport height including mobile browser chrome */
+    min-height: 100dvh;
   }
 
   ::selection {
@@ -76,6 +92,18 @@
     outline: 2px solid var(--color-brass);
     outline-offset: 2px;
   }
+
+  /* Ensure tap highlight on iOS is subtle */
+  * {
+    -webkit-tap-highlight-color: rgba(169, 134, 47, 0.08);
+  }
+
+  /* Prevent iOS Safari 16px auto-zoom on form inputs */
+  @media (max-width: 767px) {
+    input, select, textarea {
+      font-size: 16px;
+    }
+  }
 }
 
 /* ---------------------------------------------------------------------
@@ -83,12 +111,27 @@
    --------------------------------------------------------------------- */
 
 @layer utilities {
-  /* section container */
+  /* section container — mobile-first gutters */
   .shell {
-    @apply mx-auto w-full max-w-[1200px] px-5 sm:px-8;
+    @apply mx-auto w-full max-w-[1200px];
+    padding-left: var(--shell-px);
+    padding-right: var(--shell-px);
   }
   .shell-wide {
-    @apply mx-auto w-full max-w-[1360px] px-5 sm:px-8;
+    @apply mx-auto w-full max-w-[1360px];
+    padding-left: var(--shell-px);
+    padding-right: var(--shell-px);
+  }
+
+  @media (min-width: 640px) {
+    :root {
+      --shell-px: 24px;
+    }
+  }
+  @media (min-width: 1024px) {
+    :root {
+      --shell-px: 32px;
+    }
   }
 
   /* display serif */
@@ -138,7 +181,7 @@
     color: rgb(250 247 242 / 0.55);
   }
 
-  /* smooth hardware-accelerated ambient hero mesh (no WebKit blur clipping artifacts) */
+  /* smooth hardware-accelerated ambient hero mesh */
   .hero-mesh {
     background-color: var(--color-paper);
     background-image:
@@ -161,6 +204,76 @@
   body[data-mobile-nav-open="true"] .floating-concierge,
   body[data-mobile-nav-open="true"] #compare-floating-drawer {
     display: none !important;
+  }
+
+  /* ── mobile-first utility classes ── */
+
+  /* scroll rail with gradient edge masks */
+  .scroll-rail {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scroll-rail::-webkit-scrollbar {
+    display: none;
+  }
+  .scroll-rail > * {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+  .scroll-rail-mask {
+    mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  }
+
+  /* bottom sheet base for mobile modals/drawers */
+  .bottom-sheet {
+    @apply fixed inset-x-0 bottom-0 z-50 rounded-t-3xl bg-white shadow-2xl;
+    max-height: 85dvh;
+    padding-bottom: var(--safe-bottom);
+    overscroll-behavior: contain;
+  }
+  .bottom-sheet-handle {
+    @apply mx-auto mt-3 mb-2 h-1 w-10 rounded-full bg-line;
+  }
+
+  /* sticky action footer for property detail etc. */
+  .sticky-action-bar {
+    @apply fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 backdrop-blur-xl;
+    padding-bottom: var(--safe-bottom);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   touch target enforcement (coarse pointer = touchscreens)
+   --------------------------------------------------------------------- */
+
+@media (pointer: coarse) {
+  /* Ensure all interactive elements meet iOS 44px minimum */
+  button:not(.touch-sm),
+  [role="button"]:not(.touch-sm),
+  a:not(.touch-sm) {
+    min-height: var(--touch-min);
+  }
+
+  /* Larger select dropdowns on touch */
+  select {
+    min-height: var(--touch-min);
+    font-size: max(16px, 1em); /* Prevents iOS zoom on focus */
+  }
+
+  /* Larger range slider thumbs on touch */
+  input[type="range"]::-webkit-slider-thumb {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 28px !important;
+    height: 28px !important;
   }
 }
 
@@ -203,7 +316,7 @@ html.js-loaded .reveal:not(.is-visible) {
 }
 
 /* ---------------------------------------------------------------------
-   interactive range sliders (luxury brass theme)
+   interactive range sliders (luxury brass theme — touch-optimized)
    --------------------------------------------------------------------- */
 input[type="range"].slider-brass {
   -webkit-appearance: none;
@@ -214,6 +327,7 @@ input[type="range"].slider-brass {
   background: #e4dcce;
   outline: none;
   transition: background 0.2s ease;
+  cursor: pointer;
 }
 input[type="range"].slider-brass:hover {
   background: #d5cabb;
@@ -221,12 +335,12 @@ input[type="range"].slider-brass:hover {
 input[type="range"].slider-brass::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: #a9862f;
   border: 2px solid #ffffff;
-  box-shadow: 0 2px 6px rgba(18, 16, 14, 0.25);
+  box-shadow: 0 2px 8px rgba(18, 16, 14, 0.3);
   cursor: pointer;
   transition: transform 0.15s ease, background 0.15s ease;
 }
@@ -234,14 +348,28 @@ input[type="range"].slider-brass::-webkit-slider-thumb:hover {
   transform: scale(1.15);
   background: #c9a24b;
 }
+input[type="range"].slider-brass::-webkit-slider-thumb:active {
+  transform: scale(1.25);
+}
 input[type="range"].slider-brass::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: #a9862f;
   border: 2px solid #ffffff;
-  box-shadow: 0 2px 6px rgba(18, 16, 14, 0.25);
+  box-shadow: 0 2px 8px rgba(18, 16, 14, 0.3);
   cursor: pointer;
+}
+
+@media (pointer: coarse) {
+  input[type="range"].slider-brass::-webkit-slider-thumb {
+    width: 32px;
+    height: 32px;
+  }
+  input[type="range"].slider-brass::-moz-range-thumb {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 /* ---------------------------------------------------------------------

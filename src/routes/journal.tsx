@@ -40,7 +40,7 @@ function JournalPage() {
     <div className="min-h-dvh">
       <Header />
       <FloatingConcierge />
-      <main className="pt-16">
+      <main className="pt-14 lg:pt-16">
         <section className="border-b border-line bg-paper-2/60">
           <div className="shell py-14 md:py-20">
             <p className="eyebrow">Notes from the ground</p>

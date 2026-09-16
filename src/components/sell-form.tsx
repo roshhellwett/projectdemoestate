@@ -123,7 +123,7 @@ export function SellForm({ kind = "sell" }: { kind?: "sell" | "partner" }) {
   }
 
   const inputCls =
-    "w-full rounded-xl border border-line bg-paper/60 px-4 py-3 text-xs font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none transition-colors";
+    "w-full rounded-xl border border-line bg-paper/60 px-4 py-3 text-xs font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none transition-colors min-h-[48px]";
   const labelCls = "mb-1.5 block text-xs font-bold text-ink uppercase tracking-wider";
 
   return (
@@ -269,7 +269,7 @@ export function SellForm({ kind = "sell" }: { kind?: "sell" | "partner" }) {
                   }
                   setStep(2);
                 }}
-                className="flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-paper hover:bg-ink-2 transition-all"
+                className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-ink px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-paper hover:bg-ink-2 transition-all min-h-[48px] cursor-pointer"
               >
                 <span>Continue to Valuation</span>
                 <ArrowRight size={14} />
@@ -347,11 +347,11 @@ export function SellForm({ kind = "sell" }: { kind?: "sell" | "partner" }) {
               </div>
             </div>
 
-            <div className="mt-8 flex justify-between">
+            <div className="mt-8 flex flex-col-reverse sm:flex-row justify-between gap-3">
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="flex items-center gap-2 rounded-full border border-line bg-white px-6 py-3 text-xs font-semibold text-ink hover:bg-paper-2 transition-colors"
+                className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-line bg-white px-6 py-3 text-xs font-semibold text-ink hover:bg-paper-2 transition-colors min-h-[44px] cursor-pointer"
               >
                 <ArrowLeft size={14} />
                 <span>Back</span>
@@ -367,7 +367,7 @@ export function SellForm({ kind = "sell" }: { kind?: "sell" | "partner" }) {
                   }
                   setStep(3);
                 }}
-                className="flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-paper hover:bg-ink-2 transition-all"
+                className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-ink px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-paper hover:bg-ink-2 transition-all min-h-[48px] cursor-pointer"
               >
                 <span>Final Step: Contact Details</span>
                 <ArrowRight size={14} />
@@ -441,11 +441,11 @@ export function SellForm({ kind = "sell" }: { kind?: "sell" | "partner" }) {
               </p>
             ) : null}
 
-            <div className="mt-8 flex justify-between">
+            <div className="mt-8 flex flex-col-reverse sm:flex-row justify-between gap-3">
               <button
                 type="button"
                 onClick={() => setStep(2)}
-                className="flex items-center gap-2 rounded-full border border-line bg-white px-6 py-3 text-xs font-semibold text-ink hover:bg-paper-2 transition-colors"
+                className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-line bg-white px-6 py-3 text-xs font-semibold text-ink hover:bg-paper-2 transition-colors min-h-[44px] cursor-pointer"
               >
                 <ArrowLeft size={14} />
                 <span>Back</span>
@@ -455,7 +455,7 @@ export function SellForm({ kind = "sell" }: { kind?: "sell" | "partner" }) {
                 id="btn-sell-submit"
                 type="submit"
                 disabled={state === "sending"}
-                className="flex items-center gap-2 rounded-full bg-verdigris px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg hover:bg-verdigris/90 disabled:opacity-50 transition-all"
+                className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-verdigris px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg hover:bg-verdigris/90 disabled:opacity-50 transition-all min-h-[48px] cursor-pointer"
               >
                 <span>{state === "sending" ? "Submitting…" : "Submit for Free Valuation"}</span>
                 <CheckCircle size={16} weight="bold" />

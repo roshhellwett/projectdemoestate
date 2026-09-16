@@ -201,7 +201,7 @@ function PropertiesPage() {
         <Header />
         <FloatingConcierge />
 
-        <main className="pt-18">
+        <main className="pt-14 lg:pt-20">
           {/* =================================================================
               1. PAGE BANNER
              ================================================================= */}
@@ -213,7 +213,7 @@ function PropertiesPage() {
                     <Sparkle size={13} weight="fill" className="text-brass" />
                     <span>Curated Kolkata Real Estate Collection</span>
                   </div>
-                  <h1 className="mt-3 font-display text-3xl md:text-5xl font-medium tracking-tight text-ink">
+                  <h1 className="mt-3 font-display text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight text-ink">
                     Find Your Prime Address
                   </h1>
                   <p className="mt-2 text-sm text-muted max-w-2xl leading-relaxed">
@@ -265,7 +265,7 @@ function PropertiesPage() {
           {/* =================================================================
               2. RESPONSIVE MULTI-FACET FILTERING BAR (STICKY Z-20)
              ================================================================= */}
-          <section className="sticky top-20 z-20 border-b border-line bg-white/95 backdrop-blur-md py-3 shadow-xs">
+          <section className="sticky top-14 lg:top-20 z-20 border-b border-line bg-white/95 backdrop-blur-md py-3 shadow-xs">
             <div className="shell-wide space-y-2.5">
               {/* --- MOBILE CONTROLS (< lg) --- */}
               <div className="flex flex-col gap-2.5 lg:hidden">
@@ -281,7 +281,7 @@ function PropertiesPage() {
                       value={q}
                       onChange={(e) => setQ(e.target.value)}
                       placeholder="Search locality, project name…"
-                      className="w-full rounded-xl border border-line bg-paper/60 pl-10 pr-9 py-2 text-xs font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none"
+                      className="w-full rounded-xl border border-line bg-paper/60 pl-10 pr-9 py-3 text-sm font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none min-h-[44px]"
                     />
                     {q ? (
                       <button
@@ -301,7 +301,7 @@ function PropertiesPage() {
                   <button
                     type="button"
                     onClick={() => setMobileFilterOpen(true)}
-                    className={`flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-semibold shrink-0 transition-colors ${
+                    className={`flex items-center gap-1.5 rounded-xl border px-4 py-3 text-xs font-semibold shrink-0 transition-colors cursor-pointer min-h-[44px] ${
                       activeFilterCount > 0
                         ? "border-brass bg-brass-soft/40 text-ink"
                         : "border-line bg-paper text-muted hover:text-ink"
@@ -321,7 +321,7 @@ function PropertiesPage() {
                     type="button"
                     onClick={() => setFilter({ savedOnly: !search.savedOnly })}
                     aria-label="Favorites only"
-                    className={`flex h-9 w-9 items-center justify-center rounded-xl border shrink-0 transition-colors ${
+                    className={`flex h-11 w-11 items-center justify-center rounded-xl border shrink-0 transition-colors cursor-pointer ${
                       search.savedOnly
                         ? "border-danger bg-danger/10 text-danger"
                         : "border-line bg-paper text-muted hover:text-ink"
@@ -336,7 +336,7 @@ function PropertiesPage() {
                   <button
                     type="button"
                     onClick={() => setFilter({ locality: "All" })}
-                    className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
+                    className={`shrink-0 rounded-full px-3.5 py-2 text-xs font-semibold transition-colors cursor-pointer ${
                       search.locality === "All"
                         ? "bg-ink text-paper shadow-xs"
                         : "border border-line bg-white text-muted hover:text-ink"
@@ -349,7 +349,7 @@ function PropertiesPage() {
                       key={l.locality}
                       type="button"
                       onClick={() => setFilter({ locality: l.locality })}
-                      className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
+                      className={`shrink-0 rounded-full px-3.5 py-2 text-xs font-semibold transition-colors cursor-pointer ${
                         search.locality === l.locality
                           ? "bg-ink text-paper shadow-xs"
                           : "border border-line bg-white text-muted hover:text-ink"
@@ -601,7 +601,7 @@ function PropertiesPage() {
                     <button
                       type="button"
                       onClick={() => setMobileFilterOpen(false)}
-                      className="flex h-8 w-8 items-center justify-center rounded-full bg-paper-2 text-ink hover:bg-line transition-colors"
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-paper-2 text-ink hover:bg-line transition-colors cursor-pointer"
                     >
                       <X size={16} />
                     </button>

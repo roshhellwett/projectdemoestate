@@ -36,7 +36,7 @@ import {
   SealCheck,
 } from "@phosphor-icons/react";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/")(  {
   head: () => ({
     meta: [
       { title: "SS Property - Verified Luxury Residences & Commercial in Kolkata" },
@@ -108,7 +108,7 @@ function HomePage() {
     return ids.size;
   }, [featured, latest]);
 
-  const heroTitle = settings.hero_title ?? "Kolkata’s Most Coveted Addresses. Personally Verified.";
+  const heroTitle = settings.hero_title ?? "Kolkata's Most Coveted Addresses. Personally Verified.";
   const [line1, line2 = ""] = heroTitle.split(". ").length > 1
     ? [`${heroTitle.split(". ")[0]}.`, heroTitle.split(". ").slice(1).join(". ")]
     : [heroTitle, ""];
@@ -120,19 +120,19 @@ function HomePage() {
 
         <main>
           {/* =================================================================
-              1. HERO SECTION
+              1. HERO SECTION — Mobile-first single-column → 2-col on lg
              ================================================================= */}
-          <section className="relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24 border-b border-line/60 hero-mesh">
+          <section className="relative overflow-hidden pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24 border-b border-line/60 hero-mesh">
             <div className="shell-wide">
-              <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+              <div className="grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
                 {/* Hero Left Column: Copy & Value Proposition */}
                 <div>
-                  <div className="inline-flex items-center gap-2 rounded-full border border-brass/35 bg-white/80 px-3.5 py-1.5 text-xs font-semibold text-ink shadow-xs">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-brass/35 bg-white/80 px-3.5 py-2 text-xs font-semibold text-ink shadow-xs">
                     <SealCheck size={16} weight="fill" className="text-verdigris shrink-0" />
-                    <span>{settings.hero_eyebrow ?? "Kolkata’s Premier Property Consultancy"}</span>
+                    <span>{settings.hero_eyebrow ?? "Kolkata's Premier Property Consultancy"}</span>
                   </div>
 
-                  <h1 className="mt-5 font-display text-[clamp(2.25rem,4.8vw,4.25rem)] font-medium leading-[1.08] tracking-tight text-ink [text-wrap:balance]">
+                  <h1 className="mt-5 font-display text-[clamp(1.75rem,5.5vw,4.25rem)] font-medium leading-[1.08] tracking-tight text-ink [text-wrap:balance]">
                     <span className="hero-line"><span>{line1}</span></span>
                     {line2 ? (
                       <span className="hero-line">
@@ -141,15 +141,15 @@ function HomePage() {
                     ) : null}
                   </h1>
 
-                  <p className="mt-5 max-w-xl text-[15px] sm:text-[16px] leading-relaxed text-muted">
+                  <p className="mt-4 sm:mt-5 max-w-xl text-sm sm:text-[15px] leading-relaxed text-muted">
                     {settings.hero_subtitle ??
                       "Hand-verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat, and Greater Kolkata. Every property personally inspected, every legal title verified."}
                   </p>
 
-                  <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+                  <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                     <Link
                       to="/properties"
-                      className="flex items-center justify-center rounded-full bg-ink px-8 py-3.5 sm:py-4 text-sm font-semibold text-paper shadow-lg shadow-ink/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-ink-2 active:translate-y-0"
+                      className="flex items-center justify-center rounded-full bg-ink px-7 py-3.5 sm:px-8 sm:py-4 text-sm font-semibold text-paper shadow-lg shadow-ink/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-ink-2 active:translate-y-0"
                     >
                       {featured.length + latest.length > 0 ? `Explore ${featured.length + latest.length} Residences` : "Explore Residences"}
                     </Link>
@@ -157,7 +157,7 @@ function HomePage() {
                       href={site.whatsapp}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center justify-center gap-2 rounded-full border border-line bg-white/90 px-7 py-3.5 sm:py-4 text-sm font-semibold text-ink shadow-xs transition-all hover:border-brass hover:bg-white active:translate-y-0"
+                      className="flex items-center justify-center gap-2 rounded-full border border-line bg-white/90 px-6 py-3.5 sm:px-7 sm:py-4 text-sm font-semibold text-ink shadow-xs transition-all hover:border-brass hover:bg-white active:translate-y-0"
                     >
                       <span>Speak with an Advisor</span>
                       <ArrowRight size={16} />
@@ -165,9 +165,9 @@ function HomePage() {
                   </div>
                 </div>
 
-                {/* Hero Right Column: High-End Visual Showcase */}
+                {/* Hero Right Column: Visual Showcase */}
                 <div className="relative">
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-line bg-paper-2 shadow-[0_32px_64px_-24px_rgba(18,16,14,0.18)]">
+                  <div className="relative aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-line bg-paper-2 shadow-[0_32px_64px_-24px_rgba(18,16,14,0.18)]">
                     <img
                       src="/images/kolkata.webp"
                       alt="SS Property - Kolkata Skyline & Premier Residences"
@@ -182,28 +182,28 @@ function HomePage() {
               </div>
 
               {/* Instant Search Widget */}
-              <div className="mt-12 md:mt-16">
+              <div className="mt-8 sm:mt-12 md:mt-16">
                 <HeroSearch totalCount={totalPropertiesCount} />
               </div>
 
-              {/* Trust Stat Ticker */}
-              <div className="mt-10 grid grid-cols-2 gap-4 border-t border-line/70 pt-8 sm:grid-cols-4">
-                <div>
-                  <p className="font-display text-2xl md:text-3xl font-bold text-ink">₹150+ Cr</p>
+              {/* Trust Stat Ticker — horizontal scroll on mobile */}
+              <div className="mt-8 sm:mt-10 scroll-rail sm:grid sm:grid-cols-4 gap-4 sm:gap-6 border-t border-line/70 pt-6 sm:pt-8">
+                <div className="shrink-0 min-w-[140px] sm:min-w-0">
+                  <p className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-ink">₹150+ Cr</p>
                   <p className="mt-1 text-xs text-muted font-medium">Curated Property Value</p>
                 </div>
-                <div>
-                  <p className="font-display text-2xl md:text-3xl font-bold text-ink">
+                <div className="shrink-0 min-w-[140px] sm:min-w-0">
+                  <p className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-ink">
                     {totalPropertiesCount > 0 ? `${totalPropertiesCount} Prime` : "Bespoke"}
                   </p>
                   <p className="mt-1 text-xs text-muted font-medium">Verified Kolkata Listings</p>
                 </div>
-                <div>
-                  <p className="font-display text-2xl md:text-3xl font-bold text-ink">100%</p>
+                <div className="shrink-0 min-w-[140px] sm:min-w-0">
+                  <p className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-ink">100%</p>
                   <p className="mt-1 text-xs text-muted font-medium">Physical Site Inspection</p>
                 </div>
-                <div>
-                  <p className="font-display text-2xl md:text-3xl font-bold text-ink">0%</p>
+                <div className="shrink-0 min-w-[140px] sm:min-w-0">
+                  <p className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-ink">0%</p>
                   <p className="mt-1 text-xs text-muted font-medium">Hidden Charges / Mislead</p>
                 </div>
               </div>
@@ -218,7 +218,7 @@ function HomePage() {
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                 <div>
                   <p className="eyebrow text-brass">Seamless Real Estate Services</p>
-                  <h2 className="mt-1.5 font-display text-2xl sm:text-3xl font-medium text-ink">
+                  <h2 className="mt-1.5 font-display text-xl sm:text-2xl md:text-3xl font-medium text-ink">
                     How We Assist Your Kolkata Property Journey
                   </h2>
                 </div>
@@ -227,24 +227,24 @@ function HomePage() {
                 </p>
               </div>
 
-              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {/* Service 1: Buy Verified */}
                 <Link
                   to="/properties"
-                  className="group flex flex-col justify-between rounded-2xl border border-line bg-paper/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass/60 hover:bg-white hover:shadow-lg"
+                  className="group flex flex-col justify-between rounded-2xl border border-line bg-paper/60 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass/60 hover:bg-white hover:shadow-lg"
                 >
                   <div>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105">
-                      <ShieldCheck size={24} weight="fill" className="text-brass-2" />
+                    <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105">
+                      <ShieldCheck size={22} weight="fill" className="text-brass-2" />
                     </div>
-                    <h3 className="mt-4 font-display text-lg font-semibold text-ink">
+                    <h3 className="mt-4 font-display text-base sm:text-lg font-semibold text-ink">
                       Buy Verified Residences
                     </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-muted">
+                    <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted">
                       100% physically inspected flats, penthouses and commercial spaces. Every legal deed and RERA permit verified before listing.
                     </p>
                   </div>
-                  <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-ink group-hover:text-brass transition-colors">
+                  <div className="mt-5 sm:mt-6 flex items-center gap-1.5 text-xs font-bold text-ink group-hover:text-brass transition-colors">
                     <span>Browse Collection</span>
                     <ArrowRight size={14} />
                   </div>
@@ -253,20 +253,20 @@ function HomePage() {
                 {/* Service 2: Sell / List */}
                 <Link
                   to="/sell"
-                  className="group flex flex-col justify-between rounded-2xl border border-line bg-paper/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass/60 hover:bg-white hover:shadow-lg"
+                  className="group flex flex-col justify-between rounded-2xl border border-line bg-paper/60 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass/60 hover:bg-white hover:shadow-lg"
                 >
                   <div>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105">
-                      <Handshake size={24} weight="fill" className="text-brass-2" />
+                    <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105">
+                      <Handshake size={22} weight="fill" className="text-brass-2" />
                     </div>
-                    <h3 className="mt-4 font-display text-lg font-semibold text-ink">
+                    <h3 className="mt-4 font-display text-base sm:text-lg font-semibold text-ink">
                       List & Sell Your Property
                     </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-muted">
+                    <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted">
                       Direct owner and builder listing service. Get genuine valuation, professional media coverage, and qualified buyers with zero spam.
                     </p>
                   </div>
-                  <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-ink group-hover:text-brass transition-colors">
+                  <div className="mt-5 sm:mt-6 flex items-center gap-1.5 text-xs font-bold text-ink group-hover:text-brass transition-colors">
                     <span>List Your Property</span>
                     <ArrowRight size={14} />
                   </div>
@@ -275,20 +275,20 @@ function HomePage() {
                 {/* Service 3: Finance & Advisor */}
                 <Link
                   to="/calculator"
-                  className="group flex flex-col justify-between rounded-2xl border border-line bg-paper/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass/60 hover:bg-white hover:shadow-lg"
+                  className="group flex flex-col justify-between rounded-2xl border border-line bg-paper/60 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass/60 hover:bg-white hover:shadow-lg sm:col-span-2 lg:col-span-1"
                 >
                   <div>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105">
-                      <Eye size={24} weight="fill" className="text-brass-2" />
+                    <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105">
+                      <Eye size={22} weight="fill" className="text-brass-2" />
                     </div>
-                    <h3 className="mt-4 font-display text-lg font-semibold text-ink">
+                    <h3 className="mt-4 font-display text-base sm:text-lg font-semibold text-ink">
                       Compare & Mortgage Planning
                     </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-muted">
+                    <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted">
                       Side-by-side architectural specs comparison, West Bengal stamp duty calculations, and bank home loan advisory.
                     </p>
                   </div>
-                  <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-ink group-hover:text-brass transition-colors">
+                  <div className="mt-5 sm:mt-6 flex items-center gap-1.5 text-xs font-bold text-ink group-hover:text-brass transition-colors">
                     <span>Calculate EMI & Returns</span>
                     <ArrowRight size={14} />
                   </div>
@@ -305,23 +305,23 @@ function HomePage() {
           {/* =================================================================
               4. FEATURED RESIDENCES CATALOG
              ================================================================= */}
-          <section className="shell-wide py-20 md:py-28 border-t border-line">
-            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <section className="shell-wide py-14 sm:py-20 md:py-28 border-t border-line">
+            <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="eyebrow flex items-center gap-1.5 text-brass">
                   <Sparkle size={14} weight="fill" />
                   Curated Catalog
                 </p>
-                <h2 className="mt-2 font-display text-3xl font-medium tracking-tight text-ink md:text-4xl">
+                <h2 className="mt-2 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink md:text-4xl">
                   Featured residences & workspaces
                 </h2>
-                <p className="mt-3 max-w-xl text-sm text-muted">
+                <p className="mt-2 sm:mt-3 max-w-xl text-sm text-muted">
                   Hand-picked flats, penthouses and commercial spaces across Lake Town, Kasba, Newtown and Rajarhat.
                 </p>
               </div>
 
-              {/* Category Filter Pills */}
-              <div className="flex flex-wrap items-center gap-2">
+              {/* Category Filter Pills — horizontal scroll on mobile */}
+              <div className="scroll-rail gap-2">
                 {[
                   { id: "all", label: "All Properties" },
                   { id: "ready", label: "Ready to Move" },
@@ -332,7 +332,7 @@ function HomePage() {
                     key={cat.id}
                     type="button"
                     onClick={() => setActiveCategory(cat.id)}
-                    className={`rounded-full px-4 py-2 text-xs font-semibold transition-all ${
+                    className={`shrink-0 rounded-full px-4 py-2.5 text-xs font-semibold transition-all cursor-pointer ${
                       activeCategory === cat.id
                         ? "bg-ink text-paper shadow-sm"
                         : "border border-line bg-white text-muted hover:border-brass hover:text-ink"
@@ -346,8 +346,8 @@ function HomePage() {
 
             {displayedProperties.length > 0 ? (
               <>
-                {/* Property Cards Grid */}
-                <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {/* Property Cards Grid — single col on mobile */}
+                <div className="mt-8 sm:mt-12 grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {displayedProperties.map((property, idx) => (
                     <PropertyCard
                       key={property.id}
@@ -358,10 +358,10 @@ function HomePage() {
                   ))}
                 </div>
 
-                <div className="mt-12 text-center">
+                <div className="mt-8 sm:mt-12 text-center">
                   <Link
                     to="/properties"
-                    className="inline-flex items-center gap-2 rounded-full border border-ink/30 bg-white px-8 py-3.5 text-sm font-semibold text-ink shadow-sm transition-all hover:border-ink hover:bg-paper-2"
+                    className="inline-flex items-center gap-2 rounded-full border border-ink/30 bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-sm transition-all hover:border-ink hover:bg-paper-2"
                   >
                     <span>Browse All {totalPropertiesCount} Properties</span>
                     <ArrowRight size={16} />
@@ -370,20 +370,20 @@ function HomePage() {
               </>
             ) : (
               /* Luxury Onboarding Empty State */
-              <div className="mt-12 flex flex-col items-center justify-center rounded-3xl border border-line bg-white p-10 md:p-16 text-center shadow-sm">
+              <div className="mt-8 sm:mt-12 flex flex-col items-center justify-center rounded-2xl sm:rounded-3xl border border-line bg-white p-8 sm:p-10 md:p-16 text-center shadow-sm">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brass-ghost text-brass">
                   <Sparkle size={28} weight="fill" />
                 </div>
-                <h3 className="mt-5 font-display text-2xl font-medium text-ink">
+                <h3 className="mt-5 font-display text-xl sm:text-2xl font-medium text-ink">
                   Onboarding Verified Residences
                 </h3>
-                <p className="mt-2 max-w-lg text-xs md:text-sm text-muted leading-relaxed">
+                <p className="mt-2 max-w-lg text-xs sm:text-sm text-muted leading-relaxed">
                   The SS Property advisory desk is currently conducting on-ground walkthroughs and legal title verifications for upcoming Kolkata inventory. Are you an owner looking to list?
                 </p>
-                <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                   <Link
                     to="/sell"
-                    className="rounded-full bg-ink px-7 py-3 text-xs font-bold uppercase tracking-wider text-paper shadow-md hover:bg-ink-2 transition-all"
+                    className="w-full sm:w-auto rounded-full bg-ink px-7 py-3 text-xs font-bold uppercase tracking-wider text-paper shadow-md hover:bg-ink-2 transition-all text-center"
                   >
                     List Your Property
                   </Link>
@@ -391,7 +391,7 @@ function HomePage() {
                     href={site.whatsapp}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full border border-line bg-white px-6 py-3 text-xs font-bold uppercase tracking-wider text-ink hover:border-brass transition-all"
+                    className="w-full sm:w-auto rounded-full border border-line bg-white px-6 py-3 text-xs font-bold uppercase tracking-wider text-ink hover:border-brass transition-all text-center"
                   >
                     Speak with Concierge
                   </a>
@@ -403,63 +403,63 @@ function HomePage() {
           {/* =================================================================
               5. WHY CHOOSE SS PROPERTY (TRANSPARENCY MANIFESTO)
              ================================================================= */}
-          <section className="border-y border-line bg-paper-2/70 py-20 md:py-28">
+          <section className="border-y border-line bg-paper-2/70 py-14 sm:py-20 md:py-28">
             <div className="shell">
               <div className="text-center max-w-2xl mx-auto">
                 <p className="eyebrow text-brass">The SS Property Standard</p>
-                <h2 className="mt-3 font-display text-3xl font-medium tracking-tight text-ink md:text-4xl">
+                <h2 className="mt-3 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink md:text-4xl">
                   Real estate done with uncompromised integrity
                 </h2>
-                <p className="mt-4 text-sm text-muted leading-relaxed">
+                <p className="mt-3 sm:mt-4 text-sm text-muted leading-relaxed">
                   In a market crowded with stock photos, inflated claims, and phantom listings, SS Property is built on one simple rule: absolute ground reality.
                 </p>
               </div>
 
-              <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                <div className="rounded-2xl border border-line bg-white p-6 shadow-sm">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
-                    <Eye size={24} weight="duotone" />
+              <div className="mt-10 sm:mt-16 grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="rounded-2xl border border-line bg-white p-5 sm:p-6 shadow-sm">
+                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
+                    <Eye size={22} weight="duotone" />
                   </div>
-                  <h3 className="mt-5 font-display text-lg font-semibold text-ink">
+                  <h3 className="mt-4 sm:mt-5 font-display text-base sm:text-lg font-semibold text-ink">
                     100% Physical Walkthroughs
                   </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-muted">
+                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted">
                     No renders or stock photography. Every single home in our catalog has been physically stepped into, measured, and photographed.
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-line bg-white p-6 shadow-sm">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
-                    <ShieldCheck size={24} weight="duotone" />
+                <div className="rounded-2xl border border-line bg-white p-5 sm:p-6 shadow-sm">
+                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
+                    <ShieldCheck size={22} weight="duotone" />
                   </div>
-                  <h3 className="mt-5 font-display text-lg font-semibold text-ink">
+                  <h3 className="mt-4 sm:mt-5 font-display text-base sm:text-lg font-semibold text-ink">
                     Legal & Title Due Diligence
                   </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-muted">
+                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted">
                     We independently vet RERA status, developer sanctions, municipal tax receipts, and chain-of-title before listing.
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-line bg-white p-6 shadow-sm">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
-                    <Handshake size={24} weight="duotone" />
+                <div className="rounded-2xl border border-line bg-white p-5 sm:p-6 shadow-sm">
+                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
+                    <Handshake size={22} weight="duotone" />
                   </div>
-                  <h3 className="mt-5 font-display text-lg font-semibold text-ink">
+                  <h3 className="mt-4 sm:mt-5 font-display text-base sm:text-lg font-semibold text-ink">
                     Direct Pricing, Zero Games
                   </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-muted">
+                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted">
                     Transparent rates direct from owners and developers. No hidden commissions, unexpected transfer costs, or inflated figures.
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-line bg-white p-6 shadow-sm">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
-                    <FileText size={24} weight="duotone" />
+                <div className="rounded-2xl border border-line bg-white p-5 sm:p-6 shadow-sm">
+                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
+                    <FileText size={22} weight="duotone" />
                   </div>
-                  <h3 className="mt-5 font-display text-lg font-semibold text-ink">
+                  <h3 className="mt-4 sm:mt-5 font-display text-base sm:text-lg font-semibold text-ink">
                     Registry & Loan Concierge
                   </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-muted">
+                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted">
                     From home loan approval with top national banks to deed drafting, stamping, and West Bengal registry coordination.
                   </p>
                 </div>
@@ -470,10 +470,10 @@ function HomePage() {
           {/* =================================================================
               6. LIVE INTERACTIVE EMI & INVESTMENT CALCULATOR WIDGET
              ================================================================= */}
-          <section className="shell py-20 md:py-28">
-            <div className="text-center max-w-2xl mx-auto mb-12">
+          <section className="shell py-14 sm:py-20 md:py-28">
+            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
               <p className="eyebrow text-brass">Financial Transparency</p>
-              <h2 className="mt-3 font-display text-3xl font-medium tracking-tight text-ink md:text-4xl">
+              <h2 className="mt-3 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink md:text-4xl">
                 Plan your property investment with clarity
               </h2>
               <p className="mt-3 text-sm text-muted">
@@ -498,42 +498,42 @@ function HomePage() {
               9. REAL ESTATE JOURNAL & INSIGHTS
              ================================================================= */}
           {posts.length > 0 ? (
-            <section className="shell-wide py-20 border-t border-line">
-              <div className="flex items-end justify-between gap-6">
+            <section className="shell-wide py-14 sm:py-20 border-t border-line">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6">
                 <div>
                   <p className="eyebrow text-brass">Kolkata Property Journal</p>
-                  <h2 className="mt-3 font-display text-3xl font-medium tracking-tight text-ink">
+                  <h2 className="mt-2 sm:mt-3 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink">
                     Market intelligence & buyer guides
                   </h2>
                 </div>
                 <Link
                   to="/journal"
-                  className="hidden text-sm font-semibold text-brass hover:text-ink sm:block"
+                  className="text-sm font-semibold text-brass hover:text-ink"
                 >
                   All articles →
                 </Link>
               </div>
 
-              <div className="mt-10 grid gap-6 md:grid-cols-3">
+              <div className="mt-6 sm:mt-10 grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
                 {posts.map((post) => (
                   <Link
                     key={post.id}
                     to="/journal/$slug"
                     params={{ slug: post.slug }}
-                    className="group flex flex-col justify-between rounded-2xl border border-line bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass/50 hover:shadow-md"
+                    className="group flex flex-col justify-between rounded-2xl border border-line bg-white p-5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass/50 hover:shadow-md"
                   >
                     <div>
                       <span className="text-[11px] font-semibold text-muted">
                         {formatDate(post.publish_date)} · {post.author}
                       </span>
-                      <h3 className="mt-2 font-display text-xl font-medium leading-snug text-ink transition-colors group-hover:text-brass">
+                      <h3 className="mt-2 font-display text-lg sm:text-xl font-medium leading-snug text-ink transition-colors group-hover:text-brass">
                         {post.title}
                       </h3>
-                      <p className="mt-3 line-clamp-3 text-xs leading-relaxed text-muted">
+                      <p className="mt-2 sm:mt-3 line-clamp-3 text-xs sm:text-sm leading-relaxed text-muted">
                         {post.excerpt}
                       </p>
                     </div>
-                    <span className="mt-6 flex items-center gap-1 text-xs font-semibold text-brass">
+                    <span className="mt-4 sm:mt-6 flex items-center gap-1 text-xs font-semibold text-brass">
                       Read analysis <ArrowRight size={12} />
                     </span>
                   </Link>
@@ -546,16 +546,16 @@ function HomePage() {
               10. FREQUENTLY ASKED QUESTIONS
              ================================================================= */}
           {faqs.length > 0 ? (
-            <section className="border-t border-line bg-paper-2/60 py-20">
+            <section className="border-t border-line bg-paper-2/60 py-14 sm:py-20">
               <div className="shell max-w-3xl">
                 <div className="text-center">
                   <p className="eyebrow text-brass">Clear Answers</p>
-                  <h2 className="mt-3 font-display text-3xl font-medium tracking-tight text-ink">
+                  <h2 className="mt-3 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink">
                     Questions buyers & investors ask us
                   </h2>
                 </div>
 
-                <div className="mt-10 space-y-4">
+                <div className="mt-8 sm:mt-10 space-y-3 sm:space-y-4">
                   {faqs.map((faq) => (
                     <FaqItem key={faq.id} faq={faq} />
                   ))}
@@ -567,21 +567,21 @@ function HomePage() {
           {/* =================================================================
               11. HIGH-CONVERTING VALUATION CTA BANNER
              ================================================================= */}
-          <section className="border-t border-line bg-ink text-paper py-20 md:py-28">
+          <section className="border-t border-line bg-ink text-paper py-14 sm:py-20 md:py-28">
             <div className="shell max-w-4xl text-center">
-              <span className="inline-block rounded-full bg-brass-ghost px-4 py-1 text-xs font-semibold uppercase tracking-wider text-brass-2">
+              <span className="inline-block rounded-full bg-brass-ghost px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-brass-2">
                 Sell or Lease With SS Property
               </span>
-              <h2 className="mt-6 font-display text-3xl md:text-5xl font-medium tracking-tight text-paper">
-                Have a premium property in Kolkata? Let’s find the right buyer.
+              <h2 className="mt-5 sm:mt-6 font-display text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight text-paper">
+                Have a premium property in Kolkata? Let's find the right buyer.
               </h2>
-              <p className="mt-6 max-w-xl mx-auto text-[15px] leading-relaxed text-paper/70">
+              <p className="mt-4 sm:mt-6 max-w-xl mx-auto text-sm sm:text-[15px] leading-relaxed text-paper/70">
                 We position your property directly in front of qualified HNIs and verified home seekers. Professional video tours, verified listings, and zero spam inquiries.
               </p>
-              <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
                 <Link
                   to="/sell"
-                  className="rounded-full bg-brass px-8 py-4 text-sm font-semibold text-ink shadow-lg transition-transform hover:-translate-y-0.5 hover:bg-brass-2"
+                  className="rounded-full bg-brass px-7 sm:px-8 py-3.5 sm:py-4 text-sm font-semibold text-ink shadow-lg transition-transform hover:-translate-y-0.5 hover:bg-brass-2 text-center"
                 >
                   Request a Free Valuation
                 </Link>
@@ -589,7 +589,7 @@ function HomePage() {
                   href={site.whatsapp}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full border border-paper/20 px-8 py-4 text-sm font-semibold text-paper transition-colors hover:border-paper/60"
+                  className="rounded-full border border-paper/20 px-7 sm:px-8 py-3.5 sm:py-4 text-sm font-semibold text-paper transition-colors hover:border-paper/60 text-center"
                 >
                   WhatsApp Ujjawal Sharma
                 </a>
@@ -618,16 +618,16 @@ function FaqItem({ faq }: { faq: Faq }) {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between p-5 text-left text-sm font-semibold text-ink hover:text-brass"
+        className="flex w-full items-center justify-between p-4 sm:p-5 text-left text-sm font-semibold text-ink hover:text-brass cursor-pointer gap-3"
       >
         <span>{faq.question}</span>
         <CaretDown
-          size={16}
+          size={18}
           className={`shrink-0 transition-transform duration-200 ${open ? "rotate-180 text-brass" : "text-muted"}`}
         />
       </button>
       {open ? (
-        <div className="border-t border-line/60 px-5 pb-5 pt-3 text-xs leading-relaxed text-muted">
+        <div className="border-t border-line/60 px-4 sm:px-5 pb-4 sm:pb-5 pt-3 text-xs sm:text-sm leading-relaxed text-muted">
           {faq.answer}
         </div>
       ) : null}

@@ -25,6 +25,7 @@ export const Route = createFileRoute("/journal/$slug")({
       
       meta: post
         ? [
+            { title: `${post.title} · SS Property` },
             { name: "description", content: post.excerpt || post.content.slice(0, 150) },
             { property: "og:image", content: post.cover_image },
           ]
@@ -46,7 +47,7 @@ function JournalPostPage() {
     <div className="min-h-dvh">
       <Header />
       <FloatingConcierge />
-      <main className="pt-16">
+      <main className="pt-14 lg:pt-16">
         <article className="shell max-w-[720px] py-14">
           <time className="text-xs text-muted">
             {formatDate(post.publish_date)} · {post.author}

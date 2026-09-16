@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
 import { FooterSettingsContext } from "../components/footer-settings";
@@ -10,10 +10,8 @@ import {
   Calculator,
   ShieldCheck,
   Bank,
-  CheckCircle,
   CurrencyInr,
   WhatsappLogo,
-  ArrowRight,
 } from "@phosphor-icons/react";
 import { SITE } from "../lib/site";
 
@@ -45,7 +43,7 @@ function CalculatorPage() {
         <Header />
         <FloatingConcierge />
 
-        <main className="pt-20">
+        <main className="pt-14 lg:pt-20">
           {/* =================================================================
               PAGE BANNER
              ================================================================= */}

@@ -72,7 +72,7 @@ function PartnersPage() {
       <Header />
       <FloatingConcierge />
 
-      <main className="pt-20">
+      <main className="pt-14 lg:pt-20">
         {/* =================================================================
             HERO SECTION
            ================================================================= */}

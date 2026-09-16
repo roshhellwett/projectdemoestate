@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
 import { FooterSettingsContext } from "../components/footer-settings";
@@ -131,7 +131,7 @@ function PropertyDetailPage() {
 
   return (
     <FooterSettingsContext.Provider value={settings}>
-      <div className="min-h-dvh bg-paper text-ink selection:bg-brass-ghost">
+      <div className="min-h-dvh bg-paper text-ink selection:bg-brass-ghost pb-20 md:pb-0">
         <Header />
         <FloatingConcierge />
 
@@ -139,7 +139,7 @@ function PropertyDetailPage() {
             STICKY SUB-HEADER ON SCROLL
            ================================================================= */}
         <div
-          className={`fixed top-18 inset-x-0 z-30 border-b border-line bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 no-print ${
+          className={`fixed top-14 lg:top-20 inset-x-0 z-30 border-b border-line bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 no-print ${
             showStickyBar ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
           }`}
         >
@@ -178,14 +178,14 @@ function PropertyDetailPage() {
                 href={whatsappInquiryUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 rounded-full bg-verdigris px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-verdigris/90"
+                className="flex items-center gap-1.5 rounded-full bg-verdigris px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-verdigris/90 cursor-pointer min-h-[44px]"
               >
                 <WhatsappLogo size={15} weight="fill" />
                 <span className="hidden sm:inline">WhatsApp</span>
               </a>
               <a
                 href="#enquiry-section"
-                className="rounded-full bg-ink px-4 py-2 text-xs font-semibold text-paper hover:bg-ink-2"
+                className="rounded-full bg-ink px-4 py-2.5 text-xs font-semibold text-paper hover:bg-ink-2 cursor-pointer min-h-[44px] flex items-center"
               >
                 Schedule Visit
               </a>
@@ -193,7 +193,7 @@ function PropertyDetailPage() {
           </div>
         </div>
 
-        <main className="pt-20">
+        <main className="pt-14 lg:pt-20">
           {/* =================================================================
               BREADCRUMB & TOP ACTIONS
              ================================================================= */}
@@ -695,6 +695,38 @@ function PropertyDetailPage() {
             </div>
           </div>
         ) : null}
+
+        {/* Mobile Persistent Bottom Action Bar (< md) */}
+        <div
+          className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-line bg-white/95 backdrop-blur-md px-4 py-2.5 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] flex items-center justify-between gap-3"
+          style={{ paddingBottom: "max(10px, env(safe-area-inset-bottom))" }}
+        >
+          <div className="min-w-0 flex-1">
+            <p className="text-[10px] font-bold text-muted uppercase tracking-wider truncate">
+              {property.bhk_type} · {property.locality}
+            </p>
+            <p className="font-display text-base font-bold text-ink leading-tight truncate">
+              {formatPrice(property.price_inr, property.price_display)}
+            </p>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <a
+              href={whatsappInquiryUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="flex h-10 items-center gap-1.5 rounded-full bg-verdigris px-3.5 text-xs font-bold text-white shadow-sm active:scale-95 cursor-pointer"
+            >
+              <WhatsappLogo size={16} weight="fill" />
+              <span>WhatsApp</span>
+            </a>
+            <a
+              href="#enquiry-section"
+              className="flex h-10 items-center rounded-full bg-ink px-3.5 text-xs font-bold text-paper shadow-sm active:scale-95 cursor-pointer"
+            >
+              Enquire
+            </a>
+          </div>
+        </div>
 
         <Footer />
         <CompareDrawer />

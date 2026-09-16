@@ -15,13 +15,8 @@ import {
   WhatsappLogo,
   ArrowRight,
   ShieldCheck,
-  House,
   Calculator,
   Compass,
-  Car,
-  Bathtub,
-  ArrowsOut,
-  Sparkle,
 } from "@phosphor-icons/react";
 
 export const Route = createFileRoute("/compare")({
@@ -69,9 +64,9 @@ function ComparePage() {
   };
 
   return (
-    <div className="min-h-screen bg-paper text-ink pb-24">
+    <div className="min-h-dvh bg-paper text-ink pb-24">
       {/* Hero Header */}
-      <section className="relative border-b border-line bg-gradient-to-b from-paper-2 to-paper pt-28 pb-12">
+      <section className="relative border-b border-line bg-gradient-to-b from-paper-2 to-paper pt-20 lg:pt-28 pb-10 sm:pb-12">
         <div className="shell-wide">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>

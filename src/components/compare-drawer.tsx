@@ -20,7 +20,8 @@ export function CompareDrawer() {
   return (
     <div
       id="compare-floating-drawer"
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[95%] max-w-4xl transition-all duration-300 animate-in slide-in-from-bottom-6"
+      className="fixed left-1/2 -translate-x-1/2 z-40 w-[95%] max-w-4xl transition-all duration-300 animate-in slide-in-from-bottom-6"
+      style={{ bottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
     >
       <div className="overflow-hidden rounded-2xl border border-brass/40 bg-ink/95 text-paper shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] backdrop-blur-xl">
         {/* Header Ribbon */}
@@ -41,18 +42,18 @@ export function CompareDrawer() {
             <button
               type="button"
               onClick={clear}
-              className="flex items-center gap-1 text-[11px] text-white/60 hover:text-white transition-colors"
+              className="flex min-h-[32px] items-center gap-1 text-xs text-white/60 hover:text-white transition-colors cursor-pointer"
             >
-              <Trash size={12} />
+              <Trash size={14} />
               <span className="hidden sm:inline">Clear</span>
             </button>
             <button
               type="button"
               onClick={() => setCollapsed(!collapsed)}
-              className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
               aria-label={collapsed ? "Expand drawer" : "Collapse drawer"}
             >
-              {collapsed ? <CaretUp size={13} /> : <CaretDown size={13} />}
+              {collapsed ? <CaretUp size={15} /> : <CaretDown size={15} />}
             </button>
           </div>
         </div>
@@ -84,9 +85,9 @@ export function CompareDrawer() {
                     type="button"
                     onClick={() => removeItem(item.id)}
                     aria-label={`Remove ${item.title}`}
-                    className="absolute right-1.5 top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-danger hover:text-white transition-colors"
+                    className="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-white/15 text-white/80 hover:bg-danger hover:text-white transition-colors cursor-pointer"
                   >
-                    <X size={10} />
+                    <X size={12} weight="bold" />
                   </button>
                 </div>
               ))}

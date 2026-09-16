@@ -55,7 +55,7 @@ function AboutPage() {
     <div className="min-h-dvh">
       <Header />
       <FloatingConcierge />
-      <main className="pt-16">
+      <main className="pt-14 lg:pt-16">
         <section className="border-b border-line bg-paper-2/60">
           <div className="shell py-14 md:py-20">
             <p className="eyebrow">About us</p>
@@ -98,13 +98,13 @@ function AboutPage() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
                   href={settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, "")}` : "tel:+919429693786"}
-                  className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-transform hover:-translate-y-0.5"
+                  className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-transform hover:-translate-y-0.5 cursor-pointer"
                 >
                   {settings.phone ?? "+91 94296 93786"}
                 </a>
                 <Link
                   to="/properties"
-                  className="rounded-full border border-ink/20 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/50"
+                  className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-ink/20 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/50 cursor-pointer"
                 >
                   Browse Properties
                 </Link>
