@@ -1,6 +1,6 @@
 {
   "A:/projectssproperty/src/styles/app.css": {
-    "file": "assets/app-DUkMFrLi.css",
+    "file": "assets/app-yU_eZUeh.css",
     "src": "A:/projectssproperty/src/styles/app.css"
   },
   "_CheckCircle.es-BIy2-kxn.js": {
@@ -161,6 +161,20 @@
   "_format-CHtBtEr_.js": {
     "file": "assets/format-CHtBtEr_.js",
     "name": "format"
+  },
+  "_founder-section-CG-ZYml_.js": {
+    "file": "assets/founder-section-CG-ZYml_.js",
+    "name": "founder-section",
+    "imports": [
+      "_jsx-runtime-XLNAidv3.js",
+      "_link-EVI38fh_.js",
+      "_queries-CWRitaKX.js",
+      "_footer-DIp35I2k.js",
+      "_floating-concierge-ByiScAdS.js",
+      "_CheckCircle.es-BIy2-kxn.js",
+      "_ShieldCheck.es-DXeEg2D1.js",
+      "_Sparkle.es-CCWDMNm1.js"
+    ]
   },
   "_jsx-runtime-XLNAidv3.js": {
     "file": "assets/jsx-runtime-XLNAidv3.js",
@@ -330,7 +344,7 @@
     "isDynamicEntry": true
   },
   "src/router.tsx": {
-    "file": "assets/router-DDH2qLrF.js",
+    "file": "assets/router-torAfu0D.js",
     "name": "router",
     "src": "src/router.tsx",
     "isDynamicEntry": true,
@@ -373,7 +387,7 @@
       "assets/fraunces-vietnamese-wght-normal-CnvboYUG.woff2",
       "assets/fraunces-latin-ext-wght-normal-Ca2vKHc0.woff2",
       "assets/fraunces-latin-wght-normal-ukD16Tqj.woff2",
-      "assets/app-DUkMFrLi.css"
+      "assets/app-yU_eZUeh.css"
     ]
   },
   "src/routes/$.tsx?tsr-split=component": {
@@ -387,7 +401,7 @@
     ]
   },
   "src/routes/about.tsx?tsr-split=component": {
-    "file": "assets/about-CUxbF1IU.js",
+    "file": "assets/about-DeAcgC-9.js",
     "name": "about",
     "src": "src/routes/about.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -397,6 +411,7 @@
       "src/router.tsx",
       "_footer-DIp35I2k.js",
       "_floating-concierge-ByiScAdS.js",
+      "_founder-section-CG-ZYml_.js",
       "_reveal-D_F53lYS.js"
     ]
   },
@@ -426,7 +441,7 @@
     ]
   },
   "src/routes/admin.property.$id.tsx?tsr-split=component": {
-    "file": "assets/admin.property._id-B2mScQs4.js",
+    "file": "assets/admin.property._id-DJBLK_B5.js",
     "name": "admin.property._id",
     "src": "src/routes/admin.property.$id.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -447,7 +462,7 @@
     ]
   },
   "src/routes/calculator.tsx?tsr-split=component": {
-    "file": "assets/calculator-V0NfIdxz.js",
+    "file": "assets/calculator-BrUNaQMx.js",
     "name": "calculator",
     "src": "src/routes/calculator.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -463,7 +478,7 @@
     ]
   },
   "src/routes/compare.tsx?tsr-split=component": {
-    "file": "assets/compare-DcIdrF6V.js",
+    "file": "assets/compare-DgSje0uW.js",
     "name": "compare",
     "src": "src/routes/compare.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -479,7 +494,7 @@
     ]
   },
   "src/routes/index.tsx?tsr-split=component": {
-    "file": "assets/routes-058KKTHz.js",
+    "file": "assets/routes-CsxbzWoM.js",
     "name": "routes",
     "src": "src/routes/index.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -495,6 +510,7 @@
       "_compare-drawer-Cq6OE86b.js",
       "_Compass.es-CVuKYmNP.js",
       "_CurrencyInr.es-CAsRsj7I.js",
+      "_founder-section-CG-ZYml_.js",
       "_ShieldCheck.es-DXeEg2D1.js",
       "_Sparkle.es-CCWDMNm1.js",
       "_reveal-D_F53lYS.js",
@@ -503,7 +519,7 @@
     ]
   },
   "src/routes/journal.$slug.tsx?tsr-split=component": {
-    "file": "assets/journal._slug-6-kCbqVl.js",
+    "file": "assets/journal._slug-nR4mRtn5.js",
     "name": "journal._slug",
     "src": "src/routes/journal.$slug.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -517,7 +533,7 @@
     ]
   },
   "src/routes/journal.tsx?tsr-split=component": {
-    "file": "assets/journal-nwIKGzGG.js",
+    "file": "assets/journal-DqZCyO6r.js",
     "name": "journal",
     "src": "src/routes/journal.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -549,7 +565,7 @@
     "isDynamicEntry": true
   },
   "src/routes/partners.tsx?tsr-split=component": {
-    "file": "assets/partners-BpVBg0DH.js",
+    "file": "assets/partners-BtFVuxEY.js",
     "name": "partners",
     "src": "src/routes/partners.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -566,7 +582,7 @@
     ]
   },
   "src/routes/properties.tsx?tsr-split=component": {
-    "file": "assets/properties-BWm8l6ow.js",
+    "file": "assets/properties-JjmZnBxk.js",
     "name": "properties",
     "src": "src/routes/properties.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -584,7 +600,7 @@
     ]
   },
   "src/routes/property.$slug.tsx?tsr-split=component": {
-    "file": "assets/property._slug-DPjmdGG3.js",
+    "file": "assets/property._slug-CurK0Vq8.js",
     "name": "property._slug",
     "src": "src/routes/property.$slug.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -608,7 +624,7 @@
     ]
   },
   "src/routes/sell.tsx?tsr-split=component": {
-    "file": "assets/sell-2agkdTqr.js",
+    "file": "assets/sell-lb328RHP.js",
     "name": "sell",
     "src": "src/routes/sell.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -635,7 +651,7 @@
     ]
   },
   "tanstack-start-manifest:v": {
-    "file": "assets/_tanstack-start-manifest_v-Bf4aCx20.js",
+    "file": "assets/_tanstack-start-manifest_v-8N-E7YnA.js",
     "name": "_tanstack-start-manifest_v",
     "src": "tanstack-start-manifest:v",
     "isDynamicEntry": true

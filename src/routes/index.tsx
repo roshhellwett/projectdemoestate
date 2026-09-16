@@ -11,6 +11,7 @@ import { QuickViewModal } from "../components/quick-view-modal";
 import { CompareDrawer } from "../components/compare-drawer";
 import { EmiCalculator } from "../components/emi-calculator";
 import { ReelsSection, TestimonialStrip } from "../components/sections";
+import { FounderSection } from "../components/founder-section";
 import { initRevealOnScroll } from "../lib/reveal";
 import { formatDate } from "../lib/format";
 import { getSupabaseForRoute } from "../lib/route-supabase";
@@ -488,6 +489,18 @@ function HomePage() {
               7. SOCIAL PROOF & INSTAGRAM VIDEO TOURS
              ================================================================= */}
           <ReelsSection reels={reels} instagram={site.instagram} />
+
+          {/* =================================================================
+              7.5. FOUNDER & LEADERSHIP SPOTLIGHT (BUILT AROUND TRUST)
+             ================================================================= */}
+          <div id="about" className="border-t border-line bg-white/70 py-14 sm:py-20 md:py-28">
+            <FounderSection
+              compact
+              phone={site.phone}
+              instagram={site.instagram}
+              whatsapp={site.whatsapp}
+            />
+          </div>
 
           {/* =================================================================
               8. VERIFIED CLIENT REVIEWS

@@ -4,6 +4,7 @@ import { Header } from "../components/header";
 import { Footer } from "../components/footer";
 import { FooterSettingsContext } from "../components/footer-settings";
 import { FloatingConcierge } from "../components/floating-concierge";
+import { FounderSection } from "../components/founder-section";
 import { initRevealOnScroll } from "../lib/reveal";
 import { getSupabaseForRoute } from "../lib/route-supabase";
 import { getSiteSettings, listProperties } from "../lib/queries";
@@ -19,8 +20,12 @@ export const Route = createFileRoute("/about")({
   },
   head: () => ({
     meta: [
-      { title: "About · SS Property" },
-      { name: "description", content: "SS Property - verified real estate advisory for Kolkata. Every listing walked through, every paper checked." },
+      { title: "About Ujjawal Sharma & SS Property · Built Around Trust" },
+      {
+        name: "description",
+        content:
+          "Founded by Ujjawal Sharma, SS Property is a premier Kolkata real estate advisory and media platform dedicated to physically verified listings, video tours, and transparent advisory.",
+      },
     ],
   }),
   component: AboutPage,
@@ -37,7 +42,7 @@ function AboutPage() {
     {
       value: settings.about_stat_1_value ?? `${count}+`,
       label: settings.about_stat_1_label ?? "Live verified listings",
-      note: settings.about_stat_1_note ?? "Across 10 Kolkata localities.",
+      note: settings.about_stat_1_note ?? "Across 10 Kolkata prime corridors.",
     },
     {
       value: settings.about_stat_2_value ?? "100%",
@@ -47,18 +52,25 @@ function AboutPage() {
     {
       value: settings.about_stat_3_value ?? "1:1",
       label: settings.about_stat_3_label ?? "Dedicated advisor",
-      note: settings.about_stat_3_note ?? "One person owns your search end to end.",
+      note: settings.about_stat_3_note ?? "Founder-led personal assistance from search to registry.",
     },
   ];
 
+  const waLink = settings.whatsapp_number
+    ? `https://wa.me/${settings.whatsapp_number.replace(/\D/g, "")}`
+    : undefined;
+
   return (
-    <div className="min-h-dvh">
+    <div className="min-h-dvh bg-paper text-ink">
       <Header />
       <FloatingConcierge />
       <main className="pt-14 lg:pt-16">
+        {/* =================================================================
+            1. HERO PAGE BANNER
+           ================================================================= */}
         <section className="border-b border-line bg-paper-2/60">
           <div className="shell py-14 md:py-20">
-            <p className="eyebrow">About us</p>
+            <p className="eyebrow text-brass">About SS Property</p>
             <h1 className="mt-4 max-w-3xl font-display text-4xl font-medium leading-tight tracking-tight text-ink md:text-5xl">
               We walk through every home before we list it.
             </h1>
@@ -69,13 +81,26 @@ function AboutPage() {
           </div>
         </section>
 
-        <section className="shell-wide grid gap-14 py-14 lg:grid-cols-3">
-          {stats.map((s, i) => (
-            <div key={s.label} className="reveal">
-              <p className="stat-value font-display text-5xl font-medium text-ink">{s.value}</p>
-              <p className="mt-2 text-sm font-semibold text-ink">{s.label}</p>
-              <p className="mt-1 text-sm text-muted">{s.note}</p>
-              {i === 0 && count > 0 && !settings.about_stat_1_value ? null : null}
+        {/* =================================================================
+            2. FEATURED FOUNDER & OWNER SPOTLIGHT ("BUILT AROUND TRUST")
+           ================================================================= */}
+        <div className="border-b border-line bg-white/70 py-14 sm:py-20 md:py-24">
+          <FounderSection
+            phone={settings.phone}
+            instagram={settings.instagram_url}
+            whatsapp={waLink}
+          />
+        </div>
+
+        {/* =================================================================
+            3. KEY VERIFICATION STATS
+           ================================================================= */}
+        <section className="shell-wide grid gap-6 sm:gap-8 py-14 sm:py-16 md:grid-cols-3 border-b border-line">
+          {stats.map((s) => (
+            <div key={s.label} className="reveal rounded-2xl border border-line bg-white p-6 sm:p-8 shadow-xs">
+              <p className="stat-value font-display text-4xl sm:text-5xl font-bold text-ink">{s.value}</p>
+              <p className="mt-3 text-sm font-bold text-ink">{s.label}</p>
+              <p className="mt-1 text-xs sm:text-sm text-muted leading-relaxed">{s.note}</p>
             </div>
           ))}
         </section>
