@@ -20,6 +20,16 @@ export const Route = createFileRoute("/sell")({
         content:
           "List your Kolkata flat, penthouse, or commercial space with SS Property. Accurate market valuation, professional photography, verified HNI buyers, zero spam.",
       },
+      { property: "og:title", content: "Sell or Lease Your Kolkata Property · SS Property" },
+      {
+        property: "og:description",
+        content:
+          "List your Kolkata flat, penthouse, or commercial space with SS Property. Accurate market valuation, professional photography, verified HNI buyers.",
+      },
+      { property: "og:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Sell or Lease Your Kolkata Property · SS Property" },
+      { name: "twitter:image", content: "/images/og-banner.jpg" },
     ],
   }),
   component: SellPage,

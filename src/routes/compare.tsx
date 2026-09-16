@@ -1,7 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useMemo } from "react";
+import { Header } from "../components/header";
+import { Footer } from "../components/footer";
+import { FooterSettingsContext } from "../components/footer-settings";
 import { getSupabaseForRoute } from "../lib/route-supabase";
-import { listProperties } from "../lib/queries";
+import { getSiteSettings, listProperties } from "../lib/queries";
 import type { Property } from "../lib/types";
 import { useCompare } from "../lib/compare";
 import { formatPrice } from "../lib/format";
@@ -20,10 +23,33 @@ import {
 } from "@phosphor-icons/react";
 
 export const Route = createFileRoute("/compare")({
+  head: () => ({
+    meta: [
+      { title: "Compare Residences · Architectural Dossier · SS Property" },
+      {
+        name: "description",
+        content:
+          "Side-by-side comparison of Kolkata luxury residences. Compare super built-up areas, price per sq.ft., Vastu orientations, and West Bengal stamp duty.",
+      },
+      { property: "og:title", content: "Compare Residences · SS Property Kolkata" },
+      {
+        property: "og:description",
+        content:
+          "Side-by-side comparison of Kolkata luxury residences. Compare super built-up areas, price per sq.ft., and West Bengal stamp duty.",
+      },
+      { property: "og:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Compare Residences · SS Property Kolkata" },
+      { name: "twitter:image", content: "/images/og-banner.jpg" },
+    ],
+  }),
   loader: async () => {
     const supabase = getSupabaseForRoute();
-    const allProperties = await listProperties(supabase, { limit: 50 });
-    return { allProperties };
+    const [allProperties, settings] = await Promise.all([
+      listProperties(supabase, { limit: 50 }),
+      getSiteSettings(supabase),
+    ]);
+    return { allProperties, settings };
   },
   component: ComparePage,
 });
@@ -43,7 +69,7 @@ const ALL_AMENITIES = [
 ];
 
 function ComparePage() {
-  const { allProperties } = Route.useLoaderData();
+  const { allProperties, settings } = Route.useLoaderData();
   const { items, removeItem, clear, toggle, isCompared } = useCompare();
   const [showAddPicker, setShowAddPicker] = useState(false);
 
@@ -64,9 +90,11 @@ function ComparePage() {
   };
 
   return (
-    <div className="min-h-dvh bg-paper text-ink pb-24">
-      {/* Hero Header */}
-      <section className="relative border-b border-line bg-gradient-to-b from-paper-2 to-paper pt-20 lg:pt-28 pb-10 sm:pb-12">
+    <FooterSettingsContext.Provider value={settings}>
+      <div className="min-h-dvh bg-paper text-ink selection:bg-brass-ghost">
+        <Header />
+        {/* Hero Header */}
+        <section className="relative border-b border-line bg-gradient-to-b from-paper-2 to-paper pt-20 lg:pt-28 pb-10 sm:pb-12">
         <div className="shell-wide">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
@@ -463,6 +491,8 @@ function ComparePage() {
       )}
 
       <FloatingConcierge />
+      <Footer />
     </div>
+  </FooterSettingsContext.Provider>
   );
 }

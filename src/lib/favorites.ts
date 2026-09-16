@@ -22,10 +22,6 @@ function writeStorage(ids: string[]): void {
   }
 }
 
-function isFavorite(id: string): boolean {
-  const list = readStorage();
-  return list.includes(id);
-}
 
 function toggleFavorite(id: string): boolean {
   const list = readStorage();

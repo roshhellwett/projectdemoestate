@@ -26,6 +26,16 @@ export const Route = createFileRoute("/about")({
         content:
           "Founded by Ujjawal Sharma, SS Property is a premier Kolkata real estate advisory and media platform dedicated to physically verified listings, video tours, and transparent advisory.",
       },
+      { property: "og:title", content: "About SS Property Kolkata · Built Around Trust" },
+      {
+        property: "og:description",
+        content:
+          "Founded by Ujjawal Sharma, SS Property is a premier Kolkata real estate advisory and media platform dedicated to physically verified listings, video tours, and transparent advisory.",
+      },
+      { property: "og:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "About SS Property Kolkata · Built Around Trust" },
+      { name: "twitter:image", content: "/images/og-banner.jpg" },
     ],
   }),
   component: AboutPage,

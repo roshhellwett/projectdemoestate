@@ -8,10 +8,6 @@ import { SITE } from "../lib/site";
 import {
   X,
   MapPin,
-  ArrowsOut,
-  Bathtub,
-  Car,
-  Compass,
   CheckCircle,
   WhatsappLogo,
   Heart,

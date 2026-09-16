@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { formatPrice } from "../lib/format";
-import { TrendUp, CurrencyInr, PiggyBank, Receipt, ShieldCheck, ChartLineUp } from "@phosphor-icons/react";
+import { TrendUp, Receipt, ShieldCheck, ChartLineUp } from "@phosphor-icons/react";
 
 interface InvestmentModelerProps {
   priceInr: number;
@@ -9,7 +9,7 @@ interface InvestmentModelerProps {
   areaSqFt?: number | null;
 }
 
-export function InvestmentModeler({ priceInr, locality, bhkType, areaSqFt }: InvestmentModelerProps) {
+export function InvestmentModeler({ priceInr, locality, bhkType, areaSqFt: _areaSqFt }: InvestmentModelerProps) {
   const [activeTab, setActiveTab] = useState<"yield" | "growth" | "tax">("yield");
   const [expectedCagr, setExpectedCagr] = useState<number>(7.2); // 7.2% historic Kolkata prime corridor CAGR
 
@@ -205,7 +205,7 @@ export function InvestmentModeler({ priceInr, locality, bhkType, areaSqFt }: Inv
                 5-Year Compounding Milestone
               </span>
               <div className="space-y-2">
-                {calculations.yearlyTrajectory.map((t, idx) => {
+                {calculations.yearlyTrajectory.map((t, _idx) => {
                   const widthPercent = Math.round((t.value / calculations.fiveYearFutureValue) * 100);
                   return (
                     <div key={t.year} className="flex items-center gap-3 text-xs">

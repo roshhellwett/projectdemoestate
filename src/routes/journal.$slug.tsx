@@ -21,13 +21,21 @@ export const Route = createFileRoute("/journal/$slug")({
   },
   head: ({ loaderData }) => {
     const post = loaderData?.post;
+    const desc = post?.excerpt || post?.content.slice(0, 150) || "SS Property Kolkata Journal article.";
+    const img = post?.cover_image || "/images/og-banner.jpg";
     return {
-      
       meta: post
         ? [
             { title: `${post.title} · SS Property` },
-            { name: "description", content: post.excerpt || post.content.slice(0, 150) },
-            { property: "og:image", content: post.cover_image },
+            { name: "description", content: desc },
+            { property: "og:title", content: `${post.title} · SS Property Kolkata` },
+            { property: "og:description", content: desc },
+            { property: "og:image", content: img },
+            { property: "og:type", content: "article" },
+            { name: "twitter:card", content: "summary_large_image" },
+            { name: "twitter:title", content: `${post.title} · SS Property Kolkata` },
+            { name: "twitter:description", content: desc },
+            { name: "twitter:image", content: img },
           ]
         : [],
     };

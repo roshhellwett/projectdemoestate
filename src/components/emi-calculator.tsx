@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { formatPrice } from "../lib/format";
-import { Calculator, CurrencyInr, ShieldCheck, Info } from "@phosphor-icons/react";
+import { Calculator, ShieldCheck, Info } from "@phosphor-icons/react";
 
 interface EmiCalculatorProps {
   initialPrice?: number;

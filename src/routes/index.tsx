@@ -37,7 +37,7 @@ import {
   SealCheck,
 } from "@phosphor-icons/react";
 
-export const Route = createFileRoute("/")(  {
+export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "SS Property - Verified Luxury Residences & Commercial in Kolkata" },
@@ -46,6 +46,20 @@ export const Route = createFileRoute("/")(  {
         content:
           "Kolkata's premier real estate consultancy. Verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat and South Kolkata. 100% physically inspected.",
       },
+      { property: "og:title", content: "SS Property - Verified Luxury Residences & Commercial in Kolkata" },
+      {
+        property: "og:description",
+        content:
+          "Kolkata's premier real estate consultancy. Verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat and South Kolkata. 100% physically inspected.",
+      },
+      { property: "og:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:title", content: "SS Property - Verified Luxury Residences & Commercial in Kolkata" },
+      {
+        name: "twitter:description",
+        content:
+          "Kolkata's premier real estate consultancy. Verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat and South Kolkata.",
+      },
+      { name: "twitter:image", content: "/images/og-banner.jpg" },
     ],
   }),
   loader: async () => {

@@ -7,7 +7,6 @@ import {
   Clock,
   Compass,
   ArrowRight,
-  Sparkle,
   TrendUp,
   ShieldCheck,
 } from "@phosphor-icons/react";

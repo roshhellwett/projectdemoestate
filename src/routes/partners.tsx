@@ -37,6 +37,16 @@ export const Route = createFileRoute("/partners")({
         content:
           "Discover Kolkata's most trusted developers, CREDAI certified builders, and institutional partners working with SS Property.",
       },
+      { property: "og:title", content: "Builders & Brand Partners · SS Property Kolkata" },
+      {
+        property: "og:description",
+        content:
+          "Discover Kolkata's most trusted developers, CREDAI certified builders, and institutional partners working with SS Property.",
+      },
+      { property: "og:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Builders & Brand Partners · SS Property Kolkata" },
+      { name: "twitter:image", content: "/images/og-banner.jpg" },
     ],
   }),
   component: PartnersPage,

@@ -60,16 +60,23 @@ export const Route = createFileRoute("/property/$slug")({
   },
   head: ({ loaderData }) => {
     const p = loaderData?.property;
+    const desc = p
+      ? `${p.bhk_type} in ${p.locality || p.location}. ${formatPrice(p.price_inr, p.price_display)}. 100% physically inspected & title verified by SS Property Kolkata.`
+      : "Verified luxury property in Kolkata by SS Property.";
+    const img = p?.main_image || "/images/og-banner.jpg";
     return {
       meta: p
         ? [
             { title: `${p.title} · SS Property Kolkata` },
-            {
-              name: "description",
-              content: `${p.bhk_type} in ${p.location}. ${formatPrice(p.price_inr, p.price_display)}. 100% physically inspected & title verified by SS Property Kolkata.`,
-            },
-            { property: "og:title", content: `${p.title} · SS Property` },
-            { property: "og:image", content: p.main_image },
+            { name: "description", content: desc },
+            { property: "og:title", content: `${p.title} · SS Property Kolkata` },
+            { property: "og:description", content: desc },
+            { property: "og:image", content: img },
+            { property: "og:type", content: "article" },
+            { name: "twitter:card", content: "summary_large_image" },
+            { name: "twitter:title", content: `${p.title} · SS Property Kolkata` },
+            { name: "twitter:description", content: desc },
+            { name: "twitter:image", content: img },
           ]
         : [],
     };

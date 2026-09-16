@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Compass, Sun, Wind, Sparkle, ShieldCheck, ArrowUpRight } from "@phosphor-icons/react";
+import { Compass, Sun, Wind, Sparkle, ShieldCheck } from "@phosphor-icons/react";
 
 interface VastuSolarDialProps {
   facing?: string | null;
@@ -91,7 +91,7 @@ const DIRECTIONS: Record<string, DirectionMeta> = {
   },
 };
 
-export function VastuSolarDial({ facing = "North-East", locality = "Kolkata", floor }: VastuSolarDialProps) {
+export function VastuSolarDial({ facing = "North-East", locality: _locality = "Kolkata", floor: _floor }: VastuSolarDialProps) {
   const [activeTime, setActiveTime] = useState<"dawn" | "midday" | "dusk">("dawn");
 
   // Normalize facing string to key

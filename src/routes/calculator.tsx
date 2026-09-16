@@ -24,6 +24,16 @@ export const Route = createFileRoute("/calculator")({
         content:
           "Calculate monthly home loan EMIs, West Bengal municipal stamp duty, and registration charges for residential and commercial properties in Kolkata.",
       },
+      { property: "og:title", content: "Kolkata Home Loan EMI & West Bengal Stamp Duty Calculator · SS Property" },
+      {
+        property: "og:description",
+        content:
+          "Calculate monthly home loan EMIs, West Bengal municipal stamp duty, and registration charges for properties in Kolkata.",
+      },
+      { property: "og:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Kolkata Home Loan EMI & Stamp Duty Calculator · SS Property" },
+      { name: "twitter:image", content: "/images/og-banner.jpg" },
     ],
   }),
   loader: async () => {

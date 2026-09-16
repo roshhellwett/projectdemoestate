@@ -22,6 +22,12 @@ export const Route = createFileRoute("/journal")({
     meta: [
       { title: "Journal · SS Property" },
       { name: "description", content: "Kolkata market notes, buyer guides and honest advice from SS Property." },
+      { property: "og:title", content: "The Journal · SS Property Kolkata" },
+      { property: "og:description", content: "Kolkata market notes, buyer guides and honest advice from SS Property." },
+      { property: "og:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "The Journal · SS Property Kolkata" },
+      { name: "twitter:image", content: "/images/og-banner.jpg" },
     ],
   }),
   component: JournalPage,

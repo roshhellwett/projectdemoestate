@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { MagnifyingGlass, X, MapPin, House, ArrowsOut, Sparkle, ArrowRight } from "@phosphor-icons/react";
+import { MagnifyingGlass, X, MapPin, ArrowRight } from "@phosphor-icons/react";
 import { getSupabaseBrowser } from "../lib/supabase";
 import { listProperties } from "../lib/queries";
 import type { Property } from "../lib/types";
@@ -28,38 +28,49 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
+  const handleClose = () => {
+    setQuery("");
+    setSelectedIndex(0);
+    onClose();
+  };
+
   // Load properties once when opened
   useEffect(() => {
     if (!isOpen) return;
 
     // Focus input on open
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       inputRef.current?.focus();
     }, 50);
 
+    let active = true;
     if (properties.length === 0) {
-      setLoading(true);
+      Promise.resolve().then(() => {
+        if (active) setLoading(true);
+      });
       const supabase = getSupabaseBrowser();
       listProperties(supabase, { limit: 50 })
         .then((data) => {
-          setProperties(data);
-          setLoading(false);
+          if (active) {
+            setProperties(data);
+            setLoading(false);
+          }
         })
         .catch(() => {
-          setLoading(false);
+          if (active) setLoading(false);
         });
     }
-  }, [isOpen]);
+
+    return () => {
+      active = false;
+      clearTimeout(timer);
+    };
+  }, [isOpen, properties.length]);
 
   // Lock body scroll when open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-      setQuery("");
-      setSelectedIndex(0);
-    }
+    if (!isOpen) return;
+    document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
     };
@@ -90,7 +101,7 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
   // Handle keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Escape") {
-      onClose();
+      handleClose();
     } else if (e.key === "ArrowDown") {
       e.preventDefault();
       setSelectedIndex((prev) => (prev < filtered.length - 1 ? prev + 1 : 0));
@@ -100,7 +111,7 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
     } else if (e.key === "Enter" && filtered[selectedIndex]) {
       e.preventDefault();
       const target = filtered[selectedIndex];
-      onClose();
+      handleClose();
       navigate({ to: `/property/$slug`, params: { slug: target.slug } });
     }
   };
@@ -111,7 +122,7 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
     <div
       id="spotlight-search-modal"
       className="fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-6 md:p-14 bg-black/60 backdrop-blur-md animate-in fade-in duration-200"
-      onClick={onClose}
+      onClick={handleClose}
     >
       <div
         className="w-full max-w-2xl rounded-3xl border border-line bg-white shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 duration-150"
@@ -144,7 +155,7 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
           ) : null}
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             className="rounded-full border border-line bg-white px-2.5 py-1 text-xs font-semibold text-muted hover:text-ink transition-colors"
           >
             ESC

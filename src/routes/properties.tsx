@@ -45,6 +45,21 @@ export const Route = createFileRoute("/properties")({
         content:
           "Browse verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat, Bangur Avenue and Greater Kolkata. Filter by locality, budget, and BHK.",
       },
+      { property: "og:title", content: "Kolkata Luxury Properties for Sale & Lease · SS Property" },
+      {
+        property: "og:description",
+        content:
+          "Browse verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat, Bangur Avenue and Greater Kolkata.",
+      },
+      { property: "og:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Kolkata Luxury Properties for Sale & Lease · SS Property" },
+      {
+        name: "twitter:description",
+        content:
+          "Browse verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat and Greater Kolkata.",
+      },
+      { name: "twitter:image", content: "/images/og-banner.jpg" },
     ],
   }),
   validateSearch: (search: Record<string, unknown>): Search => ({

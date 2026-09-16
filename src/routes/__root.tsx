@@ -10,8 +10,18 @@ export const Route = createRootRoute({
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "default" },
       { name: "format-detection", content: "telephone=no" },
+      { property: "og:site_name", content: "SS Property Kolkata" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "/images/og-banner.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "SS Property Kolkata - Verified Luxury Residences & Commercial Spaces" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "/images/og-banner.jpg" },
     ],
     links: [
+      { rel: "icon", href: "/images/ss-logo-ink.webp", type: "image/webp" },
+      { rel: "apple-touch-icon", href: "/images/ss-logo-ink.webp" },
       { rel: "stylesheet", href: appCss },
       /* Preload critical fonts for faster render */
       {
