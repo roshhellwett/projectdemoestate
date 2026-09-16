@@ -59,26 +59,26 @@ export function Header() {
       <header
         className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
           scrolled || open
-            ? "border-b border-line bg-paper/90 backdrop-blur-xl shadow-[0_4px_20px_-8px_rgba(18,16,14,0.08)]"
-            : "border-b border-transparent bg-transparent"
+            ? "border-b border-line bg-paper/95 backdrop-blur-xl shadow-[0_4px_20px_-8px_rgba(18,16,14,0.08)]"
+            : "border-b border-line/40 bg-paper/75 backdrop-blur-md"
         }`}
       >
-        <div className="shell flex h-18 items-center justify-between">
+        <div className="w-full max-w-[1720px] mx-auto px-5 sm:px-8 lg:px-12 flex h-20 items-center justify-between gap-6">
           {/* Brand Logo */}
-          <Link to="/" aria-label="SS Property home" onClick={() => setOpen(false)} className="flex items-center">
-            <LogoImage className="h-8 md:h-10 transition-transform hover:scale-[1.02]" />
+          <Link to="/" aria-label="SS Property home" onClick={() => setOpen(false)} className="flex items-center shrink-0">
+            <LogoImage className="h-9 md:h-10 transition-transform hover:scale-[1.02]" />
           </Link>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
+          {/* Desktop Nav Links: visible from lg (1024px) upwards */}
+          <nav className="hidden items-center gap-3.5 xl:gap-6 2xl:gap-8 lg:flex" aria-label="Primary">
             {NAV_LINKS.map((link) => {
               const active = !!matchRoute({ to: link.to, fuzzy: true });
               return (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`relative text-[13px] font-semibold tracking-wide transition-colors hover:text-ink ${
-                    active ? "text-ink" : "text-muted"
+                  className={`relative py-1 text-[13px] xl:text-sm font-semibold tracking-wide transition-colors hover:text-ink whitespace-nowrap ${
+                    active ? "text-ink" : "text-muted hover:text-ink"
                   }`}
                 >
                   {link.label}
@@ -90,18 +90,18 @@ export function Header() {
             })}
           </nav>
 
-          {/* Desktop Right Actions: Spotlight Search, Favorites, Compare, Hotline, Book a Visit CTA */}
-          <div className="hidden items-center gap-3.5 md:flex">
+          {/* Desktop Right Actions: visible from lg (1024px) upwards */}
+          <div className="hidden items-center gap-2.5 sm:gap-3 lg:flex shrink-0">
             {/* Spotlight Search Button */}
             <button
               type="button"
               onClick={() => setSpotlightOpen(true)}
-              className="flex items-center gap-2 rounded-full border border-line bg-paper px-3.5 py-1.5 text-xs text-muted transition-colors hover:border-brass hover:text-ink hover:bg-paper-2"
+              className="flex items-center gap-2 rounded-full border border-line bg-paper/80 px-3 py-1.5 text-xs text-muted transition-colors hover:border-brass hover:text-ink hover:bg-white shadow-xs"
               title="Spotlight Search (Ctrl + K)"
             >
-              <MagnifyingGlass size={15} className="text-brass" />
-              <span className="hidden xl:inline">Quick Search</span>
-              <kbd className="hidden xl:inline-flex items-center rounded border border-line/80 bg-white px-1 text-[10px] font-mono text-muted">
+              <MagnifyingGlass size={15} className="text-brass shrink-0" />
+              <span className="hidden xl:inline font-medium">Quick Search</span>
+              <kbd className="hidden 2xl:inline-flex items-center rounded border border-line/80 bg-white px-1.5 py-0.5 text-[10px] font-mono text-muted">
                 ⌘K
               </kbd>
             </button>
@@ -110,15 +110,15 @@ export function Header() {
             <Link
               to="/compare"
               aria-label="Compare selected residences"
-              className="relative flex items-center gap-1.5 rounded-full border border-line bg-paper px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:border-brass hover:bg-paper-2"
+              className="relative flex items-center gap-1.5 rounded-full border border-line bg-paper/80 px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:border-brass hover:bg-white shadow-xs"
               title="Compare Residences"
             >
               <Scales
                 size={16}
                 weight={compareCount > 0 ? "fill" : "regular"}
-                className={compareCount > 0 ? "text-brass" : "text-muted"}
+                className={compareCount > 0 ? "text-brass shrink-0" : "text-muted shrink-0"}
               />
-              <span className="hidden xl:inline">Compare</span>
+              <span className="hidden 2xl:inline">Compare</span>
               {compareCount > 0 ? (
                 <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-brass text-[10px] font-bold text-ink">
                   {compareCount}
@@ -131,17 +131,17 @@ export function Header() {
               to="/properties"
               search={{ locality: "All", bhk: "" }}
               aria-label="View saved favorite properties"
-              className="relative flex items-center gap-1.5 rounded-full border border-line bg-paper px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:border-brass hover:bg-paper-2"
+              className="relative flex items-center gap-1.5 rounded-full border border-line bg-paper/80 px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:border-brass hover:bg-white shadow-xs"
               title="Saved Properties"
             >
               <Heart
                 size={16}
                 weight={favoritesCount > 0 ? "fill" : "regular"}
-                className={favoritesCount > 0 ? "text-danger" : "text-muted"}
+                className={favoritesCount > 0 ? "text-danger shrink-0" : "text-muted shrink-0"}
               />
-              <span className="hidden xl:inline">Saved</span>
+              <span className="hidden 2xl:inline">Saved</span>
               {favoritesCount > 0 ? (
-                <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-ink px-1 text-[10px] font-bold text-paper">
+                <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-ink px-1.5 text-[10px] font-bold text-paper">
                   {favoritesCount}
                 </span>
               ) : null}
@@ -150,10 +150,10 @@ export function Header() {
             {/* Direct Phone Link */}
             <a
               href={SITE.phoneHref}
-              className="hidden 2xl:flex items-center gap-1.5 text-xs font-semibold text-muted hover:text-ink transition-colors"
+              className="hidden xl:flex items-center gap-1.5 text-xs font-semibold text-muted hover:text-ink transition-colors whitespace-nowrap pl-1"
             >
-              <Phone size={14} className="text-brass" />
-              <span>{SITE.phone}</span>
+              <Phone size={14} className="text-brass shrink-0" />
+              <span className="whitespace-nowrap">{SITE.phone}</span>
             </a>
 
             {/* WhatsApp / Book a Visit Button */}
@@ -161,15 +161,15 @@ export function Header() {
               href={SITE.whatsapp}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[13px] font-semibold text-paper transition-all duration-300 hover:bg-ink-2 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0"
+              className="flex items-center gap-2 rounded-full bg-ink px-4 py-2 sm:px-5 sm:py-2.5 text-xs md:text-[13px] font-semibold text-paper shadow-sm transition-all duration-300 hover:bg-ink-2 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 whitespace-nowrap shrink-0 ml-1"
             >
-              <WhatsappLogo size={16} weight="fill" className="text-brass-2" />
+              <WhatsappLogo size={16} weight="fill" className="text-brass-2 shrink-0" />
               <span>Book a Visit</span>
             </a>
           </div>
 
-          {/* Mobile Menu & Quick Actions Toggle */}
-          <div className="flex items-center gap-2.5 md:hidden">
+          {/* Mobile / Tablet Menu & Quick Actions Toggle (< 1024px) */}
+          <div className="flex items-center gap-2 sm:gap-2.5 lg:hidden">
             <button
               type="button"
               onClick={() => setSpotlightOpen(true)}
@@ -241,14 +241,14 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer: visible < 1024px (lg:hidden) */}
       <div
-        className={`fixed inset-0 z-30 bg-paper transition-transform duration-300 md:hidden ${
+        className={`fixed inset-0 z-30 bg-paper transition-transform duration-300 lg:hidden ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
-        style={{ top: "4.5rem" }}
+        style={{ top: "5rem" }}
       >
-        <div className="shell flex h-full flex-col justify-between py-8">
+        <div className="w-full px-6 flex h-full flex-col justify-between py-8">
           <div className="flex flex-col gap-5">
             {NAV_LINKS.map((link) => (
               <Link

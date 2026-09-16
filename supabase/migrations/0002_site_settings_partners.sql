@@ -73,12 +73,18 @@ insert into public.site_settings(key, value) values
 on conflict (key) do nothing;
 
 insert into public.partners(name, slug, logo_url, website_url, description, display_order) values
-  ('Auricas', 'auricas', '/images/partners/auricas.webp', '', '', 10),
-  ('CREDAI', 'credai', '/images/partners/credai.webp', '', '', 20),
-  ('DTC', 'dtc', '/images/partners/dtc.webp', '', '', 30),
-  ('Eden', 'eden', '/images/partners/eden.webp', '', '', 40),
-  ('Hero Homes', 'herohomes', '/images/partners/herohomes.webp', '', '', 50),
-  ('Ruchi Realty', 'ruchirealty', '/images/partners/ruchirealty.webp', '', '', 60),
-  ('Silver Villa', 'silvervilla', '/images/partners/silvervilla.webp', '', '', 70),
-  ('Synergy', 'synergy', '/images/partners/synergy.webp', '', '', 80)
-on conflict (slug) do nothing;
+  ('Auricas', 'auricas', '/images/partners/auricas.webp', 'https://auricas.com', 'Crafting Golden Spaces - Premium residential developments across Kolkata', 10),
+  ('CREDAI Kolkata', 'credai', '/images/partners/credai.webp', 'https://credaibengal.in', 'Apex body for private real estate developers, setting ethical standards and construction excellence across Bengal.', 20),
+  ('DTC Group', 'dtc', '/images/partners/dtc.webp', 'https://dtcgroup.in', 'Commit. Deliver. Grow - Leading infrastructure and integrated township developers in Greater Kolkata.', 30),
+  ('Eden Group', 'eden', '/images/partners/eden.webp', 'https://edengroup.in', 'Distinctive architectural homes across North & South Kolkata with proven legacy.', 40),
+  ('Hero Homes', 'herohomes', '/images/partners/herohomes.webp', 'https://herohomes.in', 'Sustainable luxury communities and integrated high-rise wellness enclaves.', 50),
+  ('Ruchi Realty', 'ruchirealty', '/images/partners/ruchirealty.webp', 'https://ruchirealty.com', 'Iconic commercial and residential landmarks with state-of-the-art community amenities.', 60),
+  ('Silver Villa', 'silvervilla', '/images/partners/silvervilla.webp', '', 'Bespoke gated villas and premium boutique residences in peaceful green corridors.', 70),
+  ('Synergy Group', 'synergy', '/images/partners/synergy.webp', '', 'Modern high-rise residential towers strategically connected to Kolkata’s key transit nodes.', 80)
+on conflict (slug) do update set
+  name = excluded.name,
+  logo_url = excluded.logo_url,
+  website_url = excluded.website_url,
+  description = excluded.description,
+  display_order = excluded.display_order;
+

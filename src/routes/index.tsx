@@ -11,7 +11,7 @@ import { NeighborhoodRadar } from "../components/neighborhood-radar";
 import { QuickViewModal } from "../components/quick-view-modal";
 import { CompareDrawer } from "../components/compare-drawer";
 import { EmiCalculator } from "../components/emi-calculator";
-import { PartnerWall, ReelsSection, TestimonialStrip } from "../components/sections";
+import { ReelsSection, TestimonialStrip } from "../components/sections";
 import { initRevealOnScroll } from "../lib/reveal";
 import { formatDate, formatPrice } from "../lib/format";
 import { getSupabaseForRoute } from "../lib/route-supabase";
@@ -190,38 +190,6 @@ function HomePage() {
                       decoding="async"
                       className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/20 to-transparent pointer-events-none" />
-
-                    {/* Floating Luxury Glass Badge */}
-                    <div className="glass-card absolute bottom-6 left-6 right-6 rounded-2xl p-4 shadow-lg backdrop-blur-md">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-[11px] font-bold uppercase tracking-wider text-brass">
-                            {featured[0] ? "Featured Property of the Week" : "Verified Kolkata Real Estate"}
-                          </p>
-                          <h4 className="mt-1 font-display text-base font-semibold text-ink line-clamp-1">
-                            {featured[0] ? featured[0].title : "Architectural Residences & Penthouses"}
-                          </h4>
-                          <p className="text-xs text-muted">
-                            {featured[0] ? featured[0].location : "Lake Town • Newtown • Kasba • Rajarhat"}
-                          </p>
-                        </div>
-                        <div className="text-right shrink-0">
-                          {featured[0]?.price_inr ? (
-                            <p className="font-display text-lg font-bold text-ink">
-                              {formatPrice(featured[0].price_inr, featured[0].price_display)}
-                            </p>
-                          ) : null}
-                          <Link
-                            to={featured[0] ? "/property/$slug" : "/properties"}
-                            params={featured[0] ? { slug: featured[0].slug } : undefined}
-                            className="text-[11px] font-semibold text-brass hover:text-ink flex items-center gap-1 justify-end mt-0.5"
-                          >
-                            {featured[0] ? "View Tour" : "Explore"} <ArrowRight size={12} />
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -254,11 +222,6 @@ function HomePage() {
               </div>
             </div>
           </section>
-
-          {/* =================================================================
-              2. BUILDER & PARTNER MARQUEE WALL
-             ================================================================= */}
-          <PartnerWall partners={partners} />
 
           {/* =================================================================
               3. PRIME KOLKATA CORRIDORS (LOCALITY SHOWCASE)

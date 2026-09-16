@@ -18,6 +18,7 @@ import { Route as CompareRouteImport } from './routes/compare'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PartnerRouteImport } from './routes/partner'
+import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PropertiesRouteImport } from './routes/properties'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
@@ -71,6 +72,11 @@ const PartnerRoute = PartnerRouteImport.update({
   path: '/partner',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PropertiesRoute = PropertiesRouteImport.update({
   id: '/properties',
   path: '/properties',
@@ -117,6 +123,7 @@ export interface FileRoutesByFullPath {
   '/journal': typeof JournalRouteWithChildren
   '/login': typeof LoginRoute
   '/partner': typeof PartnerRoute
+  '/partners': typeof PartnersRoute
   '/properties': typeof PropertiesRoute
   '/sell': typeof SellRoute
   '/admin/new': typeof AdminNewRoute
@@ -134,6 +141,7 @@ export interface FileRoutesByTo {
   '/journal': typeof JournalRouteWithChildren
   '/login': typeof LoginRoute
   '/partner': typeof PartnerRoute
+  '/partners': typeof PartnersRoute
   '/properties': typeof PropertiesRoute
   '/sell': typeof SellRoute
   '/admin/new': typeof AdminNewRoute
@@ -153,6 +161,7 @@ export interface FileRoutesById {
   '/journal': typeof JournalRouteWithChildren
   '/login': typeof LoginRoute
   '/partner': typeof PartnerRoute
+  '/partners': typeof PartnersRoute
   '/properties': typeof PropertiesRoute
   '/sell': typeof SellRoute
   '/admin/new': typeof AdminNewRoute
@@ -173,6 +182,7 @@ export interface FileRouteTypes {
     | '/journal'
     | '/login'
     | '/partner'
+    | '/partners'
     | '/properties'
     | '/sell'
     | '/admin/new'
@@ -190,6 +200,7 @@ export interface FileRouteTypes {
     | '/journal'
     | '/login'
     | '/partner'
+    | '/partners'
     | '/properties'
     | '/sell'
     | '/admin/new'
@@ -208,6 +219,7 @@ export interface FileRouteTypes {
     | '/journal'
     | '/login'
     | '/partner'
+    | '/partners'
     | '/properties'
     | '/sell'
     | '/admin/new'
@@ -227,6 +239,7 @@ export interface RootRouteChildren {
   JournalRoute: typeof JournalRouteWithChildren
   LoginRoute: typeof LoginRoute
   PartnerRoute: typeof PartnerRoute
+  PartnersRoute: typeof PartnersRoute
   PropertiesRoute: typeof PropertiesRoute
   SellRoute: typeof SellRoute
   PropertySlugRoute: typeof PropertySlugRoute
@@ -295,6 +308,13 @@ declare module '@tanstack/react-router' {
       path: '/partner'
       fullPath: '/partner'
       preLoaderRoute: typeof PartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/properties': {
@@ -384,6 +404,7 @@ const rootRouteChildren: RootRouteChildren = {
   JournalRoute: JournalRouteWithChildren,
   LoginRoute: LoginRoute,
   PartnerRoute: PartnerRoute,
+  PartnersRoute: PartnersRoute,
   PropertiesRoute: PropertiesRoute,
   SellRoute: SellRoute,
   PropertySlugRoute: PropertySlugRoute,

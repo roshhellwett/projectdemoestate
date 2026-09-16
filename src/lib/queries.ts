@@ -119,12 +119,109 @@ export async function listReels(client: SupabaseClient, onlyPublished = true): P
   return (data ?? []) as Reel[];
 }
 
+export const DEFAULT_PARTNERS: Partner[] = [
+  {
+    id: "p-auricas",
+    name: "Auricas",
+    slug: "auricas",
+    logo_url: "/images/partners/auricas.webp",
+    website_url: "https://auricas.com",
+    description: "Crafting Golden Spaces - Premium residential developments across Kolkata",
+    display_order: 10,
+    is_published: true,
+    created_at: "2025-01-01T00:00:00Z",
+  },
+  {
+    id: "p-credai",
+    name: "CREDAI Kolkata",
+    slug: "credai",
+    logo_url: "/images/partners/credai.webp",
+    website_url: "https://credaibengal.in",
+    description: "Apex body for private real estate developers, setting ethical standards and construction excellence across Bengal.",
+    display_order: 20,
+    is_published: true,
+    created_at: "2025-01-01T00:00:00Z",
+  },
+  {
+    id: "p-dtc",
+    name: "DTC Group",
+    slug: "dtc",
+    logo_url: "/images/partners/dtc.webp",
+    website_url: "https://dtcgroup.in",
+    description: "Commit. Deliver. Grow - Leading infrastructure and integrated township developers in Greater Kolkata.",
+    display_order: 30,
+    is_published: true,
+    created_at: "2025-01-01T00:00:00Z",
+  },
+  {
+    id: "p-eden",
+    name: "Eden Group",
+    slug: "eden",
+    logo_url: "/images/partners/eden.webp",
+    website_url: "https://edengroup.in",
+    description: "Distinctive architectural homes across North & South Kolkata with proven legacy.",
+    display_order: 40,
+    is_published: true,
+    created_at: "2025-01-01T00:00:00Z",
+  },
+  {
+    id: "p-herohomes",
+    name: "Hero Homes",
+    slug: "herohomes",
+    logo_url: "/images/partners/herohomes.webp",
+    website_url: "https://herohomes.in",
+    description: "Sustainable luxury communities and integrated high-rise wellness enclaves.",
+    display_order: 50,
+    is_published: true,
+    created_at: "2025-01-01T00:00:00Z",
+  },
+  {
+    id: "p-ruchirealty",
+    name: "Ruchi Realty",
+    slug: "ruchirealty",
+    logo_url: "/images/partners/ruchirealty.webp",
+    website_url: "https://ruchirealty.com",
+    description: "Iconic commercial and residential landmarks with state-of-the-art community amenities.",
+    display_order: 60,
+    is_published: true,
+    created_at: "2025-01-01T00:00:00Z",
+  },
+  {
+    id: "p-silvervilla",
+    name: "Silver Villa",
+    slug: "silvervilla",
+    logo_url: "/images/partners/silvervilla.webp",
+    website_url: "",
+    description: "Bespoke gated villas and premium boutique residences in peaceful green corridors.",
+    display_order: 70,
+    is_published: true,
+    created_at: "2025-01-01T00:00:00Z",
+  },
+  {
+    id: "p-synergy",
+    name: "Synergy Group",
+    slug: "synergy",
+    logo_url: "/images/partners/synergy.webp",
+    website_url: "",
+    description: "Modern high-rise residential towers strategically connected to Kolkata’s key transit nodes.",
+    display_order: 80,
+    is_published: true,
+    created_at: "2025-01-01T00:00:00Z",
+  },
+];
+
 export async function listPartners(client: SupabaseClient, onlyPublished = true): Promise<Partner[]> {
-  let q = client.from("partners").select("*");
-  if (onlyPublished) q = q.eq("is_published", true);
-  const { data, error } = await q.order("display_order");
-  if (error) throw error;
-  return (data ?? []) as Partner[];
+  try {
+    let q = client.from("partners").select("*");
+    if (onlyPublished) q = q.eq("is_published", true);
+    const { data, error } = await q.order("display_order");
+    if (!error && data && data.length > 0) {
+      return data as Partner[];
+    }
+  } catch (err) {
+    console.warn("Could not query partners table from Supabase, using defaults:", err);
+  }
+  return DEFAULT_PARTNERS;
 }
 
 /** Site settings as a key->value map. Missing keys are simply absent. */

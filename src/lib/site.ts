@@ -21,6 +21,7 @@ export const SITE = {
 
 export const NAV_LINKS = [
   { label: "Properties", to: "/properties" },
+  { label: "Partners", to: "/partners" },
   { label: "Compare", to: "/compare" },
   { label: "Sell", to: "/sell" },
   { label: "Calculator", to: "/calculator" },
@@ -31,7 +32,7 @@ export const NAV_LINKS = [
 export const FOOTER_SERVICES = [
   { label: "Buy a Property", to: "/properties" },
   { label: "Sell Your Property", to: "/sell" },
-  { label: "Partner With Us", to: "/partner" },
+  { label: "Partner With Us", to: "/partners" },
 ] as const;
 
 /**
