@@ -133,7 +133,6 @@ function PropertyDetailPage() {
     <FooterSettingsContext.Provider value={settings}>
       <div className="min-h-dvh bg-paper text-ink selection:bg-brass-ghost pb-20 md:pb-0">
         <Header />
-        <FloatingConcierge />
 
         {/* =================================================================
             STICKY SUB-HEADER ON SCROLL
@@ -197,55 +196,59 @@ function PropertyDetailPage() {
           {/* =================================================================
               BREADCRUMB & TOP ACTIONS
              ================================================================= */}
-          <nav className="shell-wide pt-6 pb-2 text-xs text-muted flex items-center justify-between no-print" aria-label="Breadcrumb">
-            <div className="flex items-center gap-2 truncate">
-              <Link to="/" className="hover:text-ink">Home</Link>
-              <span>/</span>
-              <Link to="/properties" className="hover:text-ink">Properties</Link>
-              <span>/</span>
-              <span className="text-ink font-semibold">{property.locality}</span>
+          <nav className="shell-wide pt-6 pb-2 text-xs text-muted flex items-center justify-between gap-2 no-print" aria-label="Breadcrumb">
+            <div className="min-w-0 flex-1 flex items-center gap-1.5 sm:gap-2 text-xs text-muted whitespace-nowrap overflow-hidden mr-2">
+              <Link to="/" className="shrink-0 hover:text-ink transition-colors">Home</Link>
+              <span className="shrink-0 text-muted/50">/</span>
+              <Link to="/properties" className="shrink-0 hover:text-ink transition-colors">Properties</Link>
+              <span className="shrink-0 text-muted/50">/</span>
+              <span className="text-ink font-semibold truncate">{property.locality}</span>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               <button
                 type="button"
                 onClick={() => toggleCompare(property)}
-                className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${
+                className={`flex h-9 w-9 sm:h-auto sm:w-auto items-center justify-center sm:justify-start gap-1.5 rounded-full border sm:px-3 sm:py-1.5 text-xs font-semibold transition-colors ${
                   compared
                     ? "border-brass bg-brass/15 text-brass-dark font-bold"
                     : "border-line bg-white text-ink hover:border-brass"
                 }`}
                 title="Compare specifications"
+                aria-label={compared ? "Remove from compare" : "Compare specifications"}
               >
                 <Scales
                   size={15}
                   weight={compared ? "fill" : "regular"}
                   className={compared ? "text-brass" : "text-muted"}
                 />
-                <span>{compared ? "Compared" : "Compare"}</span>
+                <span className="hidden sm:inline">{compared ? "Compared" : "Compare"}</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => toggle(property.id)}
-                className="flex items-center gap-1.5 rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-ink hover:border-brass transition-colors"
+                className="flex h-9 w-9 sm:h-auto sm:w-auto items-center justify-center sm:justify-start gap-1.5 rounded-full border border-line bg-white sm:px-3 sm:py-1.5 text-xs font-semibold text-ink hover:border-brass transition-colors"
+                title="Save property"
+                aria-label={favorited ? "Remove from saved" : "Save property"}
               >
                 <Heart
                   size={15}
                   weight={favorited ? "fill" : "regular"}
                   className={favorited ? "text-danger" : "text-muted"}
                 />
-                <span>{favorited ? "Saved" : "Save"}</span>
+                <span className="hidden sm:inline">{favorited ? "Saved" : "Save"}</span>
               </button>
 
               <button
                 type="button"
                 onClick={handleShare}
-                className="flex items-center gap-1.5 rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-ink hover:border-brass transition-colors"
+                className="flex h-9 w-9 sm:h-auto sm:w-auto items-center justify-center sm:justify-start gap-1.5 rounded-full border border-line bg-white sm:px-3 sm:py-1.5 text-xs font-semibold text-ink hover:border-brass transition-colors"
                 title="Share property"
+                aria-label="Share property link"
               >
                 <ShareNetwork size={15} />
-                <span>{copiedShare ? "Link Copied!" : "Share"}</span>
+                <span className="hidden sm:inline">{copiedShare ? "Link Copied!" : "Share"}</span>
               </button>
 
               <button
@@ -729,8 +732,8 @@ function PropertyDetailPage() {
         </div>
 
         <Footer />
-        <CompareDrawer />
-        <FloatingConcierge />
+        <CompareDrawer className="bottom-[calc(4.5rem+env(safe-area-inset-bottom))] md:bottom-[max(1.25rem,env(safe-area-inset-bottom))]" />
+        <FloatingConcierge className="hidden md:flex" />
       </div>
     </FooterSettingsContext.Provider>
   );

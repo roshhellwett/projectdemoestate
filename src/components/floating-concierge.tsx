@@ -9,11 +9,14 @@ import {
 } from "@phosphor-icons/react";
 import { SITE } from "../lib/site";
 
-export function FloatingConcierge() {
+export function FloatingConcierge({ className = "" }: { className?: string } = {}) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="floating-concierge fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-3 print:hidden" style={{ paddingBottom: "var(--safe-bottom)" }}>
+    <div
+      className={`floating-concierge fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-3 print:hidden ${className}`}
+      style={{ paddingBottom: "var(--safe-bottom)" }}
+    >
       {/* Expanded Speed-Dial Panel */}
       {open ? (
         <div

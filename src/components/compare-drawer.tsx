@@ -11,7 +11,7 @@ import {
   Trash,
 } from "@phosphor-icons/react";
 
-export function CompareDrawer() {
+export function CompareDrawer({ className = "" }: { className?: string } = {}) {
   const { items, count, removeItem, clear } = useCompare();
   const [collapsed, setCollapsed] = useState(false);
 
@@ -20,8 +20,9 @@ export function CompareDrawer() {
   return (
     <div
       id="compare-floating-drawer"
-      className="fixed left-1/2 -translate-x-1/2 z-40 w-[95%] max-w-4xl transition-all duration-300 animate-in slide-in-from-bottom-6"
-      style={{ bottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
+      className={`fixed left-1/2 -translate-x-1/2 z-40 w-[95%] max-w-4xl transition-all duration-300 animate-in slide-in-from-bottom-6 ${
+        className || "bottom-[max(1.25rem,env(safe-area-inset-bottom))]"
+      }`}
     >
       <div className="overflow-hidden rounded-2xl border border-brass/40 bg-ink/95 text-paper shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] backdrop-blur-xl">
         {/* Header Ribbon */}

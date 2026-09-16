@@ -199,7 +199,6 @@ function PropertiesPage() {
     <FooterSettingsContext.Provider value={settings}>
       <div className="min-h-dvh bg-paper text-ink selection:bg-brass-ghost">
         <Header />
-        <FloatingConcierge />
 
         <main className="pt-14 lg:pt-20">
           {/* =================================================================
