@@ -40,7 +40,7 @@ function applyFilters(query: QueryBuilder, f: PropertyQuery) {
 }
 
 export async function listProperties(client: SupabaseClient, f: PropertyQuery = {}): Promise<Property[]> {
-  let builder = client.from("properties").select("*");
+  const builder = client.from("properties").select("*");
   let q = applyFilters(builder, f);
 
   if (f.sort === "price_asc") {

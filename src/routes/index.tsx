@@ -12,13 +12,12 @@ import { CompareDrawer } from "../components/compare-drawer";
 import { EmiCalculator } from "../components/emi-calculator";
 import { ReelsSection, TestimonialStrip } from "../components/sections";
 import { initRevealOnScroll } from "../lib/reveal";
-import { formatDate, formatPrice } from "../lib/format";
+import { formatDate } from "../lib/format";
 import { getSupabaseForRoute } from "../lib/route-supabase";
 import { applySettings } from "../lib/site";
 import {
   listBlogPosts,
   listFaqs,
-  listPartners,
   listProperties,
   listPublishedTestimonials,
   listReels,
@@ -35,8 +34,6 @@ import {
   ArrowRight,
   CaretDown,
   SealCheck,
-  BuildingOffice,
-  HouseLine,
 } from "@phosphor-icons/react";
 
 export const Route = createFileRoute("/")({
@@ -52,7 +49,7 @@ export const Route = createFileRoute("/")({
   }),
   loader: async () => {
     const supabase = getSupabaseForRoute();
-    const [featured, latest, reels, posts, faqs, testimonials, partners, settings, localities] =
+    const [featured, latest, reels, posts, faqs, testimonials, settings, localities] =
       await Promise.all([
         listProperties(supabase, { featuredOnly: true, limit: 6 }),
         listProperties(supabase, { limit: 12 }),
@@ -60,13 +57,12 @@ export const Route = createFileRoute("/")({
         listBlogPosts(supabase, 3),
         listFaqs(supabase),
         listPublishedTestimonials(supabase),
-        listPartners(supabase),
         getSiteSettings(supabase),
         listLocalities(supabase),
       ]);
 
     const corridorCounts: Record<string, number> = {};
-    for (const loc of localities) {
+    for (const loc of localities ?? []) {
       corridorCounts[loc.locality] = loc.count;
     }
 
@@ -77,7 +73,6 @@ export const Route = createFileRoute("/")({
       posts,
       faqs,
       testimonials,
-      partners,
       settings,
       corridorCounts,
       site: applySettings(settings),
@@ -87,7 +82,7 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  const { featured, latest, reels, posts, faqs, testimonials, partners, settings, corridorCounts, site } =
+  const { featured, latest, reels, posts, faqs, testimonials, settings, corridorCounts, site } =
     Route.useLoaderData();
 
   const [activeCategory, setActiveCategory] = useState<string>("all");
