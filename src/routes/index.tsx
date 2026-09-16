@@ -181,68 +181,47 @@ function HomePage() {
                 {/* Hero Right Column: High-End Visual Showcase */}
                 <div className="relative">
                   <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-line bg-paper-2 shadow-[0_32px_64px_-24px_rgba(18,16,14,0.22)]">
-                    {featured[0] ? (
-                      <>
-                        <img
-                          src={featured[0].main_image || featured[0].main_image_thumb}
-                          alt={featured[0].title}
-                          width={1000}
-                          height={750}
-                          loading="eager"
-                          decoding="async"
-                          className="h-full w-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+                    <img
+                      src="/images/kolkata.webp"
+                      alt="SS Property - Kolkata Skyline & Premier Residences"
+                      width={1000}
+                      height={750}
+                      loading="eager"
+                      decoding="async"
+                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/20 to-transparent pointer-events-none" />
 
-                        {/* Floating Luxury Glass Badge */}
-                        <div className="glass-card absolute bottom-6 left-6 right-6 rounded-2xl p-4 shadow-lg backdrop-blur-md">
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <p className="text-[11px] font-bold uppercase tracking-wider text-brass">
-                                Featured Property of the Week
-                              </p>
-                              <h4 className="mt-1 font-display text-base font-semibold text-ink line-clamp-1">
-                                {featured[0].title}
-                              </h4>
-                              <p className="text-xs text-muted">{featured[0].location}</p>
-                            </div>
-                            <div className="text-right shrink-0">
-                              <p className="font-display text-lg font-bold text-ink">
-                                {formatPrice(featured[0].price_inr, featured[0].price_display)}
-                              </p>
-                              <Link
-                                to="/property/$slug"
-                                params={{ slug: featured[0].slug }}
-                                className="text-[11px] font-semibold text-brass hover:text-ink flex items-center gap-1 justify-end mt-0.5"
-                              >
-                                View Tour <ArrowRight size={12} />
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      </>
-                    ) : (
-                      <div className="relative h-full w-full bg-gradient-to-br from-[#1c1915] via-[#2a2622] to-[#12100e] flex flex-col justify-between p-8 text-paper">
-                        <div className="flex items-center justify-between">
-                          <span className="rounded-full border border-brass/40 bg-brass/20 px-3 py-1 text-[11px] font-mono font-bold text-brass uppercase tracking-wider">
-                            Private Desk
-                          </span>
-                          <span className="text-xs font-mono text-muted-2">Kolkata, WB</span>
-                        </div>
-                        <div className="space-y-2">
-                          <p className="font-display text-2xl md:text-3xl font-medium text-paper">
-                            Architectural Residences & Penthouses
+                    {/* Floating Luxury Glass Badge */}
+                    <div className="glass-card absolute bottom-6 left-6 right-6 rounded-2xl p-4 shadow-lg backdrop-blur-md">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-[11px] font-bold uppercase tracking-wider text-brass">
+                            {featured[0] ? "Featured Property of the Week" : "Verified Kolkata Real Estate"}
                           </p>
-                          <p className="text-xs text-paper/70 max-w-sm">
-                            Direct owner representation across Lake Town, Newtown Action Area, and Kasba EM Bypass.
+                          <h4 className="mt-1 font-display text-base font-semibold text-ink line-clamp-1">
+                            {featured[0] ? featured[0].title : "Architectural Residences & Penthouses"}
+                          </h4>
+                          <p className="text-xs text-muted">
+                            {featured[0] ? featured[0].location : "Lake Town • Newtown • Kasba • Rajarhat"}
                           </p>
                         </div>
-                        <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs">
-                          <span className="text-verdigris font-semibold">● 100% Verified Title</span>
-                          <Link to="/sell" className="text-brass hover:underline font-semibold">List Your Property →</Link>
+                        <div className="text-right shrink-0">
+                          {featured[0]?.price_inr ? (
+                            <p className="font-display text-lg font-bold text-ink">
+                              {formatPrice(featured[0].price_inr, featured[0].price_display)}
+                            </p>
+                          ) : null}
+                          <Link
+                            to={featured[0] ? "/property/$slug" : "/properties"}
+                            params={featured[0] ? { slug: featured[0].slug } : undefined}
+                            className="text-[11px] font-semibold text-brass hover:text-ink flex items-center gap-1 justify-end mt-0.5"
+                          >
+                            {featured[0] ? "View Tour" : "Explore"} <ArrowRight size={12} />
+                          </Link>
                         </div>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </div>
