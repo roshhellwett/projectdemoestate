@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Dk72oS4N.js";import{t}from"./index-DSjgZEDh.js";import{n}from"./property-editor-Xe3A-IZp.js";var r=e();function i(){let{id:e}=t.useParams();return(0,r.jsx)(n,{propertyId:e})}export{i as component};

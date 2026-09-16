@@ -137,6 +137,31 @@
   .on-dark-soft {
     color: rgb(250 247 242 / 0.55);
   }
+
+  /* smooth hardware-accelerated ambient hero mesh (no WebKit blur clipping artifacts) */
+  .hero-mesh {
+    background-color: var(--color-paper);
+    background-image:
+      radial-gradient(at 10% 15%, rgba(201, 162, 75, 0.12) 0px, transparent 55%),
+      radial-gradient(at 90% 20%, rgba(169, 134, 47, 0.14) 0px, transparent 50%),
+      radial-gradient(at 40% 75%, rgba(46, 110, 78, 0.08) 0px, transparent 50%),
+      linear-gradient(to bottom, rgba(243, 238, 230, 0.95), var(--color-paper));
+  }
+
+  /* hide scrollbars on horizontal scroll rails while maintaining touch scrolling */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* suppress floating overlays when mobile drawer is open */
+  body[data-mobile-nav-open="true"] .floating-concierge,
+  body[data-mobile-nav-open="true"] #compare-floating-drawer {
+    display: none !important;
+  }
 }
 
 /* ---------------------------------------------------------------------

@@ -46,8 +46,10 @@ export function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    document.body.dataset.mobileNavOpen = open ? "true" : "false";
     return () => {
       document.body.style.overflow = "";
+      document.body.dataset.mobileNavOpen = "false";
     };
   }, [open]);
 
@@ -57,7 +59,7 @@ export function Header() {
       <div ref={sentinelRef} className="absolute left-0 top-0 h-px w-full" aria-hidden="true" />
 
       <header
-        className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
           scrolled || open
             ? "border-b border-line bg-paper/95 backdrop-blur-xl shadow-[0_4px_20px_-8px_rgba(18,16,14,0.08)]"
             : "border-b border-line/40 bg-paper/75 backdrop-blur-md"
@@ -219,7 +221,7 @@ export function Header() {
               onClick={() => setOpen(!open)}
               aria-expanded={open}
               aria-label="Toggle navigation menu"
-              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full border border-line bg-paper"
+              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full border border-line bg-paper transition-colors hover:border-brass"
             >
               <span
                 className={`h-0.5 w-5 bg-ink transition-transform duration-300 ${
@@ -241,41 +243,58 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile drawer: visible < 1024px (lg:hidden) */}
+      {/* Mobile full-screen navigation drawer: visible < 1024px (lg:hidden) */}
       <div
-        className={`fixed inset-0 z-30 bg-paper transition-transform duration-300 lg:hidden ${
-          open ? "translate-x-0" : "translate-x-full"
+        className={`fixed inset-x-0 bottom-0 z-50 bg-paper transition-all duration-300 ease-out lg:hidden ${
+          open
+            ? "opacity-100 pointer-events-auto translate-y-0"
+            : "opacity-0 pointer-events-none -translate-y-2"
         }`}
         style={{ top: "5rem" }}
       >
-        <div className="w-full px-6 flex h-full flex-col justify-between py-8">
-          <div className="flex flex-col gap-5">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setOpen(false)}
-                className="font-display text-2xl font-medium text-ink transition-colors hover:text-brass"
-              >
-                {link.label}
-              </Link>
-            ))}
+        <div className="w-full h-full max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain px-6 py-6 pb-28 flex flex-col justify-between">
+          <div className="flex flex-col gap-2">
+            <p className="eyebrow px-2 mb-1">Navigation & Services</p>
+            {NAV_LINKS.map((link) => {
+              const active = !!matchRoute({ to: link.to, fuzzy: true });
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setOpen(false)}
+                  className={`flex items-center justify-between rounded-xl px-4 py-3 transition-colors ${
+                    active
+                      ? "bg-paper-2 font-semibold text-ink border border-brass/40"
+                      : "text-muted hover:text-ink hover:bg-paper-2"
+                  }`}
+                >
+                  <span className="font-display text-2xl font-medium">{link.label}</span>
+                  {link.to === "/compare" && compareCount > 0 ? (
+                    <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-brass px-1.5 text-[11px] font-bold text-ink">
+                      {compareCount}
+                    </span>
+                  ) : active ? (
+                    <span className="h-2 w-2 rounded-full bg-brass" />
+                  ) : null}
+                </Link>
+              );
+            })}
           </div>
 
-          <div className="flex flex-col gap-3 pt-6 border-t border-line">
+          <div className="flex flex-col gap-3 pt-6 border-t border-line mt-6">
             <p className="eyebrow">Connect With SS Property</p>
             <a
               href={SITE.whatsapp}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center justify-center gap-2 rounded-xl bg-verdigris py-3 text-sm font-semibold text-white shadow-sm"
+              className="flex items-center justify-center gap-2 rounded-xl bg-verdigris py-3.5 text-sm font-semibold text-white shadow-sm transition-transform active:scale-[0.98]"
             >
               <WhatsappLogo size={18} weight="fill" />
               <span>WhatsApp an Advisor</span>
             </a>
             <a
               href={SITE.phoneHref}
-              className="flex items-center justify-center gap-2 rounded-xl border border-line bg-paper-2 py-3 text-sm font-semibold text-ink"
+              className="flex items-center justify-center gap-2 rounded-xl border border-line bg-paper-2 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-brass"
             >
               <Phone size={18} className="text-brass" />
               <span>Call: {SITE.phone}</span>

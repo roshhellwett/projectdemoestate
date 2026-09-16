@@ -22,8 +22,6 @@ import {
   X,
   Sparkle,
   ArrowCounterClockwise,
-  MapPin,
-  CheckCircle,
 } from "@phosphor-icons/react";
 
 export interface Search {
@@ -125,6 +123,7 @@ function PropertiesPage() {
   const navigate = Route.useNavigate();
   const { isFavorite, count: favoritesCount } = useFavorites();
   const [quickViewProperty, setQuickViewProperty] = useState<Property | null>(null);
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
   const [q, setQ] = useState(search.q);
   const [prevSearchQ, setPrevSearchQ] = useState(search.q);
@@ -183,6 +182,18 @@ function PropertiesPage() {
     !!search.possession ||
     !!search.furnishing ||
     search.savedOnly;
+
+  const activeFilterCount = useMemo(() => {
+    let c = 0;
+    if (search.locality && search.locality !== "All") c++;
+    if (search.bhk) c++;
+    if (search.budget) c++;
+    if (search.possession) c++;
+    if (search.furnishing) c++;
+    if (search.sort && search.sort !== "featured") c++;
+    if (search.savedOnly) c++;
+    return c;
+  }, [search]);
 
   return (
     <FooterSettingsContext.Provider value={settings}>
@@ -252,170 +263,455 @@ function PropertiesPage() {
           </section>
 
           {/* =================================================================
-              2. MULTI-FACET FILTERING BAR (STICKY)
+              2. RESPONSIVE MULTI-FACET FILTERING BAR (STICKY Z-20)
              ================================================================= */}
-          <section className="sticky top-18 z-30 border-b border-line bg-white/95 backdrop-blur-md py-4 shadow-sm">
-            <div className="shell-wide space-y-3">
-              {/* Top Controls Row: Search Input, Locality Dropdown, Sort, Favorites */}
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_0.9fr_auto_auto]">
-                {/* Search text */}
-                <div className="relative flex items-center">
-                  <MagnifyingGlass
-                    size={18}
-                    className="absolute left-4 text-muted pointer-events-none"
-                  />
-                  <input
-                    type="search"
-                    value={q}
-                    onChange={(e) => setQ(e.target.value)}
-                    placeholder="Search locality, landmark, project name…"
-                    className="w-full rounded-xl border border-line bg-paper/60 pl-11 pr-10 py-2.5 text-xs font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none"
-                  />
-                  {q ? (
+          <section className="sticky top-20 z-20 border-b border-line bg-white/95 backdrop-blur-md py-3 shadow-xs">
+            <div className="shell-wide space-y-2.5">
+              {/* --- MOBILE CONTROLS (< lg) --- */}
+              <div className="flex flex-col gap-2.5 lg:hidden">
+                {/* Search Bar + Filter Trigger + Favorites */}
+                <div className="flex items-center gap-2">
+                  <div className="relative flex-1 flex items-center">
+                    <MagnifyingGlass
+                      size={17}
+                      className="absolute left-3.5 text-muted pointer-events-none"
+                    />
+                    <input
+                      type="search"
+                      value={q}
+                      onChange={(e) => setQ(e.target.value)}
+                      placeholder="Search locality, project name…"
+                      className="w-full rounded-xl border border-line bg-paper/60 pl-10 pr-9 py-2 text-xs font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none"
+                    />
+                    {q ? (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setQ("");
+                          setFilter({ q: "" });
+                        }}
+                        className="absolute right-2.5 text-muted hover:text-ink p-1"
+                      >
+                        <X size={13} />
+                      </button>
+                    ) : null}
+                  </div>
+
+                  {/* Mobile Filters Trigger */}
+                  <button
+                    type="button"
+                    onClick={() => setMobileFilterOpen(true)}
+                    className={`flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-semibold shrink-0 transition-colors ${
+                      activeFilterCount > 0
+                        ? "border-brass bg-brass-soft/40 text-ink"
+                        : "border-line bg-paper text-muted hover:text-ink"
+                    }`}
+                  >
+                    <SlidersHorizontal size={15} className={activeFilterCount > 0 ? "text-brass" : ""} />
+                    <span>Filters</span>
+                    {activeFilterCount > 0 ? (
+                      <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-ink px-1 text-[10px] font-bold text-paper">
+                        {activeFilterCount}
+                      </span>
+                    ) : null}
+                  </button>
+
+                  {/* Favorites Toggle */}
+                  <button
+                    type="button"
+                    onClick={() => setFilter({ savedOnly: !search.savedOnly })}
+                    aria-label="Favorites only"
+                    className={`flex h-9 w-9 items-center justify-center rounded-xl border shrink-0 transition-colors ${
+                      search.savedOnly
+                        ? "border-danger bg-danger/10 text-danger"
+                        : "border-line bg-paper text-muted hover:text-ink"
+                    }`}
+                  >
+                    <Heart size={16} weight={search.savedOnly ? "fill" : "regular"} />
+                  </button>
+                </div>
+
+                {/* Horizontal Quick Corridor Rail */}
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 -mx-1 px-1">
+                  <button
+                    type="button"
+                    onClick={() => setFilter({ locality: "All" })}
+                    className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
+                      search.locality === "All"
+                        ? "bg-ink text-paper shadow-xs"
+                        : "border border-line bg-white text-muted hover:text-ink"
+                    }`}
+                  >
+                    All Corridors
+                  </button>
+                  {localities.map((l) => (
+                    <button
+                      key={l.locality}
+                      type="button"
+                      onClick={() => setFilter({ locality: l.locality })}
+                      className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
+                        search.locality === l.locality
+                          ? "bg-ink text-paper shadow-xs"
+                          : "border border-line bg-white text-muted hover:text-ink"
+                      }`}
+                    >
+                      {l.locality} ({l.count})
+                    </button>
+                  ))}
+                </div>
+
+                {/* Active Filter Tags (if any) */}
+                {activeFilterCount > 0 ? (
+                  <div className="flex flex-wrap items-center gap-1.5 pt-1 border-t border-line/40">
+                    <span className="text-[10px] uppercase font-bold text-muted mr-0.5">Active:</span>
+                    {search.locality !== "All" ? (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-paper-2 border border-line px-2.5 py-0.5 text-[11px] font-semibold text-ink">
+                        {search.locality}
+                        <button type="button" onClick={() => setFilter({ locality: "All" })} className="text-muted hover:text-ink">
+                          <X size={11} />
+                        </button>
+                      </span>
+                    ) : null}
+                    {search.bhk ? (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-paper-2 border border-line px-2.5 py-0.5 text-[11px] font-semibold text-ink">
+                        {BHK_FILTERS.find((b) => b.id === search.bhk)?.label || search.bhk}
+                        <button type="button" onClick={() => setFilter({ bhk: "" })} className="text-muted hover:text-ink">
+                          <X size={11} />
+                        </button>
+                      </span>
+                    ) : null}
+                    {search.budget ? (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-paper-2 border border-line px-2.5 py-0.5 text-[11px] font-semibold text-ink">
+                        {BUDGET_FILTERS.find((b) => b.id === search.budget)?.label || search.budget}
+                        <button type="button" onClick={() => setFilter({ budget: "" })} className="text-muted hover:text-ink">
+                          <X size={11} />
+                        </button>
+                      </span>
+                    ) : null}
+                    {search.possession ? (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-verdigris-soft border border-verdigris/30 px-2.5 py-0.5 text-[11px] font-semibold text-verdigris">
+                        Ready to Move
+                        <button type="button" onClick={() => setFilter({ possession: "" })}>
+                          <X size={11} />
+                        </button>
+                      </span>
+                    ) : null}
                     <button
                       type="button"
-                      onClick={() => {
-                        setQ("");
-                        setFilter({ q: "" });
-                      }}
-                      className="absolute right-3 text-muted hover:text-ink p-1"
+                      onClick={resetAllFilters}
+                      className="text-[11px] font-semibold text-danger hover:underline ml-1"
                     >
-                      <X size={14} />
+                      Clear all
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+
+              {/* --- DESKTOP CONTROLS (lg+) --- */}
+              <div className="hidden lg:block space-y-3">
+                {/* Top Controls Row: Search Input, Locality Dropdown, Sort, Favorites */}
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_0.9fr_auto_auto]">
+                  {/* Search text */}
+                  <div className="relative flex items-center">
+                    <MagnifyingGlass
+                      size={18}
+                      className="absolute left-4 text-muted pointer-events-none"
+                    />
+                    <input
+                      type="search"
+                      value={q}
+                      onChange={(e) => setQ(e.target.value)}
+                      placeholder="Search locality, landmark, project name…"
+                      className="w-full rounded-xl border border-line bg-paper/60 pl-11 pr-10 py-2.5 text-xs font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none"
+                    />
+                    {q ? (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setQ("");
+                          setFilter({ q: "" });
+                        }}
+                        className="absolute right-3 text-muted hover:text-ink p-1"
+                      >
+                        <X size={14} />
+                      </button>
+                    ) : null}
+                  </div>
+
+                  {/* Locality Dropdown */}
+                  <div className="relative">
+                    <select
+                      value={search.locality}
+                      onChange={(e) => setFilter({ locality: e.target.value })}
+                      className="w-full appearance-none rounded-xl border border-line bg-paper/60 px-4 py-2.5 pr-8 text-xs font-semibold text-ink focus:border-brass focus:bg-white focus:outline-none cursor-pointer"
+                    >
+                      <option value="All">All Kolkata Corridors</option>
+                      {localities.map((l) => (
+                        <option key={l.locality} value={l.locality}>
+                          {l.locality} ({l.count})
+                        </option>
+                      ))}
+                    </select>
+                    <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-muted text-xs">
+                      ▼
+                    </span>
+                  </div>
+
+                  {/* Sort Dropdown */}
+                  <div className="relative">
+                    <select
+                      value={search.sort}
+                      onChange={(e) => setFilter({ sort: e.target.value })}
+                      className="w-full appearance-none rounded-xl border border-line bg-paper/60 px-4 py-2.5 pr-8 text-xs font-semibold text-ink focus:border-brass focus:bg-white focus:outline-none cursor-pointer"
+                    >
+                      <option value="featured">Sort: Featured First</option>
+                      <option value="price_asc">Price: Low to High</option>
+                      <option value="price_desc">Price: High to Low</option>
+                      <option value="area_desc">Area: Largest First</option>
+                      <option value="newest">Newest Arrivals</option>
+                    </select>
+                    <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-muted text-xs">
+                      ▼
+                    </span>
+                  </div>
+
+                  {/* Saved Favorites Filter Toggle */}
+                  <button
+                    type="button"
+                    onClick={() => setFilter({ savedOnly: !search.savedOnly })}
+                    className={`flex items-center gap-1.5 rounded-xl border px-4 py-2.5 text-xs font-semibold transition-all ${
+                      search.savedOnly
+                        ? "border-danger bg-danger/10 text-danger"
+                        : "border-line bg-paper/60 text-muted hover:border-brass hover:text-ink"
+                    }`}
+                  >
+                    <Heart
+                      size={16}
+                      weight={search.savedOnly ? "fill" : "regular"}
+                      className={search.savedOnly ? "text-danger" : "text-muted"}
+                    />
+                    <span>Favorites ({favoritesCount})</span>
+                  </button>
+
+                  {/* Clear All Button */}
+                  {isAnyFilterActive ? (
+                    <button
+                      type="button"
+                      onClick={resetAllFilters}
+                      className="flex items-center gap-1.5 rounded-xl border border-line bg-white px-3.5 py-2.5 text-xs font-semibold text-muted hover:text-ink transition-colors"
+                      title="Reset all filters"
+                    >
+                      <ArrowCounterClockwise size={15} />
+                      <span className="hidden sm:inline">Reset</span>
                     </button>
                   ) : null}
                 </div>
 
-                {/* Locality Dropdown */}
-                <div className="relative">
-                  <select
-                    value={search.locality}
-                    onChange={(e) => setFilter({ locality: e.target.value })}
-                    className="w-full appearance-none rounded-xl border border-line bg-paper/60 px-4 py-2.5 pr-8 text-xs font-semibold text-ink focus:border-brass focus:bg-white focus:outline-none cursor-pointer"
-                  >
-                    <option value="All">All Kolkata Corridors</option>
-                    {localities.map((l) => (
-                      <option key={l.locality} value={l.locality}>
-                        {l.locality} ({l.count})
-                      </option>
+                {/* Bottom Pills Row: BHK Types and Budget Tiers */}
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-line/40">
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-muted mr-1">
+                      BHK:
+                    </span>
+                    {BHK_FILTERS.map((b) => (
+                      <button
+                        key={b.id}
+                        type="button"
+                        onClick={() => setFilter({ bhk: b.id })}
+                        className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
+                          search.bhk === b.id
+                            ? "bg-ink text-paper shadow-sm"
+                            : "border border-line bg-white text-muted hover:border-brass hover:text-ink"
+                        }`}
+                      >
+                        {b.label}
+                      </button>
                     ))}
-                  </select>
-                  <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-muted text-xs">
-                    ▼
-                  </span>
-                </div>
+                  </div>
 
-                {/* Sort Dropdown */}
-                <div className="relative">
-                  <select
-                    value={search.sort}
-                    onChange={(e) => setFilter({ sort: e.target.value })}
-                    className="w-full appearance-none rounded-xl border border-line bg-paper/60 px-4 py-2.5 pr-8 text-xs font-semibold text-ink focus:border-brass focus:bg-white focus:outline-none cursor-pointer"
-                  >
-                    <option value="featured">Sort: Featured First</option>
-                    <option value="price_asc">Price: Low to High</option>
-                    <option value="price_desc">Price: High to Low</option>
-                    <option value="area_desc">Area: Largest First</option>
-                    <option value="newest">Newest Arrivals</option>
-                  </select>
-                  <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-muted text-xs">
-                    ▼
-                  </span>
-                </div>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-muted mr-1">
+                      Budget:
+                    </span>
+                    {BUDGET_FILTERS.map((bg) => (
+                      <button
+                        key={bg.id}
+                        type="button"
+                        onClick={() => setFilter({ budget: bg.id })}
+                        className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
+                          search.budget === bg.id
+                            ? "bg-brass text-ink font-bold shadow-sm"
+                            : "border border-line bg-white text-muted hover:border-brass hover:text-ink"
+                        }`}
+                      >
+                        {bg.label}
+                      </button>
+                    ))}
 
-                {/* Saved Favorites Filter Toggle */}
-                <button
-                  type="button"
-                  onClick={() => setFilter({ savedOnly: !search.savedOnly })}
-                  className={`flex items-center gap-1.5 rounded-xl border px-4 py-2.5 text-xs font-semibold transition-all ${
-                    search.savedOnly
-                      ? "border-danger bg-danger/10 text-danger"
-                      : "border-line bg-paper/60 text-muted hover:border-brass hover:text-ink"
-                  }`}
-                >
-                  <Heart
-                    size={16}
-                    weight={search.savedOnly ? "fill" : "regular"}
-                    className={search.savedOnly ? "text-danger" : "text-muted"}
-                  />
-                  <span>Favorites ({favoritesCount})</span>
-                </button>
-
-                {/* Clear All Button */}
-                {isAnyFilterActive ? (
-                  <button
-                    type="button"
-                    onClick={resetAllFilters}
-                    className="flex items-center gap-1.5 rounded-xl border border-line bg-white px-3.5 py-2.5 text-xs font-semibold text-muted hover:text-ink transition-colors"
-                    title="Reset all filters"
-                  >
-                    <ArrowCounterClockwise size={15} />
-                    <span className="hidden sm:inline">Reset</span>
-                  </button>
-                ) : null}
-              </div>
-
-              {/* Bottom Pills Row: BHK Types and Budget Tiers */}
-              <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-line/40">
-                <div className="flex flex-wrap items-center gap-1.5">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-muted mr-1">
-                    BHK:
-                  </span>
-                  {BHK_FILTERS.map((b) => (
+                    {/* Ready to move chip */}
                     <button
-                      key={b.id}
                       type="button"
-                      onClick={() => setFilter({ bhk: b.id })}
+                      onClick={() =>
+                        setFilter({
+                          possession:
+                            search.possession === "Ready To Move" ? "" : "Ready To Move",
+                        })
+                      }
                       className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
-                        search.bhk === b.id
-                          ? "bg-ink text-paper shadow-sm"
-                          : "border border-line bg-white text-muted hover:border-brass hover:text-ink"
+                        search.possession === "Ready To Move"
+                          ? "bg-verdigris text-white shadow-sm"
+                          : "border border-line bg-white text-muted hover:border-verdigris hover:text-verdigris"
                       }`}
                     >
-                      {b.label}
+                      ✓ Ready to Move
                     </button>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap items-center gap-1.5">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-muted mr-1">
-                    Budget:
-                  </span>
-                  {BUDGET_FILTERS.map((bg) => (
-                    <button
-                      key={bg.id}
-                      type="button"
-                      onClick={() => setFilter({ budget: bg.id })}
-                      className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
-                        search.budget === bg.id
-                          ? "bg-brass text-ink font-bold shadow-sm"
-                          : "border border-line bg-white text-muted hover:border-brass hover:text-ink"
-                      }`}
-                    >
-                      {bg.label}
-                    </button>
-                  ))}
-
-                  {/* Ready to move chip */}
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setFilter({
-                        possession:
-                          search.possession === "Ready To Move" ? "" : "Ready To Move",
-                      })
-                    }
-                    className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
-                      search.possession === "Ready To Move"
-                        ? "bg-verdigris text-white shadow-sm"
-                        : "border border-line bg-white text-muted hover:border-verdigris hover:text-verdigris"
-                    }`}
-                  >
-                    ✓ Ready to Move
-                  </button>
+                  </div>
                 </div>
               </div>
             </div>
           </section>
+
+          {/* =================================================================
+              MOBILE FILTER BOTTOM SHEET MODAL (Z-60)
+             ================================================================= */}
+          {mobileFilterOpen ? (
+            <div className="fixed inset-0 z-60 flex flex-col justify-end bg-ink/60 backdrop-blur-xs lg:hidden animate-in fade-in duration-200">
+              <div
+                className="fixed inset-0"
+                onClick={() => setMobileFilterOpen(false)}
+                aria-hidden="true"
+              />
+              <div className="relative w-full max-h-[85dvh] overflow-y-auto rounded-t-3xl border-t border-line bg-paper p-5 shadow-2xl space-y-5">
+                {/* Drawer Header */}
+                <div className="flex items-center justify-between border-b border-line pb-3">
+                  <div className="flex items-center gap-2">
+                    <SlidersHorizontal size={18} className="text-brass" />
+                    <h3 className="font-display text-lg font-semibold text-ink">Filter Residences</h3>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    {activeFilterCount > 0 ? (
+                      <button
+                        type="button"
+                        onClick={resetAllFilters}
+                        className="text-xs font-semibold text-danger hover:underline"
+                      >
+                        Reset All
+                      </button>
+                    ) : null}
+                    <button
+                      type="button"
+                      onClick={() => setMobileFilterOpen(false)}
+                      className="flex h-8 w-8 items-center justify-center rounded-full bg-paper-2 text-ink hover:bg-line transition-colors"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Sort Option */}
+                <div className="space-y-2">
+                  <p className="eyebrow">Sort Listings</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { id: "featured", label: "Featured First" },
+                      { id: "price_asc", label: "Price: Low to High" },
+                      { id: "price_desc", label: "Price: High to Low" },
+                      { id: "newest", label: "Newest Arrivals" },
+                    ].map((s) => (
+                      <button
+                        key={s.id}
+                        type="button"
+                        onClick={() => setFilter({ sort: s.id })}
+                        className={`rounded-xl border p-2.5 text-xs font-semibold text-left transition-colors ${
+                          search.sort === s.id
+                            ? "border-brass bg-brass-soft/50 text-ink"
+                            : "border-line bg-white text-muted hover:text-ink"
+                        }`}
+                      >
+                        {s.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* BHK Filter */}
+                <div className="space-y-2">
+                  <p className="eyebrow">Configuration (BHK)</p>
+                  <div className="flex flex-wrap gap-2">
+                    {BHK_FILTERS.map((b) => (
+                      <button
+                        key={b.id}
+                        type="button"
+                        onClick={() => setFilter({ bhk: b.id })}
+                        className={`rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
+                          search.bhk === b.id
+                            ? "bg-ink text-paper shadow-sm"
+                            : "border border-line bg-white text-muted hover:text-ink"
+                        }`}
+                      >
+                        {b.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Budget Filter */}
+                <div className="space-y-2">
+                  <p className="eyebrow">Budget Range</p>
+                  <div className="flex flex-wrap gap-2">
+                    {BUDGET_FILTERS.map((bg) => (
+                      <button
+                        key={bg.id}
+                        type="button"
+                        onClick={() => setFilter({ budget: bg.id })}
+                        className={`rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
+                          search.budget === bg.id
+                            ? "bg-brass text-ink font-bold shadow-sm"
+                            : "border border-line bg-white text-muted hover:text-ink"
+                        }`}
+                      >
+                        {bg.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Possession Status */}
+                <div className="space-y-2">
+                  <p className="eyebrow">Possession Status</p>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setFilter({
+                          possession:
+                            search.possession === "Ready To Move" ? "" : "Ready To Move",
+                        })
+                      }
+                      className={`flex-1 rounded-xl border p-3 text-xs font-semibold text-center transition-colors ${
+                        search.possession === "Ready To Move"
+                          ? "border-verdigris bg-verdigris text-white"
+                          : "border-line bg-white text-muted hover:text-ink"
+                      }`}
+                    >
+                      ✓ Ready to Move Only
+                    </button>
+                  </div>
+                </div>
+
+                {/* Sticky Apply Button */}
+                <div className="pt-2 sticky bottom-0 bg-paper pb-2">
+                  <button
+                    type="button"
+                    onClick={() => setMobileFilterOpen(false)}
+                    className="w-full rounded-xl bg-ink py-3.5 text-xs font-bold uppercase tracking-wider text-paper shadow-lg hover:bg-ink-2 active:scale-[0.98] transition-all"
+                  >
+                    Show {filteredProperties.length} Properties
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : null}
 
           {/* Corridor Benchmark Insights Strip */}
           <div className="shell-wide pt-6 pb-2">

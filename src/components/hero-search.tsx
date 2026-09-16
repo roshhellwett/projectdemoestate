@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { MagnifyingGlass, MapPin, House, CurrencyInr, Buildings } from "@phosphor-icons/react";
+import { MagnifyingGlass, MapPin, House, CurrencyInr, Buildings, Sparkle } from "@phosphor-icons/react";
 
 interface HeroSearchProps {
   totalCount?: number;
@@ -31,22 +31,22 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
 
   return (
     <div className="w-full max-w-4xl rounded-2xl border border-line/80 bg-white/90 p-4 md:p-6 shadow-[0_24px_50px_-16px_rgba(18,16,14,0.18)] backdrop-blur-xl">
-      {/* Category Tabs */}
-      <div className="flex items-center gap-2 border-b border-line/60 pb-3">
+      {/* Category Tabs: Scrollable rail on mobile, never clips */}
+      <div className="flex items-center gap-2 border-b border-line/60 pb-3 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-0.5 -mx-1 px-1">
         <button
           type="button"
           onClick={() => {
             setTab("residential");
             if (bhk === "commercial") setBhk("");
           }}
-          className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
+          className={`flex shrink-0 snap-start items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition-all ${
             tab === "residential"
               ? "bg-ink text-paper shadow-sm"
               : "text-muted hover:text-ink hover:bg-paper-2"
           }`}
         >
-          <House size={14} weight={tab === "residential" ? "fill" : "regular"} />
-          Buy Residence
+          <House size={15} weight={tab === "residential" ? "fill" : "regular"} />
+          <span>Buy Residence</span>
         </button>
 
         <button
@@ -55,14 +55,14 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
             setTab("commercial");
             setBhk("commercial");
           }}
-          className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
+          className={`flex shrink-0 snap-start items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition-all ${
             tab === "commercial"
               ? "bg-ink text-paper shadow-sm"
               : "text-muted hover:text-ink hover:bg-paper-2"
           }`}
         >
-          <Buildings size={14} weight={tab === "commercial" ? "fill" : "regular"} />
-          Commercial & Office
+          <Buildings size={15} weight={tab === "commercial" ? "fill" : "regular"} />
+          <span>Commercial & Office</span>
         </button>
 
         <button
@@ -71,28 +71,28 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
             setTab("luxury");
             setBhk("4");
           }}
-          className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
+          className={`flex shrink-0 snap-start items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition-all ${
             tab === "luxury"
               ? "bg-ink text-paper shadow-sm"
               : "text-muted hover:text-ink hover:bg-paper-2"
           }`}
         >
-          <span className="text-brass-2 font-serif">✦</span>
-          Luxury & Penthouses
+          <Sparkle size={15} weight="fill" className="text-brass-2" />
+          <span>Luxury & Penthouses</span>
         </button>
       </div>
 
-      {/* Inputs Form Bar */}
-      <form onSubmit={handleSearch} className="mt-4 grid gap-3 sm:grid-cols-3 lg:grid-cols-[1.2fr_1fr_1fr_auto]">
+      {/* Inputs Form Bar: Compact & ergonomic on mobile, spacious on desktop */}
+      <form onSubmit={handleSearch} className="mt-4 grid gap-2.5 sm:gap-3 sm:grid-cols-3 lg:grid-cols-[1.2fr_1fr_1fr_auto]">
         {/* Locality Selector */}
-        <div className="flex flex-col gap-1 rounded-xl border border-line bg-paper/60 px-3.5 py-2.5 transition-colors focus-within:border-brass focus-within:bg-white">
+        <div className="flex flex-col justify-center rounded-xl border border-line bg-paper/60 px-3.5 py-2 transition-colors focus-within:border-brass focus-within:bg-white min-h-[50px]">
           <label className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-muted">
             <MapPin size={12} weight="fill" className="text-brass" /> Locality
           </label>
           <select
             value={locality}
             onChange={(e) => setLocality(e.target.value)}
-            className="w-full bg-transparent text-xs font-semibold text-ink focus:outline-none cursor-pointer"
+            className="w-full bg-transparent text-xs font-semibold text-ink focus:outline-none cursor-pointer truncate"
           >
             <option value="All">All Kolkata Prime Areas</option>
             <option value="Lake Town">Lake Town & Bangur</option>
@@ -106,7 +106,7 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
         </div>
 
         {/* BHK / Type Selector */}
-        <div className="flex flex-col gap-1 rounded-xl border border-line bg-paper/60 px-3.5 py-2.5 transition-colors focus-within:border-brass focus-within:bg-white">
+        <div className="flex flex-col justify-center rounded-xl border border-line bg-paper/60 px-3.5 py-2 transition-colors focus-within:border-brass focus-within:bg-white min-h-[50px]">
           <label className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-muted">
             <House size={12} weight="fill" className="text-brass" /> Configuration
           </label>
@@ -114,7 +114,7 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
             value={bhk}
             onChange={(e) => setBhk(e.target.value)}
             disabled={tab === "commercial"}
-            className="w-full bg-transparent text-xs font-semibold text-ink focus:outline-none cursor-pointer disabled:opacity-60"
+            className="w-full bg-transparent text-xs font-semibold text-ink focus:outline-none cursor-pointer disabled:opacity-60 truncate"
           >
             {tab === "commercial" ? (
               <option value="commercial">Commercial Office Space</option>
@@ -130,14 +130,14 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
         </div>
 
         {/* Budget Tier */}
-        <div className="flex flex-col gap-1 rounded-xl border border-line bg-paper/60 px-3.5 py-2.5 transition-colors focus-within:border-brass focus-within:bg-white">
+        <div className="flex flex-col justify-center rounded-xl border border-line bg-paper/60 px-3.5 py-2 transition-colors focus-within:border-brass focus-within:bg-white min-h-[50px]">
           <label className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-muted">
             <CurrencyInr size={12} weight="fill" className="text-brass" /> Price Range
           </label>
           <select
             value={budget}
             onChange={(e) => setBudget(e.target.value)}
-            className="w-full bg-transparent text-xs font-semibold text-ink focus:outline-none cursor-pointer"
+            className="w-full bg-transparent text-xs font-semibold text-ink focus:outline-none cursor-pointer truncate"
           >
             <option value="">Any Budget</option>
             <option value="under-75">Under ₹75 Lakhs</option>
@@ -149,7 +149,7 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
         {/* Submit Search Button */}
         <button
           type="submit"
-          className="flex items-center justify-center gap-2 rounded-xl bg-ink px-6 py-3 text-xs font-bold uppercase tracking-wider text-paper shadow-md transition-all hover:bg-ink-2 hover:-translate-y-0.5 active:translate-y-0"
+          className="flex min-h-[50px] items-center justify-center gap-2 rounded-xl bg-ink px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-paper shadow-md transition-all hover:bg-ink-2 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
         >
           <MagnifyingGlass size={16} weight="bold" className="text-brass-2" />
           <span>{totalCount > 0 ? `Explore (${totalCount})` : "Explore Residences"}</span>
