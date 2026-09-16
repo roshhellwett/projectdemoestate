@@ -9,5 +9,11 @@
   },
   "observability": {
     "enabled": true
+  },
+  "vars": {
+    "VITE_SUPABASE_URL": "https://vuvxmzrthcitfagwebgm.supabase.co",
+    "VITE_SUPABASE_PUBLISHABLE_KEY": "sb_publishable_oFux3tjP1HXUoIi6BB0j0A_EKwT8RK4",
+    "SUPABASE_URL": "https://vuvxmzrthcitfagwebgm.supabase.co",
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_oFux3tjP1HXUoIi6BB0j0A_EKwT8RK4"
   }
 }

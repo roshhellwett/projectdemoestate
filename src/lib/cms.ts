@@ -7,7 +7,13 @@
 import { getSupabaseBrowser } from "./supabase";
 import type { BlogPost, Faq, Partner, Property, PropertyImage, Reel, Testimonial } from "./types";
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const env = (globalThis as unknown as { process?: { env?: Record<string, string | undefined> } }).process?.env;
+
+const SUPABASE_URL =
+  (typeof import.meta !== "undefined" && import.meta.env?.VITE_SUPABASE_URL) ||
+  env?.VITE_SUPABASE_URL ||
+  env?.SUPABASE_URL ||
+  "https://vuvxmzrthcitfagwebgm.supabase.co";
 
 const publicUrl = (path: string) => `${SUPABASE_URL}/storage/v1/object/public/media/${path}`;
 

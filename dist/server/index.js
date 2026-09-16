@@ -8,7 +8,7 @@ import { a as getScriptPreloadAttrs, c as resolveManifestCssLink, n as createInl
 import { r as routerContext } from "./assets/useStore-D9b7VaH8.js";
 import { t as Matches } from "./assets/Matches-Bjl6fKAK.js";
 import { a as runWithStartContext, c as FrameType, d as TSS_SERVER_FUNCTION, f as X_TSS_RAW_RESPONSE, i as getStartContext, l as TSS_CONTENT_TYPE_FRAMED_VERSIONED, m as mergeHeaders, n as flattenMiddlewares, o as createNullProtoObject, p as X_TSS_SERIALIZED, r as getStartOptions, s as safeObjectMerge, u as TSS_FORMDATA_CONTEXT } from "./assets/createServerFn-BITAowlT.js";
-import { t as getServerFnById } from "./assets/__23tanstack-start-server-fn-resolver-DOXIGTuM.js";
+import { t as getServerFnById } from "./assets/__23tanstack-start-server-fn-resolver-4BFaztAQ.js";
 import { ReadableStream as ReadableStream$1 } from "node:stream/web";
 import { PassThrough, Readable } from "node:stream";
 import { AsyncLocalStorage as AsyncLocalStorage$1 } from "node:async_hooks";
@@ -13655,7 +13655,7 @@ var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 * the dev styles URL for route-scoped CSS collection.
 */
 async function getStartManifest(matchedRoutes) {
-	const { tsrStartManifest } = await import("./assets/_tanstack-start-manifest_v-DOp5TtrU.js");
+	const { tsrStartManifest } = await import("./assets/_tanstack-start-manifest_v-W_g5Dc0T.js");
 	const startManifest = tsrStartManifest();
 	let routes = startManifest.routes;
 	routes[rootRouteId];
@@ -14699,7 +14699,7 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
 	const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-		import("./assets/router-C3IqD2jx.js").then((n) => n.t),
+		import("./assets/router-CSbh0l9e.js").then((n) => n.t),
 		import("./assets/start-5Z2QO8AU.js"),
 		import("./assets/empty-plugin-adapters-D9UWiqvJ.js")
 	]);

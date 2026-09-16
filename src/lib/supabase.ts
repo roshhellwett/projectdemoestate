@@ -11,12 +11,20 @@
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
-const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
+const env = (globalThis as unknown as { process?: { env?: Record<string, string | undefined> } }).process?.env;
 
-if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
-  throw new Error("Missing VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY");
-}
+const SUPABASE_URL =
+  (typeof import.meta !== "undefined" && import.meta.env?.VITE_SUPABASE_URL) ||
+  env?.VITE_SUPABASE_URL ||
+  env?.SUPABASE_URL ||
+  "https://vuvxmzrthcitfagwebgm.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  (typeof import.meta !== "undefined" && import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY) ||
+  env?.VITE_SUPABASE_PUBLISHABLE_KEY ||
+  env?.SUPABASE_PUBLISHABLE_KEY ||
+  env?.SUPABASE_ANON_KEY ||
+  "sb_publishable_oFux3tjP1HXUoIi6BB0j0A_EKwT8RK4";
 
 let browserClient: SupabaseClient | null = null;
 
