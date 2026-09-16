@@ -6,7 +6,6 @@ import { FooterSettingsContext } from "../components/footer-settings";
 import { PropertyCard } from "../components/property-card";
 import { FloatingConcierge } from "../components/floating-concierge";
 import { HeroSearch } from "../components/hero-search";
-import { LocalityCorridorsSection } from "../components/locality-corridors";
 import { NeighborhoodRadar } from "../components/neighborhood-radar";
 import { QuickViewModal } from "../components/quick-view-modal";
 import { CompareDrawer } from "../components/compare-drawer";
@@ -222,11 +221,6 @@ function HomePage() {
               </div>
             </div>
           </section>
-
-          {/* =================================================================
-              3. PRIME KOLKATA CORRIDORS (LOCALITY SHOWCASE)
-             ================================================================= */}
-          <LocalityCorridorsSection corridorCounts={corridorCounts} />
 
           {/* =================================================================
               3.5. SPATIAL CORRIDOR RADAR & COMMUTE MATRIX

@@ -1,3 +1,0 @@
-[
-  { "type": "click", "selector": "button:has-text('View All 12 Photos')", "wait": 1000 }
-]

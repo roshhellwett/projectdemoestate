@@ -1,3 +1,0 @@
-[
-  { "type": "click", "selector": "button[title=\"Quick View\"]", "wait": 1000 }
-]

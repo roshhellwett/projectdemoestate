@@ -1,6 +1,6 @@
 {
   "A:/projectssproperty/src/styles/app.css": {
-    "file": "assets/app-CE8qUKEp.css",
+    "file": "assets/app-BUpcFBDh.css",
     "src": "A:/projectssproperty/src/styles/app.css"
   },
   "_Calculator.es-DjsXWh1Y.js": {
@@ -355,7 +355,7 @@
     "isDynamicEntry": true
   },
   "src/router.tsx": {
-    "file": "assets/router-CGFqW7hE.js",
+    "file": "assets/router-cVU4Hb3Z.js",
     "name": "router",
     "src": "src/router.tsx",
     "isDynamicEntry": true,
@@ -398,7 +398,7 @@
       "assets/fraunces-vietnamese-wght-normal-CnvboYUG.woff2",
       "assets/fraunces-latin-ext-wght-normal-Ca2vKHc0.woff2",
       "assets/fraunces-latin-wght-normal-ukD16Tqj.woff2",
-      "assets/app-CE8qUKEp.css"
+      "assets/app-BUpcFBDh.css"
     ]
   },
   "src/routes/$.tsx?tsr-split=component": {
@@ -412,7 +412,7 @@
     ]
   },
   "src/routes/about.tsx?tsr-split=component": {
-    "file": "assets/about-xTYHWSTC.js",
+    "file": "assets/about-Dp1bpzXY.js",
     "name": "about",
     "src": "src/routes/about.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -451,7 +451,7 @@
     ]
   },
   "src/routes/admin.property.$id.tsx?tsr-split=component": {
-    "file": "assets/admin.property._id-a8rY06u2.js",
+    "file": "assets/admin.property._id-iLWy_9pF.js",
     "name": "admin.property._id",
     "src": "src/routes/admin.property.$id.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -472,7 +472,7 @@
     ]
   },
   "src/routes/calculator.tsx?tsr-split=component": {
-    "file": "assets/calculator-BMVga1vn.js",
+    "file": "assets/calculator-BiN_-CZ9.js",
     "name": "calculator",
     "src": "src/routes/calculator.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -489,7 +489,7 @@
     ]
   },
   "src/routes/compare.tsx?tsr-split=component": {
-    "file": "assets/compare-DUgKNMCK.js",
+    "file": "assets/compare-BPn56qdq.js",
     "name": "compare",
     "src": "src/routes/compare.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -506,7 +506,7 @@
     ]
   },
   "src/routes/index.tsx?tsr-split=component": {
-    "file": "assets/routes-XbbE4CtI.js",
+    "file": "assets/routes-3SzylrN-.js",
     "name": "routes",
     "src": "src/routes/index.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -532,7 +532,7 @@
     ]
   },
   "src/routes/journal.$slug.tsx?tsr-split=component": {
-    "file": "assets/journal._slug-BL9tZZes.js",
+    "file": "assets/journal._slug-B8md0yVd.js",
     "name": "journal._slug",
     "src": "src/routes/journal.$slug.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -546,7 +546,7 @@
     ]
   },
   "src/routes/journal.tsx?tsr-split=component": {
-    "file": "assets/journal-CwGqRujN.js",
+    "file": "assets/journal-BXyewYE_.js",
     "name": "journal",
     "src": "src/routes/journal.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -578,7 +578,7 @@
     "isDynamicEntry": true
   },
   "src/routes/partners.tsx?tsr-split=component": {
-    "file": "assets/partners-KGj_TqG4.js",
+    "file": "assets/partners-CaEGdf8q.js",
     "name": "partners",
     "src": "src/routes/partners.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -596,7 +596,7 @@
     ]
   },
   "src/routes/properties.tsx?tsr-split=component": {
-    "file": "assets/properties-otGpBJXz.js",
+    "file": "assets/properties-BPYu0Xf1.js",
     "name": "properties",
     "src": "src/routes/properties.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -614,7 +614,7 @@
     ]
   },
   "src/routes/property.$slug.tsx?tsr-split=component": {
-    "file": "assets/property._slug-DnoD0UWP.js",
+    "file": "assets/property._slug-L_0g2o6B.js",
     "name": "property._slug",
     "src": "src/routes/property.$slug.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -639,7 +639,7 @@
     ]
   },
   "src/routes/sell.tsx?tsr-split=component": {
-    "file": "assets/sell-B3X39ERn.js",
+    "file": "assets/sell-Byo7js7h.js",
     "name": "sell",
     "src": "src/routes/sell.tsx?tsr-split=component",
     "isDynamicEntry": true,
@@ -666,7 +666,7 @@
     ]
   },
   "tanstack-start-manifest:v": {
-    "file": "assets/_tanstack-start-manifest_v-DlQIQv5T.js",
+    "file": "assets/_tanstack-start-manifest_v-dwkHTWnt.js",
     "name": "_tanstack-start-manifest_v",
     "src": "tanstack-start-manifest:v",
     "isDynamicEntry": true

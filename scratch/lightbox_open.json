@@ -1,3 +1,0 @@
-[
-  { "type": "click", "selector": "#btn-view-gallery", "wait": 1000 }
-]

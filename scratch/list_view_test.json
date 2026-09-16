@@ -1,3 +1,0 @@
-[
-  { "type": "click", "selector": "#btn-view-list", "wait": 1000 }
-]
