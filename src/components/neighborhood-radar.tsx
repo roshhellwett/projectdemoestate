@@ -125,7 +125,7 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
       {/* Main Interactive Grid */}
       <div className="mt-6 sm:mt-10 grid gap-6 sm:gap-8 lg:grid-cols-[1.1fr_1.9fr] items-start">
         {/* Left Column: Corridor Selector Pills */}
-        <div className="scroll-rail lg:flex lg:flex-col gap-3 py-1.5 lg:py-0 lg:overflow-visible">
+        <div className="scroll-rail lg:flex lg:flex-col gap-3 py-2 px-1">
           {CORRIDORS_DATA.map((c) => {
             const isSelected = selectedCorridor.name === c.name;
             const primaryKey = c.name.split(" ")[0] ?? "";
@@ -137,7 +137,7 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
                 onClick={() => setSelectedCorridor(c)}
                 className={`w-full min-w-[260px] sm:min-w-0 text-left rounded-2xl p-4 sm:p-5 border transition-all duration-300 cursor-pointer ${
                   isSelected
-                    ? "border-brass bg-white shadow-lg shadow-brass/10 -translate-y-0.5"
+                    ? "border-brass bg-white shadow-lg shadow-brass/10 ring-1 ring-brass/30"
                     : "border-line bg-white/60 hover:bg-white hover:border-brass/40 text-muted"
                 }`}
               >

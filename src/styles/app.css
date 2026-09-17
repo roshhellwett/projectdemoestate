@@ -221,6 +221,11 @@
   .scroll-rail::-webkit-scrollbar {
     display: none;
   }
+  @media (min-width: 1024px) {
+    .scroll-rail.lg\:flex {
+      overflow: visible;
+    }
+  }
   .scroll-rail > * {
     scroll-snap-align: start;
     flex-shrink: 0;
