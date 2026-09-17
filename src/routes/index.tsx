@@ -547,7 +547,7 @@ function HomePage() {
                     key={post.id}
                     to="/journal/$slug"
                     params={{ slug: post.slug }}
-                    className="group flex flex-col justify-between rounded-2xl border border-line bg-white p-5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass/50 hover:shadow-md"
+                    className="group flex flex-col justify-between rounded-2xl border border-brass/50 bg-white/70 p-5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-md"
                   >
                     <div>
                       <span className="text-[11px] font-semibold text-muted">

@@ -23,6 +23,7 @@ import { Route as PropertiesRouteImport } from './routes/properties'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminNewRouteImport } from './routes/admin.new'
+import { Route as JournalIndexRouteImport } from './routes/journal.index'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 import { Route as PropertySlugRouteImport } from './routes/property.$slug'
 import { Route as AdminPropertyIdRouteImport } from './routes/admin.property.$id'
@@ -97,6 +98,11 @@ const AdminNewRoute = AdminNewRouteImport.update({
   path: '/new',
   getParentRoute: () => AdminRoute,
 } as any)
+const JournalIndexRoute = JournalIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => JournalRoute,
+} as any)
 const JournalSlugRoute = JournalSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/journal/$slug': typeof JournalSlugRoute
   '/property/$slug': typeof PropertySlugRoute
   '/admin/': typeof AdminIndexRoute
+  '/journal/': typeof JournalIndexRoute
   '/admin/property/$id': typeof AdminPropertyIdRoute
 }
 export interface FileRoutesByTo {
@@ -138,7 +145,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/calculator': typeof CalculatorRoute
   '/compare': typeof CompareRoute
-  '/journal': typeof JournalRouteWithChildren
   '/login': typeof LoginRoute
   '/partner': typeof PartnerRoute
   '/partners': typeof PartnersRoute
@@ -148,6 +154,7 @@ export interface FileRoutesByTo {
   '/journal/$slug': typeof JournalSlugRoute
   '/property/$slug': typeof PropertySlugRoute
   '/admin': typeof AdminIndexRoute
+  '/journal': typeof JournalIndexRoute
   '/admin/property/$id': typeof AdminPropertyIdRoute
 }
 export interface FileRoutesById {
@@ -168,6 +175,7 @@ export interface FileRoutesById {
   '/journal/$slug': typeof JournalSlugRoute
   '/property/$slug': typeof PropertySlugRoute
   '/admin/': typeof AdminIndexRoute
+  '/journal/': typeof JournalIndexRoute
   '/admin/property/$id': typeof AdminPropertyIdRoute
 }
 export interface FileRouteTypes {
@@ -189,6 +197,7 @@ export interface FileRouteTypes {
     | '/journal/$slug'
     | '/property/$slug'
     | '/admin/'
+    | '/journal/'
     | '/admin/property/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -197,7 +206,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/calculator'
     | '/compare'
-    | '/journal'
     | '/login'
     | '/partner'
     | '/partners'
@@ -207,6 +215,7 @@ export interface FileRouteTypes {
     | '/journal/$slug'
     | '/property/$slug'
     | '/admin'
+    | '/journal'
     | '/admin/property/$id'
   id:
     | '__root__'
@@ -226,6 +235,7 @@ export interface FileRouteTypes {
     | '/journal/$slug'
     | '/property/$slug'
     | '/admin/'
+    | '/journal/'
     | '/admin/property/$id'
   fileRoutesById: FileRoutesById
 }
@@ -345,6 +355,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminNewRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/journal/': {
+      id: '/journal/'
+      path: '/'
+      fullPath: '/journal/'
+      preLoaderRoute: typeof JournalIndexRouteImport
+      parentRoute: typeof JournalRoute
+    }
     '/journal/$slug': {
       id: '/journal/$slug'
       path: '/$slug'
@@ -385,10 +402,12 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface JournalRouteChildren {
   JournalSlugRoute: typeof JournalSlugRoute
+  JournalIndexRoute: typeof JournalIndexRoute
 }
 
 const JournalRouteChildren: JournalRouteChildren = {
   JournalSlugRoute: JournalSlugRoute,
+  JournalIndexRoute: JournalIndexRoute,
 }
 
 const JournalRouteWithChildren =

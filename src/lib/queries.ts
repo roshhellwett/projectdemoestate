@@ -247,15 +247,51 @@ export async function listBlogPosts(client: SupabaseClient, limit?: number): Pro
   return (data ?? []) as BlogPost[];
 }
 
-export async function getBlogPostBySlug(client: SupabaseClient, slug: string): Promise<BlogPost | null> {
+export async function getBlogPostBySlug(client: SupabaseClient, rawSlug: string): Promise<BlogPost | null> {
+  const cleanSlug = decodeURIComponent(rawSlug || "").trim();
+  if (!cleanSlug) return null;
+
+  // 1. Exact match on slug
   const { data, error } = await client
     .from("blog_posts")
     .select("*")
-    .eq("slug", slug)
+    .eq("slug", cleanSlug)
     .eq("is_published", true)
     .maybeSingle();
   if (error) throw error;
-  return (data as BlogPost) ?? null;
+  if (data) return data as BlogPost;
+
+  // 2. Case-insensitive match on slug
+  const { data: dataIlike } = await client
+    .from("blog_posts")
+    .select("*")
+    .ilike("slug", cleanSlug)
+    .eq("is_published", true)
+    .maybeSingle();
+  if (dataIlike) return dataIlike as BlogPost;
+
+  // 3. Normalized slug (e.g. "Lorem Ipsum" -> "lorem-ipsum")
+  const normalized = cleanSlug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  if (normalized && normalized !== cleanSlug) {
+    const { data: dataNorm } = await client
+      .from("blog_posts")
+      .select("*")
+      .eq("slug", normalized)
+      .eq("is_published", true)
+      .maybeSingle();
+    if (dataNorm) return dataNorm as BlogPost;
+  }
+
+  // 4. Title match
+  const { data: dataTitle } = await client
+    .from("blog_posts")
+    .select("*")
+    .ilike("title", cleanSlug)
+    .eq("is_published", true)
+    .maybeSingle();
+  if (dataTitle) return dataTitle as BlogPost;
+
+  return null;
 }
 
 export async function listPublishedTestimonials(client: SupabaseClient) {
