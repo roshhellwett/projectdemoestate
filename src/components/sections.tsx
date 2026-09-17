@@ -1,4 +1,6 @@
+import { Link } from "@tanstack/react-router";
 import type { Partner, Reel, Testimonial } from "../lib/types";
+import { InstagramIcon } from "./instagram-icon";
 
 /**
  * Partner logo wall: marquee of the client's real partner logos
@@ -50,59 +52,69 @@ function PartnerLogo({ partner }: { partner: Partner }) {
 }
 
 /**
- * Instagram reels section. Admin pastes reel links in the dashboard;
- * they render ONLY here - nowhere else on the site.
- * Click opens the reel on Instagram (covers stay fast, no embeds by default).
+ * Instagram reels & posts section. Admin pastes links in the dashboard.
+ * Compact luxury tiles with golden rounded borders.
+ * Click opens the post directly on Instagram.
  */
 export function ReelsSection({ reels, instagram }: { reels: Reel[]; instagram: string }) {
   if (reels.length === 0) return null;
   return (
-    <section aria-label="Instagram reels" className="shell-wide py-14 sm:py-20 md:py-28">
-      <div className="reveal flex items-end justify-between gap-6">
+    <section aria-label="Instagram reels" className="shell-wide py-14 sm:py-20 md:py-24">
+      <div className="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6">
         <div>
-          <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink md:text-4xl">
+          <p className="eyebrow text-brass">Verified Social Feed</p>
+          <h2 className="mt-2 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink md:text-4xl">
             Straight from our Instagram
           </h2>
-          <p className="mt-3 max-w-md text-sm text-muted">
+          <p className="mt-2.5 max-w-md text-sm text-muted">
             Walkthroughs and site visits, as posted. Tap any to watch on Instagram.
           </p>
         </div>
-        <a
-          href={instagram}
-          target="_blank"
-          rel="noreferrer"
-          className="hidden shrink-0 text-sm font-semibold text-brass transition-colors hover:text-ink sm:block"
-        >
-          Follow @sspropertykol →
-        </a>
+        <div className="flex items-center gap-5">
+          <Link
+            to="/instagram"
+            className="text-sm font-semibold text-brass transition-colors hover:text-ink"
+          >
+            All posts →
+          </Link>
+          <a
+            href={instagram}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden shrink-0 text-sm font-semibold text-brass transition-colors hover:text-ink sm:block"
+          >
+            Follow @sspropertykol →
+          </a>
+        </div>
       </div>
-      <div className="mt-6 sm:mt-10 scroll-rail sm:grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 sm:mt-10 flex flex-wrap gap-4 sm:gap-6">
         {reels.map((reel) => (
           <a
             key={reel.id}
             href={reel.reel_url}
             target="_blank"
             rel="noreferrer"
-            className="reel-tile reveal group relative block overflow-hidden rounded-2xl border border-line bg-ink min-w-[260px] sm:min-w-0"
+            className="reel-tile reveal group relative block w-full max-w-[240px] sm:max-w-[260px] overflow-hidden rounded-2xl border border-brass/50 bg-ink shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-xl shrink-0"
           >
-            <img
-              src={reel.cover_thumb || reel.cover_image}
-              alt={reel.title}
-              width={400}
-              height={500}
-              loading="lazy"
-              decoding="async"
-              className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/30 to-transparent p-4 pt-14">
-              <p className="text-sm font-medium leading-snug text-paper">{reel.title}</p>
-              <p className="mt-1 flex items-center gap-1.5 text-xs text-paper/70">
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                  <rect x="3" y="3" width="18" height="18" rx="5" />
-                  <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
-                </svg>
-                Watch on Instagram
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink-2">
+              <img
+                src={reel.cover_thumb || reel.cover_image}
+                alt={reel.title}
+                width={360}
+                height={450}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+              />
+              <div className="absolute top-2.5 right-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-black/65 text-white backdrop-blur-md border border-white/20 shadow-xs">
+                <InstagramIcon size={14} />
+              </div>
+            </div>
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-3.5 pt-12">
+              <p className="text-xs sm:text-sm font-medium leading-snug text-paper line-clamp-2">{reel.title}</p>
+              <p className="mt-1 flex items-center gap-1 text-[11px] font-medium text-brass-2">
+                <span>Watch on Instagram</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-0.5">↗</span>
               </p>
             </div>
           </a>

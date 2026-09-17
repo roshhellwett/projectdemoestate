@@ -397,10 +397,14 @@ input[type="range"].slider-brass::-moz-range-thumb {
 .hero-line {
   display: block;
   overflow: hidden;
+  padding-top: 0.25em;
+  padding-bottom: 0.35em;
+  margin-top: -0.25em;
+  margin-bottom: -0.35em;
 }
 .hero-line > span {
   display: block;
-  transform: translateY(110%);
+  transform: translateY(115%);
   animation: hero-rise 900ms var(--ease-lux) forwards;
 }
 .hero-line:nth-child(2) > span { animation-delay: 120ms; }

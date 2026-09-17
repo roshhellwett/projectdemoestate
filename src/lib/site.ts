@@ -27,6 +27,7 @@ export const NAV_LINKS = [
   { label: "Calculator", to: "/calculator" },
   { label: "Journal", to: "/journal" },
   { label: "About", to: "/about" },
+  { label: "Instagram", to: "/instagram" },
 ] as const;
 
 export const FOOTER_SERVICES = [

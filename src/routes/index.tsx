@@ -147,11 +147,11 @@ function HomePage() {
                     <span>{settings.hero_eyebrow ?? "Kolkata's Premier Property Consultancy"}</span>
                   </div>
 
-                  <h1 className="mt-5 font-display text-[clamp(1.75rem,5.5vw,4.25rem)] font-medium leading-[1.08] tracking-tight text-ink [text-wrap:balance]">
-                    <span className="hero-line"><span>{line1}</span></span>
+                  <h1 className="mt-5 font-display text-[clamp(1.75rem,5.5vw,4.25rem)] font-medium leading-[1.25] tracking-tight text-ink [text-wrap:balance]">
+                    <span className="hero-line"><span className="inline-block py-1">{line1}</span></span>
                     {line2 ? (
                       <span className="hero-line">
-                        <span className="italic font-normal text-brass">{line2}</span>
+                        <span className="italic font-normal text-brass inline-block py-1">{line2}</span>
                       </span>
                     ) : null}
                   </h1>

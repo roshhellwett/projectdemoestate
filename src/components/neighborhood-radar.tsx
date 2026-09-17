@@ -125,7 +125,7 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
       {/* Main Interactive Grid */}
       <div className="mt-6 sm:mt-10 grid gap-6 sm:gap-8 lg:grid-cols-[1.1fr_1.9fr] items-start">
         {/* Left Column: Corridor Selector Pills */}
-        <div className="scroll-rail lg:flex lg:flex-col gap-3">
+        <div className="scroll-rail lg:flex lg:flex-col gap-3 py-1.5 lg:py-0 lg:overflow-visible">
           {CORRIDORS_DATA.map((c) => {
             const isSelected = selectedCorridor.name === c.name;
             const primaryKey = c.name.split(" ")[0] ?? "";

@@ -23,6 +23,7 @@ import {
   PhoneCall,
 } from "@phosphor-icons/react";
 import { SpotlightSearch } from "./spotlight-search";
+import { InstagramIcon } from "./instagram-icon";
 
 /* Icon map for sidebar nav items */
 const NAV_ICONS: Record<string, React.ElementType> = {
@@ -33,6 +34,7 @@ const NAV_ICONS: Record<string, React.ElementType> = {
   "/calculator": Calculator,
   "/journal": Newspaper,
   "/about": Info,
+  "/instagram": InstagramIcon,
 };
 
 /**

@@ -15,6 +15,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as CompareRouteImport } from './routes/compare'
+import { Route as InstagramRouteImport } from './routes/instagram'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PartnerRouteImport } from './routes/partner'
@@ -56,6 +57,11 @@ const CalculatorRoute = CalculatorRouteImport.update({
 const CompareRoute = CompareRouteImport.update({
   id: '/compare',
   path: '/compare',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InstagramRoute = InstagramRouteImport.update({
+  id: '/instagram',
+  path: '/instagram',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JournalRoute = JournalRouteImport.update({
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/calculator': typeof CalculatorRoute
   '/compare': typeof CompareRoute
+  '/instagram': typeof InstagramRoute
   '/journal': typeof JournalRouteWithChildren
   '/login': typeof LoginRoute
   '/partner': typeof PartnerRoute
@@ -145,6 +152,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/calculator': typeof CalculatorRoute
   '/compare': typeof CompareRoute
+  '/instagram': typeof InstagramRoute
   '/login': typeof LoginRoute
   '/partner': typeof PartnerRoute
   '/partners': typeof PartnersRoute
@@ -165,6 +173,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/calculator': typeof CalculatorRoute
   '/compare': typeof CompareRoute
+  '/instagram': typeof InstagramRoute
   '/journal': typeof JournalRouteWithChildren
   '/login': typeof LoginRoute
   '/partner': typeof PartnerRoute
@@ -187,6 +196,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/calculator'
     | '/compare'
+    | '/instagram'
     | '/journal'
     | '/login'
     | '/partner'
@@ -206,6 +216,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/calculator'
     | '/compare'
+    | '/instagram'
     | '/login'
     | '/partner'
     | '/partners'
@@ -225,6 +236,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/calculator'
     | '/compare'
+    | '/instagram'
     | '/journal'
     | '/login'
     | '/partner'
@@ -246,6 +258,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   CalculatorRoute: typeof CalculatorRoute
   CompareRoute: typeof CompareRoute
+  InstagramRoute: typeof InstagramRoute
   JournalRoute: typeof JournalRouteWithChildren
   LoginRoute: typeof LoginRoute
   PartnerRoute: typeof PartnerRoute
@@ -297,6 +310,13 @@ declare module '@tanstack/react-router' {
       path: '/compare'
       fullPath: '/compare'
       preLoaderRoute: typeof CompareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/instagram': {
+      id: '/instagram'
+      path: '/instagram'
+      fullPath: '/instagram'
+      preLoaderRoute: typeof InstagramRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/journal': {
@@ -420,6 +440,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRouteWithChildren,
   CalculatorRoute: CalculatorRoute,
   CompareRoute: CompareRoute,
+  InstagramRoute: InstagramRoute,
   JournalRoute: JournalRouteWithChildren,
   LoginRoute: LoginRoute,
   PartnerRoute: PartnerRoute,

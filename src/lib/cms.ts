@@ -138,15 +138,18 @@ export async function reorderImages(propertyId: string, orderedIds: string[]) {
  *   https://www.instagram.com/p/DbqdwlJPfz2/   (post-style, also works in embeds)
  *   https://www.instagram.com/sspropertykol/reel/DbqdwlJPfz2/
  */
-export function parseInstagramUrl(raw: string): { id: string; reelUrl: string; embedUrl: string } | null {
+export function parseInstagramUrl(raw: string): { id: string; type: "p" | "reel"; reelUrl: string; embedUrl: string } | null {
   const url = raw.trim();
-  const m = url.match(/instagram\.com\/(?:[^/]+\/)?(?:reel|reels|p)\/([A-Za-z0-9_-]+)/i);
+  const m = url.match(/instagram\.com\/(?:[^/]+\/)?(reel|reels|p|tv)\/([A-Za-z0-9_-]+)/i);
   if (!m) return null;
-  const id = m[1]!;
+  const rawType = m[1]!.toLowerCase();
+  const type: "p" | "reel" = rawType === "p" ? "p" : "reel";
+  const id = m[2]!;
   return {
     id,
-    reelUrl: `https://www.instagram.com/reel/${id}/`,
-    embedUrl: `https://www.instagram.com/reel/${id}/embed`,
+    type,
+    reelUrl: `https://www.instagram.com/${type}/${id}/`,
+    embedUrl: `https://www.instagram.com/${type}/${id}/embed`,
   };
 }
 
