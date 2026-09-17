@@ -140,7 +140,7 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
               setQuery(e.target.value);
               setSelectedIndex(0);
             }}
-            placeholder="Search by locality, project name, 2/3 BHK, or budget…"
+            placeholder="Search by locality, project name, 2/3 BHK, or budget..."
             className="w-full bg-transparent text-base font-medium text-ink placeholder:text-muted outline-hidden"
           />
           {query ? (
@@ -186,7 +186,7 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
         <div className="flex-1 overflow-y-auto p-3 space-y-1.5 scrollbar-thin">
           {loading ? (
             <div className="py-12 text-center text-sm text-muted">
-              <p>Scanning Kolkata luxury residences…</p>
+              <p>Scanning Kolkata luxury residences...</p>
             </div>
           ) : filtered.length === 0 ? (
             <div className="py-12 text-center text-sm text-muted">

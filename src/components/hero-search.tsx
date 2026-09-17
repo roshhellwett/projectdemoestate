@@ -82,7 +82,7 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
         </button>
       </div>
 
-      {/* Search Form — stacks vertically on mobile, horizontal on desktop */}
+      {/* Search Form - stacks vertically on mobile, horizontal on desktop */}
       <form onSubmit={handleSearch} className="mt-4 grid gap-2.5 sm:gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_auto]">
         {/* Locality Selector */}
         <div className="flex flex-col justify-center rounded-xl border border-brass/35 bg-paper/60 px-3.5 py-2.5 transition-all focus-within:border-brass focus-within:ring-1 focus-within:ring-brass/30 focus-within:bg-white min-h-[52px] shadow-2xs">

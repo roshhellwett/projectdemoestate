@@ -174,7 +174,12 @@ export function AdminDashboard() {
 
       <main className="shell-wide py-10">
         {loading ? (
-          <p className="text-sm text-muted">Loading…</p>
+          <div className="flex items-center justify-center py-16 text-center">
+            <div className="flex flex-col items-center gap-3">
+              <div className="h-7 w-7 animate-spin rounded-full border-2 border-brass border-t-transparent" />
+              <p className="text-sm font-medium text-muted">Loading dashboard data...</p>
+            </div>
+          </div>
         ) : tab === "properties" ? (
           <PropertyTable rows={properties} onToggle={togglePublished} onDelete={removeProperty} />
         ) : tab === "enquiries" ? (
@@ -489,7 +494,7 @@ function ReelsManager({ reels, refresh }: { reels: Reel[]; refresh: (r: Reel[]) 
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               className={inputCls}
-              placeholder="https://www.instagram.com/reel/… (just paste it)"
+              placeholder="https://www.instagram.com/reel/... (just paste it)"
             />
             {url && !parsed ? (
               <p className="mt-1.5 text-xs text-danger">That does not look like an Instagram reel link.</p>
@@ -517,7 +522,7 @@ function ReelsManager({ reels, refresh }: { reels: Reel[]; refresh: (r: Reel[]) 
         </div>
         <div className="mt-5 flex items-center gap-4">
           <Btn onClick={onAdd} disabled={busy || !parsed}>
-            {busy ? "Adding…" : "Add to Instagram section"}
+            {busy ? "Adding..." : "Add to Instagram section"}
           </Btn>
           <Notice state={notice} />
         </div>
@@ -668,7 +673,7 @@ function JournalManager({ posts, refresh }: { posts: BlogPost[]; refresh: (p: Bl
             </div>
             <div>
               <label className={labelCls}>Cover image URL <span className="font-normal text-muted-2">(optional)</span></label>
-              <input value={draft.cover} onChange={(e) => setDraft({ ...draft, cover: e.target.value, coverThumb: e.target.value })} className={inputCls} placeholder="https://…" />
+              <input value={draft.cover} onChange={(e) => setDraft({ ...draft, cover: e.target.value, coverThumb: e.target.value })} className={inputCls} placeholder="https://..." />
             </div>
             <div className="md:col-span-2">
               <label className={labelCls}>Excerpt <span className="font-normal text-muted-2">(1-2 lines)</span></label>
@@ -685,7 +690,7 @@ function JournalManager({ posts, refresh }: { posts: BlogPost[]; refresh: (p: Bl
             <div className="flex items-center justify-end gap-4">
               <Notice state={notice} />
               <Btn onClick={onSave} disabled={busy || !draft.title.trim() || !draft.content.trim()}>
-                {busy ? "Saving…" : draft.id ? "Save Article" : "Publish Article"}
+                {busy ? "Saving..." : draft.id ? "Save Article" : "Publish Article"}
               </Btn>
             </div>
           </div>
@@ -807,7 +812,7 @@ function ReviewsManager({ testimonials, refresh }: { testimonials: Testimonial[]
         </div>
         <div className="mt-5 flex items-center gap-4">
           <Btn onClick={onAdd} disabled={busy || !d.clientName.trim() || !d.reviewText.trim()}>
-            {busy ? "Adding…" : "Add Review"}
+            {busy ? "Adding..." : "Add Review"}
           </Btn>
           <Notice state={notice} />
         </div>
@@ -914,7 +919,7 @@ function FaqManager({ faqs, refresh }: { faqs: Faq[]; refresh: (f: Faq[]) => voi
         </div>
         <div className="mt-5 flex items-center gap-4">
           <Btn onClick={onSave} disabled={busy || !d.question.trim() || !d.answer.trim()}>
-            {busy ? "Saving…" : editId ? "Save FAQ" : "Add FAQ"}
+            {busy ? "Saving..." : editId ? "Save FAQ" : "Add FAQ"}
           </Btn>
           {editId ? (
             <Btn kind="ghost" onClick={() => { setEditId(null); setD({ question: "", answer: "", category: "General", displayOrder: faqs.length + 1, isPublished: true }); }}>
@@ -1045,7 +1050,7 @@ function PartnersManager({ partners, refresh }: { partners: Partner[]; refresh: 
           </div>
           <div>
             <label className={labelCls}>Website <span className="font-normal text-muted-2">(optional)</span></label>
-            <input value={d.websiteUrl} onChange={(e) => setD({ ...d, websiteUrl: e.target.value })} className={inputCls} placeholder="https://…" />
+            <input value={d.websiteUrl} onChange={(e) => setD({ ...d, websiteUrl: e.target.value })} className={inputCls} placeholder="https://..." />
           </div>
           <div className="md:col-span-2">
             <label className={labelCls}>Logo</label>
@@ -1074,7 +1079,7 @@ function PartnersManager({ partners, refresh }: { partners: Partner[]; refresh: 
         </div>
         <div className="mt-5 flex items-center gap-4">
           <Btn onClick={onSave} disabled={busy || !d.name.trim()}>
-            {busy ? "Saving…" : editId ? "Save Partner" : "Add Partner"}
+            {busy ? "Saving..." : editId ? "Save Partner" : "Add Partner"}
           </Btn>
           {editId ? <Btn kind="ghost" onClick={() => { setEditId(null); setD({ name: "", slug: "", logoUrl: "", websiteUrl: "", description: "", displayOrder: partners.length + 1, isPublished: true }); }}>Cancel</Btn> : null}
           <Notice state={notice} />
@@ -1255,7 +1260,7 @@ function SettingsManager({ settings }: { settings: Record<string, string> }) {
       ))}
       <div className="sticky bottom-6 flex items-center gap-4 rounded-full border border-line bg-white/95 px-6 py-3 shadow-lg backdrop-blur">
         <Btn onClick={onSave} disabled={busy || !dirty}>
-          {busy ? "Saving…" : "Save Settings"}
+          {busy ? "Saving..." : "Save Settings"}
         </Btn>
         <Notice state={notice} />
         <p className="text-xs text-muted-2">Changes go live on the site immediately after saving.</p>

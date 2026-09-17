@@ -27,7 +27,7 @@ const CORRIDORS_DATA: CorridorDetail[] = [
   {
     name: "Lake Town & Bangur",
     tag: "Established North-East Core",
-    pricePerSqFt: "₹6,800 – ₹8,500",
+    pricePerSqFt: "₹6,800 - ₹8,500",
     airportMins: 15,
     sectorVMins: 18,
     parkStreetMins: 25,
@@ -39,7 +39,7 @@ const CORRIDORS_DATA: CorridorDetail[] = [
   {
     name: "Newtown (Action Area I & II)",
     tag: "Smart City Financial Hub",
-    pricePerSqFt: "₹7,200 – ₹10,800",
+    pricePerSqFt: "₹7,200 - ₹10,800",
     airportMins: 12,
     sectorVMins: 10,
     parkStreetMins: 30,
@@ -51,7 +51,7 @@ const CORRIDORS_DATA: CorridorDetail[] = [
   {
     name: "Kasba & Ruby Crossing",
     tag: "South Kolkata Commercial Nexus",
-    pricePerSqFt: "₹7,500 – ₹11,200",
+    pricePerSqFt: "₹7,500 - ₹11,200",
     airportMins: 35,
     sectorVMins: 15,
     parkStreetMins: 18,
@@ -63,7 +63,7 @@ const CORRIDORS_DATA: CorridorDetail[] = [
   {
     name: "Rajarhat & Chinar Park",
     tag: "Airport Expressway Growth Hub",
-    pricePerSqFt: "₹5,500 – ₹7,800",
+    pricePerSqFt: "₹5,500 - ₹7,800",
     airportMins: 10,
     sectorVMins: 15,
     parkStreetMins: 35,
@@ -75,7 +75,7 @@ const CORRIDORS_DATA: CorridorDetail[] = [
   {
     name: "C.R. Avenue & Central Kolkata",
     tag: "Heritage Central Business District",
-    pricePerSqFt: "₹12,000 – ₹16,500",
+    pricePerSqFt: "₹12,000 - ₹16,500",
     airportMins: 30,
     sectorVMins: 22,
     parkStreetMins: 8,

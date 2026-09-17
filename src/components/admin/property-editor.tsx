@@ -165,7 +165,7 @@ export function PropertyEditor({ propertyId }: { propertyId: string }) {
   if (!property) {
     return (
       <EditorShell title="Edit listing" back={{ to: "/admin" }}>
-        <p className="text-sm text-muted">Loading…</p>
+        <p className="text-sm text-muted">Loading listing...</p>
       </EditorShell>
     );
   }
@@ -432,7 +432,7 @@ function PropertyForm({
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="pf-desc" className={labelCls}>Description</label>
-        <textarea id="pf-desc" rows={5} value={d.description} onChange={set("description")} className={`${inputCls} resize-y`} placeholder="Editorial description of the home…" />
+        <textarea id="pf-desc" rows={5} value={d.description} onChange={set("description")} className={`${inputCls} resize-y`} placeholder="Editorial description of the home..." />
       </div>
       <div>
         <label htmlFor="pf-ig" className={labelCls}>Instagram post URL</label>
@@ -457,7 +457,7 @@ function PropertyForm({
           disabled={busy}
           className="rounded-full bg-ink px-8 py-3 text-sm font-semibold text-paper transition-opacity disabled:opacity-60"
         >
-          {busy ? "Saving…" : submitLabel}
+          {busy ? "Saving..." : submitLabel}
         </button>
         {saved ? <span className="text-xs font-semibold text-verdigris">Saved ✓</span> : null}
       </div>

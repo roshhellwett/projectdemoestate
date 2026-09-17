@@ -81,7 +81,7 @@ export function PropertyCard({
         <Link
           to="/property/$slug"
           params={{ slug: property.slug }}
-          className="group relative hidden md:flex flex-row overflow-hidden rounded-[var(--radius-card)] border border-brass/35 bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-brass hover:shadow-lg hover:shadow-brass/10 hover:ring-1 hover:ring-brass/25"
+          className="card-sheen group relative hidden md:flex flex-row overflow-hidden rounded-[var(--radius-card)] border border-brass/35 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-xl hover:shadow-brass/10 hover:ring-1 hover:ring-brass/25"
         >
           {/* Image side */}
           <div className="relative w-80 shrink-0 overflow-hidden bg-paper-2">
@@ -212,7 +212,7 @@ function GridCard({
     <Link
       to="/property/$slug"
       params={{ slug: property.slug }}
-      className="group relative flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-brass/35 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-[0_24px_48px_-16px_rgba(18,16,14,0.18)] hover:shadow-brass/15 hover:ring-1 hover:ring-brass/25"
+      className="card-sheen group relative flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-brass/35 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-brass hover:shadow-[0_24px_48px_-16px_rgba(18,16,14,0.18)] hover:shadow-brass/15 hover:ring-1 hover:ring-brass/25"
     >
       {/* Media Container */}
       <div className="relative aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-paper-2">
@@ -324,7 +324,7 @@ function CardBadges({ property }: { property: Property }) {
   );
 }
 
-/** Top-right action buttons — ≥40px touch targets */
+/** Top-right action buttons - ≥40px touch targets */
 function CardActions({
   onQuickView,
   onCompare,
@@ -411,7 +411,7 @@ function PropertySpecs({ property }: { property: Property }) {
   );
 }
 
-/** WhatsApp inquiry button — visible pill on mobile */
+/** WhatsApp inquiry button - visible pill on mobile */
 function WhatsAppButton({
   onClick,
   expanded = false,

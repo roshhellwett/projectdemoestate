@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Dk72oS4N.js";var t=e();function n({className:e=`h-9`,dark:n=!1}){return(0,t.jsx)(`img`,{src:n?`/images/ss-logo-paper.webp`:`/images/ss-logo-ink.webp`,alt:`SS Property`,width:406,height:95,className:`${e} w-auto`})}export{n as t};

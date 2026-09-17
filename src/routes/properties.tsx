@@ -294,7 +294,7 @@ function PropertiesPage() {
                       type="search"
                       value={q}
                       onChange={(e) => setQ(e.target.value)}
-                      placeholder="Search locality, project name…"
+                      placeholder="Search locality, project name..."
                       className="w-full rounded-xl border border-brass/35 bg-paper/60 pl-10 pr-9 py-3 text-sm font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none min-h-[44px]"
                     />
                     {q ? (
@@ -435,7 +435,7 @@ function PropertiesPage() {
                       type="search"
                       value={q}
                       onChange={(e) => setQ(e.target.value)}
-                      placeholder="Search locality, landmark, project name…"
+                      placeholder="Search locality, landmark, project name..."
                       className="w-full rounded-xl border border-brass/35 bg-paper/60 pl-11 pr-10 py-2.5 text-xs font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none"
                     />
                     {q ? (
@@ -739,28 +739,28 @@ function PropertiesPage() {
                 onClick={() => setFilter({ locality: "Lake Town" })}
                 className="shrink-0 rounded-full border border-line bg-white px-3 py-1 text-ink hover:border-brass transition-colors"
               >
-                <strong>Lake Town & Bangur:</strong> ₹6,800 – ₹8,500/sq.ft
+                <strong>Lake Town & Bangur:</strong> ₹6,800 - ₹8,500/sq.ft
               </button>
               <button
                 type="button"
                 onClick={() => setFilter({ locality: "Newtown" })}
                 className="shrink-0 rounded-full border border-line bg-white px-3 py-1 text-ink hover:border-brass transition-colors"
               >
-                <strong>Newtown:</strong> ₹7,200 – ₹10,800/sq.ft
+                <strong>Newtown:</strong> ₹7,200 - ₹10,800/sq.ft
               </button>
               <button
                 type="button"
                 onClick={() => setFilter({ locality: "Kasba" })}
                 className="shrink-0 rounded-full border border-line bg-white px-3 py-1 text-ink hover:border-brass transition-colors"
               >
-                <strong>Kasba / Ruby:</strong> ₹7,500 – ₹11,200/sq.ft
+                <strong>Kasba / Ruby:</strong> ₹7,500 - ₹11,200/sq.ft
               </button>
               <button
                 type="button"
                 onClick={() => setFilter({ locality: "Rajarhat" })}
                 className="shrink-0 rounded-full border border-line bg-white px-3 py-1 text-ink hover:border-brass transition-colors"
               >
-                <strong>Rajarhat:</strong> ₹5,500 – ₹7,800/sq.ft
+                <strong>Rajarhat:</strong> ₹5,500 - ₹7,800/sq.ft
               </button>
             </div>
           </div>
@@ -773,8 +773,8 @@ function PropertiesPage() {
               <div
                 className={
                   search.view === "list"
-                    ? "space-y-6"
-                    : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                    ? "space-y-6 reveal-stagger"
+                    : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3 reveal-stagger"
                 }
               >
                 {filteredProperties.map((property, idx) => (

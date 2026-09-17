@@ -1,14 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { getSupabaseBrowser } from "../lib/supabase";
 import { LogoImage } from "./brand";
+import { LockKey, EnvelopeSimple, ShieldCheck, ArrowRight, Eye, EyeSlash } from "@phosphor-icons/react";
 
 /** CMS login. Supabase email + password; the session lives in localStorage. */
 export function LoginForm() {
   const supabase = getSupabaseBrowser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -26,60 +29,101 @@ export function LoginForm() {
   }
 
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-paper px-6">
-      <div className="w-full max-w-sm">
-        <div className="mb-8 flex justify-center">
-          <LogoImage className="h-12" />
+    <div className="flex min-h-dvh flex-col items-center justify-center bg-paper px-4 sm:px-6 py-12">
+      <div className="w-full max-w-md">
+        <div className="mb-8 text-center flex flex-col items-center">
+          <Link to="/" className="inline-block transition-transform hover:scale-105">
+            <LogoImage className="h-11 sm:h-12" />
+          </Link>
+          <div className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-brass/30 bg-brass-ghost px-3.5 py-1 text-xs font-semibold text-brass-dark">
+            <ShieldCheck size={14} weight="fill" className="text-verdigris" />
+            <span>Kolkata Advisory Desk</span>
+          </div>
         </div>
-        <form onSubmit={onSubmit} className="rounded-[var(--radius-card)] border border-line bg-white p-8">
-          <h1 className="font-display text-xl font-medium text-ink">Admin sign in</h1>
-          <p className="mt-1 text-xs text-muted">Manage listings, enquiries and content.</p>
 
-          <div className="mt-6 space-y-4">
+        <div className="rounded-3xl border border-brass/40 bg-white p-7 sm:p-9 shadow-xl shadow-brass/5">
+          <h1 className="font-display text-2xl font-bold tracking-tight text-ink">
+            Admin Management Console
+          </h1>
+          <p className="mt-1.5 text-xs sm:text-sm text-muted">
+            Sign in to manage verified listings, lead enquiries, reels, and website settings.
+          </p>
+
+          <form onSubmit={onSubmit} className="mt-6 space-y-4">
             <div>
               <label htmlFor="login-email" className="mb-1.5 block text-xs font-semibold text-ink">
-                Email
+                Admin Email Address
               </label>
-              <input
-                id="login-email"
-                type="email"
-                required
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-[var(--radius-input)] border border-line bg-paper px-4 py-2.5 text-sm text-ink focus:border-brass focus:outline-none"
-              />
+              <div className="relative">
+                <input
+                  id="login-email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="writetous@ssproperty.in"
+                  className="w-full rounded-xl border border-line bg-paper px-4 py-3 pl-10 text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:ring-1 focus:ring-brass/30 focus:outline-none min-h-[46px]"
+                />
+                <EnvelopeSimple size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
+              </div>
             </div>
+
             <div>
-              <label htmlFor="login-pass" className="mb-1.5 block text-xs font-semibold text-ink">
-                Password
-              </label>
-              <input
-                id="login-pass"
-                type="password"
-                required
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-[var(--radius-input)] border border-line bg-paper px-4 py-2.5 text-sm text-ink focus:border-brass focus:outline-none"
-              />
+              <div className="flex items-center justify-between mb-1.5">
+                <label htmlFor="login-pass" className="block text-xs font-semibold text-ink">
+                  Security Password
+                </label>
+              </div>
+              <div className="relative">
+                <input
+                  id="login-pass"
+                  type={showPassword ? "text" : "password"}
+                  required
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full rounded-xl border border-line bg-paper px-4 py-3 pl-10 pr-10 text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:ring-1 focus:ring-brass/30 focus:outline-none min-h-[46px]"
+                />
+                <LockKey size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted hover:text-ink cursor-pointer p-1"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeSlash size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
-          </div>
 
-          {error ? (
-            <p role="alert" className="mt-4 text-xs text-danger">
-              {error}
-            </p>
-          ) : null}
+            {error ? (
+              <div role="alert" className="rounded-xl border border-danger/30 bg-danger/10 p-3 text-xs text-danger flex items-center gap-2">
+                <span>✕</span>
+                <span>{error}</span>
+              </div>
+            ) : null}
 
-          <button
-            type="submit"
-            disabled={busy}
-            className="mt-6 w-full rounded-full bg-ink py-3 text-sm font-semibold text-paper transition-opacity disabled:opacity-60"
+            <button
+              type="submit"
+              disabled={busy}
+              className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-ink py-3.5 text-xs font-bold uppercase tracking-wider text-paper shadow-md transition-all hover:bg-ink-2 active:scale-[0.99] disabled:opacity-60 cursor-pointer"
+            >
+              <span>{busy ? "Authenticating..." : "Sign in to Dashboard"}</span>
+              <ArrowRight size={14} weight="bold" />
+            </button>
+          </form>
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link
+            to="/"
+            className="text-xs font-semibold text-muted hover:text-brass transition-colors inline-flex items-center gap-1"
           >
-            {busy ? "Signing in…" : "Sign In"}
-          </button>
-        </form>
+            <span>← Back to SS Property Public Portal</span>
+          </Link>
+        </div>
       </div>
     </div>
   );

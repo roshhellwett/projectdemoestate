@@ -111,7 +111,7 @@
    --------------------------------------------------------------------- */
 
 @layer utilities {
-  /* section container — mobile-first gutters */
+  /* section container - mobile-first gutters */
   .shell {
     @apply mx-auto w-full max-w-[1200px];
     padding-left: var(--shell-px);
@@ -283,7 +283,7 @@
 }
 
 /* ---------------------------------------------------------------------
-   motion & reveal (progressive enhancement: never stays blank)
+   motion & reveal system (hardware-accelerated, progressive enhancement)
    --------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -296,24 +296,62 @@
   }
 }
 
-/* reveal on scroll: defaults to visible so no blank voids if JS is delayed */
-.reveal {
+/* Base reveal transition */
+.reveal,
+.reveal-left,
+.reveal-right,
+.reveal-scale,
+.reveal-stagger > * {
   opacity: 1;
   transform: none;
   transition:
-    opacity 640ms var(--ease-lux),
-    transform 640ms var(--ease-lux);
+    opacity 720ms var(--ease-lux),
+    transform 720ms var(--ease-lux);
+  will-change: opacity, transform;
 }
+
+/* Progressive enhancement: only hide elements once JS runtime is verified */
 html.js-loaded .reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+html.js-loaded .reveal-left:not(.is-visible) {
+  opacity: 0;
+  transform: translateX(-24px);
+}
+
+html.js-loaded .reveal-right:not(.is-visible) {
+  opacity: 0;
+  transform: translateX(24px);
+}
+
+html.js-loaded .reveal-scale:not(.is-visible) {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+html.js-loaded .reveal-stagger > *:not(.is-visible) {
   opacity: 0;
   transform: translateY(20px);
 }
-.reveal.is-visible {
+
+/* Reveal active state */
+.reveal.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible,
+.reveal-scale.is-visible,
+.reveal-stagger > *.is-visible {
   opacity: 1 !important;
   transform: none !important;
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale,
+  .reveal-stagger > * {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
@@ -321,7 +359,82 @@ html.js-loaded .reveal:not(.is-visible) {
 }
 
 /* ---------------------------------------------------------------------
-   interactive range sliders (luxury brass theme — touch-optimized)
+   luxury card sheen reflection & hover physics
+   --------------------------------------------------------------------- */
+
+.card-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-sheen::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 42%,
+    rgba(201, 162, 75, 0.08) 48%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(201, 162, 75, 0.08) 52%,
+    transparent 58%
+  );
+  transform: translateX(-120%) rotate(25deg);
+  transition: transform 950ms var(--ease-lux);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.card-sheen:hover::before {
+  transform: translateX(120%) rotate(25deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-sheen::before {
+    display: none;
+  }
+}
+
+/* Luxury button tactile physics */
+.btn-lux {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 280ms var(--ease-lux),
+    box-shadow 280ms var(--ease-lux),
+    background-color 280ms var(--ease-lux),
+    border-color 280ms var(--ease-lux);
+}
+
+.btn-lux:hover {
+  transform: translateY(-2px);
+}
+
+.btn-lux:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Floating gentle hover animation */
+.float-subtle {
+  animation: float-drift 6s ease-in-out infinite alternate;
+}
+
+@keyframes float-drift {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-subtle {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   interactive range sliders (luxury brass theme - touch-optimized)
    --------------------------------------------------------------------- */
 input[type="range"].slider-brass {
   -webkit-appearance: none;

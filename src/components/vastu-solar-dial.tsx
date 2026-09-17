@@ -227,7 +227,7 @@ export function VastuSolarDial({ facing = "North-East", locality: _locality = "K
               <span className="text-[11px] font-semibold text-muted">Element: {meta.element}</span>
             </div>
             <p className="mt-1 font-display text-base font-bold text-ink">
-              {meta.vedicName} — Governed by {meta.rulingDeity}
+              {meta.vedicName} - Governed by {meta.rulingDeity}
             </p>
             <p className="mt-2 text-xs leading-relaxed text-ink/80">
               {meta.significance}

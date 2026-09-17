@@ -374,7 +374,7 @@ function ComparePage() {
                               <Check size={14} weight="bold" />
                             </span>
                           ) : (
-                            <span className="inline-block text-muted/40 font-mono text-xs">—</span>
+                            <span className="inline-block text-muted/40 font-mono text-xs">-</span>
                           )}
                         </td>
                       );

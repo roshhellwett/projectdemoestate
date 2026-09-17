@@ -142,7 +142,7 @@ export function TestimonialStrip({ testimonials }: { testimonials: Testimonial[]
           >
             <blockquote className="text-[15px] leading-relaxed text-ink/80">
               <span aria-hidden="true" className="font-display text-3xl leading-none text-brass">“</span>
-              {t.review_text.length > 220 ? `${t.review_text.slice(0, 217).trimEnd()}…` : t.review_text}
+              {t.review_text.length > 220 ? `${t.review_text.slice(0, 217).trimEnd()}...` : t.review_text}
             </blockquote>
             <figcaption className="mt-6">
               <p className="text-sm font-semibold text-ink">{t.client_name}</p>

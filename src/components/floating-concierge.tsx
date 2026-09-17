@@ -88,12 +88,12 @@ export function FloatingConcierge({ className = "" }: { className?: string } = {
         </div>
       ) : null}
 
-      {/* Main Floating Trigger Button — larger on touch */}
+      {/* Main Floating Trigger Button - larger on touch */}
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
         aria-label="Contact SS Property Concierge"
-        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-ink text-paper shadow-[0_12px_28px_-6px_rgba(18,16,14,0.35)] transition-all duration-300 hover:scale-105 hover:bg-ink-2 cursor-pointer"
+        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-ink text-paper shadow-[0_12px_28px_-6px_rgba(18,16,14,0.35)] transition-all duration-300 hover:scale-110 hover:bg-ink-2 active:scale-95 cursor-pointer float-subtle"
       >
         <span className="absolute -top-1 -right-1 flex h-4 w-4">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brass-2 opacity-75" />

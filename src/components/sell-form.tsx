@@ -457,7 +457,7 @@ export function SellForm({ kind = "sell" }: { kind?: "sell" | "partner" }) {
                 disabled={state === "sending"}
                 className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-verdigris px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg hover:bg-verdigris/90 disabled:opacity-50 transition-all min-h-[48px] cursor-pointer"
               >
-                <span>{state === "sending" ? "Submitting…" : "Submit for Free Valuation"}</span>
+                <span>{state === "sending" ? "Submitting..." : "Submit for Free Valuation"}</span>
                 <CheckCircle size={16} weight="bold" />
               </button>
             </div>

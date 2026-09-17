@@ -77,7 +77,7 @@ export function QuickViewModal({ property, onClose }: QuickViewModalProps) {
         onClick={(e) => e.stopPropagation()}
         className="relative flex flex-col w-full sm:flex-row sm:w-auto sm:max-w-4xl max-h-[92dvh] sm:max-h-[90vh] overflow-hidden rounded-t-2xl sm:rounded-3xl border border-line bg-white shadow-2xl animate-in slide-in-from-bottom sm:zoom-in-95 duration-300"
       >
-        {/* Drag handle — mobile only */}
+        {/* Drag handle - mobile only */}
         <div className="sm:hidden flex justify-center pt-2 pb-1">
           <div className="h-1 w-10 rounded-full bg-line" />
         </div>
@@ -143,7 +143,7 @@ export function QuickViewModal({ property, onClose }: QuickViewModalProps) {
               {property.description}
             </p>
 
-            {/* Key Specs Grid — 2 cols on mobile, 3 on larger */}
+            {/* Key Specs Grid - 2 cols on mobile, 3 on larger */}
             <div className="mt-5 sm:mt-6 grid grid-cols-2 sm:grid-cols-3 gap-2">
               <div className="rounded-xl border border-line bg-paper-2/60 p-2.5 sm:p-3 text-center">
                 <span className="text-[10px] font-semibold uppercase tracking-wider text-muted block">
@@ -217,7 +217,7 @@ export function QuickViewModal({ property, onClose }: QuickViewModalProps) {
             ) : null}
           </div>
 
-          {/* Action Row — sticky at bottom on mobile */}
+          {/* Action Row - sticky at bottom on mobile */}
           <div className="mt-6 sm:mt-8 space-y-3 pt-4 border-t border-line">
             <div className="flex gap-2">
               <button

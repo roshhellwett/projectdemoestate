@@ -1,12 +1,11 @@
-import { a as __toESM, n as require_react, r as __commonJSMin, t as require_jsx_runtime } from "./assets/jsx-runtime-XLNAidv3.js";
-import { o as isNotFound } from "./assets/Match-jgdi8drQ.js";
-import { r as rootRouteId } from "./assets/matchContext-CEGeAE9f.js";
+import { c as __commonJSMin, o as require_jsx_runtime, r as routerContext, s as require_react, u as __toESM } from "./assets/useStore-DOgV22Lo.js";
+import { o as isNotFound } from "./assets/Match-PAaURLE2.js";
+import { r as rootRouteId } from "./assets/matchContext-D_Vq7Onh.js";
 import { t as isRedirect } from "./assets/redirect-jkG3vMHM.js";
-import { A as hasKeys, b as invariant, j as isDangerousProtocol, w as decodePath, x as createSieveCache } from "./assets/utils-Bru9Ambr.js";
-import { a as createMemoryHistory, c as executeRewriteInput, n as _getRenderedMatches } from "./assets/load-server-DHCd7v1T.js";
+import { A as hasKeys, b as invariant, j as isDangerousProtocol, w as decodePath, x as createSieveCache } from "./assets/utils-pXzjPIMk.js";
+import { a as createMemoryHistory, c as executeRewriteInput, n as _getRenderedMatches } from "./assets/load-server-q-07CHFd.js";
 import { a as getScriptPreloadAttrs, c as resolveManifestCssLink, n as createInlineCssPlaceholderAsset, o as getStylesheetHref, r as createInlineCssStyleAsset, s as resolveManifestAssetLink } from "./assets/manifest-C1Z7yn7o.js";
-import { r as routerContext } from "./assets/useStore-D9b7VaH8.js";
-import { t as Matches } from "./assets/Matches-Bjl6fKAK.js";
+import { t as Matches } from "./assets/Matches-BtrFDXPd.js";
 import { a as runWithStartContext, c as FrameType, d as TSS_SERVER_FUNCTION, f as X_TSS_RAW_RESPONSE, i as getStartContext, l as TSS_CONTENT_TYPE_FRAMED_VERSIONED, m as mergeHeaders, n as flattenMiddlewares, o as createNullProtoObject, p as X_TSS_SERIALIZED, r as getStartOptions, s as safeObjectMerge, u as TSS_FORMDATA_CONTEXT } from "./assets/createServerFn-BITAowlT.js";
 import { t as getServerFnById } from "./assets/__23tanstack-start-server-fn-resolver-4BFaztAQ.js";
 import { ReadableStream as ReadableStream$1 } from "node:stream/web";
@@ -13655,7 +13654,7 @@ var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 * the dev styles URL for route-scoped CSS collection.
 */
 async function getStartManifest(matchedRoutes) {
-	const { tsrStartManifest } = await import("./assets/_tanstack-start-manifest_v-CyY9vO8a.js");
+	const { tsrStartManifest } = await import("./assets/_tanstack-start-manifest_v-DQPkIkEp.js");
 	const startManifest = tsrStartManifest();
 	let routes = startManifest.routes;
 	routes[rootRouteId];
@@ -14699,7 +14698,7 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
 	const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-		import("./assets/router-B-0hxn_C.js").then((n) => n.t),
+		import("./assets/router-CDgPq_GY.js").then((n) => n.t),
 		import("./assets/start-5Z2QO8AU.js"),
 		import("./assets/empty-plugin-adapters-D9UWiqvJ.js")
 	]);

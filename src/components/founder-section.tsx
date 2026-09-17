@@ -158,7 +158,7 @@ export function FounderSection({
                 “Apka Sapna, Humara Apna!”
               </p>
               <p className="mt-1 text-xs sm:text-sm font-semibold text-brass-dark uppercase tracking-wider">
-                — Your dream is our own.
+                - Your dream is our own.
               </p>
             </div>
 

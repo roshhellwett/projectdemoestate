@@ -105,9 +105,9 @@ function AboutPage() {
         {/* =================================================================
             3. KEY VERIFICATION STATS
            ================================================================= */}
-        <section className="shell-wide grid gap-6 sm:gap-8 py-14 sm:py-16 md:grid-cols-3 border-b border-line">
+        <section className="shell-wide grid gap-6 sm:gap-8 py-14 sm:py-16 md:grid-cols-3 border-b border-line reveal-stagger">
           {stats.map((s) => (
-            <div key={s.label} className="reveal rounded-2xl border border-line bg-white p-6 sm:p-8 shadow-xs">
+            <div key={s.label} className="card-sheen rounded-2xl border border-brass/40 bg-white p-6 sm:p-8 shadow-xs hover:border-brass hover:shadow-lg hover:shadow-brass/10 hover:-translate-y-1 transition-all duration-300">
               <p className="stat-value font-display text-4xl sm:text-5xl font-bold text-ink">{s.value}</p>
               <p className="mt-3 text-sm font-bold text-ink">{s.label}</p>
               <p className="mt-1 text-xs sm:text-sm text-muted leading-relaxed">{s.note}</p>
@@ -115,9 +115,9 @@ function AboutPage() {
           ))}
         </section>
 
-        <section className="shell-wide pb-24">
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="reveal rounded-[var(--radius-card)] border border-line bg-white p-8">
+        <section className="shell-wide pb-24 pt-12">
+          <div className="grid gap-6 md:grid-cols-2 reveal-stagger">
+            <div className="card-sheen rounded-[var(--radius-card)] border border-brass/40 bg-white p-8 shadow-xs hover:border-brass hover:shadow-md transition-all">
               <h2 className="font-display text-2xl font-medium text-ink">What we do</h2>
               <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted">
                 <li>Curated resale and new flats across Lake Town, Newtown, Kasba, Rajarhat and more.</li>
@@ -125,7 +125,7 @@ function AboutPage() {
                 <li>Honest pricing guidance based on real closed deals, not asking prices.</li>
               </ul>
             </div>
-            <div className="reveal rounded-[var(--radius-card)] border border-line bg-white p-8">
+            <div className="card-sheen rounded-[var(--radius-card)] border border-brass/40 bg-white p-8 shadow-xs hover:border-brass hover:shadow-md transition-all">
               <h2 className="font-display text-2xl font-medium text-ink">Talk to us</h2>
               <p className="mt-4 text-sm leading-relaxed text-muted">
                 Buying, selling or just figuring out the market - the conversation is free.
@@ -133,13 +133,13 @@ function AboutPage() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
                   href={settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, "")}` : "tel:+919429693786"}
-                  className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-transform hover:-translate-y-0.5 cursor-pointer"
+                  className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper shadow-sm transition-transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                 >
                   {settings.phone ?? "+91 94296 93786"}
                 </a>
                 <Link
                   to="/properties"
-                  className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-ink/20 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/50 cursor-pointer"
+                  className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-brass/40 bg-white px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-brass hover:shadow-xs cursor-pointer"
                 >
                   Browse Properties
                 </Link>

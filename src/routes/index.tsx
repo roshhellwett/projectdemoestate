@@ -135,7 +135,7 @@ function HomePage() {
 
         <main>
           {/* =================================================================
-              1. HERO SECTION — Mobile-first single-column → 2-col on lg
+              1. HERO SECTION - Mobile-first single-column → 2-col on lg
              ================================================================= */}
           <section className="relative overflow-hidden pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24 border-b border-line/60 hero-mesh">
             <div className="shell-wide">
@@ -201,8 +201,8 @@ function HomePage() {
                 <HeroSearch totalCount={totalPropertiesCount} />
               </div>
 
-              {/* Trust Stat Ticker — horizontal scroll on mobile */}
-              <div className="mt-8 sm:mt-10 scroll-rail sm:grid sm:grid-cols-4 gap-4 sm:gap-6 border-t border-line/70 pt-6 sm:pt-8">
+              {/* Trust Stat Ticker - horizontal scroll on mobile */}
+              <div className="reveal-stagger mt-8 sm:mt-10 scroll-rail sm:grid sm:grid-cols-4 gap-4 sm:gap-6 border-t border-line/70 pt-6 sm:pt-8">
                 <div className="shrink-0 min-w-[140px] sm:min-w-0">
                   <p className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-ink">₹150+ Cr</p>
                   <p className="mt-1 text-xs text-muted font-medium">Curated Property Value</p>
@@ -242,11 +242,11 @@ function HomePage() {
                 </p>
               </div>
 
-              <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="reveal-stagger grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {/* Service 1: Buy Verified */}
                 <Link
                   to="/properties"
-                  className="group flex flex-col justify-between rounded-2xl border border-brass/40 bg-white/90 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-lg hover:shadow-brass/15 hover:ring-1 hover:ring-brass/30"
+                  className="card-sheen group flex flex-col justify-between rounded-2xl border border-brass/40 bg-white/90 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-brass hover:shadow-xl hover:shadow-brass/15 hover:ring-1 hover:ring-brass/30"
                 >
                   <div>
                     <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105 border border-brass/30">
@@ -268,7 +268,7 @@ function HomePage() {
                 {/* Service 2: Sell / List */}
                 <Link
                   to="/sell"
-                  className="group flex flex-col justify-between rounded-2xl border border-brass/40 bg-white/90 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-lg hover:shadow-brass/15 hover:ring-1 hover:ring-brass/30"
+                  className="card-sheen group flex flex-col justify-between rounded-2xl border border-brass/40 bg-white/90 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-brass hover:shadow-xl hover:shadow-brass/15 hover:ring-1 hover:ring-brass/30"
                 >
                   <div>
                     <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105 border border-brass/30">
@@ -290,7 +290,7 @@ function HomePage() {
                 {/* Service 3: Finance & Advisor */}
                 <Link
                   to="/calculator"
-                  className="group flex flex-col justify-between rounded-2xl border border-brass/40 bg-white/90 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-lg hover:shadow-brass/15 hover:ring-1 hover:ring-brass/30 sm:col-span-2 lg:col-span-1"
+                  className="card-sheen group flex flex-col justify-between rounded-2xl border border-brass/40 bg-white/90 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-brass hover:shadow-xl hover:shadow-brass/15 hover:ring-1 hover:ring-brass/30 sm:col-span-2 lg:col-span-1"
                 >
                   <div>
                     <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105 border border-brass/30">
@@ -335,7 +335,7 @@ function HomePage() {
                 </p>
               </div>
 
-              {/* Category Filter Pills — horizontal scroll on mobile */}
+              {/* Category Filter Pills - horizontal scroll on mobile */}
               <div className="scroll-rail gap-2">
                 {[
                   { id: "all", label: "All Properties" },
@@ -361,7 +361,7 @@ function HomePage() {
 
             {displayedProperties.length > 0 ? (
               <>
-                {/* Property Cards Grid — single col on mobile */}
+                {/* Property Cards Grid - single col on mobile */}
                 <div className="mt-8 sm:mt-12 grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {displayedProperties.map((property, idx) => (
                     <PropertyCard
@@ -430,8 +430,8 @@ function HomePage() {
                 </p>
               </div>
 
-              <div className="mt-10 sm:mt-16 grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-                <div className="rounded-2xl border border-brass/40 bg-white p-5 sm:p-6 shadow-sm hover:border-brass hover:shadow-md hover:shadow-brass/10 transition-all">
+              <div className="reveal-stagger mt-10 sm:mt-16 grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="card-sheen rounded-2xl border border-brass/40 bg-white p-5 sm:p-6 shadow-sm hover:border-brass hover:shadow-lg hover:shadow-brass/10 hover:-translate-y-1 transition-all duration-300">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
                     <Eye size={22} weight="duotone" />
                   </div>
@@ -443,7 +443,7 @@ function HomePage() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-brass/40 bg-white p-5 sm:p-6 shadow-sm hover:border-brass hover:shadow-md hover:shadow-brass/10 transition-all">
+                <div className="card-sheen rounded-2xl border border-brass/40 bg-white p-5 sm:p-6 shadow-sm hover:border-brass hover:shadow-lg hover:shadow-brass/10 hover:-translate-y-1 transition-all duration-300">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
                     <ShieldCheck size={22} weight="duotone" />
                   </div>
@@ -455,7 +455,7 @@ function HomePage() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-brass/40 bg-white p-5 sm:p-6 shadow-sm hover:border-brass hover:shadow-md hover:shadow-brass/10 transition-all">
+                <div className="card-sheen rounded-2xl border border-brass/40 bg-white p-5 sm:p-6 shadow-sm hover:border-brass hover:shadow-lg hover:shadow-brass/10 hover:-translate-y-1 transition-all duration-300">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
                     <Handshake size={22} weight="duotone" />
                   </div>
@@ -467,7 +467,7 @@ function HomePage() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-brass/40 bg-white p-5 sm:p-6 shadow-sm hover:border-brass hover:shadow-md hover:shadow-brass/10 transition-all">
+                <div className="card-sheen rounded-2xl border border-brass/40 bg-white p-5 sm:p-6 shadow-sm hover:border-brass hover:shadow-lg hover:shadow-brass/10 hover:-translate-y-1 transition-all duration-300">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
                     <FileText size={22} weight="duotone" />
                   </div>
@@ -541,13 +541,13 @@ function HomePage() {
                 </Link>
               </div>
 
-              <div className="mt-6 sm:mt-10 grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
+              <div className="reveal-stagger mt-6 sm:mt-10 grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
                 {posts.map((post) => (
                   <Link
                     key={post.id}
                     to="/journal/$slug"
                     params={{ slug: post.slug }}
-                    className="group flex flex-col justify-between rounded-2xl border border-brass/50 bg-white/70 p-5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-md"
+                    className="card-sheen group flex flex-col justify-between rounded-2xl border border-brass/50 bg-white/70 p-5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-brass hover:shadow-xl hover:shadow-brass/10"
                   >
                     <div>
                       <span className="text-[11px] font-semibold text-muted">
@@ -560,8 +560,9 @@ function HomePage() {
                         {post.excerpt}
                       </p>
                     </div>
-                    <span className="mt-4 sm:mt-6 flex items-center gap-1 text-xs font-semibold text-brass">
-                      Read analysis <ArrowRight size={12} />
+                    <span className="mt-4 sm:mt-6 flex items-center gap-1 text-xs font-semibold text-brass group-hover:text-brass-dark transition-colors">
+                      <span>Read analysis</span>
+                      <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
                   </Link>
                 ))}

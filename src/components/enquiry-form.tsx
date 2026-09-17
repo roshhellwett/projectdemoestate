@@ -105,7 +105,7 @@ export function EnquiryForm({ property }: { property: Property }) {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             className="w-full resize-none rounded-[var(--radius-input)] border border-line bg-paper px-4 py-2.5 text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:outline-none"
-            placeholder="Preferred visit time, questions…"
+            placeholder="Preferred visit time, questions..."
           />
         </div>
 
@@ -139,7 +139,7 @@ export function EnquiryForm({ property }: { property: Property }) {
           disabled={state === "sending"}
           className="w-full rounded-full bg-ink py-3.5 text-sm font-semibold text-paper transition-all hover:-translate-y-0.5 active:translate-y-0 disabled:translate-y-0 disabled:opacity-60 cursor-pointer min-h-[48px]"
         >
-          {state === "sending" ? "Sending…" : "Request a Visit"}
+          {state === "sending" ? "Sending..." : "Request a Visit"}
         </button>
       </form>
 

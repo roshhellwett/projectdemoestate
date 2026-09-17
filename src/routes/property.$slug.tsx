@@ -461,7 +461,7 @@ function PropertyDetailPage() {
                       <Bathtub size={13} className="text-brass" /> Bathrooms
                     </p>
                     <p className="mt-2 font-display text-lg font-bold text-ink">
-                      {property.bathrooms ?? "—"}
+                      {property.bathrooms ?? "-"}
                     </p>
                   </div>
 

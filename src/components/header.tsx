@@ -222,7 +222,7 @@ export function Header() {
               <MagnifyingGlass size={18} />
             </button>
 
-            {/* Saved — with badge */}
+            {/* Saved - with badge */}
             <Link
               to="/properties"
               search={{ locality: "All", bhk: "" }}
@@ -279,7 +279,7 @@ export function Header() {
         aria-hidden="true"
       />
 
-      {/* Sidebar Drawer — slides in from right */}
+      {/* Sidebar Drawer - slides in from right */}
       <div
         ref={sidebarRef}
         className={`fixed top-0 right-0 bottom-0 z-50 w-[min(320px,85vw)] border-l border-brass/40 bg-paper shadow-2xl transition-transform duration-300 ease-out lg:hidden ${
@@ -337,7 +337,7 @@ export function Header() {
             </div>
           </nav>
 
-          {/* Sidebar Footer — Contact Actions */}
+          {/* Sidebar Footer - Contact Actions */}
           <div className="border-t border-brass/30 px-4 py-4 pb-6 space-y-3" style={{ paddingBottom: "max(24px, env(safe-area-inset-bottom))" }}>
             <a
               href={SITE.whatsapp}
