@@ -59,7 +59,7 @@ export function FounderSection({
               />
 
               {/* Main Photo Card Container */}
-              <div className="group relative overflow-hidden rounded-3xl border border-line bg-paper-2 shadow-[0_24px_50px_-16px_rgba(18,16,14,0.22)] transition-all duration-500 hover:border-brass/50">
+              <div className="group relative overflow-hidden rounded-3xl border-2 border-brass/50 bg-paper-2 shadow-[0_24px_50px_-16px_rgba(18,16,14,0.22)] shadow-brass/15 ring-1 ring-brass/25 transition-all duration-500 hover:border-brass">
                 <div className="aspect-[3/4] sm:aspect-[4/5] w-full overflow-hidden bg-ink">
                   <img
                     src="/owner.avif"
@@ -84,7 +84,7 @@ export function FounderSection({
 
                 {/* Top Founder Badge */}
                 <div className="absolute top-4 left-4 z-10">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-ink/75 backdrop-blur-md px-3.5 py-1 text-xs font-semibold text-paper shadow-md">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-brass/40 bg-ink/85 backdrop-blur-md px-3.5 py-1 text-xs font-semibold text-paper shadow-md">
                     <Sparkle size={13} weight="fill" className="text-brass-2" />
                     <span>Founder & Creator</span>
                   </span>
@@ -119,7 +119,7 @@ export function FounderSection({
               </div>
 
               {/* Floating Verified Trust Pill on Mobile/Desktop */}
-              <div className="absolute -bottom-4 -right-2 sm:-right-4 z-20 hidden sm:flex items-center gap-2 rounded-2xl border border-brass/40 bg-white/95 backdrop-blur-md px-4 py-2.5 shadow-lg">
+              <div className="absolute -bottom-4 -right-2 sm:-right-4 z-20 hidden sm:flex items-center gap-2 rounded-2xl border-2 border-brass/50 bg-white/95 backdrop-blur-md px-4 py-2.5 shadow-lg shadow-brass/10 ring-1 ring-brass/20">
                 <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-brass-ghost text-brass">
                   <CheckCircle size={18} weight="fill" />
                 </div>
@@ -153,7 +153,7 @@ export function FounderSection({
             </p>
 
             {/* Signature Brand Quote Box (Iconic from ssproperty.in) */}
-            <div className="relative rounded-2xl border-l-4 border-brass bg-paper-2/90 border border-line/80 p-5 sm:p-6 shadow-xs">
+            <div className="relative rounded-2xl border-l-4 border-l-brass border border-brass/40 bg-paper-2/95 p-5 sm:p-6 shadow-sm ring-1 ring-brass/15">
               <p className="font-display text-xl sm:text-2xl font-bold italic tracking-tight text-ink">
                 “Apka Sapna, Humara Apna!”
               </p>
@@ -168,7 +168,7 @@ export function FounderSection({
 
             {/* 4 Pillars Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-              <div className="rounded-xl border border-line bg-white p-4 shadow-xs">
+              <div className="rounded-xl border border-brass/35 bg-white p-4 shadow-xs transition-all duration-300 hover:border-brass hover:shadow-md hover:shadow-brass/10 hover:ring-1 hover:ring-brass/20">
                 <div className="flex items-center gap-2 text-xs font-bold text-ink">
                   <VideoCamera size={16} weight="duotone" className="text-brass" />
                   <span>Real Video Walkthroughs</span>
@@ -178,7 +178,7 @@ export function FounderSection({
                 </p>
               </div>
 
-              <div className="rounded-xl border border-line bg-white p-4 shadow-xs">
+              <div className="rounded-xl border border-brass/35 bg-white p-4 shadow-xs transition-all duration-300 hover:border-brass hover:shadow-md hover:shadow-brass/10 hover:ring-1 hover:ring-brass/20">
                 <div className="flex items-center gap-2 text-xs font-bold text-ink">
                   <ShieldCheck size={16} weight="duotone" className="text-verdigris" />
                   <span>100% Legal Due Diligence</span>
@@ -188,7 +188,7 @@ export function FounderSection({
                 </p>
               </div>
 
-              <div className="rounded-xl border border-line bg-white p-4 shadow-xs">
+              <div className="rounded-xl border border-brass/35 bg-white p-4 shadow-xs transition-all duration-300 hover:border-brass hover:shadow-md hover:shadow-brass/10 hover:ring-1 hover:ring-brass/20">
                 <div className="flex items-center gap-2 text-xs font-bold text-ink">
                   <Handshake size={16} weight="duotone" className="text-brass" />
                   <span>Founder-Led Advisory</span>
@@ -198,7 +198,7 @@ export function FounderSection({
                 </p>
               </div>
 
-              <div className="rounded-xl border border-line bg-white p-4 shadow-xs">
+              <div className="rounded-xl border border-brass/35 bg-white p-4 shadow-xs transition-all duration-300 hover:border-brass hover:shadow-md hover:shadow-brass/10 hover:ring-1 hover:ring-brass/20">
                 <div className="flex items-center gap-2 text-xs font-bold text-ink">
                   <CheckCircle size={16} weight="duotone" className="text-verdigris" />
                   <span>Kolkata Micro-Market Intel</span>

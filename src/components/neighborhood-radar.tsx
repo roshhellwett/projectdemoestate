@@ -138,7 +138,7 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
                 className={`w-full min-w-[260px] sm:min-w-0 text-left rounded-2xl p-4 sm:p-5 border transition-all duration-300 cursor-pointer ${
                   isSelected
                     ? "border-brass bg-white shadow-lg shadow-brass/10 ring-1 ring-brass/30"
-                    : "border-line bg-white/60 hover:bg-white hover:border-brass/40 text-muted"
+                    : "border-brass/30 bg-white/70 hover:bg-white hover:border-brass/70 hover:shadow-xs text-muted"
                 }`}
               >
                 <div className="flex items-start justify-between">
@@ -154,7 +154,7 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
                       {c.name}
                     </h4>
                   </div>
-                  <span className="rounded-full bg-paper-2 px-2.5 py-1 text-[11px] font-bold text-ink">
+                  <span className="rounded-full bg-paper-2 px-2.5 py-1 text-[11px] font-bold text-ink border border-brass/25">
                     {count > 0 ? `${count} Active` : "Prime Enclave"}
                   </span>
                 </div>
@@ -169,11 +169,11 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
         </div>
 
         {/* Right Column: Active Corridor Deep-Dive Spec Card */}
-        <div className="rounded-2xl sm:rounded-3xl border border-line bg-white p-5 sm:p-8 md:p-10 shadow-sm relative overflow-hidden">
+        <div className="rounded-2xl sm:rounded-3xl border-2 border-brass/50 bg-white p-5 sm:p-8 md:p-10 shadow-lg shadow-brass/5 ring-1 ring-brass/25 relative overflow-hidden">
           {/* Subtle Ambient Glow */}
           <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-brass/5 blur-3xl pointer-events-none" />
 
-          <div className="flex flex-wrap items-start justify-between gap-4 border-b border-line pb-6">
+          <div className="flex flex-wrap items-start justify-between gap-4 border-b border-brass/20 pb-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-brass">
                 {selectedCorridor.tag}
@@ -186,7 +186,7 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
               </p>
             </div>
 
-            <div className="text-left sm:text-right rounded-2xl bg-paper-2 p-4 border border-line">
+            <div className="text-left sm:text-right rounded-2xl bg-paper-2/80 p-4 border border-brass/35 shadow-xs">
               <span className="text-[10px] font-bold uppercase tracking-wider text-muted block">
                 Capital Benchmark
               </span>
@@ -206,8 +206,8 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {/* Airport */}
-              <div className="rounded-2xl border border-line bg-paper-2/60 p-4 text-center">
-                <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-white text-ink shadow-sm">
+              <div className="rounded-2xl border border-brass/30 bg-paper-2/60 p-4 text-center hover:border-brass hover:bg-white hover:shadow-md hover:shadow-brass/10 transition-all shadow-2xs">
+                <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-white text-ink shadow-sm border border-brass/25">
                   <AirplaneTilt size={18} weight="fill" className="text-brass" />
                 </div>
                 <span className="font-display text-xl font-bold text-ink mt-2 block">
@@ -219,8 +219,8 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
               </div>
 
               {/* Sector V */}
-              <div className="rounded-2xl border border-line bg-paper-2/60 p-4 text-center">
-                <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-white text-ink shadow-sm">
+              <div className="rounded-2xl border border-brass/30 bg-paper-2/60 p-4 text-center hover:border-brass hover:bg-white hover:shadow-md hover:shadow-brass/10 transition-all shadow-2xs">
+                <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-white text-ink shadow-sm border border-brass/25">
                   <Buildings size={18} weight="fill" className="text-verdigris" />
                 </div>
                 <span className="font-display text-xl font-bold text-ink mt-2 block">
@@ -232,8 +232,8 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
               </div>
 
               {/* Park Street */}
-              <div className="rounded-2xl border border-line bg-paper-2/60 p-4 text-center">
-                <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-white text-ink shadow-sm">
+              <div className="rounded-2xl border border-brass/30 bg-paper-2/60 p-4 text-center hover:border-brass hover:bg-white hover:shadow-md hover:shadow-brass/10 transition-all shadow-2xs">
+                <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-white text-ink shadow-sm border border-brass/25">
                   <Compass size={18} weight="fill" className="text-ink" />
                 </div>
                 <span className="font-display text-xl font-bold text-ink mt-2 block">
@@ -245,8 +245,8 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
               </div>
 
               {/* Metro Station */}
-              <div className="rounded-2xl border border-line bg-paper-2/60 p-4 text-center">
-                <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-white text-ink shadow-sm">
+              <div className="rounded-2xl border border-brass/30 bg-paper-2/60 p-4 text-center hover:border-brass hover:bg-white hover:shadow-md hover:shadow-brass/10 transition-all shadow-2xs">
+                <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-white text-ink shadow-sm border border-brass/25">
                   <Train size={18} weight="fill" className="text-brass-dark" />
                 </div>
                 <span className="font-display text-base font-bold text-ink mt-2 block truncate" title={selectedCorridor.metroLine}>
@@ -260,12 +260,12 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
           </div>
 
           {/* Highlights Pills & Filter CTA */}
-          <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-6 border-t border-line">
+          <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-6 border-t border-brass/20">
             <div className="flex flex-wrap gap-2">
               {selectedCorridor.highlights.map((hl) => (
                 <span
                   key={hl}
-                  className="rounded-full border border-line bg-white px-3 py-1 text-[11px] font-semibold text-ink"
+                  className="rounded-full border border-brass/35 bg-white px-3 py-1 text-[11px] font-semibold text-ink shadow-2xs"
                 >
                   ✓ {hl}
                 </span>
@@ -275,7 +275,7 @@ export function NeighborhoodRadar({ corridorCounts = {} }: NeighborhoodRadarProp
             <Link
               to="/properties"
               search={{ locality: (selectedCorridor.name.split(" &")[0] || "All").trim() }}
-              className="flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-xs font-bold uppercase tracking-wider text-paper shadow-md hover:bg-ink-2 transition-transform hover:scale-105 active:scale-95 shrink-0"
+              className="flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-xs font-bold uppercase tracking-wider text-paper border border-brass/40 shadow-md hover:bg-ink-2 hover:border-brass transition-all hover:scale-105 active:scale-95 shrink-0"
             >
               <span>View {selectedCorridor.name} Listings</span>
               <ArrowRight size={14} weight="bold" />

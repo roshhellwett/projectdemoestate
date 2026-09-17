@@ -172,7 +172,7 @@ function HomePage() {
                       href={site.whatsapp}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center justify-center gap-2 rounded-full border border-line bg-white/90 px-6 py-3.5 sm:px-7 sm:py-4 text-sm font-semibold text-ink shadow-xs transition-all hover:border-brass hover:bg-white active:translate-y-0"
+                      className="flex items-center justify-center gap-2 rounded-full border border-brass/45 bg-white/95 px-6 py-3.5 sm:px-7 sm:py-4 text-sm font-semibold text-ink shadow-xs transition-all hover:border-brass hover:bg-white hover:shadow-md hover:shadow-brass/15 active:translate-y-0"
                     >
                       <span>Speak with an Advisor</span>
                       <ArrowRight size={16} />
@@ -182,7 +182,7 @@ function HomePage() {
 
                 {/* Hero Right Column: Visual Showcase */}
                 <div className="relative">
-                  <div className="relative aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-line bg-paper-2 shadow-[0_32px_64px_-24px_rgba(18,16,14,0.18)]">
+                  <div className="relative aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-brass/50 bg-paper-2 shadow-[0_32px_64px_-24px_rgba(18,16,14,0.18)] shadow-brass/10 ring-1 ring-brass/25">
                     <img
                       src="/images/kolkata.webp"
                       alt="SS Property - Kolkata Skyline & Premier Residences"
@@ -246,10 +246,10 @@ function HomePage() {
                 {/* Service 1: Buy Verified */}
                 <Link
                   to="/properties"
-                  className="group flex flex-col justify-between rounded-2xl border border-line bg-paper/60 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass/60 hover:bg-white hover:shadow-lg"
+                  className="group flex flex-col justify-between rounded-2xl border border-brass/40 bg-white/90 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-lg hover:shadow-brass/15 hover:ring-1 hover:ring-brass/30"
                 >
                   <div>
-                    <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105">
+                    <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105 border border-brass/30">
                       <ShieldCheck size={22} weight="fill" className="text-brass-2" />
                     </div>
                     <h3 className="mt-4 font-display text-base sm:text-lg font-semibold text-ink">
@@ -268,10 +268,10 @@ function HomePage() {
                 {/* Service 2: Sell / List */}
                 <Link
                   to="/sell"
-                  className="group flex flex-col justify-between rounded-2xl border border-line bg-paper/60 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass/60 hover:bg-white hover:shadow-lg"
+                  className="group flex flex-col justify-between rounded-2xl border border-brass/40 bg-white/90 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-lg hover:shadow-brass/15 hover:ring-1 hover:ring-brass/30"
                 >
                   <div>
-                    <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105">
+                    <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105 border border-brass/30">
                       <Handshake size={22} weight="fill" className="text-brass-2" />
                     </div>
                     <h3 className="mt-4 font-display text-base sm:text-lg font-semibold text-ink">
@@ -290,10 +290,10 @@ function HomePage() {
                 {/* Service 3: Finance & Advisor */}
                 <Link
                   to="/calculator"
-                  className="group flex flex-col justify-between rounded-2xl border border-line bg-paper/60 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass/60 hover:bg-white hover:shadow-lg sm:col-span-2 lg:col-span-1"
+                  className="group flex flex-col justify-between rounded-2xl border border-brass/40 bg-white/90 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-lg hover:shadow-brass/15 hover:ring-1 hover:ring-brass/30 sm:col-span-2 lg:col-span-1"
                 >
                   <div>
-                    <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105">
+                    <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:scale-105 border border-brass/30">
                       <Eye size={22} weight="fill" className="text-brass-2" />
                     </div>
                     <h3 className="mt-4 font-display text-base sm:text-lg font-semibold text-ink">
@@ -431,7 +431,7 @@ function HomePage() {
               </div>
 
               <div className="mt-10 sm:mt-16 grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-                <div className="rounded-2xl border border-line bg-white p-5 sm:p-6 shadow-sm">
+                <div className="rounded-2xl border border-brass/40 bg-white p-5 sm:p-6 shadow-sm hover:border-brass hover:shadow-md hover:shadow-brass/10 transition-all">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
                     <Eye size={22} weight="duotone" />
                   </div>
@@ -443,7 +443,7 @@ function HomePage() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-line bg-white p-5 sm:p-6 shadow-sm">
+                <div className="rounded-2xl border border-brass/40 bg-white p-5 sm:p-6 shadow-sm hover:border-brass hover:shadow-md hover:shadow-brass/10 transition-all">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
                     <ShieldCheck size={22} weight="duotone" />
                   </div>
@@ -455,7 +455,7 @@ function HomePage() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-line bg-white p-5 sm:p-6 shadow-sm">
+                <div className="rounded-2xl border border-brass/40 bg-white p-5 sm:p-6 shadow-sm hover:border-brass hover:shadow-md hover:shadow-brass/10 transition-all">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
                     <Handshake size={22} weight="duotone" />
                   </div>
@@ -467,7 +467,7 @@ function HomePage() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-line bg-white p-5 sm:p-6 shadow-sm">
+                <div className="rounded-2xl border border-brass/40 bg-white p-5 sm:p-6 shadow-sm hover:border-brass hover:shadow-md hover:shadow-brass/10 transition-all">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-brass-ghost text-brass">
                     <FileText size={22} weight="duotone" />
                   </div>
@@ -641,7 +641,7 @@ function FaqItem({ faq }: { faq: Faq }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="rounded-xl border border-line bg-white shadow-sm overflow-hidden transition-colors">
+    <div className={`rounded-xl border bg-white shadow-sm overflow-hidden transition-all ${open ? "border-brass shadow-md shadow-brass/10" : "border-brass/35 hover:border-brass/70"}`}>
       <button
         type="button"
         onClick={() => setOpen(!open)}

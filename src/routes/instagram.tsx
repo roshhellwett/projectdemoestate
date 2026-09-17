@@ -57,7 +57,7 @@ function InstagramPage() {
       <FloatingConcierge />
       <main className="pt-14 lg:pt-16">
         {/* Hero Section */}
-        <section className="border-b border-line bg-paper-2/60">
+        <section className="border-b border-brass/30 bg-paper-2/60">
           <div className="shell py-14 md:py-20">
             <div className="inline-flex items-center gap-2 rounded-full border border-brass/40 bg-white px-3.5 py-1 text-xs font-semibold text-ink shadow-xs mb-4">
               <InstagramIcon size={14} className="text-brass" />
@@ -75,7 +75,7 @@ function InstagramPage() {
                 href={instaUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-xs font-semibold text-paper shadow-xs hover:bg-ink-2 hover:shadow-md transition-all active:translate-y-0"
+                className="inline-flex items-center gap-2 rounded-full border border-brass/40 bg-ink px-5 py-2.5 text-xs font-semibold text-paper shadow-xs hover:bg-ink-2 hover:border-brass hover:shadow-md hover:shadow-brass/20 transition-all active:translate-y-0"
               >
                 <InstagramIcon size={15} className="text-brass-2" />
                 <span>Follow @{instaHandle} on Instagram</span>
@@ -83,7 +83,7 @@ function InstagramPage() {
               </a>
               <Link
                 to="/properties"
-                className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-5 py-2.5 text-xs font-semibold text-ink hover:border-brass transition-colors shadow-xs"
+                className="inline-flex items-center gap-2 rounded-full border border-brass/40 bg-white px-5 py-2.5 text-xs font-semibold text-ink hover:border-brass hover:shadow-xs transition-all"
               >
                 <span>Browse All Properties</span>
               </Link>
@@ -121,7 +121,7 @@ function InstagramPage() {
                     href={reel.reel_url}
                     target="_blank"
                     rel="noreferrer"
-                    className="reel-tile reveal group relative block w-full max-w-[240px] sm:max-w-[260px] overflow-hidden rounded-2xl border border-brass/50 bg-ink shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-xl shrink-0"
+                    className="reel-tile reveal group relative block w-full max-w-[240px] sm:max-w-[260px] overflow-hidden rounded-2xl border-2 border-brass/50 bg-ink shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-xl hover:shadow-brass/20 hover:ring-1 hover:ring-brass/30 shrink-0"
                   >
                     <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink-2">
                       <img
@@ -133,7 +133,7 @@ function InstagramPage() {
                         decoding="async"
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       />
-                      <div className="absolute top-2.5 right-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-black/65 text-white backdrop-blur-md border border-white/20 shadow-xs">
+                      <div className="absolute top-2.5 right-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-black/65 text-white backdrop-blur-md border border-brass/40 shadow-xs">
                         <InstagramIcon size={14} />
                       </div>
                     </div>
@@ -154,7 +154,7 @@ function InstagramPage() {
         </section>
 
         {/* Community / Follow Banner */}
-        <section className="border-t border-line bg-paper-2/40 py-12 sm:py-16">
+        <section className="border-t border-brass/30 bg-paper-2/40 py-12 sm:py-16">
           <div className="shell max-w-3xl text-center">
             <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink">
               Never miss an off-market opportunity
@@ -167,7 +167,7 @@ function InstagramPage() {
                 href={instaUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-brass/50 bg-white px-6 py-3 text-xs font-semibold text-ink shadow-xs hover:border-brass hover:text-brass-dark hover:shadow-md transition-all"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-brass/50 bg-white px-6 py-3 text-xs font-semibold text-ink shadow-xs hover:border-brass hover:text-brass-dark hover:shadow-md hover:shadow-brass/20 hover:ring-1 hover:ring-brass/25 transition-all"
               >
                 <InstagramIcon size={15} className="text-brass" />
                 <span>Follow @{instaHandle}</span>

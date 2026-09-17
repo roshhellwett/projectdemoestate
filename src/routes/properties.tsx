@@ -241,7 +241,7 @@ function PropertiesPage() {
                     {properties.length > 0 ? `${filteredProperties.length} of ${properties.length} Listings` : "0 Active Listings"}
                   </span>
 
-                  <div className="flex items-center rounded-xl border border-line bg-white p-1 shadow-sm">
+                  <div className="flex items-center rounded-xl border border-brass/35 bg-white p-1 shadow-xs">
                     <button
                       id="btn-view-grid"
                       type="button"
@@ -278,8 +278,8 @@ function PropertiesPage() {
 
           {/* =================================================================
               2. RESPONSIVE MULTI-FACET FILTERING BAR (STICKY Z-20)
-             ================================================================= */}
-          <section className="sticky top-14 lg:top-20 z-20 border-b border-line bg-white/95 backdrop-blur-md py-3 shadow-xs">
+              ================================================================= */}
+          <section className="sticky top-14 lg:top-20 z-20 border-b border-brass/30 bg-white/95 backdrop-blur-md py-3 shadow-xs">
             <div className="shell-wide space-y-2.5">
               {/* --- MOBILE CONTROLS (< lg) --- */}
               <div className="flex flex-col gap-2.5 lg:hidden">
@@ -295,7 +295,7 @@ function PropertiesPage() {
                       value={q}
                       onChange={(e) => setQ(e.target.value)}
                       placeholder="Search locality, project name…"
-                      className="w-full rounded-xl border border-line bg-paper/60 pl-10 pr-9 py-3 text-sm font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none min-h-[44px]"
+                      className="w-full rounded-xl border border-brass/35 bg-paper/60 pl-10 pr-9 py-3 text-sm font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none min-h-[44px]"
                     />
                     {q ? (
                       <button
@@ -312,13 +312,13 @@ function PropertiesPage() {
                   </div>
 
                   {/* Mobile Filters Trigger */}
-                  <button
+                    <button
                     type="button"
                     onClick={() => setMobileFilterOpen(true)}
                     className={`flex items-center gap-1.5 rounded-xl border px-4 py-3 text-xs font-semibold shrink-0 transition-colors cursor-pointer min-h-[44px] ${
                       activeFilterCount > 0
                         ? "border-brass bg-brass-soft/40 text-ink"
-                        : "border-line bg-paper text-muted hover:text-ink"
+                        : "border-brass/35 bg-paper text-muted hover:border-brass hover:text-ink"
                     }`}
                   >
                     <SlidersHorizontal size={15} className={activeFilterCount > 0 ? "text-brass" : ""} />
@@ -338,7 +338,7 @@ function PropertiesPage() {
                     className={`flex h-11 w-11 items-center justify-center rounded-xl border shrink-0 transition-colors cursor-pointer ${
                       search.savedOnly
                         ? "border-danger bg-danger/10 text-danger"
-                        : "border-line bg-paper text-muted hover:text-ink"
+                        : "border-brass/35 bg-paper text-muted hover:border-brass hover:text-ink"
                     }`}
                   >
                     <Heart size={16} weight={search.savedOnly ? "fill" : "regular"} />
@@ -353,7 +353,7 @@ function PropertiesPage() {
                     className={`shrink-0 rounded-full px-3.5 py-2 text-xs font-semibold transition-colors cursor-pointer ${
                       search.locality === "All"
                         ? "bg-ink text-paper shadow-xs"
-                        : "border border-line bg-white text-muted hover:text-ink"
+                        : "border border-brass/30 bg-white text-muted hover:border-brass hover:text-ink"
                     }`}
                   >
                     All Corridors
@@ -366,7 +366,7 @@ function PropertiesPage() {
                       className={`shrink-0 rounded-full px-3.5 py-2 text-xs font-semibold transition-colors cursor-pointer ${
                         search.locality === l.locality
                           ? "bg-ink text-paper shadow-xs"
-                          : "border border-line bg-white text-muted hover:text-ink"
+                          : "border border-brass/30 bg-white text-muted hover:border-brass hover:text-ink"
                       }`}
                     >
                       {l.locality} ({l.count})
@@ -436,7 +436,7 @@ function PropertiesPage() {
                       value={q}
                       onChange={(e) => setQ(e.target.value)}
                       placeholder="Search locality, landmark, project name…"
-                      className="w-full rounded-xl border border-line bg-paper/60 pl-11 pr-10 py-2.5 text-xs font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none"
+                      className="w-full rounded-xl border border-brass/35 bg-paper/60 pl-11 pr-10 py-2.5 text-xs font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none"
                     />
                     {q ? (
                       <button
@@ -457,7 +457,7 @@ function PropertiesPage() {
                     <select
                       value={search.locality}
                       onChange={(e) => setFilter({ locality: e.target.value })}
-                      className="w-full appearance-none rounded-xl border border-line bg-paper/60 px-4 py-2.5 pr-8 text-xs font-semibold text-ink focus:border-brass focus:bg-white focus:outline-none cursor-pointer"
+                      className="w-full appearance-none rounded-xl border border-brass/35 bg-paper/60 px-4 py-2.5 pr-8 text-xs font-semibold text-ink focus:border-brass focus:bg-white focus:outline-none cursor-pointer"
                     >
                       <option value="All">All Kolkata Corridors</option>
                       {localities.map((l) => (
@@ -476,7 +476,7 @@ function PropertiesPage() {
                     <select
                       value={search.sort}
                       onChange={(e) => setFilter({ sort: e.target.value })}
-                      className="w-full appearance-none rounded-xl border border-line bg-paper/60 px-4 py-2.5 pr-8 text-xs font-semibold text-ink focus:border-brass focus:bg-white focus:outline-none cursor-pointer"
+                      className="w-full appearance-none rounded-xl border border-brass/35 bg-paper/60 px-4 py-2.5 pr-8 text-xs font-semibold text-ink focus:border-brass focus:bg-white focus:outline-none cursor-pointer"
                     >
                       <option value="featured">Sort: Featured First</option>
                       <option value="price_asc">Price: Low to High</option>
@@ -496,7 +496,7 @@ function PropertiesPage() {
                     className={`flex items-center gap-1.5 rounded-xl border px-4 py-2.5 text-xs font-semibold transition-all ${
                       search.savedOnly
                         ? "border-danger bg-danger/10 text-danger"
-                        : "border-line bg-paper/60 text-muted hover:border-brass hover:text-ink"
+                        : "border-brass/35 bg-paper/60 text-muted hover:border-brass hover:text-ink"
                     }`}
                   >
                     <Heart
@@ -512,7 +512,7 @@ function PropertiesPage() {
                     <button
                       type="button"
                       onClick={resetAllFilters}
-                      className="flex items-center gap-1.5 rounded-xl border border-line bg-white px-3.5 py-2.5 text-xs font-semibold text-muted hover:text-ink transition-colors"
+                      className="flex items-center gap-1.5 rounded-xl border border-brass/35 bg-white px-3.5 py-2.5 text-xs font-semibold text-muted hover:border-brass hover:text-ink transition-colors"
                       title="Reset all filters"
                     >
                       <ArrowCounterClockwise size={15} />
@@ -535,7 +535,7 @@ function PropertiesPage() {
                         className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
                           search.bhk === b.id
                             ? "bg-ink text-paper shadow-sm"
-                            : "border border-line bg-white text-muted hover:border-brass hover:text-ink"
+                            : "border border-brass/35 bg-white text-muted hover:border-brass hover:text-ink hover:shadow-2xs"
                         }`}
                       >
                         {b.label}
@@ -555,7 +555,7 @@ function PropertiesPage() {
                         className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
                           search.budget === bg.id
                             ? "bg-brass text-ink font-bold shadow-sm"
-                            : "border border-line bg-white text-muted hover:border-brass hover:text-ink"
+                            : "border border-brass/35 bg-white text-muted hover:border-brass hover:text-ink hover:shadow-2xs"
                         }`}
                       >
                         {bg.label}
@@ -574,7 +574,7 @@ function PropertiesPage() {
                       className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
                         search.possession === "Ready To Move"
                           ? "bg-verdigris text-white shadow-sm"
-                          : "border border-line bg-white text-muted hover:border-verdigris hover:text-verdigris"
+                          : "border border-brass/35 bg-white text-muted hover:border-verdigris hover:text-verdigris hover:shadow-2xs"
                       }`}
                     >
                       ✓ Ready to Move

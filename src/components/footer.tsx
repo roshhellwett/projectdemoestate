@@ -19,7 +19,7 @@ export function Footer() {
   const footerNote = settings.footer_note ?? "Verified listings. Transparent pricing. No hidden charges.";
 
   return (
-    <footer className="border-t border-line-dark bg-ink text-paper">
+    <footer className="border-t-2 border-brass/40 bg-ink text-paper">
       <div className="shell-wide grid gap-8 sm:gap-10 lg:gap-12 py-12 sm:py-16 grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
           <LogoImage dark className="h-9 sm:h-10" />
@@ -84,7 +84,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-line-dark">
+      <div className="border-t border-brass/25">
         <div
           className="shell-wide flex flex-col items-center justify-between gap-2 sm:gap-3 py-5 sm:py-6 text-xs text-paper/50 sm:flex-row"
           style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}

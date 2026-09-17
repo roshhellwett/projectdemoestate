@@ -62,7 +62,7 @@ export function EmiCalculator({
 
   return (
     <div
-      className={`rounded-2xl border border-line bg-white p-6 md:p-8 shadow-sm ${className}`}
+      className={`rounded-2xl sm:rounded-3xl border-2 border-brass/45 bg-white p-6 md:p-8 shadow-lg shadow-brass/5 ring-1 ring-brass/20 ${className}`}
     >
       <div className="flex items-center justify-between border-b border-line/60 pb-5">
         <div className="flex items-center gap-3">
@@ -173,7 +173,7 @@ export function EmiCalculator({
         </div>
 
         {/* Results Summary Box */}
-        <div className="flex flex-col justify-between rounded-xl border border-line bg-paper-2/60 p-6">
+        <div className="flex flex-col justify-between rounded-2xl border border-brass/35 bg-paper-2/80 p-6 shadow-sm ring-1 ring-brass/15">
           <div>
             <p className="eyebrow">Estimated Monthly Payment</p>
             <div className="mt-2 flex items-baseline gap-1">
@@ -257,7 +257,7 @@ export function EmiCalculator({
             ) : null}
           </div>
 
-          <div className="mt-6 flex items-center gap-2 rounded-lg bg-white/80 p-3 text-[11px] text-muted">
+          <div className="mt-6 flex items-center gap-2 rounded-xl border border-brass/25 bg-white/90 p-3 text-[11px] text-muted">
             <Info size={16} className="text-brass shrink-0" />
             <span>Bank eligibility and rates may vary based on CIBIL and loan provider terms.</span>
           </div>

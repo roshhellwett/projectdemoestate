@@ -11,7 +11,7 @@ export function PartnerWall({ partners }: { partners: Partner[] }) {
   if (partners.length === 0) return null;
   const row = [...partners, ...partners];
   return (
-    <section aria-label="Our partners" className="border-y border-line bg-paper-2/70 py-14">
+    <section aria-label="Our partners" className="border-y border-brass/25 bg-paper-2/70 py-14">
       <div className="shell-wide">
         <h2 className="reveal text-center font-display text-xl font-medium tracking-tight text-ink md:text-2xl">
           Builders and brands we work with
@@ -94,7 +94,7 @@ export function ReelsSection({ reels, instagram }: { reels: Reel[]; instagram: s
             href={reel.reel_url}
             target="_blank"
             rel="noreferrer"
-            className="reel-tile reveal group relative block w-full max-w-[240px] sm:max-w-[260px] overflow-hidden rounded-2xl border border-brass/50 bg-ink shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-xl shrink-0"
+            className="reel-tile reveal group relative block w-full max-w-[240px] sm:max-w-[260px] overflow-hidden rounded-2xl border-2 border-brass/50 bg-ink shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-xl hover:shadow-brass/20 hover:ring-1 hover:ring-brass/30 shrink-0"
           >
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink-2">
               <img
@@ -106,7 +106,7 @@ export function ReelsSection({ reels, instagram }: { reels: Reel[]; instagram: s
                 decoding="async"
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
               />
-              <div className="absolute top-2.5 right-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-black/65 text-white backdrop-blur-md border border-white/20 shadow-xs">
+              <div className="absolute top-2.5 right-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-black/65 text-white backdrop-blur-md border border-brass/40 shadow-xs">
                 <InstagramIcon size={14} />
               </div>
             </div>
@@ -138,7 +138,7 @@ export function TestimonialStrip({ testimonials }: { testimonials: Testimonial[]
         {testimonials.slice(0, 6).map((t) => (
           <figure
             key={t.id}
-            className="reveal flex h-full flex-col justify-between rounded-[var(--radius-card)] border border-line bg-white p-5 sm:p-7"
+            className="reveal flex h-full flex-col justify-between rounded-[var(--radius-card)] border border-brass/35 bg-white p-5 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-brass hover:shadow-md hover:shadow-brass/10 hover:ring-1 hover:ring-brass/20"
           >
             <blockquote className="text-[15px] leading-relaxed text-ink/80">
               <span aria-hidden="true" className="font-display text-3xl leading-none text-brass">“</span>

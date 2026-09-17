@@ -81,7 +81,7 @@ export function PropertyCard({
         <Link
           to="/property/$slug"
           params={{ slug: property.slug }}
-          className="group relative hidden md:flex flex-row overflow-hidden rounded-[var(--radius-card)] border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-brass/50 hover:shadow-[0_20px_40px_-16px_rgba(18,16,14,0.14)]"
+          className="group relative hidden md:flex flex-row overflow-hidden rounded-[var(--radius-card)] border border-brass/35 bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-brass hover:shadow-lg hover:shadow-brass/10 hover:ring-1 hover:ring-brass/25"
         >
           {/* Image side */}
           <div className="relative w-80 shrink-0 overflow-hidden bg-paper-2">
@@ -212,7 +212,7 @@ function GridCard({
     <Link
       to="/property/$slug"
       params={{ slug: property.slug }}
-      className="group relative flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass/50 hover:shadow-[0_24px_48px_-16px_rgba(18,16,14,0.18)]"
+      className="group relative flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-brass/35 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-[0_24px_48px_-16px_rgba(18,16,14,0.18)] hover:shadow-brass/15 hover:ring-1 hover:ring-brass/25"
     >
       {/* Media Container */}
       <div className="relative aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-paper-2">
@@ -311,12 +311,12 @@ function GridCard({
 function CardBadges({ property }: { property: Property }) {
   return (
     <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
-      <span className="flex items-center gap-1 rounded-full bg-ink/90 backdrop-blur-md px-2.5 py-1 text-[11px] font-semibold text-paper shadow-sm">
+      <span className="flex items-center gap-1 rounded-full border border-brass/30 bg-ink/90 backdrop-blur-md px-2.5 py-1 text-[11px] font-semibold text-paper shadow-sm">
         <CheckCircle size={13} weight="fill" className="text-verdigris" />
         Verified
       </span>
       {property.possession_status === "Ready To Move" ? (
-        <span className="rounded-full bg-verdigris px-2.5 py-1 text-[11px] font-semibold text-white shadow-sm">
+        <span className="rounded-full border border-brass-2/40 bg-verdigris px-2.5 py-1 text-[11px] font-semibold text-white shadow-sm">
           Ready to Move
         </span>
       ) : null}
@@ -346,7 +346,7 @@ function CardActions({
           onClick={onQuickView}
           aria-label="Quick preview"
           title="Quick View"
-          className="touch-sm flex h-10 w-10 items-center justify-center rounded-full bg-white/90 backdrop-blur-md text-ink shadow-sm transition-transform hover:scale-110 active:scale-95 cursor-pointer"
+          className="touch-sm flex h-10 w-10 items-center justify-center rounded-full border border-brass/35 bg-white/90 backdrop-blur-md text-ink shadow-sm transition-all hover:scale-110 hover:border-brass hover:shadow-brass/20 active:scale-95 cursor-pointer"
         >
           <Eye size={17} />
         </button>
@@ -357,8 +357,10 @@ function CardActions({
         onClick={onCompare}
         aria-label={compared ? "Remove from compare" : "Add to compare"}
         title={compared ? "Compared" : "Compare"}
-        className={`touch-sm flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-md shadow-sm transition-transform hover:scale-110 active:scale-95 cursor-pointer ${
-          compared ? "bg-brass text-ink font-bold" : "bg-white/90 text-muted hover:text-ink"
+        className={`touch-sm flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur-md shadow-sm transition-all hover:scale-110 active:scale-95 cursor-pointer ${
+          compared
+            ? "border-brass bg-brass text-ink font-bold shadow-brass/20"
+            : "border-brass/35 bg-white/90 text-muted hover:border-brass hover:text-ink hover:shadow-brass/20"
         }`}
       >
         <Scales size={17} weight={compared ? "fill" : "regular"} />
@@ -368,7 +370,7 @@ function CardActions({
         type="button"
         onClick={onFavorite}
         aria-label={favorited ? "Remove from favorites" : "Save to favorites"}
-        className="touch-sm flex h-10 w-10 items-center justify-center rounded-full bg-white/90 backdrop-blur-md text-ink shadow-sm transition-transform hover:scale-110 active:scale-95 cursor-pointer"
+        className="touch-sm flex h-10 w-10 items-center justify-center rounded-full border border-brass/35 bg-white/90 backdrop-blur-md text-ink shadow-sm transition-all hover:scale-110 hover:border-brass hover:shadow-brass/20 active:scale-95 cursor-pointer"
       >
         <Heart
           size={18}
@@ -384,7 +386,7 @@ function CardActions({
 function PropertySpecs({ property }: { property: Property }) {
   return (
     <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-muted font-medium">
-      <span className="rounded-md bg-paper-2 px-2.5 py-1 text-ink font-semibold">
+      <span className="rounded-md border border-brass/30 bg-paper-2 px-2.5 py-1 text-ink font-semibold">
         {property.bhk_type}
       </span>
       {property.area_sqft ? (

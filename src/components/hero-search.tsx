@@ -30,9 +30,9 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
   };
 
   return (
-    <div className="w-full rounded-2xl border border-line/80 bg-white/90 p-4 sm:p-5 md:p-6 shadow-[0_24px_50px_-16px_rgba(18,16,14,0.18)] backdrop-blur-xl">
+    <div className="w-full rounded-2xl sm:rounded-3xl border-2 border-brass/50 bg-white/95 p-4 sm:p-5 md:p-6 shadow-[0_24px_50px_-16px_rgba(18,16,14,0.18)] shadow-brass/15 ring-1 ring-brass/25 backdrop-blur-xl">
       {/* Category Tabs: Horizontal scroll rail on mobile */}
-      <div className="scroll-rail gap-2 border-b border-line/60 pb-3 -mx-1 px-1">
+      <div className="scroll-rail gap-2 border-b border-brass/25 pb-3 -mx-1 px-1">
         <button
           type="button"
           onClick={() => {
@@ -41,8 +41,8 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
           }}
           className={`flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2.5 text-xs font-semibold transition-all cursor-pointer ${
             tab === "residential"
-              ? "bg-ink text-paper shadow-sm"
-              : "text-muted hover:text-ink hover:bg-paper-2"
+              ? "bg-ink text-paper border border-brass/40 shadow-sm"
+              : "text-muted hover:text-ink hover:bg-paper-2 border border-transparent hover:border-brass/30"
           }`}
         >
           <House size={15} weight={tab === "residential" ? "fill" : "regular"} />
@@ -57,8 +57,8 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
           }}
           className={`flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2.5 text-xs font-semibold transition-all cursor-pointer ${
             tab === "commercial"
-              ? "bg-ink text-paper shadow-sm"
-              : "text-muted hover:text-ink hover:bg-paper-2"
+              ? "bg-ink text-paper border border-brass/40 shadow-sm"
+              : "text-muted hover:text-ink hover:bg-paper-2 border border-transparent hover:border-brass/30"
           }`}
         >
           <Buildings size={15} weight={tab === "commercial" ? "fill" : "regular"} />
@@ -73,8 +73,8 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
           }}
           className={`flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2.5 text-xs font-semibold transition-all cursor-pointer ${
             tab === "luxury"
-              ? "bg-ink text-paper shadow-sm"
-              : "text-muted hover:text-ink hover:bg-paper-2"
+              ? "bg-ink text-paper border border-brass/40 shadow-sm"
+              : "text-muted hover:text-ink hover:bg-paper-2 border border-transparent hover:border-brass/30"
           }`}
         >
           <Sparkle size={15} weight="fill" className="text-brass-2" />
@@ -85,7 +85,7 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
       {/* Search Form — stacks vertically on mobile, horizontal on desktop */}
       <form onSubmit={handleSearch} className="mt-4 grid gap-2.5 sm:gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_auto]">
         {/* Locality Selector */}
-        <div className="flex flex-col justify-center rounded-xl border border-line bg-paper/60 px-3.5 py-2.5 transition-colors focus-within:border-brass focus-within:bg-white min-h-[52px]">
+        <div className="flex flex-col justify-center rounded-xl border border-brass/35 bg-paper/60 px-3.5 py-2.5 transition-all focus-within:border-brass focus-within:ring-1 focus-within:ring-brass/30 focus-within:bg-white min-h-[52px] shadow-2xs">
           <label className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-muted">
             <MapPin size={12} weight="fill" className="text-brass" /> Locality
           </label>
@@ -106,7 +106,7 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
         </div>
 
         {/* BHK / Type Selector */}
-        <div className="flex flex-col justify-center rounded-xl border border-line bg-paper/60 px-3.5 py-2.5 transition-colors focus-within:border-brass focus-within:bg-white min-h-[52px]">
+        <div className="flex flex-col justify-center rounded-xl border border-brass/35 bg-paper/60 px-3.5 py-2.5 transition-all focus-within:border-brass focus-within:ring-1 focus-within:ring-brass/30 focus-within:bg-white min-h-[52px] shadow-2xs">
           <label className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-muted">
             <House size={12} weight="fill" className="text-brass" /> Configuration
           </label>
@@ -130,7 +130,7 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
         </div>
 
         {/* Budget Tier */}
-        <div className="flex flex-col justify-center rounded-xl border border-line bg-paper/60 px-3.5 py-2.5 transition-colors focus-within:border-brass focus-within:bg-white min-h-[52px]">
+        <div className="flex flex-col justify-center rounded-xl border border-brass/35 bg-paper/60 px-3.5 py-2.5 transition-all focus-within:border-brass focus-within:ring-1 focus-within:ring-brass/30 focus-within:bg-white min-h-[52px] shadow-2xs">
           <label className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-muted">
             <CurrencyInr size={12} weight="fill" className="text-brass" /> Price Range
           </label>
@@ -149,7 +149,7 @@ export function HeroSearch({ totalCount = 0 }: HeroSearchProps) {
         {/* Submit Search Button */}
         <button
           type="submit"
-          className="flex min-h-[52px] items-center justify-center gap-2 rounded-xl bg-ink px-6 py-3 text-sm font-bold uppercase tracking-wider text-paper shadow-md transition-all hover:bg-ink-2 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
+          className="flex min-h-[52px] items-center justify-center gap-2 rounded-xl bg-ink px-6 py-3 text-sm font-bold uppercase tracking-wider text-paper border border-brass/40 shadow-md transition-all hover:bg-ink-2 hover:border-brass hover:shadow-brass/20 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
         >
           <MagnifyingGlass size={18} weight="bold" className="text-brass-2" />
           <span>{totalCount > 0 ? `Explore (${totalCount})` : "Explore Residences"}</span>

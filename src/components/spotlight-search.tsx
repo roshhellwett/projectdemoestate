@@ -125,12 +125,12 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
       onClick={handleClose}
     >
       <div
-        className="w-full max-w-2xl rounded-3xl border border-line bg-white shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 duration-150"
+        className="w-full max-w-2xl rounded-3xl border-2 border-brass/50 bg-white shadow-2xl shadow-brass/15 ring-1 ring-brass/25 overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
         onKeyDown={handleKeyDown}
       >
         {/* Search Input Bar */}
-        <div className="relative flex items-center border-b border-line px-5 py-4 bg-paper/50">
+        <div className="relative flex items-center border-b border-brass/30 px-5 py-4 bg-paper/50">
           <MagnifyingGlass size={22} weight="bold" className="text-brass mr-3 shrink-0" />
           <input
             ref={inputRef}
@@ -156,14 +156,14 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
           <button
             type="button"
             onClick={handleClose}
-            className="rounded-full border border-line bg-white px-2.5 py-1 text-xs font-semibold text-muted hover:text-ink transition-colors"
+            className="rounded-full border border-brass/35 bg-white px-2.5 py-1 text-xs font-semibold text-muted hover:border-brass hover:text-ink transition-colors"
           >
             ESC
           </button>
         </div>
 
         {/* Quick Suggestion Chips */}
-        <div className="flex items-center gap-2 overflow-x-auto px-5 py-3 border-b border-line/60 bg-paper-2/40 text-xs scrollbar-none">
+        <div className="flex items-center gap-2 overflow-x-auto px-5 py-3 border-b border-brass/25 bg-paper-2/40 text-xs scrollbar-none">
           <span className="text-[11px] font-bold uppercase tracking-wider text-muted shrink-0">
             Presets:
           </span>
@@ -175,7 +175,7 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
                 setQuery(chip.query);
                 setSelectedIndex(0);
               }}
-              className="rounded-full border border-line bg-white px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap hover:border-brass hover:text-brass-dark transition-colors"
+              className="rounded-full border border-brass/30 bg-white px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap hover:border-brass hover:text-brass-dark hover:shadow-2xs transition-colors"
             >
               {chip.label}
             </button>

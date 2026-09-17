@@ -101,8 +101,8 @@ export function Header() {
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
           scrolled || open
-            ? "border-b border-line bg-paper/95 backdrop-blur-xl shadow-[0_4px_20px_-8px_rgba(18,16,14,0.08)]"
-            : "border-b border-line/40 bg-paper/75 backdrop-blur-md"
+            ? "border-b border-brass/35 bg-paper/95 backdrop-blur-xl shadow-[0_4px_24px_-8px_rgba(169,134,47,0.12)]"
+            : "border-b border-brass/25 bg-paper/85 backdrop-blur-md"
         }`}
       >
         <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between gap-4 h-14 lg:h-20">
@@ -138,12 +138,12 @@ export function Header() {
             <button
               type="button"
               onClick={() => setSpotlightOpen(true)}
-              className="flex items-center gap-2 rounded-full border border-line bg-paper/80 px-3 py-1.5 text-xs text-muted transition-colors hover:border-brass hover:text-ink hover:bg-white shadow-xs cursor-pointer"
+              className="flex items-center gap-2 rounded-full border border-brass/40 bg-white/90 px-3 py-1.5 text-xs text-muted transition-all hover:border-brass hover:text-ink hover:bg-white hover:shadow-xs cursor-pointer"
               title="Spotlight Search (Ctrl + K)"
             >
               <MagnifyingGlass size={15} className="text-brass shrink-0" />
               <span className="hidden xl:inline font-medium">Quick Search</span>
-              <kbd className="hidden 2xl:inline-flex items-center rounded border border-line/80 bg-white px-1.5 py-0.5 text-[10px] font-mono text-muted">
+              <kbd className="hidden 2xl:inline-flex items-center rounded border border-brass/30 bg-white px-1.5 py-0.5 text-[10px] font-mono text-muted">
                 ⌘K
               </kbd>
             </button>
@@ -152,7 +152,7 @@ export function Header() {
             <Link
               to="/compare"
               aria-label="Compare selected residences"
-              className="relative flex items-center gap-1.5 rounded-full border border-line bg-paper/80 px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:border-brass hover:bg-white shadow-xs"
+              className="relative flex items-center gap-1.5 rounded-full border border-brass/40 bg-white/90 px-3 py-1.5 text-xs font-medium text-ink transition-all hover:border-brass hover:bg-white hover:shadow-xs"
               title="Compare Residences"
             >
               <Scales
@@ -173,7 +173,7 @@ export function Header() {
               to="/properties"
               search={{ locality: "All", bhk: "" }}
               aria-label="View saved favorite properties"
-              className="relative flex items-center gap-1.5 rounded-full border border-line bg-paper/80 px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:border-brass hover:bg-white shadow-xs"
+              className="relative flex items-center gap-1.5 rounded-full border border-brass/40 bg-white/90 px-3 py-1.5 text-xs font-medium text-ink transition-all hover:border-brass hover:bg-white hover:shadow-xs"
               title="Saved Properties"
             >
               <Heart
@@ -203,7 +203,7 @@ export function Header() {
               href={SITE.whatsapp}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 rounded-full bg-ink px-4 py-2 sm:px-5 sm:py-2.5 text-xs md:text-[13px] font-semibold text-paper shadow-sm transition-all duration-300 hover:bg-ink-2 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 whitespace-nowrap shrink-0 ml-1 cursor-pointer"
+              className="flex items-center gap-2 rounded-full border border-brass/45 bg-ink px-4 py-2 sm:px-5 sm:py-2.5 text-xs md:text-[13px] font-semibold text-paper shadow-sm transition-all duration-300 hover:bg-ink-2 hover:border-brass hover:shadow-md hover:shadow-brass/20 hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap shrink-0 ml-1 cursor-pointer"
             >
               <WhatsappLogo size={16} weight="fill" className="text-brass-2 shrink-0" />
               <span>Book a Visit</span>
@@ -217,7 +217,7 @@ export function Header() {
               type="button"
               onClick={() => setSpotlightOpen(true)}
               aria-label="Search properties"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-paper text-ink hover:border-brass transition-colors cursor-pointer"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-brass/40 bg-paper text-ink hover:border-brass transition-colors cursor-pointer"
             >
               <MagnifyingGlass size={18} />
             </button>
@@ -227,7 +227,7 @@ export function Header() {
               to="/properties"
               search={{ locality: "All", bhk: "" }}
               aria-label="View saved favorite properties"
-              className="relative flex h-11 w-11 items-center justify-center rounded-full border border-line"
+              className="relative flex h-11 w-11 items-center justify-center rounded-full border border-brass/40 bg-paper text-ink hover:border-brass transition-colors"
             >
               <Heart
                 size={18}
@@ -247,7 +247,7 @@ export function Header() {
               onClick={() => setOpen(!open)}
               aria-expanded={open}
               aria-label="Toggle navigation menu"
-              className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] rounded-full border border-line bg-paper transition-colors hover:border-brass cursor-pointer"
+              className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] rounded-full border border-brass/40 bg-paper transition-colors hover:border-brass cursor-pointer"
             >
               <span
                 className={`h-0.5 w-5 bg-ink rounded-full transition-transform duration-300 ${
@@ -282,7 +282,7 @@ export function Header() {
       {/* Sidebar Drawer — slides in from right */}
       <div
         ref={sidebarRef}
-        className={`fixed top-0 right-0 bottom-0 z-50 w-[min(320px,85vw)] bg-paper shadow-2xl transition-transform duration-300 ease-out lg:hidden ${
+        className={`fixed top-0 right-0 bottom-0 z-50 w-[min(320px,85vw)] border-l border-brass/40 bg-paper shadow-2xl transition-transform duration-300 ease-out lg:hidden ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"
@@ -291,13 +291,13 @@ export function Header() {
       >
         <div className="flex h-full flex-col overflow-y-auto overscroll-contain">
           {/* Sidebar Header */}
-          <div className="flex items-center justify-between border-b border-line px-5 py-4">
+          <div className="flex items-center justify-between border-b border-brass/30 px-5 py-4">
             <span className="font-display text-lg font-semibold text-ink">Menu</span>
             <button
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close menu"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-line hover:border-brass hover:bg-paper-2 transition-colors cursor-pointer"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-brass/40 hover:border-brass hover:bg-paper-2 transition-colors cursor-pointer"
             >
               <X size={20} weight="bold" />
             </button>
@@ -338,7 +338,7 @@ export function Header() {
           </nav>
 
           {/* Sidebar Footer — Contact Actions */}
-          <div className="border-t border-line px-4 py-4 pb-6 space-y-3" style={{ paddingBottom: "max(24px, env(safe-area-inset-bottom))" }}>
+          <div className="border-t border-brass/30 px-4 py-4 pb-6 space-y-3" style={{ paddingBottom: "max(24px, env(safe-area-inset-bottom))" }}>
             <a
               href={SITE.whatsapp}
               target="_blank"
@@ -350,7 +350,7 @@ export function Header() {
             </a>
             <a
               href={SITE.phoneHref}
-              className="flex items-center justify-center gap-2.5 rounded-xl border border-line bg-paper-2 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-brass cursor-pointer"
+              className="flex items-center justify-center gap-2.5 rounded-xl border border-brass/35 bg-paper-2 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-brass cursor-pointer"
             >
               <PhoneCall size={20} className="text-brass" />
               <span>Call: {SITE.phone}</span>
