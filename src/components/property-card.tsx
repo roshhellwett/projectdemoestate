@@ -93,6 +93,9 @@ export function PropertyCard({
                 height={450}
                 loading={priority ? "eager" : "lazy"}
                 decoding="async"
+                onError={(e) => {
+                  e.currentTarget.src = "/images/og-banner.jpg";
+                }}
                 className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
             ) : (
@@ -224,6 +227,9 @@ function GridCard({
             height={675}
             loading={priority ? "eager" : "lazy"}
             decoding="async"
+            onError={(e) => {
+              e.currentTarget.src = "/images/og-banner.jpg";
+            }}
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
         ) : (

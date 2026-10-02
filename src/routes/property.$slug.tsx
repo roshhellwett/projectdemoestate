@@ -329,6 +329,9 @@ function PropertyDetailPage() {
                 <img
                   src={gallery[0]}
                   alt={property.title}
+                  onError={(e) => {
+                    e.currentTarget.src = "/images/og-banner.jpg";
+                  }}
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -344,6 +347,9 @@ function PropertyDetailPage() {
                     <img
                       src={gallery[1]}
                       alt="Property interior"
+                      onError={(e) => {
+                        e.currentTarget.src = "/images/og-banner.jpg";
+                      }}
                       className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -360,6 +366,9 @@ function PropertyDetailPage() {
                     <img
                       src={gallery[2]}
                       alt="Property interior"
+                      onError={(e) => {
+                        e.currentTarget.src = "/images/og-banner.jpg";
+                      }}
                       className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -379,6 +388,9 @@ function PropertyDetailPage() {
                     <img
                       src={gallery[3]}
                       alt="Property interior"
+                      onError={(e) => {
+                        e.currentTarget.src = "/images/og-banner.jpg";
+                      }}
                       className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -395,6 +407,9 @@ function PropertyDetailPage() {
                     <img
                       src={gallery[4]}
                       alt="Property interior"
+                      onError={(e) => {
+                        e.currentTarget.src = "/images/og-banner.jpg";
+                      }}
                       className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -670,6 +685,9 @@ function PropertyDetailPage() {
               <img
                 src={gallery[lightboxIndex]}
                 alt={`Photo ${lightboxIndex + 1}`}
+                onError={(e) => {
+                  e.currentTarget.src = "/images/og-banner.jpg";
+                }}
                 className="max-h-[75vh] max-w-full object-contain rounded-xl shadow-2xl transition-all"
               />
 

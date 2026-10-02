@@ -72,6 +72,9 @@ export function CompareDrawer({ className = "" }: { className?: string } = {}) {
                   <img
                     src={item.main_image_thumb || item.main_image}
                     alt={item.title}
+                    onError={(e) => {
+                      e.currentTarget.src = "/images/og-banner.jpg";
+                    }}
                     className="h-10 w-10 shrink-0 rounded-lg object-cover"
                   />
                   <div className="min-w-0 flex-1">

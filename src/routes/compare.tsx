@@ -185,6 +185,9 @@ function ComparePage() {
                           <img
                             src={p.main_image_thumb || p.main_image}
                             alt={p.title}
+                            onError={(e) => {
+                              e.currentTarget.src = "/images/og-banner.jpg";
+                            }}
                             className="h-full w-full object-cover"
                           />
                         </div>
@@ -457,6 +460,9 @@ function ComparePage() {
                       <img
                         src={p.main_image_thumb || p.main_image}
                         alt={p.title}
+                        onError={(e) => {
+                          e.currentTarget.src = "/images/og-banner.jpg";
+                        }}
                         className="h-12 w-12 rounded-xl object-cover shrink-0"
                       />
                       <div className="min-w-0">

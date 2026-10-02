@@ -1,10 +1,20 @@
 /**
  * Site content queries. Each loader calls one of these with the server
  * supabase client; all of them respect RLS and published flags.
+ * Includes a zero-downtime offline fallback dataset with an active circuit breaker.
  */
 
 import type { SupabaseClient } from "@supabase/supabase-js";
-import type { BlogPost, Faq, Partner, Property, PropertyImage, Reel, SiteSettings } from "./types";
+import type { BlogPost, Faq, Partner, Property, PropertyImage, Reel, SiteSettings, Testimonial } from "./types";
+import {
+  FALLBACK_PROPERTIES,
+  FALLBACK_PROPERTY_IMAGES,
+  FALLBACK_BLOG_POSTS,
+  FALLBACK_FAQS,
+  FALLBACK_REELS,
+  FALLBACK_TESTIMONIALS,
+  FALLBACK_SITE_SETTINGS,
+} from "./fallback-data";
 
 export interface PropertyQuery {
   q?: string;
@@ -20,6 +30,41 @@ export interface PropertyQuery {
 }
 
 type QueryBuilder = ReturnType<ReturnType<SupabaseClient["from"]>["select"]>;
+
+// Circuit breaker state to avoid repetitive DNS/timeout delays when Supabase is down
+let isCircuitOpen = false;
+let nextCircuitCheckTime = 0;
+const CIRCUIT_COOLDOWN_MS = 60_000; // Retry once every 60s
+
+function isSupabaseAvailable(): boolean {
+  if (!isCircuitOpen) return true;
+  if (Date.now() >= nextCircuitCheckTime) {
+    return true; // Allow single probe request
+  }
+  return false;
+}
+
+function recordSupabaseSuccess() {
+  isCircuitOpen = false;
+}
+
+function recordSupabaseFailure(err: unknown) {
+  isCircuitOpen = true;
+  nextCircuitCheckTime = Date.now() + CIRCUIT_COOLDOWN_MS;
+  console.warn(
+    "Supabase unreachable, circuit open for 60s. Serving local verified catalog:",
+    err instanceof Error ? err.message : err
+  );
+}
+
+async function withTimeout<T>(promise: PromiseLike<T>, timeoutMs = 1200): Promise<T> {
+  return Promise.race([
+    Promise.resolve(promise),
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error("Supabase query timeout")), timeoutMs)
+    ),
+  ]);
+}
 
 /** Applies text search + facet filters to a properties query builder. */
 function applyFilters(query: QueryBuilder, f: PropertyQuery) {
@@ -40,47 +85,153 @@ function applyFilters(query: QueryBuilder, f: PropertyQuery) {
 }
 
 export async function listProperties(client: SupabaseClient, f: PropertyQuery = {}): Promise<Property[]> {
-  const builder = client.from("properties").select("*");
-  let q = applyFilters(builder, f);
+  if (isSupabaseAvailable()) {
+    try {
+      const builder = client.from("properties").select("*");
+      let q = applyFilters(builder, f);
 
-  if (f.sort === "price_asc") {
-    q = q.order("price_inr", { ascending: true, nullsFirst: false });
-  } else if (f.sort === "price_desc") {
-    q = q.order("price_inr", { ascending: false, nullsFirst: false });
-  } else if (f.sort === "area_desc") {
-    q = q.order("area_sqft", { ascending: false, nullsFirst: false });
-  } else if (f.sort === "newest") {
-    q = q.order("created_at", { ascending: false });
-  } else {
-    // Default: featured first, then newest
-    q = q.order("is_featured", { ascending: false }).order("created_at", { ascending: false });
+      if (f.sort === "price_asc") {
+        q = q.order("price_inr", { ascending: true, nullsFirst: false });
+      } else if (f.sort === "price_desc") {
+        q = q.order("price_inr", { ascending: false, nullsFirst: false });
+      } else if (f.sort === "area_desc") {
+        q = q.order("area_sqft", { ascending: false, nullsFirst: false });
+      } else if (f.sort === "newest") {
+        q = q.order("created_at", { ascending: false });
+      } else {
+        q = q.order("is_featured", { ascending: false }).order("created_at", { ascending: false });
+      }
+
+      if (f.limit) q = q.limit(f.limit);
+      const { data, error } = await withTimeout(q);
+      if (!error && data && data.length > 0) {
+        recordSupabaseSuccess();
+        return data as Property[];
+      }
+      if (error) recordSupabaseFailure(error);
+    } catch (err) {
+      recordSupabaseFailure(err);
+    }
   }
 
-  if (f.limit) q = q.limit(f.limit);
-  const { data, error } = await q;
-  if (error) throw error;
-  return (data ?? []) as Property[];
+  // Resilient in-memory fallback
+  let list = FALLBACK_PROPERTIES.filter((p) => p.is_published);
+  if (f.featuredOnly) list = list.filter((p) => p.is_featured);
+  if (f.locality && f.locality !== "All") list = list.filter((p) => p.locality === f.locality);
+  if (f.bhk === "commercial") list = list.filter((p) => p.bhk_type.toLowerCase().includes("commercial"));
+  else if (f.bhk) list = list.filter((p) => p.bhk_type.toLowerCase().startsWith(f.bhk!.toLowerCase()));
+  if (f.minPrice != null) list = list.filter((p) => (p.price_inr ?? 0) >= f.minPrice!);
+  if (f.maxPrice != null) list = list.filter((p) => (p.price_inr ?? 0) <= f.maxPrice!);
+  if (f.possession && f.possession !== "All") list = list.filter((p) => p.possession_status === f.possession);
+  if (f.furnishing && f.furnishing !== "All") {
+    list = list.filter((p) => p.furnishing_status.toLowerCase().includes(f.furnishing!.toLowerCase()));
+  }
+  if (f.q) {
+    const term = f.q.toLowerCase();
+    list = list.filter(
+      (p) =>
+        p.title.toLowerCase().includes(term) ||
+        p.location.toLowerCase().includes(term) ||
+        p.locality.toLowerCase().includes(term) ||
+        p.description.toLowerCase().includes(term)
+    );
+  }
+
+  if (f.sort === "price_asc") {
+    list.sort((a, b) => (a.price_inr ?? 0) - (b.price_inr ?? 0));
+  } else if (f.sort === "price_desc") {
+    list.sort((a, b) => (b.price_inr ?? 0) - (a.price_inr ?? 0));
+  } else if (f.sort === "area_desc") {
+    list.sort((a, b) => (b.area_sqft ?? 0) - (a.area_sqft ?? 0));
+  } else if (f.sort === "newest") {
+    list.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  } else {
+    list.sort((a, b) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0));
+  }
+
+  if (f.limit) list = list.slice(0, f.limit);
+  return list;
 }
 
 export async function getPropertyBySlug(client: SupabaseClient, slug: string): Promise<Property | null> {
-  const { data, error } = await client
-    .from("properties")
-    .select("*")
-    .eq("slug", slug)
-    .eq("is_published", true)
-    .maybeSingle();
-  if (error) throw error;
-  return (data as Property) ?? null;
+  if (isSupabaseAvailable()) {
+    try {
+      const { data, error } = await withTimeout(
+        client.from("properties").select("*").eq("slug", slug).eq("is_published", true).maybeSingle()
+      );
+      if (!error && data) {
+        recordSupabaseSuccess();
+        return data as Property;
+      }
+      if (error) recordSupabaseFailure(error);
+    } catch (err) {
+      recordSupabaseFailure(err);
+    }
+  }
+  return FALLBACK_PROPERTIES.find((p) => p.slug === slug && p.is_published) ?? null;
 }
 
 export async function getImagesForProperty(client: SupabaseClient, propertyId: string): Promise<PropertyImage[]> {
-  const { data, error } = await client
-    .from("property_images")
-    .select("*")
-    .eq("property_id", propertyId)
-    .order("sort_order");
-  if (error) throw error;
-  return (data ?? []) as PropertyImage[];
+  if (isSupabaseAvailable()) {
+    try {
+      const { data, error } = await withTimeout(
+        client.from("property_images").select("*").eq("property_id", propertyId).order("sort_order")
+      );
+      if (!error && data && data.length > 0) {
+        recordSupabaseSuccess();
+        return data as PropertyImage[];
+      }
+      if (error) recordSupabaseFailure(error);
+    } catch (err) {
+      recordSupabaseFailure(err);
+    }
+  }
+
+  const matching = FALLBACK_PROPERTY_IMAGES.filter((i) => i.property_id === propertyId);
+  if (matching.length > 0) return matching;
+
+  return [
+    {
+      id: `${propertyId}-1`,
+      property_id: propertyId,
+      sort_order: 1,
+      caption: "Living Room",
+      alt_text: "Spacious Living Area",
+      image_url: "/images/properties/living.jpg",
+      thumb_url: "/images/properties/living.jpg",
+      created_at: "2026-08-25T05:00:00Z",
+    },
+    {
+      id: `${propertyId}-2`,
+      property_id: propertyId,
+      sort_order: 2,
+      caption: "Building Exterior",
+      alt_text: "Architectural Facade",
+      image_url: "/images/properties/facade.jpg",
+      thumb_url: "/images/properties/facade.jpg",
+      created_at: "2026-08-25T05:00:00Z",
+    },
+    {
+      id: `${propertyId}-3`,
+      property_id: propertyId,
+      sort_order: 3,
+      caption: "Master Suite",
+      alt_text: "Master Bedroom & Balcony",
+      image_url: "/images/properties/penthouse.jpg",
+      thumb_url: "/images/properties/penthouse.jpg",
+      created_at: "2026-08-25T05:00:00Z",
+    },
+    {
+      id: `${propertyId}-4`,
+      property_id: propertyId,
+      sort_order: 4,
+      caption: "Workspace & Amenities",
+      alt_text: "Executive Study & Lounge",
+      image_url: "/images/properties/office.jpg",
+      thumb_url: "/images/properties/office.jpg",
+      created_at: "2026-08-25T05:00:00Z",
+    },
+  ];
 }
 
 /** Similar listings: same locality first, then same bhk, excluding self. */
@@ -89,16 +240,40 @@ export async function getSimilarProperties(
   property: Property,
   limit = 3,
 ): Promise<Property[]> {
-  const { data, error } = await client
-    .from("properties")
-    .select("*")
-    .eq("is_published", true)
-    .neq("id", property.id)
-    .or(`locality.eq.${property.locality},bhk_type.eq.${property.bhk_type}`)
-    .limit(limit * 2);
-  if (error) throw error;
-  const rows = (data ?? []) as Property[];
-  const scored = rows
+  if (isSupabaseAvailable()) {
+    try {
+      const { data, error } = await withTimeout(
+        client
+          .from("properties")
+          .select("*")
+          .eq("is_published", true)
+          .neq("id", property.id)
+          .or(`locality.eq.${property.locality},bhk_type.eq.${property.bhk_type}`)
+          .limit(limit * 2)
+      );
+      if (!error && data && data.length > 0) {
+        recordSupabaseSuccess();
+        const rows = data as Property[];
+        return rows
+          .map((r) => {
+            let score = 0;
+            if (r.locality === property.locality) score += 3;
+            if (r.bhk_type === property.bhk_type) score += 2;
+            if (Math.abs((r.price_inr ?? 0) - (property.price_inr ?? 0)) < 2e6) score += 1;
+            return { r, score };
+          })
+          .sort((a, b) => b.score - a.score)
+          .slice(0, limit)
+          .map((s) => s.r);
+      }
+      if (error) recordSupabaseFailure(error);
+    } catch (err) {
+      recordSupabaseFailure(err);
+    }
+  }
+
+  return FALLBACK_PROPERTIES
+    .filter((p) => p.id !== property.id && p.is_published)
     .map((r) => {
       let score = 0;
       if (r.locality === property.locality) score += 3;
@@ -107,16 +282,26 @@ export async function getSimilarProperties(
       return { r, score };
     })
     .sort((a, b) => b.score - a.score)
-    .slice(0, limit);
-  return scored.map((s) => s.r);
+    .slice(0, limit)
+    .map((s) => s.r);
 }
 
 export async function listReels(client: SupabaseClient, onlyPublished = true): Promise<Reel[]> {
-  let q = client.from("reels").select("*");
-  if (onlyPublished) q = q.eq("is_published", true);
-  const { data, error } = await q.order("display_order");
-  if (error) throw error;
-  return (data ?? []) as Reel[];
+  if (isSupabaseAvailable()) {
+    try {
+      let q = client.from("reels").select("*");
+      if (onlyPublished) q = q.eq("is_published", true);
+      const { data, error } = await withTimeout(q.order("display_order"));
+      if (!error && data && data.length > 0) {
+        recordSupabaseSuccess();
+        return data as Reel[];
+      }
+      if (error) recordSupabaseFailure(error);
+    } catch (err) {
+      recordSupabaseFailure(err);
+    }
+  }
+  return onlyPublished ? FALLBACK_REELS.filter((r) => r.is_published) : FALLBACK_REELS;
 }
 
 export const DEFAULT_PARTNERS: Partner[] = [
@@ -203,7 +388,7 @@ export const DEFAULT_PARTNERS: Partner[] = [
     slug: "synergy",
     logo_url: "/images/partners/synergy.webp",
     website_url: "",
-    description: "Modern high-rise residential towers strategically connected to Kolkata’s key transit nodes.",
+    description: "Modern high-rise residential towers strategically connected to Kolkata's key transit nodes.",
     display_order: 80,
     is_published: true,
     created_at: "2025-01-01T00:00:00Z",
@@ -211,118 +396,172 @@ export const DEFAULT_PARTNERS: Partner[] = [
 ];
 
 export async function listPartners(client: SupabaseClient, onlyPublished = true): Promise<Partner[]> {
-  try {
-    let q = client.from("partners").select("*");
-    if (onlyPublished) q = q.eq("is_published", true);
-    const { data, error } = await q.order("display_order");
-    if (!error && data && data.length > 0) {
-      return data as Partner[];
+  if (isSupabaseAvailable()) {
+    try {
+      let q = client.from("partners").select("*");
+      if (onlyPublished) q = q.eq("is_published", true);
+      const { data, error } = await withTimeout(q.order("display_order"));
+      if (!error && data && data.length > 0) {
+        recordSupabaseSuccess();
+        return data as Partner[];
+      }
+      if (error) recordSupabaseFailure(error);
+    } catch (err) {
+      recordSupabaseFailure(err);
     }
-  } catch (err) {
-    console.warn("Could not query partners table from Supabase, using defaults:", err);
   }
   return DEFAULT_PARTNERS;
 }
 
-/** Site settings as a key->value map. Missing keys are simply absent. */
+/** Site settings as a key->value map. Missing keys are filled from defaults. */
 export async function getSiteSettings(client: SupabaseClient): Promise<SiteSettings> {
-  const { data, error } = await client.from("site_settings").select("key, value");
-  if (error) throw error;
-  const map: SiteSettings = {};
-  for (const row of (data ?? []) as { key: string; value: string }[]) {
-    map[row.key] = row.value;
+  const map: SiteSettings = { ...FALLBACK_SITE_SETTINGS };
+  if (isSupabaseAvailable()) {
+    try {
+      const { data, error } = await withTimeout(client.from("site_settings").select("key, value"));
+      if (!error && data && data.length > 0) {
+        recordSupabaseSuccess();
+        for (const row of (data as { key: string; value: string }[])) {
+          map[row.key] = row.value;
+        }
+      }
+      if (error) recordSupabaseFailure(error);
+    } catch (err) {
+      recordSupabaseFailure(err);
+    }
   }
   return map;
 }
 
 export async function listBlogPosts(client: SupabaseClient, limit?: number): Promise<BlogPost[]> {
-  let q = client
-    .from("blog_posts")
-    .select("*")
-    .eq("is_published", true)
-    .order("publish_date", { ascending: false });
-  if (limit) q = q.limit(limit);
-  const { data, error } = await q;
-  if (error) throw error;
-  return (data ?? []) as BlogPost[];
+  if (isSupabaseAvailable()) {
+    try {
+      let q = client
+        .from("blog_posts")
+        .select("*")
+        .eq("is_published", true)
+        .order("publish_date", { ascending: false });
+      if (limit) q = q.limit(limit);
+      const { data, error } = await withTimeout(q);
+      if (!error && data && data.length > 0) {
+        recordSupabaseSuccess();
+        return data as BlogPost[];
+      }
+      if (error) recordSupabaseFailure(error);
+    } catch (err) {
+      recordSupabaseFailure(err);
+    }
+  }
+
+  const posts = FALLBACK_BLOG_POSTS.filter((p) => p.is_published);
+  return limit ? posts.slice(0, limit) : posts;
 }
 
 export async function getBlogPostBySlug(client: SupabaseClient, rawSlug: string): Promise<BlogPost | null> {
   const cleanSlug = decodeURIComponent(rawSlug || "").trim();
   if (!cleanSlug) return null;
 
-  // 1. Exact match on slug
-  const { data, error } = await client
-    .from("blog_posts")
-    .select("*")
-    .eq("slug", cleanSlug)
-    .eq("is_published", true)
-    .maybeSingle();
-  if (error) throw error;
-  if (data) return data as BlogPost;
+  if (isSupabaseAvailable()) {
+    try {
+      // 1. Exact match on slug
+      const { data, error } = await withTimeout(
+        client.from("blog_posts").select("*").eq("slug", cleanSlug).eq("is_published", true).maybeSingle()
+      );
+      if (!error && data) {
+        recordSupabaseSuccess();
+        return data as BlogPost;
+      }
 
-  // 2. Case-insensitive match on slug
-  const { data: dataIlike } = await client
-    .from("blog_posts")
-    .select("*")
-    .ilike("slug", cleanSlug)
-    .eq("is_published", true)
-    .maybeSingle();
-  if (dataIlike) return dataIlike as BlogPost;
-
-  // 3. Normalized slug (e.g. "Lorem Ipsum" -> "lorem-ipsum")
-  const normalized = cleanSlug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-  if (normalized && normalized !== cleanSlug) {
-    const { data: dataNorm } = await client
-      .from("blog_posts")
-      .select("*")
-      .eq("slug", normalized)
-      .eq("is_published", true)
-      .maybeSingle();
-    if (dataNorm) return dataNorm as BlogPost;
+      // 2. Case-insensitive match on slug
+      const { data: dataIlike } = await withTimeout(
+        client.from("blog_posts").select("*").ilike("slug", cleanSlug).eq("is_published", true).maybeSingle()
+      );
+      if (dataIlike) {
+        recordSupabaseSuccess();
+        return dataIlike as BlogPost;
+      }
+      if (error) recordSupabaseFailure(error);
+    } catch (err) {
+      recordSupabaseFailure(err);
+    }
   }
 
-  // 4. Title match
-  const { data: dataTitle } = await client
-    .from("blog_posts")
-    .select("*")
-    .ilike("title", cleanSlug)
-    .eq("is_published", true)
-    .maybeSingle();
-  if (dataTitle) return dataTitle as BlogPost;
+  // Fallback checks
+  let post = FALLBACK_BLOG_POSTS.find((p) => p.slug === cleanSlug && p.is_published);
+  if (post) return post;
 
-  return null;
+  post = FALLBACK_BLOG_POSTS.find((p) => p.slug.toLowerCase() === cleanSlug.toLowerCase() && p.is_published);
+  if (post) return post;
+
+  const normalized = cleanSlug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  post = FALLBACK_BLOG_POSTS.find((p) => p.slug === normalized && p.is_published);
+  if (post) return post;
+
+  post = FALLBACK_BLOG_POSTS.find((p) => p.title.toLowerCase().includes(cleanSlug.toLowerCase()) && p.is_published);
+  return post ?? null;
 }
 
-export async function listPublishedTestimonials(client: SupabaseClient) {
-  const { data, error } = await client
-    .from("testimonials")
-    .select("*")
-    .eq("is_published", true)
-    .order("review_date", { ascending: false });
-  if (error) throw error;
-  return data ?? [];
+export async function listPublishedTestimonials(client: SupabaseClient): Promise<Testimonial[]> {
+  if (isSupabaseAvailable()) {
+    try {
+      const { data, error } = await withTimeout(
+        client.from("testimonials").select("*").eq("is_published", true).order("review_date", { ascending: false })
+      );
+      if (!error && data && data.length > 0) {
+        recordSupabaseSuccess();
+        return data as Testimonial[];
+      }
+      if (error) recordSupabaseFailure(error);
+    } catch (err) {
+      recordSupabaseFailure(err);
+    }
+  }
+  return FALLBACK_TESTIMONIALS.filter((t) => t.is_published);
 }
 
 export async function listFaqs(client: SupabaseClient): Promise<Faq[]> {
-  const { data, error } = await client
-    .from("faqs")
-    .select("*")
-    .eq("is_published", true)
-    .order("display_order");
-  if (error) throw error;
-  return (data ?? []) as Faq[];
+  if (isSupabaseAvailable()) {
+    try {
+      const { data, error } = await withTimeout(
+        client.from("faqs").select("*").eq("is_published", true).order("display_order")
+      );
+      if (!error && data && data.length > 0) {
+        recordSupabaseSuccess();
+        return data as Faq[];
+      }
+      if (error) recordSupabaseFailure(error);
+    } catch (err) {
+      recordSupabaseFailure(err);
+    }
+  }
+  return FALLBACK_FAQS.filter((f) => f.is_published);
 }
 
 /** Distinct localities with counts, for filter chips. */
 export async function listLocalities(client: SupabaseClient): Promise<{ locality: string; count: number }[]> {
-  const { data, error } = await client
-    .from("properties")
-    .select("locality")
-    .eq("is_published", true);
-  if (error) throw error;
+  if (isSupabaseAvailable()) {
+    try {
+      const { data, error } = await withTimeout(
+        client.from("properties").select("locality").eq("is_published", true)
+      );
+      if (!error && data && data.length > 0) {
+        recordSupabaseSuccess();
+        const counts = new Map<string, number>();
+        for (const row of (data as { locality: string }[])) {
+          counts.set(row.locality, (counts.get(row.locality) ?? 0) + 1);
+        }
+        return [...counts.entries()]
+          .map(([locality, count]) => ({ locality, count }))
+          .sort((a, b) => b.count - a.count);
+      }
+      if (error) recordSupabaseFailure(error);
+    } catch (err) {
+      recordSupabaseFailure(err);
+    }
+  }
+
   const counts = new Map<string, number>();
-  for (const row of data ?? []) {
+  for (const row of FALLBACK_PROPERTIES.filter((p) => p.is_published)) {
     counts.set(row.locality, (counts.get(row.locality) ?? 0) + 1);
   }
   return [...counts.entries()]

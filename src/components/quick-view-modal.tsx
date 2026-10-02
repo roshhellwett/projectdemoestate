@@ -97,6 +97,9 @@ export function QuickViewModal({ property, onClose }: QuickViewModalProps) {
           <img
             src={img}
             alt={property.title}
+            onError={(e) => {
+              e.currentTarget.src = "/images/og-banner.jpg";
+            }}
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
