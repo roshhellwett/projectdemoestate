@@ -25,22 +25,22 @@ import {
 export const Route = createFileRoute("/compare")({
   head: () => ({
     meta: [
-      { title: "Compare Residences · Architectural Dossier · SS Property" },
+      { title: "Compare Residences · Architectural Dossier · Apex Living" },
       {
         name: "description",
         content:
-          "Side-by-side comparison of Kolkata luxury residences. Compare super built-up areas, price per sq.ft., Vastu orientations, and West Bengal stamp duty.",
+          "Side-by-side comparison of luxury residences. Compare super built-up areas, price per sq.ft., orientations, and transaction breakdowns.",
       },
-      { property: "og:title", content: "Compare Residences · SS Property Kolkata" },
+      { property: "og:title", content: "Compare Residences · Apex Living" },
       {
         property: "og:description",
         content:
-          "Side-by-side comparison of Kolkata luxury residences. Compare super built-up areas, price per sq.ft., and West Bengal stamp duty.",
+          "Side-by-side comparison of luxury residences. Compare super built-up areas, price per sq.ft., and transaction breakdowns.",
       },
-      { property: "og:image", content: "/images/og-banner.jpg" },
+      { property: "og:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Compare Residences · SS Property Kolkata" },
-      { name: "twitter:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:title", content: "Compare Residences · Apex Living" },
+      { name: "twitter:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
     ],
   }),
   loader: async () => {
@@ -148,7 +148,7 @@ function ComparePage() {
               No Residences Selected for Comparison
             </h3>
             <p className="mt-2 max-w-md text-xs md:text-sm text-muted leading-relaxed">
-              Explore our verified properties in Lake Town, Newtown, Kasba, and Rajarhat. Click the <strong>Compare</strong> button on any card to view specs side-by-side.
+              Explore our verified properties in Ballygunge, Alipore, New Town, and Salt Lake. Click the <strong>Compare</strong> button on any card to view specs side-by-side.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
@@ -162,264 +162,274 @@ function ComparePage() {
           </div>
         ) : (
           /* Detailed Comparison Matrix */
-          <div className="overflow-x-auto rounded-3xl border border-line bg-white shadow-sm">
-            <table className="w-full text-left border-collapse min-w-[700px]">
-              {/* Header: Property Covers & Titles */}
-              <thead>
-                <tr className="border-b border-line bg-paper-2/40">
-                  <th className="p-6 w-48 text-xs font-bold uppercase tracking-wider text-muted align-top">
-                    Residence Spec
-                  </th>
-                  {comparedProperties.map((p) => (
-                    <th key={p.id} className="p-6 w-72 align-top border-l border-line">
-                      <div className="relative">
-                        <button
-                          type="button"
-                          onClick={() => removeItem(p.id)}
-                          aria-label={`Remove ${p.title}`}
-                          className="absolute -top-2 -right-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-ink/80 text-paper hover:bg-danger transition-colors shadow-md"
-                        >
-                          <X size={13} weight="bold" />
-                        </button>
-                        <div className="aspect-[16/10] overflow-hidden rounded-2xl bg-paper-2">
-                          <img
-                            src={p.main_image_thumb || p.main_image}
-                            alt={p.title}
-                            onError={(e) => {
-                              e.currentTarget.src = "/images/og-banner.jpg";
-                            }}
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                        <span className="mt-3 block text-[11px] font-bold uppercase tracking-wider text-brass">
-                          {p.locality}
-                        </span>
-                        <Link
-                          to="/property/$slug"
-                          params={{ slug: p.slug }}
-                          className="font-display text-base font-bold text-ink hover:text-brass transition-colors line-clamp-2 mt-1"
-                        >
-                          {p.title}
-                        </Link>
-                        <p className="mt-2 font-display text-xl font-bold text-ink">
-                          {formatPrice(p.price_inr, p.price_display)}
-                        </p>
-                      </div>
+          <div>
+            {/* Mobile swipe hint */}
+            <div className="flex items-center justify-between pb-3 sm:hidden text-xs text-muted">
+              <span className="flex items-center gap-1.5 font-medium text-brass">
+                <span>←</span> Swipe horizontally to compare residences <span>→</span>
+              </span>
+              <span className="text-[11px] font-bold text-ink">{comparedProperties.length} Selected</span>
+            </div>
+
+            <div className="overflow-x-auto rounded-2xl sm:rounded-3xl border border-line bg-white shadow-sm scroll-rail">
+              <table className="w-full text-left border-collapse min-w-[640px] sm:min-w-[700px]">
+                {/* Header: Property Covers & Titles */}
+                <thead>
+                  <tr className="border-b border-line bg-paper-2/40">
+                    <th className="sticky left-0 bg-paper-2/95 backdrop-blur-md z-20 p-4 sm:p-6 w-36 sm:w-48 text-xs font-bold uppercase tracking-wider text-muted align-top shadow-[2px_0_6px_rgba(0,0,0,0.04)]">
+                      Residence Spec
                     </th>
-                  ))}
-                </tr>
-              </thead>
-
-              <tbody className="divide-y divide-line/60 text-xs">
-                {/* Price / Sq.Ft */}
-                <tr className="hover:bg-paper-2/30 transition-colors">
-                  <td className="p-5 font-semibold text-ink">Price / Sq.Ft</td>
-                  {comparedProperties.map((p) => {
-                    const rate =
-                      p.price_inr && p.area_sqft ? Math.round(p.price_inr / p.area_sqft) : null;
-                    return (
-                      <td key={p.id} className="p-5 border-l border-line">
-                        <span className="font-bold text-ink text-sm">
-                          {rate ? `₹${rate.toLocaleString("en-IN")}` : "N/A"}
-                        </span>
-                        <span className="block text-[11px] text-muted">All-inclusive rate</span>
-                      </td>
-                    );
-                  })}
-                </tr>
-
-                {/* Configuration */}
-                <tr className="hover:bg-paper-2/30 transition-colors">
-                  <td className="p-5 font-semibold text-ink">Configuration</td>
-                  {comparedProperties.map((p) => (
-                    <td key={p.id} className="p-5 border-l border-line font-bold text-ink">
-                      {p.bhk_type}
-                    </td>
-                  ))}
-                </tr>
-
-                {/* Super Built-Up Area */}
-                <tr className="hover:bg-paper-2/30 transition-colors">
-                  <td className="p-5 font-semibold text-ink">Super Built-Up Area</td>
-                  {comparedProperties.map((p) => (
-                    <td key={p.id} className="p-5 border-l border-line">
-                      <span className="font-bold text-ink text-sm">
-                        {p.area_sqft ? `${p.area_sqft.toLocaleString("en-IN")} sq.ft` : "N/A"}
-                      </span>
-                    </td>
-                  ))}
-                </tr>
-
-                {/* Bathrooms & Balconies */}
-                <tr className="hover:bg-paper-2/30 transition-colors">
-                  <td className="p-5 font-semibold text-ink">Baths & Balconies</td>
-                  {comparedProperties.map((p) => (
-                    <td key={p.id} className="p-5 border-l border-line text-muted">
-                      <span className="font-semibold text-ink">{p.bathrooms || 2} Bathrooms</span>
-                      {p.balconies ? <span> • {p.balconies} Balcony</span> : null}
-                    </td>
-                  ))}
-                </tr>
-
-                {/* Floor / Height */}
-                <tr className="hover:bg-paper-2/30 transition-colors">
-                  <td className="p-5 font-semibold text-ink">Floor Level</td>
-                  {comparedProperties.map((p) => (
-                    <td key={p.id} className="p-5 border-l border-line font-medium text-ink">
-                      {p.floor || "Mid Floor"}
-                    </td>
-                  ))}
-                </tr>
-
-                {/* Vastu / Facing */}
-                <tr className="hover:bg-paper-2/30 transition-colors">
-                  <td className="p-5 font-semibold text-ink">Direction Facing</td>
-                  {comparedProperties.map((p) => (
-                    <td key={p.id} className="p-5 border-l border-line font-medium text-ink">
-                      <span className="inline-flex items-center gap-1 rounded-md bg-paper-2 px-2.5 py-1 text-xs">
-                        <Compass size={13} className="text-brass" />
-                        {p.facing || "Vastu Compliant"}
-                      </span>
-                    </td>
-                  ))}
-                </tr>
-
-                {/* Parking */}
-                <tr className="hover:bg-paper-2/30 transition-colors">
-                  <td className="p-5 font-semibold text-ink">Parking Allotted</td>
-                  {comparedProperties.map((p) => (
-                    <td key={p.id} className="p-5 border-l border-line text-muted">
-                      {p.parking || "Covered Parking"}
-                    </td>
-                  ))}
-                </tr>
-
-                {/* Possession Status */}
-                <tr className="hover:bg-paper-2/30 transition-colors">
-                  <td className="p-5 font-semibold text-ink">Possession Timeline</td>
-                  {comparedProperties.map((p) => (
-                    <td key={p.id} className="p-5 border-l border-line">
-                      <span
-                        className={`inline-block rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
-                          p.possession_status === "Ready To Move"
-                            ? "bg-verdigris text-white"
-                            : "bg-paper-2 text-ink"
-                        }`}
-                      >
-                        {p.possession_status}
-                      </span>
-                    </td>
-                  ))}
-                </tr>
-
-                {/* Furnishing Status */}
-                <tr className="hover:bg-paper-2/30 transition-colors">
-                  <td className="p-5 font-semibold text-ink">Furnishing Level</td>
-                  {comparedProperties.map((p) => (
-                    <td key={p.id} className="p-5 border-l border-line font-medium text-ink">
-                      {p.furnishing_status}
-                    </td>
-                  ))}
-                </tr>
-
-                {/* West Bengal Stamp Duty & Registration */}
-                <tr className="bg-brass/5 hover:bg-brass/10 transition-colors">
-                  <td className="p-5 font-semibold text-ink">
-                    <span className="flex items-center gap-1.5 text-brass-dark">
-                      <Calculator size={16} />
-                      WB Stamp Duty & Reg. Est.
-                    </span>
-                    <span className="block text-[10px] text-muted mt-0.5">
-                      KMC municipal guidance
-                    </span>
-                  </td>
-                  {comparedProperties.map((p) => {
-                    const wb = calculateWbTax(p.price_inr);
-                    return (
-                      <td key={p.id} className="p-5 border-l border-line">
-                        <span className="font-display text-sm font-bold text-ink">
-                          ₹{wb.total.toLocaleString("en-IN")}
-                        </span>
-                        <div className="text-[10px] text-muted space-y-0.5 mt-1">
-                          <p>Stamp Duty: ₹{wb.stampDuty.toLocaleString("en-IN")}</p>
-                          <p>Registration (1%): ₹{wb.regFee.toLocaleString("en-IN")}</p>
+                    {comparedProperties.map((p) => (
+                      <th key={p.id} className="p-4 sm:p-6 w-64 sm:w-72 align-top border-l border-line">
+                        <div className="relative">
+                          <button
+                            type="button"
+                            onClick={() => removeItem(p.id)}
+                            aria-label={`Remove ${p.title}`}
+                            className="absolute -top-2 -right-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-ink/80 text-paper hover:bg-danger transition-colors shadow-md active:scale-90"
+                          >
+                            <X size={13} weight="bold" />
+                          </button>
+                          <div className="aspect-[16/10] overflow-hidden rounded-2xl bg-paper-2">
+                            <img
+                              src={p.main_image_thumb || p.main_image}
+                              alt={p.title}
+                              onError={(e) => {
+                                e.currentTarget.src = "/images/og-banner.jpg";
+                              }}
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                          <span className="mt-3 block text-[11px] font-bold uppercase tracking-wider text-brass">
+                            {p.locality}
+                          </span>
+                          <Link
+                            to="/property/$slug"
+                            params={{ slug: p.slug }}
+                            className="font-display text-base font-bold text-ink hover:text-brass transition-colors line-clamp-2 mt-1"
+                          >
+                            {p.title}
+                          </Link>
+                          <p className="mt-2 font-display text-xl font-bold text-ink">
+                            {formatPrice(p.price_inr, p.price_display)}
+                          </p>
                         </div>
-                      </td>
-                    );
-                  })}
-                </tr>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
 
-                {/* Title Verification */}
-                <tr className="hover:bg-paper-2/30 transition-colors">
-                  <td className="p-5 font-semibold text-ink">Title & Legal Status</td>
-                  {comparedProperties.map((p) => (
-                    <td key={p.id} className="p-5 border-l border-line">
-                      <span className="inline-flex items-center gap-1 text-verdigris font-semibold">
-                        <ShieldCheck size={16} weight="fill" />
-                        100% Freehold Verified
-                      </span>
-                    </td>
-                  ))}
-                </tr>
-
-                {/* Amenities Matrix */}
-                {ALL_AMENITIES.map((amenity) => (
-                  <tr key={amenity} className="hover:bg-paper-2/30 transition-colors">
-                    <td className="p-4 text-muted font-medium pl-6">{amenity}</td>
+                <tbody className="divide-y divide-line/60 text-xs">
+                  {/* Price / Sq.Ft */}
+                  <tr className="hover:bg-paper-2/30 transition-colors">
+                    <td className="sticky left-0 bg-white z-10 p-4 sm:p-5 font-semibold text-ink shadow-[2px_0_6px_rgba(0,0,0,0.04)] whitespace-nowrap">Price / Sq.Ft</td>
                     {comparedProperties.map((p) => {
-                      const has = (p.amenities || []).some(
-                        (a) => a.toLowerCase().includes(amenity.toLowerCase())
-                      );
+                      const rate =
+                        p.price_inr && p.area_sqft ? Math.round(p.price_inr / p.area_sqft) : null;
                       return (
-                        <td key={p.id} className="p-4 border-l border-line text-center">
-                          {has ? (
-                            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-verdigris/15 text-verdigris">
-                              <Check size={14} weight="bold" />
-                            </span>
-                          ) : (
-                            <span className="inline-block text-muted/40 font-mono text-xs">-</span>
-                          )}
+                        <td key={p.id} className="p-4 sm:p-5 border-l border-line">
+                          <span className="font-bold text-ink text-sm">
+                            {rate ? `₹${rate.toLocaleString("en-IN")}` : "N/A"}
+                          </span>
+                          <span className="block text-[11px] text-muted">All-inclusive rate</span>
                         </td>
                       );
                     })}
                   </tr>
-                ))}
 
-                {/* Action Row */}
-                <tr className="bg-paper-2/60">
-                  <td className="p-6 font-bold uppercase tracking-wider text-xs text-ink">
-                    Actions
-                  </td>
-                  {comparedProperties.map((p) => {
-                    const waText = encodeURIComponent(
-                      `Hello SS Property, I am comparing "${p.title}" (${p.locality}, priced at ${formatPrice(p.price_inr, p.price_display)}). Please share the complete inspection dossier and schedule a site visit.`
-                    );
-                    return (
-                      <td key={p.id} className="p-6 border-l border-line space-y-2.5">
-                        <a
-                          href={`${SITE.whatsapp}?text=${waText}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="flex items-center justify-center gap-2 rounded-full bg-verdigris px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm hover:bg-verdigris/90 transition-colors w-full"
-                        >
-                          <WhatsappLogo size={15} weight="fill" />
-                          <span>Inquire WhatsApp</span>
-                        </a>
-
-                        <Link
-                          to="/property/$slug"
-                          params={{ slug: p.slug }}
-                          className="flex items-center justify-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-xs font-semibold text-paper hover:bg-ink-2 transition-colors w-full"
-                        >
-                          <span>Full Specs</span>
-                          <ArrowRight size={13} weight="bold" />
-                        </Link>
+                  {/* Configuration */}
+                  <tr className="hover:bg-paper-2/30 transition-colors">
+                    <td className="sticky left-0 bg-white z-10 p-4 sm:p-5 font-semibold text-ink shadow-[2px_0_6px_rgba(0,0,0,0.04)] whitespace-nowrap">Configuration</td>
+                    {comparedProperties.map((p) => (
+                      <td key={p.id} className="p-4 sm:p-5 border-l border-line font-bold text-ink">
+                        {p.bhk_type}
                       </td>
-                    );
-                  })}
-                </tr>
-              </tbody>
-            </table>
+                    ))}
+                  </tr>
+
+                  {/* Super Built-Up Area */}
+                  <tr className="hover:bg-paper-2/30 transition-colors">
+                    <td className="sticky left-0 bg-white z-10 p-4 sm:p-5 font-semibold text-ink shadow-[2px_0_6px_rgba(0,0,0,0.04)] whitespace-nowrap">Super Built-Up Area</td>
+                    {comparedProperties.map((p) => (
+                      <td key={p.id} className="p-4 sm:p-5 border-l border-line">
+                        <span className="font-bold text-ink text-sm">
+                          {p.area_sqft ? `${p.area_sqft.toLocaleString("en-IN")} sq.ft` : "N/A"}
+                        </span>
+                      </td>
+                    ))}
+                  </tr>
+
+                  {/* Bathrooms & Balconies */}
+                  <tr className="hover:bg-paper-2/30 transition-colors">
+                    <td className="sticky left-0 bg-white z-10 p-4 sm:p-5 font-semibold text-ink shadow-[2px_0_6px_rgba(0,0,0,0.04)] whitespace-nowrap">Baths & Balconies</td>
+                    {comparedProperties.map((p) => (
+                      <td key={p.id} className="p-4 sm:p-5 border-l border-line text-muted">
+                        <span className="font-semibold text-ink">{p.bathrooms || 2} Bathrooms</span>
+                        {p.balconies ? <span> • {p.balconies} Balcony</span> : null}
+                      </td>
+                    ))}
+                  </tr>
+
+                  {/* Floor / Height */}
+                  <tr className="hover:bg-paper-2/30 transition-colors">
+                    <td className="sticky left-0 bg-white z-10 p-4 sm:p-5 font-semibold text-ink shadow-[2px_0_6px_rgba(0,0,0,0.04)] whitespace-nowrap">Floor Level</td>
+                    {comparedProperties.map((p) => (
+                      <td key={p.id} className="p-4 sm:p-5 border-l border-line font-medium text-ink">
+                        {p.floor || "Mid Floor"}
+                      </td>
+                    ))}
+                  </tr>
+
+                  {/* Vastu / Facing */}
+                  <tr className="hover:bg-paper-2/30 transition-colors">
+                    <td className="sticky left-0 bg-white z-10 p-4 sm:p-5 font-semibold text-ink shadow-[2px_0_6px_rgba(0,0,0,0.04)] whitespace-nowrap">Direction Facing</td>
+                    {comparedProperties.map((p) => (
+                      <td key={p.id} className="p-4 sm:p-5 border-l border-line font-medium text-ink">
+                        <span className="inline-flex items-center gap-1 rounded-md bg-paper-2 px-2.5 py-1 text-xs">
+                          <Compass size={13} className="text-brass" />
+                          {p.facing || "Vastu Compliant"}
+                        </span>
+                      </td>
+                    ))}
+                  </tr>
+
+                  {/* Parking */}
+                  <tr className="hover:bg-paper-2/30 transition-colors">
+                    <td className="sticky left-0 bg-white z-10 p-4 sm:p-5 font-semibold text-ink shadow-[2px_0_6px_rgba(0,0,0,0.04)] whitespace-nowrap">Parking Allotted</td>
+                    {comparedProperties.map((p) => (
+                      <td key={p.id} className="p-4 sm:p-5 border-l border-line text-muted">
+                        {p.parking || "Covered Parking"}
+                      </td>
+                    ))}
+                  </tr>
+
+                  {/* Possession Status */}
+                  <tr className="hover:bg-paper-2/30 transition-colors">
+                    <td className="sticky left-0 bg-white z-10 p-4 sm:p-5 font-semibold text-ink shadow-[2px_0_6px_rgba(0,0,0,0.04)] whitespace-nowrap">Possession Timeline</td>
+                    {comparedProperties.map((p) => (
+                      <td key={p.id} className="p-4 sm:p-5 border-l border-line">
+                        <span
+                          className={`inline-block rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
+                            p.possession_status === "Ready To Move"
+                              ? "bg-verdigris text-white"
+                              : "bg-paper-2 text-ink"
+                          }`}
+                        >
+                          {p.possession_status}
+                        </span>
+                      </td>
+                    ))}
+                  </tr>
+
+                  {/* Furnishing Status */}
+                  <tr className="hover:bg-paper-2/30 transition-colors">
+                    <td className="sticky left-0 bg-white z-10 p-4 sm:p-5 font-semibold text-ink shadow-[2px_0_6px_rgba(0,0,0,0.04)] whitespace-nowrap">Furnishing Level</td>
+                    {comparedProperties.map((p) => (
+                      <td key={p.id} className="p-4 sm:p-5 border-l border-line font-medium text-ink">
+                        {p.furnishing_status}
+                      </td>
+                    ))}
+                  </tr>
+
+                  {/* West Bengal Stamp Duty & Registration */}
+                  <tr className="bg-brass/5 hover:bg-brass/10 transition-colors">
+                    <td className="sticky left-0 bg-white z-10 p-4 sm:p-5 font-semibold text-ink shadow-[2px_0_6px_rgba(0,0,0,0.04)]">
+                      <span className="flex items-center gap-1.5 text-brass-dark">
+                        <Calculator size={16} />
+                        WB Stamp Duty & Reg. Est.
+                      </span>
+                      <span className="block text-[10px] text-muted mt-0.5">
+                        KMC municipal guidance
+                      </span>
+                    </td>
+                    {comparedProperties.map((p) => {
+                      const wb = calculateWbTax(p.price_inr);
+                      return (
+                        <td key={p.id} className="p-4 sm:p-5 border-l border-line">
+                          <span className="font-display text-sm font-bold text-ink">
+                            ₹{wb.total.toLocaleString("en-IN")}
+                          </span>
+                          <div className="text-[10px] text-muted space-y-0.5 mt-1">
+                            <p>Stamp Duty: ₹{wb.stampDuty.toLocaleString("en-IN")}</p>
+                            <p>Registration (1%): ₹{wb.regFee.toLocaleString("en-IN")}</p>
+                          </div>
+                        </td>
+                      );
+                    })}
+                  </tr>
+
+                  {/* Title Verification */}
+                  <tr className="hover:bg-paper-2/30 transition-colors">
+                    <td className="sticky left-0 bg-white z-10 p-4 sm:p-5 font-semibold text-ink shadow-[2px_0_6px_rgba(0,0,0,0.04)] whitespace-nowrap">Title & Legal Status</td>
+                    {comparedProperties.map((p) => (
+                      <td key={p.id} className="p-4 sm:p-5 border-l border-line">
+                        <span className="inline-flex items-center gap-1 text-verdigris font-semibold">
+                          <ShieldCheck size={16} weight="fill" />
+                          100% Freehold Verified
+                        </span>
+                      </td>
+                    ))}
+                  </tr>
+
+                  {/* Amenities Matrix */}
+                  {ALL_AMENITIES.map((amenity) => (
+                    <tr key={amenity} className="hover:bg-paper-2/30 transition-colors">
+                      <td className="sticky left-0 bg-white z-10 p-3 sm:p-4 text-muted font-medium pl-4 sm:pl-6 shadow-[2px_0_6px_rgba(0,0,0,0.04)] whitespace-nowrap">{amenity}</td>
+                      {comparedProperties.map((p) => {
+                        const has = (p.amenities || []).some(
+                          (a) => a.toLowerCase().includes(amenity.toLowerCase())
+                        );
+                        return (
+                          <td key={p.id} className="p-3 sm:p-4 border-l border-line text-center">
+                            {has ? (
+                              <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-verdigris/15 text-verdigris">
+                                <Check size={14} weight="bold" />
+                              </span>
+                            ) : (
+                              <span className="inline-block text-muted/40 font-mono text-xs">-</span>
+                            )}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+
+                  {/* Action Row */}
+                  <tr className="bg-paper-2/60">
+                    <td className="sticky left-0 bg-paper-2/95 z-10 p-4 sm:p-6 font-bold uppercase tracking-wider text-xs text-ink shadow-[2px_0_6px_rgba(0,0,0,0.04)]">
+                      Actions
+                    </td>
+                    {comparedProperties.map((p) => {
+                      const waText = encodeURIComponent(
+                        `Hello, I am comparing "${p.title}" (${p.locality}, priced at ${formatPrice(p.price_inr, p.price_display)}). Please share the complete inspection dossier and schedule a site visit.`
+                      );
+                      return (
+                        <td key={p.id} className="p-4 sm:p-6 border-l border-line space-y-2.5">
+                          <a
+                            href={`${SITE.whatsapp}?text=${waText}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex items-center justify-center gap-2 rounded-full bg-verdigris px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm hover:bg-verdigris/90 transition-colors w-full min-h-[44px]"
+                          >
+                            <WhatsappLogo size={15} weight="fill" />
+                            <span>Inquire WhatsApp</span>
+                          </a>
+
+                          <Link
+                            to="/property/$slug"
+                            params={{ slug: p.slug }}
+                            className="flex items-center justify-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-xs font-semibold text-paper hover:bg-ink-2 transition-colors w-full min-h-[44px]"
+                          >
+                            <span>Full Specs</span>
+                            <ArrowRight size={13} weight="bold" />
+                          </Link>
+                        </td>
+                      );
+                    })}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </main>
@@ -427,28 +437,32 @@ function ComparePage() {
       {/* Add Property Quick Modal */}
       {showAddPicker && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/70 p-4 backdrop-blur-md"
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-ink/70 p-0 sm:p-4 backdrop-blur-md animate-in fade-in duration-200"
           role="dialog"
           onClick={() => setShowAddPicker(false)}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-2xl max-h-[80vh] overflow-hidden rounded-3xl border border-line bg-white shadow-2xl flex flex-col"
+            className="w-full max-w-2xl max-h-[85dvh] overflow-hidden rounded-t-3xl sm:rounded-3xl border border-line bg-white shadow-2xl flex flex-col animate-in slide-in-from-bottom-6 sm:slide-in-from-bottom-0 sm:zoom-in-95 duration-200"
+            style={{ paddingBottom: "max(12px, env(safe-area-inset-bottom))" }}
           >
-            <div className="flex items-center justify-between border-b border-line p-5">
-              <h3 className="font-display text-xl font-bold text-ink">
-                Add Residence to Compare
-              </h3>
+            <div className="flex items-center justify-between border-b border-line p-4 sm:p-5">
+              <div>
+                <h3 className="font-display text-lg sm:text-xl font-bold text-ink">
+                  Add Residence to Compare
+                </h3>
+                <p className="text-xs text-muted">Select up to 4 properties for side-by-side spec comparison</p>
+              </div>
               <button
                 type="button"
                 onClick={() => setShowAddPicker(false)}
-                className="rounded-full bg-paper-2 p-2 text-muted hover:text-ink transition-colors"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-paper-2 text-muted hover:text-ink transition-colors cursor-pointer active:scale-90"
               >
                 <X size={18} />
               </button>
             </div>
 
-            <div className="overflow-y-auto p-5 divide-y divide-line">
+            <div className="overflow-y-auto p-4 sm:p-5 divide-y divide-line">
               {allProperties.map((p: Property) => {
                 const compared = isCompared(p.id);
                 return (
@@ -480,7 +494,7 @@ function ComparePage() {
                         toggle(p);
                         setShowAddPicker(false);
                       }}
-                      className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all shrink-0 ${
+                      className={`min-h-[40px] rounded-full px-4 py-2 text-xs font-semibold transition-all shrink-0 active:scale-95 ${
                         compared
                           ? "bg-paper-2 text-muted cursor-not-allowed"
                           : "bg-ink text-paper hover:bg-ink-2"

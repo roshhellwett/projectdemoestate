@@ -20,22 +20,22 @@ export const Route = createFileRoute("/about")({
   },
   head: () => ({
     meta: [
-      { title: "About Ujjawal Sharma & SS Property · Built Around Trust" },
+      { title: "About Us · Apex Living · Built Around Trust" },
       {
         name: "description",
         content:
-          "Founded by Ujjawal Sharma, SS Property is a premier Kolkata real estate advisory and media platform dedicated to physically verified listings, video tours, and transparent advisory.",
+          "Apex Living is a premier luxury real estate advisory and property showcase platform dedicated to physically verified listings, video tours, and transparent advisory.",
       },
-      { property: "og:title", content: "About SS Property Kolkata · Built Around Trust" },
+      { property: "og:title", content: "About Us · Apex Living · Built Around Trust" },
       {
         property: "og:description",
         content:
-          "Founded by Ujjawal Sharma, SS Property is a premier Kolkata real estate advisory and media platform dedicated to physically verified listings, video tours, and transparent advisory.",
+          "Apex Living is a premier luxury real estate advisory and property showcase platform dedicated to physically verified listings, video tours, and transparent advisory.",
       },
-      { property: "og:image", content: "/images/og-banner.jpg" },
+      { property: "og:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "About SS Property Kolkata · Built Around Trust" },
-      { name: "twitter:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:title", content: "About Us · Apex Living · Built Around Trust" },
+      { name: "twitter:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
     ],
   }),
   component: AboutPage,
@@ -74,19 +74,19 @@ function AboutPage() {
     <div className="min-h-dvh bg-paper text-ink">
       <Header />
       <FloatingConcierge />
-      <main className="pt-14 lg:pt-16">
+      <main className="pt-20 sm:pt-24 lg:pt-28">
         {/* =================================================================
             1. HERO PAGE BANNER
            ================================================================= */}
         <section className="border-b border-line bg-paper-2/60">
           <div className="shell py-14 md:py-20">
-            <p className="eyebrow text-brass">About SS Property</p>
+            <p className="eyebrow text-brass">About {settings.brand_name ?? "Apex Living"}</p>
             <h1 className="mt-4 max-w-3xl font-display text-4xl font-medium leading-tight tracking-tight text-ink md:text-5xl">
               We walk through every home before we list it.
             </h1>
             <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted">
               {settings.about_intro ??
-                "SS Property is a Kolkata-based real estate advisory. We verify every listing in person - structure, papers, neighbourhood - so buyers see only what is real, and sellers deal only with serious people."}
+                "Apex Living is a premier real estate advisory. We verify every listing in person - structure, papers, neighbourhood - so buyers see only what is real, and sellers deal only with serious people."}
             </p>
           </div>
         </section>
@@ -99,6 +99,9 @@ function AboutPage() {
             phone={settings.phone}
             instagram={settings.instagram_url}
             whatsapp={waLink}
+            name={settings.founder_name}
+            title={settings.founder_title}
+            quote={settings.founder_quote}
           />
         </div>
 
@@ -132,10 +135,10 @@ function AboutPage() {
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
-                  href={settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, "")}` : "tel:+919429693786"}
+                  href={settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, "")}` : "tel:+919800000000"}
                   className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper shadow-sm transition-transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                 >
-                  {settings.phone ?? "+91 94296 93786"}
+                  {settings.phone ?? "+91 98000 00000"}
                 </a>
                 <Link
                   to="/properties"

@@ -26,4 +26,4 @@ $$;
 update auth.users set
   raw_app_meta_data = coalesce(raw_app_meta_data, '{}'::jsonb) || '{"role": "admin"}'::jsonb,
   raw_user_meta_data = coalesce(raw_user_meta_data, '{}'::jsonb) || '{"role": "admin"}'::jsonb
-where email = 'writetous@ssproperty.in';
+where email = 'admin@apexliving-demo.com';

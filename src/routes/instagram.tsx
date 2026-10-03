@@ -21,22 +21,22 @@ export const Route = createFileRoute("/instagram")({
   },
   head: () => ({
     meta: [
-      { title: "Instagram Walkthroughs & Posts · SS Property" },
+      { title: "Walkthroughs & Cinema Reels · Apex Living" },
       {
         name: "description",
         content:
-          "Verified architectural walkthroughs, site visits, and market insights straight from @sspropertykol on Instagram.",
+          "Verified architectural walkthroughs, luxury site visits, and market insights straight from our social channels.",
       },
-      { property: "og:title", content: "Instagram Walkthroughs & Posts · SS Property Kolkata" },
+      { property: "og:title", content: "Walkthroughs & Cinema Reels · Apex Living" },
       {
         property: "og:description",
         content:
-          "Verified architectural walkthroughs, site visits, and market insights straight from @sspropertykol on Instagram.",
+          "Verified architectural walkthroughs, luxury site visits, and market insights straight from our social channels.",
       },
-      { property: "og:image", content: "/images/og-banner.jpg" },
+      { property: "og:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Instagram Walkthroughs & Posts · SS Property Kolkata" },
-      { name: "twitter:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:title", content: "Walkthroughs & Cinema Reels · Apex Living" },
+      { name: "twitter:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
     ],
   }),
   component: InstagramPage,
@@ -55,7 +55,7 @@ function InstagramPage() {
     <div className="min-h-dvh bg-paper">
       <Header />
       <FloatingConcierge />
-      <main className="pt-14 lg:pt-16">
+      <main className="pt-20 sm:pt-24 lg:pt-28">
         {/* Hero Section */}
         <section className="border-b border-brass/30 bg-paper-2/60">
           <div className="shell py-14 md:py-20">
@@ -114,14 +114,14 @@ function InstagramPage() {
                 </a>
               </div>
 
-              <div className="flex flex-wrap gap-4 sm:gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
                 {reels.map((reel) => (
                   <a
                     key={reel.id}
                     href={reel.reel_url}
                     target="_blank"
                     rel="noreferrer"
-                    className="reel-tile reveal group relative block w-full max-w-[240px] sm:max-w-[260px] overflow-hidden rounded-2xl border-2 border-brass/50 bg-ink shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-xl hover:shadow-brass/20 hover:ring-1 hover:ring-brass/30 shrink-0"
+                    className="reel-tile reveal group relative block w-full overflow-hidden rounded-2xl border-2 border-brass/50 bg-ink shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-xl hover:shadow-brass/20 hover:ring-1 hover:ring-brass/30"
                   >
                     <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink-2">
                       <img
@@ -133,15 +133,15 @@ function InstagramPage() {
                         decoding="async"
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       />
-                      <div className="absolute top-2.5 right-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-black/65 text-white backdrop-blur-md border border-brass/40 shadow-xs">
-                        <InstagramIcon size={14} />
+                      <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-black/65 text-white backdrop-blur-md border border-brass/40 shadow-xs">
+                        <InstagramIcon size={13} />
                       </div>
                     </div>
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-3.5 pt-12">
-                      <p className="text-xs sm:text-sm font-medium leading-snug text-paper line-clamp-2">
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-2.5 sm:p-3.5 pt-8 sm:pt-12">
+                      <p className="text-[11px] sm:text-sm font-medium leading-snug text-paper line-clamp-2">
                         {reel.title}
                       </p>
-                      <p className="mt-1 flex items-center gap-1 text-[11px] font-medium text-brass-2">
+                      <p className="mt-1 flex items-center gap-1 text-[10px] sm:text-[11px] font-medium text-brass-2">
                         <span>Watch on Instagram</span>
                         <span className="transition-transform duration-300 group-hover:translate-x-0.5">↗</span>
                       </p>

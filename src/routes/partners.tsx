@@ -31,22 +31,22 @@ export const Route = createFileRoute("/partners")({
   },
   head: () => ({
     meta: [
-      { title: "Builders & Brand Partners · SS Property Kolkata" },
+      { title: "Builders & Brand Partners · Apex Living" },
       {
         name: "description",
         content:
-          "Discover Kolkata's most trusted developers, CREDAI certified builders, and institutional partners working with SS Property.",
+          "Discover trusted developers, CREDAI certified builders, and institutional partners working with our advisory platform.",
       },
-      { property: "og:title", content: "Builders & Brand Partners · SS Property Kolkata" },
+      { property: "og:title", content: "Builders & Brand Partners · Apex Living" },
       {
         property: "og:description",
         content:
-          "Discover Kolkata's most trusted developers, CREDAI certified builders, and institutional partners working with SS Property.",
+          "Discover trusted developers, CREDAI certified builders, and institutional partners working with our advisory platform.",
       },
-      { property: "og:image", content: "/images/og-banner.jpg" },
+      { property: "og:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Builders & Brand Partners · SS Property Kolkata" },
-      { name: "twitter:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:title", content: "Builders & Brand Partners · Apex Living" },
+      { name: "twitter:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
     ],
   }),
   component: PartnersPage,
@@ -61,7 +61,7 @@ const PARTNER_BENEFITS = [
   {
     icon: ShieldCheck,
     title: "CREDAI & RERA Aligned",
-    body: "Every project listed under SS Property is backed by verified legal title checks, complete sanction approvals, and strict compliance standards.",
+    body: "Every project listed under our platform is backed by verified legal title checks, complete sanction approvals, and strict compliance standards.",
   },
   {
     icon: Handshake,
@@ -82,7 +82,7 @@ function PartnersPage() {
       <Header />
       <FloatingConcierge />
 
-      <main className="pt-14 lg:pt-20">
+      <main className="pt-20 sm:pt-24 lg:pt-28">
         {/* =================================================================
             HERO SECTION
            ================================================================= */}
@@ -99,7 +99,7 @@ function PartnersPage() {
 
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
               {settings.partner_intro ??
-                "SS Property collaborates with Kolkata's most reputable real estate developers, certified builders, and apex industry bodies like CREDAI to bring you verified, dispute-free residences."}
+                "We collaborate with Kolkata's most reputable real estate developers, certified builders, and apex industry bodies like CREDAI to bring you verified, dispute-free residences."}
             </p>
 
             {/* Quick Metrics */}
@@ -150,7 +150,7 @@ function PartnersPage() {
             <div className="max-w-2xl">
               <p className="eyebrow">Ecosystem & Standards</p>
               <h2 className="mt-3 font-display text-3xl font-medium tracking-tight text-ink md:text-4xl">
-                Why Kolkata's top builders choose SS Property
+                Why top builders choose our platform
               </h2>
             </div>
 
@@ -182,7 +182,7 @@ function PartnersPage() {
             <div className="max-w-xl">
               <p className="eyebrow">Collaborate With Us</p>
               <h2 className="mt-3 font-display text-3xl font-medium tracking-tight text-ink md:text-4xl">
-                List your project with SS Property
+                List your project with our advisory
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted">
                 Are you a real estate developer, landowner, or architectural brand looking to reach verified Kolkata buyers? Share your project details with our acquisitions desk.
@@ -196,7 +196,7 @@ function PartnersPage() {
             <div className="mt-10 pt-8 border-t border-line flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-muted">Direct Partnership Desk</p>
-                <p className="font-display text-base font-medium text-ink mt-0.5">SS Property Acquisitions Team</p>
+                <p className="font-display text-base font-medium text-ink mt-0.5">Advisory & Acquisitions Team</p>
               </div>
               <div className="flex items-center gap-3">
                 <a

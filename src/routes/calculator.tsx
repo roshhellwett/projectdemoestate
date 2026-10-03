@@ -18,22 +18,22 @@ import { SITE } from "../lib/site";
 export const Route = createFileRoute("/calculator")({
   head: () => ({
     meta: [
-      { title: "Kolkata Home Loan EMI & West Bengal Stamp Duty Calculator · SS Property" },
+      { title: "Home Loan EMI & Stamp Duty Calculator · Apex Living" },
       {
         name: "description",
         content:
-          "Calculate monthly home loan EMIs, West Bengal municipal stamp duty, and registration charges for residential and commercial properties in Kolkata.",
+          "Calculate monthly home loan EMIs, municipal stamp duty, and registration charges for residential and commercial luxury properties.",
       },
-      { property: "og:title", content: "Kolkata Home Loan EMI & West Bengal Stamp Duty Calculator · SS Property" },
+      { property: "og:title", content: "Home Loan EMI & Stamp Duty Calculator · Apex Living" },
       {
         property: "og:description",
         content:
-          "Calculate monthly home loan EMIs, West Bengal municipal stamp duty, and registration charges for properties in Kolkata.",
+          "Calculate monthly home loan EMIs, municipal stamp duty, and registration charges for luxury properties.",
       },
-      { property: "og:image", content: "/images/og-banner.jpg" },
+      { property: "og:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Kolkata Home Loan EMI & Stamp Duty Calculator · SS Property" },
-      { name: "twitter:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:title", content: "Home Loan EMI & Stamp Duty Calculator · Apex Living" },
+      { name: "twitter:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
     ],
   }),
   loader: async () => {
@@ -53,7 +53,7 @@ function CalculatorPage() {
         <Header />
         <FloatingConcierge />
 
-        <main className="pt-14 lg:pt-20">
+        <main className="pt-20 sm:pt-24 lg:pt-28">
           {/* =================================================================
               PAGE BANNER
              ================================================================= */}
@@ -133,7 +133,7 @@ function CalculatorPage() {
                   <p className="mt-1 text-xs text-paper/70">Our in-house legal and banking advisors assist buyers throughout the loan sanctions and registration process.</p>
                 </div>
                 <a
-                  href={`${SITE.whatsapp}?text=${encodeURIComponent("Hello SS Property, I need assistance with home loan eligibility and property registration costs in Kolkata.")}`}
+                  href={`${SITE.whatsapp}?text=${encodeURIComponent("Hello, I need assistance with home loan eligibility and property registration costs.")}`}
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center gap-2 rounded-full bg-brass px-6 py-3 text-xs font-bold uppercase tracking-wider text-ink shrink-0 hover:bg-brass-2 transition-colors"

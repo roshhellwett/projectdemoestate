@@ -32,12 +32,13 @@ export interface PropertyQuery {
 type QueryBuilder = ReturnType<ReturnType<SupabaseClient["from"]>["select"]>;
 
 // Circuit breaker state to avoid repetitive DNS/timeout delays when Supabase is down
-let isCircuitOpen = false;
+let consecutiveFailures = 0;
 let nextCircuitCheckTime = 0;
-const CIRCUIT_COOLDOWN_MS = 60_000; // Retry once every 60s
+const MAX_FAILURES_BEFORE_OPEN = 3;
+const CIRCUIT_COOLDOWN_MS = 10_000; // 10s cooldown
 
 function isSupabaseAvailable(): boolean {
-  if (!isCircuitOpen) return true;
+  if (consecutiveFailures < MAX_FAILURES_BEFORE_OPEN) return true;
   if (Date.now() >= nextCircuitCheckTime) {
     return true; // Allow single probe request
   }
@@ -45,19 +46,21 @@ function isSupabaseAvailable(): boolean {
 }
 
 function recordSupabaseSuccess() {
-  isCircuitOpen = false;
+  consecutiveFailures = 0;
 }
 
 function recordSupabaseFailure(err: unknown) {
-  isCircuitOpen = true;
-  nextCircuitCheckTime = Date.now() + CIRCUIT_COOLDOWN_MS;
-  console.warn(
-    "Supabase unreachable, circuit open for 60s. Serving local verified catalog:",
-    err instanceof Error ? err.message : err
-  );
+  consecutiveFailures++;
+  if (consecutiveFailures >= MAX_FAILURES_BEFORE_OPEN) {
+    nextCircuitCheckTime = Date.now() + CIRCUIT_COOLDOWN_MS;
+    console.warn(
+      `Supabase unreachable after ${consecutiveFailures} failures, circuit open for 10s:`,
+      err instanceof Error ? err.message : err
+    );
+  }
 }
 
-async function withTimeout<T>(promise: PromiseLike<T>, timeoutMs = 1200): Promise<T> {
+async function withTimeout<T>(promise: PromiseLike<T>, timeoutMs = 6000): Promise<T> {
   return Promise.race([
     Promise.resolve(promise),
     new Promise<T>((_, reject) =>
@@ -104,7 +107,7 @@ export async function listProperties(client: SupabaseClient, f: PropertyQuery = 
 
       if (f.limit) q = q.limit(f.limit);
       const { data, error } = await withTimeout(q);
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         recordSupabaseSuccess();
         return data as Property[];
       }
@@ -177,7 +180,7 @@ export async function getImagesForProperty(client: SupabaseClient, propertyId: s
       const { data, error } = await withTimeout(
         client.from("property_images").select("*").eq("property_id", propertyId).order("sort_order")
       );
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         recordSupabaseSuccess();
         return data as PropertyImage[];
       }
@@ -188,50 +191,7 @@ export async function getImagesForProperty(client: SupabaseClient, propertyId: s
   }
 
   const matching = FALLBACK_PROPERTY_IMAGES.filter((i) => i.property_id === propertyId);
-  if (matching.length > 0) return matching;
-
-  return [
-    {
-      id: `${propertyId}-1`,
-      property_id: propertyId,
-      sort_order: 1,
-      caption: "Living Room",
-      alt_text: "Spacious Living Area",
-      image_url: "/images/properties/living.jpg",
-      thumb_url: "/images/properties/living.jpg",
-      created_at: "2026-08-25T05:00:00Z",
-    },
-    {
-      id: `${propertyId}-2`,
-      property_id: propertyId,
-      sort_order: 2,
-      caption: "Building Exterior",
-      alt_text: "Architectural Facade",
-      image_url: "/images/properties/facade.jpg",
-      thumb_url: "/images/properties/facade.jpg",
-      created_at: "2026-08-25T05:00:00Z",
-    },
-    {
-      id: `${propertyId}-3`,
-      property_id: propertyId,
-      sort_order: 3,
-      caption: "Master Suite",
-      alt_text: "Master Bedroom & Balcony",
-      image_url: "/images/properties/penthouse.jpg",
-      thumb_url: "/images/properties/penthouse.jpg",
-      created_at: "2026-08-25T05:00:00Z",
-    },
-    {
-      id: `${propertyId}-4`,
-      property_id: propertyId,
-      sort_order: 4,
-      caption: "Workspace & Amenities",
-      alt_text: "Executive Study & Lounge",
-      image_url: "/images/properties/office.jpg",
-      thumb_url: "/images/properties/office.jpg",
-      created_at: "2026-08-25T05:00:00Z",
-    },
-  ];
+  return matching;
 }
 
 /** Similar listings: same locality first, then same bhk, excluding self. */
@@ -251,7 +211,7 @@ export async function getSimilarProperties(
           .or(`locality.eq.${property.locality},bhk_type.eq.${property.bhk_type}`)
           .limit(limit * 2)
       );
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         recordSupabaseSuccess();
         const rows = data as Property[];
         return rows
@@ -292,7 +252,7 @@ export async function listReels(client: SupabaseClient, onlyPublished = true): P
       let q = client.from("reels").select("*");
       if (onlyPublished) q = q.eq("is_published", true);
       const { data, error } = await withTimeout(q.order("display_order"));
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         recordSupabaseSuccess();
         return data as Reel[];
       }
@@ -301,7 +261,7 @@ export async function listReels(client: SupabaseClient, onlyPublished = true): P
       recordSupabaseFailure(err);
     }
   }
-  return onlyPublished ? FALLBACK_REELS.filter((r) => r.is_published) : FALLBACK_REELS;
+  return [];
 }
 
 export const DEFAULT_PARTNERS: Partner[] = [
@@ -401,7 +361,7 @@ export async function listPartners(client: SupabaseClient, onlyPublished = true)
       let q = client.from("partners").select("*");
       if (onlyPublished) q = q.eq("is_published", true);
       const { data, error } = await withTimeout(q.order("display_order"));
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         recordSupabaseSuccess();
         return data as Partner[];
       }
@@ -419,7 +379,7 @@ export async function getSiteSettings(client: SupabaseClient): Promise<SiteSetti
   if (isSupabaseAvailable()) {
     try {
       const { data, error } = await withTimeout(client.from("site_settings").select("key, value"));
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         recordSupabaseSuccess();
         for (const row of (data as { key: string; value: string }[])) {
           map[row.key] = row.value;
@@ -443,7 +403,7 @@ export async function listBlogPosts(client: SupabaseClient, limit?: number): Pro
         .order("publish_date", { ascending: false });
       if (limit) q = q.limit(limit);
       const { data, error } = await withTimeout(q);
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         recordSupabaseSuccess();
         return data as BlogPost[];
       }
@@ -480,6 +440,9 @@ export async function getBlogPostBySlug(client: SupabaseClient, rawSlug: string)
         recordSupabaseSuccess();
         return dataIlike as BlogPost;
       }
+      if (!error && !data) {
+        return null;
+      }
       if (error) recordSupabaseFailure(error);
     } catch (err) {
       recordSupabaseFailure(err);
@@ -507,7 +470,7 @@ export async function listPublishedTestimonials(client: SupabaseClient): Promise
       const { data, error } = await withTimeout(
         client.from("testimonials").select("*").eq("is_published", true).order("review_date", { ascending: false })
       );
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         recordSupabaseSuccess();
         return data as Testimonial[];
       }
@@ -525,7 +488,7 @@ export async function listFaqs(client: SupabaseClient): Promise<Faq[]> {
       const { data, error } = await withTimeout(
         client.from("faqs").select("*").eq("is_published", true).order("display_order")
       );
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         recordSupabaseSuccess();
         return data as Faq[];
       }
@@ -544,11 +507,13 @@ export async function listLocalities(client: SupabaseClient): Promise<{ locality
       const { data, error } = await withTimeout(
         client.from("properties").select("locality").eq("is_published", true)
       );
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         recordSupabaseSuccess();
         const counts = new Map<string, number>();
         for (const row of (data as { locality: string }[])) {
-          counts.set(row.locality, (counts.get(row.locality) ?? 0) + 1);
+          if (row.locality) {
+            counts.set(row.locality, (counts.get(row.locality) ?? 0) + 1);
+          }
         }
         return [...counts.entries()]
           .map(([locality, count]) => ({ locality, count }))

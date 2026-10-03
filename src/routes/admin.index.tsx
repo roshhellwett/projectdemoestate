@@ -7,7 +7,7 @@ import { AdminDashboard } from "../components/admin/dashboard";
  */
 export const Route = createFileRoute("/admin/")({
   head: () => ({
-    meta: [{ title: "Admin · SS Property" }, { name: "robots", content: "noindex" }],
+    meta: [{ title: "Admin Dashboard · Agency Portal Demo" }, { name: "robots", content: "noindex" }],
   }),
   component: AdminDashboard,
 });

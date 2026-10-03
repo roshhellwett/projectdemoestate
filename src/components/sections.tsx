@@ -83,18 +83,18 @@ export function ReelsSection({ reels, instagram }: { reels: Reel[]; instagram: s
             rel="noreferrer"
             className="hidden shrink-0 text-sm font-semibold text-brass transition-colors hover:text-ink sm:block"
           >
-            Follow @sspropertykol →
+            Follow on Instagram →
           </a>
         </div>
       </div>
-      <div className="mt-6 sm:mt-10 flex flex-wrap gap-4 sm:gap-6">
+      <div className="mt-6 sm:mt-10 grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-6">
         {reels.map((reel) => (
           <a
             key={reel.id}
             href={reel.reel_url}
             target="_blank"
             rel="noreferrer"
-            className="reel-tile reveal group relative block w-full max-w-[240px] sm:max-w-[260px] overflow-hidden rounded-2xl border-2 border-brass/50 bg-ink shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-xl hover:shadow-brass/20 hover:ring-1 hover:ring-brass/30 shrink-0"
+            className="reel-tile reveal group relative block w-full sm:w-[240px] md:w-[260px] overflow-hidden rounded-2xl border-2 border-brass/50 bg-ink shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-xl hover:shadow-brass/20 hover:ring-1 hover:ring-brass/30 shrink-0"
           >
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink-2">
               <img
@@ -106,13 +106,13 @@ export function ReelsSection({ reels, instagram }: { reels: Reel[]; instagram: s
                 decoding="async"
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
               />
-              <div className="absolute top-2.5 right-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-black/65 text-white backdrop-blur-md border border-brass/40 shadow-xs">
-                <InstagramIcon size={14} />
+              <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-black/65 text-white backdrop-blur-md border border-brass/40 shadow-xs">
+                <InstagramIcon size={13} />
               </div>
             </div>
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-3.5 pt-12">
-              <p className="text-xs sm:text-sm font-medium leading-snug text-paper line-clamp-2">{reel.title}</p>
-              <p className="mt-1 flex items-center gap-1 text-[11px] font-medium text-brass-2">
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-2.5 sm:p-3.5 pt-8 sm:pt-12">
+              <p className="text-[11px] sm:text-sm font-medium leading-snug text-paper line-clamp-2">{reel.title}</p>
+              <p className="mt-1 flex items-center gap-1 text-[10px] sm:text-[11px] font-medium text-brass-2">
                 <span>Watch on Instagram</span>
                 <span className="transition-transform duration-300 group-hover:translate-x-0.5">↗</span>
               </p>

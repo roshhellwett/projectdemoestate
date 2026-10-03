@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const STORAGE_KEY = "ssproperty_favorites_v1";
+const STORAGE_KEY = "realty_favorites_v1";
 
 function readStorage(): string[] {
   if (typeof window === "undefined") return [];
@@ -16,12 +16,11 @@ function writeStorage(ids: string[]): void {
   if (typeof window === "undefined") return;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
-    window.dispatchEvent(new CustomEvent("ssproperty_favorites_change", { detail: ids }));
+    window.dispatchEvent(new CustomEvent("realty_favorites_change", { detail: ids }));
   } catch (err) {
     console.error("Failed to save favorites", err);
   }
 }
-
 
 function toggleFavorite(id: string): boolean {
   const list = readStorage();
@@ -46,10 +45,10 @@ export function useFavorites() {
     const handleUpdate = () => {
       setFavorites(readStorage());
     };
-    window.addEventListener("ssproperty_favorites_change", handleUpdate);
+    window.addEventListener("realty_favorites_change", handleUpdate);
     window.addEventListener("storage", handleUpdate);
     return () => {
-      window.removeEventListener("ssproperty_favorites_change", handleUpdate);
+      window.removeEventListener("realty_favorites_change", handleUpdate);
       window.removeEventListener("storage", handleUpdate);
     };
   }, []);

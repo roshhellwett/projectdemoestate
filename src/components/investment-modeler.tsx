@@ -156,7 +156,7 @@ export function InvestmentModeler({ priceInr, locality, bhkType, areaSqFt: _area
           <div className="rounded-2xl border border-line/80 bg-paper-2 p-4 text-xs leading-relaxed text-muted">
             <p className="font-semibold text-ink flex items-center gap-1.5 mb-1">
               <ShieldCheck size={14} className="text-verdigris" />
-              SS Property Corporate Lease Management:
+              Turnkey Corporate Lease Management:
             </p>
             Our dedicated NRI & investor desk handles tenant background screening, police verification, draft registered 11-month lease agreements, and automated rental remittance to your bank account.
           </div>

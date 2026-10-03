@@ -12,7 +12,7 @@ import { getSupabaseBrowser } from "../lib/supabase";
  */
 export const Route = createFileRoute("/admin")({
   head: () => ({
-    meta: [{ title: "Admin · SS Property" }, { name: "robots", content: "noindex" }],
+    meta: [{ title: "Admin Dashboard · Agency Portal Demo" }, { name: "robots", content: "noindex" }],
   }),
   beforeLoad: async () => {
     if (typeof window === "undefined") return;

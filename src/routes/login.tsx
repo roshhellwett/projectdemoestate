@@ -4,7 +4,7 @@ import { getSupabaseBrowser } from "../lib/supabase";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
-    meta: [{ title: "Sign In · SS Property" }, { name: "robots", content: "noindex" }],
+    meta: [{ title: "Sign In · Agency Portal Demo" }, { name: "robots", content: "noindex" }],
   }),
   beforeLoad: async () => {
     if (typeof window === "undefined") return;

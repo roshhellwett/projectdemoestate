@@ -125,7 +125,7 @@ export function AdminDashboard() {
       <header className="sticky top-0 z-30 border-b border-line bg-paper/90 backdrop-blur-md">
         <div className="shell-wide flex h-16 items-center justify-between gap-4">
           <div className="flex items-center gap-6">
-            <Link to="/" aria-label="SS Property home">
+            <Link to="/" aria-label="Home">
               <LogoImage className="h-8" />
             </Link>
             <nav className="hidden flex-wrap gap-1 text-[13px] font-medium lg:flex" aria-label="Admin sections">
@@ -595,7 +595,7 @@ function emptyPost(): PostDraft {
     slug: "",
     title: "",
     publishDate: new Date().toISOString().slice(0, 10),
-    author: "SS Property",
+    author: "Editorial Team",
     cover: "",
     coverThumb: "",
     content: "",
@@ -1154,9 +1154,12 @@ const SETTING_GROUPS: { title: string; fields: { key: string; label: string; hin
       { key: "brand_name", label: "Brand name" },
       { key: "tagline", label: "Tagline" },
       { key: "phone", label: "Phone", hint: "Shown in header CTA, footer, contact links" },
-      { key: "whatsapp_number", label: "WhatsApp number", hint: "Digits only with country code, e.g. 919429693786" },
+      { key: "whatsapp_number", label: "WhatsApp number", hint: "Digits only with country code, e.g. 919800000000" },
       { key: "email", label: "Email" },
       { key: "city", label: "City" },
+      { key: "founder_name", label: "Founder / Principal name" },
+      { key: "founder_title", label: "Founder / Principal title" },
+      { key: "founder_quote", label: "Signature philosophy quote" },
       { key: "instagram_handle", label: "Instagram handle" },
       { key: "instagram_url", label: "Instagram URL" },
       { key: "facebook_url", label: "Facebook URL" },

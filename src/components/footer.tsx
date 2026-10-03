@@ -22,9 +22,9 @@ export function Footer() {
     <footer className="border-t-2 border-brass/40 bg-ink text-paper">
       <div className="shell-wide grid gap-8 sm:gap-10 lg:gap-12 py-12 sm:py-16 grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
-          <LogoImage dark className="h-9 sm:h-10" />
+          <LogoImage dark className="h-9 sm:h-10" brandName={settings.brand_name ?? SITE.name} />
           <p className="mt-3 sm:mt-4 max-w-xs text-sm leading-relaxed text-paper/60">
-            Verified homes and commercial spaces across Kolkata. Lake Town, Newtown, Kasba, Rajarhat and
+            Verified luxury residences and commercial spaces across Kolkata. Lake Town, Newtown, Kasba, Rajarhat and
             greater Kolkata.
           </p>
         </div>
@@ -89,7 +89,7 @@ export function Footer() {
           className="shell-wide flex flex-col items-center justify-between gap-2 sm:gap-3 py-5 sm:py-6 text-xs text-paper/50 sm:flex-row"
           style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
         >
-          <p>© {new Date().getFullYear()} SS Property. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {settings.brand_name ?? SITE.name}. All rights reserved.</p>
           <p>{footerNote}</p>
         </div>
       </div>

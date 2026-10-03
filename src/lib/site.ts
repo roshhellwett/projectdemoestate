@@ -1,22 +1,29 @@
 /**
  * Site-wide constants - business identity, contact, nav.
- * Defaults are the recovered values; admin can override most of them live
- * from Dashboard > Settings (stored in the site_settings table).
+ * Defaults are configured for the Demo Real Estate Brand (Apex Living);
+ * admin can override them live from Dashboard > Settings (stored in the site_settings table).
+ *
+ * When shipping to a new client, change SITE values here or update the
+ * settings table to seamlessly rebrand the entire platform.
  */
 
 export const SITE = {
-  name: "SS Property",
-  tagline: "Premium Real Estate in Kolkata",
-  phone: "+91 94296 93786",
-  phoneHref: "tel:+919429693786",
-  whatsapp: "https://wa.me/919429693786",
-  email: "writetous@ssproperty.in",
-  emailHref: "mailto:writetous@ssproperty.in",
+  name: "Apex Living",
+  tagline: "Premier Luxury Real Estate Advisory",
+  phone: "+91 98000 00000",
+  phoneHref: "tel:+919800000000",
+  whatsapp: "https://wa.me/919800000000",
+  email: "zenithprojects@icloud.com",
+  emailHref: "mailto:zenithprojects@icloud.com",
   city: "Kolkata, West Bengal",
-  instagram: "https://instagram.com/sspropertykol",
-  instagramHandle: "sspropertykol",
-  facebook: "https://facebook.com/sspropertykol",
-  youtube: "https://youtube.com/@SSProperty",
+  instagram: "https://instagram.com",
+  instagramHandle: "apexliving.demo",
+  facebook: "https://facebook.com",
+  youtube: "https://youtube.com",
+  isDemo: true,
+  founderName: "Aarav Mehta",
+  founderTitle: "Founder & Principal Advisor",
+  founderQuote: "Excellence in Every Square Foot.",
 } as const;
 
 export const NAV_LINKS = [
@@ -61,6 +68,9 @@ export function applySettings(
     facebook: settings.facebook_url ?? SITE.facebook,
     youtube: settings.youtube_url ?? SITE.youtube,
     footerNote: settings.footer_note ?? "Verified listings. Transparent pricing. No hidden charges.",
+    founderName: settings.founder_name ?? SITE.founderName,
+    founderTitle: settings.founder_title ?? SITE.founderTitle,
+    founderQuote: settings.founder_quote ?? SITE.founderQuote,
   };
 }
 
@@ -78,4 +88,7 @@ export interface SiteInfo {
   facebook: string;
   youtube: string;
   footerNote: string;
+  founderName: string;
+  founderTitle: string;
+  founderQuote: string;
 }

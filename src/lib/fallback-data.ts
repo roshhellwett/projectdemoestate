@@ -2814,7 +2814,7 @@ export const FALLBACK_TESTIMONIALS: Testimonial[] = [
     "rating": 5,
     "review_text": "I was skeptical at first, but this service truly delivered. My expectations were exceeded, and I'm a very happy customer.",
     "review_date": "2023-11-01",
-    "client_photo": "/images/owner.avif",
+    "client_photo": "",
     "is_published": true,
     "created_at": "2026-08-25T05:00:00.000Z"
   },
@@ -2825,7 +2825,7 @@ export const FALLBACK_TESTIMONIALS: Testimonial[] = [
     "rating": 4,
     "review_text": "A fantastic experience from start to finish. The product quality is exceptional, and customer support was very responsive.",
     "review_date": "2023-09-15",
-    "client_photo": "/images/owner.avif",
+    "client_photo": "",
     "is_published": true,
     "created_at": "2026-08-25T05:00:00.000Z"
   },
@@ -2836,27 +2836,27 @@ export const FALLBACK_TESTIMONIALS: Testimonial[] = [
     "rating": 5,
     "review_text": "Absolutely thrilled with the service! The team went above and beyond to ensure everything was perfect. Highly recommend!",
     "review_date": "2023-10-26",
-    "client_photo": "/images/owner.avif",
+    "client_photo": "",
     "is_published": true,
     "created_at": "2026-08-25T05:00:00.000Z"
   }
 ];
 
 export const FALLBACK_SITE_SETTINGS: SiteSettings = {
-  "brand_name": "SS Property",
-  "tagline": "Premium Real Estate in Kolkata",
+  "brand_name": "Apex Living",
+  "tagline": "Premier Luxury Real Estate Advisory",
   "hero_title": "Homes worth the grand tour.",
   "hero_subtitle": "Hand-verified flats, penthouses and commercial spaces across Kolkata. Every listing walked through, every paper checked.",
   "hero_eyebrow": "Kolkata · Verified Listings",
-  "about_intro": "SS Property is a Kolkata-based real estate advisory. We verify every listing in person - structure, papers, neighbourhood - so buyers see only what is real, and sellers deal only with serious people.",
-  "phone": "+91 94296 93786",
-  "whatsapp_number": "919429693786",
-  "email": "writetous@ssproperty.in",
+  "about_intro": "Apex Living is a premier luxury real estate advisory. We verify every listing in person - structure, papers, neighbourhood - so buyers see only what is real, and sellers deal only with serious people.",
+  "phone": "+91 98000 00000",
+  "whatsapp_number": "919800000000",
+  "email": "advisory@apexliving-demo.com",
   "city": "Kolkata, West Bengal",
-  "instagram_handle": "sspropertykol",
-  "instagram_url": "https://instagram.com/sspropertykol",
-  "facebook_url": "https://facebook.com/sspropertykol",
-  "youtube_url": "https://youtube.com/@SSProperty",
+  "instagram_handle": "apexliving.demo",
+  "instagram_url": "https://instagram.com",
+  "facebook_url": "https://facebook.com",
+  "youtube_url": "https://youtube.com",
   "footer_note": "Verified listings. Transparent pricing. No hidden charges.",
   "cta_title": "Selling? We put your property in front of the right buyers.",
   "cta_subtitle": "Fair valuation, verified footfalls, zero pressure.",
@@ -2872,5 +2872,8 @@ export const FALLBACK_SITE_SETTINGS: SiteSettings = {
   "about_stat_2_note": "One person owns your search end to end.",
   "about_stat_3_value": "Local",
   "about_stat_3_label": "Kolkata born and based",
-  "about_stat_3_note": "We know these streets, blocks and builders by name."
+  "about_stat_3_note": "We know these streets, blocks and builders by name.",
+  "founder_name": "Aarav Mehta",
+  "founder_title": "Founder & Principal Advisor",
+  "founder_quote": "Excellence in Every Square Foot."
 };

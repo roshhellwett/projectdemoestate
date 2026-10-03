@@ -40,26 +40,26 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "SS Property - Verified Luxury Residences & Commercial in Kolkata" },
+      { title: "Apex Living · Verified Luxury Residences & Commercial Spaces" },
       {
         name: "description",
         content:
-          "Kolkata's premier real estate consultancy. Verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat and South Kolkata. 100% physically inspected.",
+          "Premier luxury real estate advisory demo. Verified flats, penthouses and commercial spaces across prime residential enclaves. 100% physically inspected.",
       },
-      { property: "og:title", content: "SS Property - Verified Luxury Residences & Commercial in Kolkata" },
+      { property: "og:title", content: "Apex Living · Verified Luxury Residences & Commercial Spaces" },
       {
         property: "og:description",
         content:
-          "Kolkata's premier real estate consultancy. Verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat and South Kolkata. 100% physically inspected.",
+          "Premier luxury real estate advisory demo. Verified flats, penthouses and commercial spaces across prime residential enclaves.",
       },
-      { property: "og:image", content: "/images/og-banner.jpg" },
-      { name: "twitter:title", content: "SS Property - Verified Luxury Residences & Commercial in Kolkata" },
+      { property: "og:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
+      { name: "twitter:title", content: "Apex Living · Verified Luxury Residences & Commercial Spaces" },
       {
         name: "twitter:description",
         content:
-          "Kolkata's premier real estate consultancy. Verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat and South Kolkata.",
+          "Premier luxury real estate advisory demo. Verified flats, penthouses and commercial spaces across prime residential enclaves.",
       },
-      { name: "twitter:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
     ],
   }),
   loader: async () => {
@@ -109,7 +109,7 @@ function HomePage() {
 
   // Filter featured properties based on selected tab
   const displayedProperties = featured.filter((p) => {
-    if (activeCategory === "ready") return p.possession_status === "Ready To Move";
+    if (activeCategory === "ready") return p.possession_status?.toLowerCase() === "ready to move";
     if (activeCategory === "luxury") return (p.price_inr ?? 0) >= 10000000;
     if (activeCategory === "commercial")
       return p.bhk_type.toLowerCase().includes("commercial");
@@ -158,7 +158,7 @@ function HomePage() {
 
                   <p className="mt-4 sm:mt-5 max-w-xl text-sm sm:text-[15px] leading-relaxed text-muted">
                     {settings.hero_subtitle ??
-                      "Hand-verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat, and Greater Kolkata. Every property personally inspected, every legal title verified."}
+                      "Hand-verified flats, penthouses and commercial spaces across Ballygunge, Alipore, New Town, Salt Lake, and Greater Kolkata. Every property personally inspected, every legal title verified."}
                   </p>
 
                   <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
@@ -166,7 +166,7 @@ function HomePage() {
                       to="/properties"
                       className="flex items-center justify-center rounded-full bg-ink px-7 py-3.5 sm:px-8 sm:py-4 text-sm font-semibold text-paper shadow-lg shadow-ink/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-ink-2 active:translate-y-0"
                     >
-                      {featured.length + latest.length > 0 ? `Explore ${featured.length + latest.length} Residences` : "Explore Residences"}
+                      {totalPropertiesCount > 0 ? `Explore ${totalPropertiesCount} Residences` : "Explore Residences"}
                     </Link>
                     <a
                       href={site.whatsapp}
@@ -185,7 +185,7 @@ function HomePage() {
                   <div className="relative aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-brass/50 bg-paper-2 shadow-[0_32px_64px_-24px_rgba(18,16,14,0.18)] shadow-brass/10 ring-1 ring-brass/25">
                     <img
                       src="/images/kolkata.webp"
-                      alt="SS Property - Kolkata Skyline & Premier Residences"
+                      alt="Apex Living - City Skyline & Premier Residences"
                       width={1000}
                       height={750}
                       loading="eager"
@@ -331,7 +331,7 @@ function HomePage() {
                   Featured residences & workspaces
                 </h2>
                 <p className="mt-2 sm:mt-3 max-w-xl text-sm text-muted">
-                  Hand-picked flats, penthouses and commercial spaces across Lake Town, Kasba, Newtown and Rajarhat.
+                  Hand-picked flats, penthouses and commercial spaces across Ballygunge, Alipore, New Town, and Salt Lake.
                 </p>
               </div>
 
@@ -393,7 +393,7 @@ function HomePage() {
                   Onboarding Verified Residences
                 </h3>
                 <p className="mt-2 max-w-lg text-xs sm:text-sm text-muted leading-relaxed">
-                  The SS Property advisory desk is currently conducting on-ground walkthroughs and legal title verifications for upcoming Kolkata inventory. Are you an owner looking to list?
+                  Our advisory desk is currently conducting on-ground walkthroughs and legal title verifications for upcoming premier inventory. Are you an owner looking to list?
                 </p>
                 <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                   <Link
@@ -416,17 +416,17 @@ function HomePage() {
           </section>
 
           {/* =================================================================
-              5. WHY CHOOSE SS PROPERTY (TRANSPARENCY MANIFESTO)
+              5. THE TRANSPARENCY MANIFESTO
              ================================================================= */}
           <section className="border-y border-line bg-paper-2/70 py-14 sm:py-20 md:py-28">
             <div className="shell">
               <div className="text-center max-w-2xl mx-auto">
-                <p className="eyebrow text-brass">The SS Property Standard</p>
+                <p className="eyebrow text-brass">The Transparency Standard</p>
                 <h2 className="mt-3 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink md:text-4xl">
                   Real estate done with uncompromised integrity
                 </h2>
                 <p className="mt-3 sm:mt-4 text-sm text-muted leading-relaxed">
-                  In a market crowded with stock photos, inflated claims, and phantom listings, SS Property is built on one simple rule: absolute ground reality.
+                  In a market crowded with stock photos, inflated claims, and phantom listings, our platform is built on one simple rule: absolute ground reality.
                 </p>
               </div>
 
@@ -598,10 +598,10 @@ function HomePage() {
           <section className="border-t border-line bg-ink text-paper py-14 sm:py-20 md:py-28">
             <div className="shell max-w-4xl text-center">
               <span className="inline-block rounded-full bg-brass-ghost px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-brass-2">
-                Sell or Lease With SS Property
+                Sell or Lease With Us
               </span>
               <h2 className="mt-5 sm:mt-6 font-display text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight text-paper">
-                Have a premium property in Kolkata? Let's find the right buyer.
+                Have a premium property? Let's connect you with qualified buyers.
               </h2>
               <p className="mt-4 sm:mt-6 max-w-xl mx-auto text-sm sm:text-[15px] leading-relaxed text-paper/70">
                 We position your property directly in front of qualified HNIs and verified home seekers. Professional video tours, verified listings, and zero spam inquiries.
@@ -619,7 +619,7 @@ function HomePage() {
                   rel="noreferrer"
                   className="rounded-full border border-paper/20 px-7 sm:px-8 py-3.5 sm:py-4 text-sm font-semibold text-paper transition-colors hover:border-paper/60 text-center"
                 >
-                  WhatsApp Ujjawal Sharma
+                  Connect on WhatsApp
                 </a>
               </div>
             </div>

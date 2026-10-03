@@ -62,7 +62,7 @@ export function QuickViewModal({ property, onClose }: QuickViewModalProps) {
     : null;
 
   const waText = encodeURIComponent(
-    `Hello SS Property, I am looking at "${property.title}" (${property.locality}, ${formatPrice(property.price_inr, property.price_display)}). Please share floor plans and schedule a private visit.`
+    `Hello, I am looking at "${property.title}" (${property.locality}, ${formatPrice(property.price_inr, property.price_display)}). Please share floor plans and schedule a private visit.`
   );
 
   return (

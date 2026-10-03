@@ -1,5 +1,5 @@
 /* =====================================================================
-   SS Property - Ivory & Brass design system (Tailwind v4 tokens)
+   Luxury Real Estate Demo - Ivory & Brass design system (Tailwind v4 tokens)
    Mobile-first · Touch-optimized · WCAG AA contrast
    ===================================================================== */
 
@@ -66,6 +66,7 @@
     scroll-behavior: smooth;
     /* Prevent horizontal overflow globally on mobile */
     overflow-x: hidden;
+    max-width: 100vw;
   }
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -80,6 +81,8 @@
     overscroll-behavior-y: contain;
     /* Full viewport height including mobile browser chrome */
     min-height: 100dvh;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   ::selection {

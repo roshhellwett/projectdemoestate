@@ -39,27 +39,27 @@ export interface Search {
 export const Route = createFileRoute("/properties")({
   head: () => ({
     meta: [
-      { title: "Kolkata Luxury Properties for Sale & Lease · SS Property" },
+      { title: "Luxury Properties for Sale & Lease · Apex Living" },
       {
         name: "description",
         content:
-          "Browse verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat, Bangur Avenue and Greater Kolkata. Filter by locality, budget, and BHK.",
+          "Browse verified flats, penthouses and commercial spaces across prime residential and commercial corridors. Filter by locality, budget, and BHK.",
       },
-      { property: "og:title", content: "Kolkata Luxury Properties for Sale & Lease · SS Property" },
+      { property: "og:title", content: "Luxury Properties for Sale & Lease · Apex Living" },
       {
         property: "og:description",
         content:
-          "Browse verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat, Bangur Avenue and Greater Kolkata.",
+          "Browse verified flats, penthouses and commercial spaces across prime residential and commercial corridors.",
       },
-      { property: "og:image", content: "/images/og-banner.jpg" },
+      { property: "og:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Kolkata Luxury Properties for Sale & Lease · SS Property" },
+      { name: "twitter:title", content: "Luxury Properties for Sale & Lease · Apex Living" },
       {
         name: "twitter:description",
         content:
-          "Browse verified flats, penthouses and commercial spaces across Lake Town, Newtown, Kasba, Rajarhat and Greater Kolkata.",
+          "Browse verified flats, penthouses and commercial spaces across prime residential and commercial corridors.",
       },
-      { name: "twitter:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
     ],
   }),
   validateSearch: (search: Record<string, unknown>): Search => ({
@@ -215,7 +215,7 @@ function PropertiesPage() {
       <div className="min-h-dvh bg-paper text-ink selection:bg-brass-ghost">
         <Header />
 
-        <main className="pt-14 lg:pt-20">
+        <main className="pt-20 sm:pt-24 lg:pt-28">
           {/* =================================================================
               1. PAGE BANNER
              ================================================================= */}
@@ -713,12 +713,15 @@ function PropertiesPage() {
                   </div>
                 </div>
 
-                {/* Sticky Apply Button */}
-                <div className="pt-2 sticky bottom-0 bg-paper pb-2">
+                {/* Sticky Apply Button with Safe Area */}
+                <div
+                  className="pt-2 sticky bottom-0 bg-paper pb-2"
+                  style={{ paddingBottom: "max(16px, env(safe-area-inset-bottom))" }}
+                >
                   <button
                     type="button"
                     onClick={() => setMobileFilterOpen(false)}
-                    className="w-full rounded-xl bg-ink py-3.5 text-xs font-bold uppercase tracking-wider text-paper shadow-lg hover:bg-ink-2 active:scale-[0.98] transition-all"
+                    className="w-full rounded-xl bg-ink py-3.5 text-xs font-bold uppercase tracking-wider text-paper shadow-lg hover:bg-ink-2 active:scale-[0.98] transition-all cursor-pointer min-h-[48px]"
                   >
                     Show {filteredProperties.length} Properties
                   </button>
@@ -729,38 +732,52 @@ function PropertiesPage() {
 
           {/* Corridor Benchmark Insights Strip */}
           <div className="shell-wide pt-6 pb-2">
-            <div className="flex items-center gap-2.5 overflow-x-auto pb-1 text-[11px] text-muted">
+            <div className="flex items-center gap-2.5 overflow-x-auto pb-1 text-[11px] text-muted scroll-rail no-scrollbar">
               <span className="shrink-0 font-bold uppercase tracking-wider text-brass flex items-center gap-1">
                 <Sparkle size={13} weight="fill" />
                 Capital Benchmarks:
               </span>
               <button
                 type="button"
-                onClick={() => setFilter({ locality: "Lake Town" })}
-                className="shrink-0 rounded-full border border-line bg-white px-3 py-1 text-ink hover:border-brass transition-colors"
+                onClick={() => setFilter({ locality: "Ballygunge" })}
+                className="shrink-0 rounded-full border border-line bg-white px-3 py-1.5 text-ink hover:border-brass transition-colors active:scale-95"
               >
-                <strong>Lake Town & Bangur:</strong> ₹6,800 - ₹8,500/sq.ft
+                <strong>Ballygunge:</strong> ₹12,500 - ₹18,000/sq.ft
               </button>
               <button
                 type="button"
-                onClick={() => setFilter({ locality: "Newtown" })}
+                onClick={() => setFilter({ locality: "Alipore" })}
                 className="shrink-0 rounded-full border border-line bg-white px-3 py-1 text-ink hover:border-brass transition-colors"
               >
-                <strong>Newtown:</strong> ₹7,200 - ₹10,800/sq.ft
+                <strong>Alipore:</strong> ₹14,000 - ₹22,000/sq.ft
+              </button>
+              <button
+                type="button"
+                onClick={() => setFilter({ locality: "New Town" })}
+                className="shrink-0 rounded-full border border-line bg-white px-3 py-1 text-ink hover:border-brass transition-colors"
+              >
+                <strong>New Town:</strong> ₹7,500 - ₹11,500/sq.ft
+              </button>
+              <button
+                type="button"
+                onClick={() => setFilter({ locality: "Salt Lake" })}
+                className="shrink-0 rounded-full border border-line bg-white px-3 py-1 text-ink hover:border-brass transition-colors"
+              >
+                <strong>Salt Lake Sector V:</strong> ₹8,500 - ₹13,000/sq.ft
+              </button>
+              <button
+                type="button"
+                onClick={() => setFilter({ locality: "Lake Town" })}
+                className="shrink-0 rounded-full border border-line bg-white px-3 py-1 text-ink hover:border-brass transition-colors"
+              >
+                <strong>Lake Town:</strong> ₹6,800 - ₹8,500/sq.ft
               </button>
               <button
                 type="button"
                 onClick={() => setFilter({ locality: "Kasba" })}
                 className="shrink-0 rounded-full border border-line bg-white px-3 py-1 text-ink hover:border-brass transition-colors"
               >
-                <strong>Kasba / Ruby:</strong> ₹7,500 - ₹11,200/sq.ft
-              </button>
-              <button
-                type="button"
-                onClick={() => setFilter({ locality: "Rajarhat" })}
-                className="shrink-0 rounded-full border border-line bg-white px-3 py-1 text-ink hover:border-brass transition-colors"
-              >
-                <strong>Rajarhat:</strong> ₹5,500 - ₹7,800/sq.ft
+                <strong>Kasba / Ruby:</strong> ₹7,200 - ₹9,800/sq.ft
               </button>
             </div>
           </div>
@@ -805,7 +822,7 @@ function PropertiesPage() {
                 <p className="mt-2 text-xs text-muted max-w-md leading-relaxed">
                   {isAnyFilterActive
                     ? "Try adjusting your budget, locality, or configuration filters to discover available residences."
-                    : "The SS Property collection is actively onboarding verified residences. Are you an owner or developer looking to list with us?"}
+                    : "Our portfolio is actively onboarding verified residences. Are you an owner or developer looking to list with us?"}
                 </p>
                 <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                   {isAnyFilterActive ? (

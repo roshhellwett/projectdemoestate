@@ -30,7 +30,7 @@ export function FloatingConcierge({ className = "" }: { className?: string } = {
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-verdigris" />
               </span>
               <p className="text-xs font-semibold uppercase tracking-wider text-ink">
-                SS Property Concierge
+                {SITE.name} Concierge
               </p>
             </div>
             <button
@@ -44,12 +44,12 @@ export function FloatingConcierge({ className = "" }: { className?: string } = {
           </div>
 
           <p className="text-xs text-muted leading-relaxed">
-            Connect directly with our Kolkata luxury property advisors.
+            Connect directly with our luxury property advisors.
           </p>
 
           <div className="flex flex-col gap-2 pt-1">
             <a
-              href={`${SITE.whatsapp}?text=${encodeURIComponent("Hello SS Property, I am looking for a verified property in Kolkata and would like expert assistance.")}`}
+              href={`${SITE.whatsapp}?text=${encodeURIComponent(`Hello, I am looking for a verified luxury property and would like expert assistance.`)}`}
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-3 rounded-xl bg-verdigris px-4 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-verdigris/90 hover:shadow cursor-pointer"
@@ -92,7 +92,7 @@ export function FloatingConcierge({ className = "" }: { className?: string } = {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        aria-label="Contact SS Property Concierge"
+        aria-label={`Contact ${SITE.name} Concierge`}
         className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-ink text-paper shadow-[0_12px_28px_-6px_rgba(18,16,14,0.35)] transition-all duration-300 hover:scale-110 hover:bg-ink-2 active:scale-95 cursor-pointer float-subtle"
       >
         <span className="absolute -top-1 -right-1 flex h-4 w-4">

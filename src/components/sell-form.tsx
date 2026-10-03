@@ -92,7 +92,7 @@ export function SellForm({ kind = "sell" }: { kind?: "sell" | "partner" }) {
 
   if (state === "done") {
     const waText = encodeURIComponent(
-      `Hello SS Property, I have submitted my property listing details for valuation:\n- Location: ${form.address} (${form.locality})\n- Configuration: ${form.bedrooms} BHK (${form.area} sq.ft)\n- Expected Price: ${form.expectedPrice}\n- Name: ${form.name}\n- Phone: ${form.phone}`
+      `Hello, I have submitted my property listing details for valuation:\n- Location: ${form.address} (${form.locality})\n- Configuration: ${form.bedrooms} BHK (${form.area} sq.ft)\n- Expected Price: ${form.expectedPrice}\n- Name: ${form.name}\n- Phone: ${form.phone}`
     );
 
     return (
@@ -123,7 +123,7 @@ export function SellForm({ kind = "sell" }: { kind?: "sell" | "partner" }) {
   }
 
   const inputCls =
-    "w-full rounded-xl border border-line bg-paper/60 px-4 py-3 text-xs font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none transition-colors min-h-[48px]";
+    "w-full rounded-xl border border-line bg-paper/60 px-4 py-3 text-base sm:text-xs font-medium text-ink placeholder:text-muted focus:border-brass focus:bg-white focus:outline-none transition-colors min-h-[48px]";
   const labelCls = "mb-1.5 block text-xs font-bold text-ink uppercase tracking-wider";
 
   return (
@@ -431,7 +431,7 @@ export function SellForm({ kind = "sell" }: { kind?: "sell" | "partner" }) {
             <div className="rounded-xl bg-paper-2 p-4 text-xs text-muted flex items-start gap-2.5">
               <ShieldCheck size={18} weight="fill" className="text-verdigris shrink-0 mt-0.5" />
               <span>
-                SS Property guarantees complete confidentiality. Your phone and property address will never be publicly listed without written authorization.
+                We guarantee complete confidentiality. Your phone and property address will never be publicly listed without written authorization.
               </span>
             </div>
 

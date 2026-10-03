@@ -61,20 +61,20 @@ export const Route = createFileRoute("/property/$slug")({
   head: ({ loaderData }) => {
     const p = loaderData?.property;
     const desc = p
-      ? `${p.bhk_type} in ${p.locality || p.location}. ${formatPrice(p.price_inr, p.price_display)}. 100% physically inspected & title verified by SS Property Kolkata.`
-      : "Verified luxury property in Kolkata by SS Property.";
-    const img = p?.main_image || "/images/og-banner.jpg";
+      ? `${p.bhk_type} in ${p.locality || p.location}. ${formatPrice(p.price_inr, p.price_display)}. 100% physically inspected & title verified luxury residence.`
+      : "Verified luxury property showcase.";
+    const img = p?.main_image || "/images/properties/luxury_penthouse_terrace_1790945979055.jpg";
     return {
       meta: p
         ? [
-            { title: `${p.title} · SS Property Kolkata` },
+            { title: `${p.title} · Verified Luxury Residence` },
             { name: "description", content: desc },
-            { property: "og:title", content: `${p.title} · SS Property Kolkata` },
+            { property: "og:title", content: `${p.title} · Verified Luxury Residence` },
             { property: "og:description", content: desc },
             { property: "og:image", content: img },
             { property: "og:type", content: "article" },
             { name: "twitter:card", content: "summary_large_image" },
-            { name: "twitter:title", content: `${p.title} · SS Property Kolkata` },
+            { name: "twitter:title", content: `${p.title} · Verified Luxury Residence` },
             { name: "twitter:description", content: desc },
             { name: "twitter:image", content: img },
           ]
@@ -117,7 +117,7 @@ function PropertyDetailPage() {
       try {
         await navigator.share({
           title: property.title,
-          text: `Check out this verified property in ${property.locality} on SS Property:`,
+          text: `Check out this verified property in ${property.locality}:`,
           url: window.location.href,
         });
         return;
@@ -133,7 +133,7 @@ function PropertyDetailPage() {
   };
 
   const whatsappInquiryUrl = `${SITE.whatsapp}?text=${encodeURIComponent(
-    `Hello SS Property, I am interested in scheduling a private site visit for "${property.title}" in ${property.locality} (Priced at ${formatPrice(property.price_inr, property.price_display)}). Please share verified details.`
+    `Hello, I am interested in scheduling a private site visit for "${property.title}" in ${property.locality} (Priced at ${formatPrice(property.price_inr, property.price_display)}). Please share verified details.`
   )}`;
 
   return (
@@ -144,62 +144,62 @@ function PropertyDetailPage() {
         {/* =================================================================
             STICKY SUB-HEADER ON SCROLL
            ================================================================= */}
-        <div
-          className={`fixed top-14 lg:top-20 inset-x-0 z-30 border-b border-line bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 no-print ${
-            showStickyBar ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
-          }`}
-        >
-          <div className="shell-wide flex h-14 items-center justify-between gap-4">
-            <div className="flex items-center gap-3 overflow-hidden">
-              <img
-                src={property.main_image_thumb || property.main_image}
-                alt={property.title}
-                className="h-10 w-10 shrink-0 rounded-lg object-cover"
-              />
-              <div className="truncate">
-                <p className="truncate text-xs font-bold text-ink">{property.title}</p>
-                <p className="text-[11px] text-muted">{property.locality}</p>
+        {showStickyBar ? (
+          <div
+            className="fixed top-14 lg:top-20 inset-x-0 z-30 border-b border-line bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 no-print animate-in fade-in slide-in-from-top-2"
+          >
+            <div className="shell-wide flex h-14 items-center justify-between gap-4">
+              <div className="flex items-center gap-3 overflow-hidden">
+                <img
+                  src={property.main_image_thumb || property.main_image}
+                  alt={property.title}
+                  className="h-10 w-10 shrink-0 rounded-lg object-cover"
+                />
+                <div className="truncate">
+                  <p className="truncate text-xs font-bold text-ink">{property.title}</p>
+                  <p className="text-[11px] text-muted">{property.locality}</p>
+                </div>
               </div>
-            </div>
 
-            <div className="flex items-center gap-3 shrink-0">
-              <div className="text-right hidden sm:block">
-                <span className="font-display text-lg font-bold text-ink">
-                  {formatPrice(property.price_inr, property.price_display)}
-                </span>
+              <div className="flex items-center gap-3 shrink-0">
+                <div className="text-right hidden sm:block">
+                  <span className="font-display text-lg font-bold text-ink">
+                    {formatPrice(property.price_inr, property.price_display)}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => toggleCompare(property)}
+                  className={`hidden md:flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-semibold transition-colors ${
+                    compared
+                      ? "border-brass bg-brass text-ink font-bold"
+                      : "border-line bg-paper text-ink hover:border-brass"
+                  }`}
+                >
+                  <Scales size={15} weight={compared ? "fill" : "regular"} />
+                  <span>{compared ? "Compared" : "Compare"}</span>
+                </button>
+                <a
+                  href={whatsappInquiryUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-1.5 rounded-full bg-verdigris px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-verdigris/90 cursor-pointer min-h-[44px]"
+                >
+                  <WhatsappLogo size={15} weight="fill" />
+                  <span className="hidden sm:inline">WhatsApp</span>
+                </a>
+                <a
+                  href="#enquiry-section"
+                  className="rounded-full bg-ink px-4 py-2.5 text-xs font-semibold text-paper hover:bg-ink-2 cursor-pointer min-h-[44px] flex items-center"
+                >
+                  Schedule Visit
+                </a>
               </div>
-              <button
-                type="button"
-                onClick={() => toggleCompare(property)}
-                className={`hidden md:flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-semibold transition-colors ${
-                  compared
-                    ? "border-brass bg-brass text-ink font-bold"
-                    : "border-line bg-paper text-ink hover:border-brass"
-                }`}
-              >
-                <Scales size={15} weight={compared ? "fill" : "regular"} />
-                <span>{compared ? "Compared" : "Compare"}</span>
-              </button>
-              <a
-                href={whatsappInquiryUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-1.5 rounded-full bg-verdigris px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-verdigris/90 cursor-pointer min-h-[44px]"
-              >
-                <WhatsappLogo size={15} weight="fill" />
-                <span className="hidden sm:inline">WhatsApp</span>
-              </a>
-              <a
-                href="#enquiry-section"
-                className="rounded-full bg-ink px-4 py-2.5 text-xs font-semibold text-paper hover:bg-ink-2 cursor-pointer min-h-[44px] flex items-center"
-              >
-                Schedule Visit
-              </a>
             </div>
           </div>
-        </div>
+        ) : null}
 
-        <main className="pt-14 lg:pt-20">
+        <main className="pt-20 sm:pt-24 lg:pt-28">
           {/* =================================================================
               BREADCRUMB & TOP ACTIONS
              ================================================================= */}
@@ -317,36 +317,54 @@ function PropertyDetailPage() {
           </section>
 
           {/* =================================================================
-              LUXURY 5-PHOTO HERO GRID
+              LUXURY ADAPTIVE PHOTO HERO GRID
              ================================================================= */}
           <section className="shell-wide pb-12">
-            <div className="relative grid grid-cols-1 md:grid-cols-4 gap-3 h-[420px] md:h-[520px] rounded-3xl overflow-hidden shadow-[0_20px_50px_-20px_rgba(18,16,14,0.22)]">
-              {/* Main Left Photo (spans 2 cols) */}
-              <div
-                onClick={() => setLightboxIndex(0)}
-                className="relative md:col-span-2 h-full cursor-pointer overflow-hidden group bg-paper-2"
-              >
-                <img
-                  src={gallery[0]}
-                  alt={property.title}
-                  onError={(e) => {
-                    e.currentTarget.src = "/images/og-banner.jpg";
-                  }}
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-
-              {/* 2 Companion Photos in Col 3 */}
-              <div className="hidden md:grid grid-rows-2 gap-3 h-full">
-                {gallery[1] ? (
+            <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_50px_-20px_rgba(18,16,14,0.22)] h-[380px] sm:h-[460px] md:h-[520px]">
+              {gallery.length === 1 ? (
+                <div
+                  onClick={() => setLightboxIndex(0)}
+                  className="relative w-full h-full cursor-pointer overflow-hidden group bg-paper-2"
+                >
+                  <img
+                    src={gallery[0]}
+                    alt={property.title}
+                    onError={(e) => {
+                      e.currentTarget.src = "/images/og-banner.jpg";
+                    }}
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+              ) : gallery.length === 2 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 h-full">
+                  {gallery.slice(0, 2).map((imgUrl, idx) => (
+                    <div
+                      key={idx}
+                      onClick={() => setLightboxIndex(idx)}
+                      className="relative h-full cursor-pointer overflow-hidden group bg-paper-2"
+                    >
+                      <img
+                        src={imgUrl}
+                        alt={`${property.title} photo ${idx + 1}`}
+                        onError={(e) => {
+                          e.currentTarget.src = "/images/og-banner.jpg";
+                        }}
+                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  ))}
+                </div>
+              ) : gallery.length === 3 ? (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 h-full">
                   <div
-                    onClick={() => setLightboxIndex(1)}
-                    className="relative h-full cursor-pointer overflow-hidden group bg-paper-2"
+                    onClick={() => setLightboxIndex(0)}
+                    className="relative md:col-span-2 h-full cursor-pointer overflow-hidden group bg-paper-2"
                   >
                     <img
-                      src={gallery[1]}
-                      alt="Property interior"
+                      src={gallery[0]}
+                      alt={property.title}
                       onError={(e) => {
                         e.currentTarget.src = "/images/og-banner.jpg";
                       }}
@@ -354,18 +372,35 @@ function PropertyDetailPage() {
                     />
                     <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
-                ) : (
-                  <div className="bg-paper-2" />
-                )}
-
-                {gallery[2] ? (
+                  <div className="hidden md:grid grid-rows-2 gap-3 h-full">
+                    {gallery.slice(1, 3).map((imgUrl, idx) => (
+                      <div
+                        key={idx + 1}
+                        onClick={() => setLightboxIndex(idx + 1)}
+                        className="relative h-full cursor-pointer overflow-hidden group bg-paper-2"
+                      >
+                        <img
+                          src={imgUrl}
+                          alt={`${property.title} photo ${idx + 2}`}
+                          onError={(e) => {
+                            e.currentTarget.src = "/images/og-banner.jpg";
+                          }}
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : gallery.length === 4 ? (
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-3 h-full">
                   <div
-                    onClick={() => setLightboxIndex(2)}
-                    className="relative h-full cursor-pointer overflow-hidden group bg-paper-2"
+                    onClick={() => setLightboxIndex(0)}
+                    className="relative md:col-span-2 h-full cursor-pointer overflow-hidden group bg-paper-2"
                   >
                     <img
-                      src={gallery[2]}
-                      alt="Property interior"
+                      src={gallery[0]}
+                      alt={property.title}
                       onError={(e) => {
                         e.currentTarget.src = "/images/og-banner.jpg";
                       }}
@@ -373,21 +408,32 @@ function PropertyDetailPage() {
                     />
                     <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
-                ) : (
-                  <div className="bg-paper-2" />
-                )}
-              </div>
-
-              {/* 2 Companion Photos in Col 4 */}
-              <div className="hidden md:grid grid-rows-2 gap-3 h-full">
-                {gallery[3] ? (
+                  <div className="hidden md:grid grid-rows-2 gap-3 h-full">
+                    {gallery.slice(1, 3).map((imgUrl, idx) => (
+                      <div
+                        key={idx + 1}
+                        onClick={() => setLightboxIndex(idx + 1)}
+                        className="relative h-full cursor-pointer overflow-hidden group bg-paper-2"
+                      >
+                        <img
+                          src={imgUrl}
+                          alt={`${property.title} photo ${idx + 2}`}
+                          onError={(e) => {
+                            e.currentTarget.src = "/images/og-banner.jpg";
+                          }}
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                    ))}
+                  </div>
                   <div
                     onClick={() => setLightboxIndex(3)}
-                    className="relative h-full cursor-pointer overflow-hidden group bg-paper-2"
+                    className="hidden md:block relative h-full cursor-pointer overflow-hidden group bg-paper-2"
                   >
                     <img
                       src={gallery[3]}
-                      alt="Property interior"
+                      alt={`${property.title} photo 4`}
                       onError={(e) => {
                         e.currentTarget.src = "/images/og-banner.jpg";
                       }}
@@ -395,18 +441,16 @@ function PropertyDetailPage() {
                     />
                     <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
-                ) : (
-                  <div className="bg-paper-2" />
-                )}
-
-                {gallery[4] ? (
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-3 h-full">
                   <div
-                    onClick={() => setLightboxIndex(4)}
-                    className="relative h-full cursor-pointer overflow-hidden group bg-paper-2"
+                    onClick={() => setLightboxIndex(0)}
+                    className="relative md:col-span-2 h-full cursor-pointer overflow-hidden group bg-paper-2"
                   >
                     <img
-                      src={gallery[4]}
-                      alt="Property interior"
+                      src={gallery[0]}
+                      alt={property.title}
                       onError={(e) => {
                         e.currentTarget.src = "/images/og-banner.jpg";
                       }}
@@ -414,20 +458,56 @@ function PropertyDetailPage() {
                     />
                     <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
-                ) : (
-                  <div className="bg-paper-2" />
-                )}
-              </div>
+                  <div className="hidden md:grid grid-rows-2 gap-3 h-full">
+                    {gallery.slice(1, 3).map((imgUrl, idx) => (
+                      <div
+                        key={idx + 1}
+                        onClick={() => setLightboxIndex(idx + 1)}
+                        className="relative h-full cursor-pointer overflow-hidden group bg-paper-2"
+                      >
+                        <img
+                          src={imgUrl}
+                          alt="Property interior"
+                          onError={(e) => {
+                            e.currentTarget.src = "/images/og-banner.jpg";
+                          }}
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="hidden md:grid grid-rows-2 gap-3 h-full">
+                    {gallery.slice(3, 5).map((imgUrl, idx) => (
+                      <div
+                        key={idx + 3}
+                        onClick={() => setLightboxIndex(idx + 3)}
+                        className="relative h-full cursor-pointer overflow-hidden group bg-paper-2"
+                      >
+                        <img
+                          src={imgUrl}
+                          alt="Property interior"
+                          onError={(e) => {
+                            e.currentTarget.src = "/images/og-banner.jpg";
+                          }}
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-ink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Floating "View All Photos" Button */}
               <button
                 id="btn-view-gallery"
                 type="button"
                 onClick={() => setLightboxIndex(0)}
-                className="absolute bottom-5 right-5 flex items-center gap-2 rounded-full bg-white/95 px-5 py-2.5 text-xs font-bold text-ink shadow-lg backdrop-blur-md transition-all hover:scale-105 active:scale-95"
+                className="absolute bottom-3 right-3 sm:bottom-5 sm:right-5 flex items-center gap-1.5 sm:gap-2 rounded-full bg-white/95 px-3.5 py-2 sm:px-5 sm:py-2.5 text-xs font-bold text-ink shadow-lg backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer min-h-[40px]"
               >
                 <Sparkle size={15} weight="fill" className="text-brass" />
-                <span>View All {gallery.length} Photos</span>
+                <span>{gallery.length > 1 ? `View All ${gallery.length} Photos` : "View Photo"}</span>
               </button>
             </div>
           </section>
@@ -545,7 +625,7 @@ function PropertyDetailPage() {
                     </div>
                     <div>
                       <h3 className="font-display text-lg font-bold text-ink">Watch Live Video Tour</h3>
-                      <p className="text-xs text-muted">Walkthrough reel recorded on location by SS Property</p>
+                      <p className="text-xs text-muted">Walkthrough reel recorded on location by our advisory team</p>
                     </div>
                   </div>
                   <a
@@ -587,7 +667,7 @@ function PropertyDetailPage() {
                     </div>
                     <div>
                       <h3 className="font-display text-xl font-bold text-ink">Schedule a Private Tour</h3>
-                      <p className="text-xs text-muted">Direct with verified SS Property advisor</p>
+                      <p className="text-xs text-muted">Direct with verified property advisor</p>
                     </div>
                   </div>
 
@@ -613,7 +693,7 @@ function PropertyDetailPage() {
                 <div className="rounded-2xl border border-line bg-paper-2 p-5 text-xs text-muted space-y-2">
                   <p className="font-bold text-ink flex items-center gap-1.5">
                     <ShieldCheck size={16} weight="fill" className="text-verdigris" />
-                    100% Verified by SS Property
+                    100% Physically & Title Verified
                   </p>
                   <p>All listings are walked through in person. Title search, sanction plans, and developer credentials verified before listing.</p>
                 </div>
@@ -727,7 +807,7 @@ function PropertyDetailPage() {
         {/* Mobile Persistent Bottom Action Bar (< md) */}
         <div
           className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-line bg-white/95 backdrop-blur-md px-4 py-2.5 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] flex items-center justify-between gap-3"
-          style={{ paddingBottom: "max(10px, env(safe-area-inset-bottom))" }}
+          style={{ paddingBottom: "max(12px, env(safe-area-inset-bottom))" }}
         >
           <div className="min-w-0 flex-1">
             <p className="text-[10px] font-bold text-muted uppercase tracking-wider truncate">
@@ -742,14 +822,14 @@ function PropertyDetailPage() {
               href={whatsappInquiryUrl}
               target="_blank"
               rel="noreferrer"
-              className="flex h-10 items-center gap-1.5 rounded-full bg-verdigris px-3.5 text-xs font-bold text-white shadow-sm active:scale-95 cursor-pointer"
+              className="flex h-11 min-h-[44px] items-center gap-1.5 rounded-full bg-verdigris px-4 text-xs font-bold text-white shadow-sm active:scale-95 cursor-pointer"
             >
-              <WhatsappLogo size={16} weight="fill" />
+              <WhatsappLogo size={17} weight="fill" />
               <span>WhatsApp</span>
             </a>
             <a
               href="#enquiry-section"
-              className="flex h-10 items-center rounded-full bg-ink px-3.5 text-xs font-bold text-paper shadow-sm active:scale-95 cursor-pointer"
+              className="flex h-11 min-h-[44px] items-center rounded-full bg-ink px-4 text-xs font-bold text-paper shadow-sm active:scale-95 cursor-pointer"
             >
               Enquire
             </a>

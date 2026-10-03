@@ -136,7 +136,7 @@ export async function reorderImages(propertyId: string, orderedIds: string[]) {
  *   https://www.instagram.com/reel/DbqdwlJPfz2/
  *   https://instagram.com/reel/DbqdwlJPfz2/?igsh=...
  *   https://www.instagram.com/p/DbqdwlJPfz2/   (post-style, also works in embeds)
- *   https://www.instagram.com/sspropertykol/reel/DbqdwlJPfz2/
+ *   https://www.instagram.com/username/reel/DbqdwlJPfz2/
  */
 export function parseInstagramUrl(raw: string): { id: string; type: "p" | "reel"; reelUrl: string; embedUrl: string } | null {
   const url = raw.trim();
@@ -223,7 +223,7 @@ export async function upsertBlogPost(input: {
     slug: input.slug,
     title: input.title.trim(),
     publish_date: input.publishDate || new Date().toISOString().slice(0, 10),
-    author: input.author.trim() || "SS Property",
+    author: input.author.trim() || "Editorial Team",
     cover_image: input.cover ?? "",
     cover_thumb: input.coverThumb ?? "",
     content: input.content,

@@ -121,17 +121,17 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
   return (
     <div
       id="spotlight-search-modal"
-      className="fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-6 md:p-14 bg-black/60 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-start justify-center p-2.5 sm:p-6 md:p-14 bg-black/60 backdrop-blur-md animate-in fade-in duration-200"
       onClick={handleClose}
     >
       <div
-        className="w-full max-w-2xl rounded-3xl border-2 border-brass/50 bg-white shadow-2xl shadow-brass/15 ring-1 ring-brass/25 overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 duration-150"
+        className="w-full max-w-2xl rounded-2xl sm:rounded-3xl border-2 border-brass/50 bg-white shadow-2xl shadow-brass/15 ring-1 ring-brass/25 overflow-hidden flex flex-col max-h-[90vh] sm:max-h-[85vh] animate-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
         onKeyDown={handleKeyDown}
       >
         {/* Search Input Bar */}
-        <div className="relative flex items-center border-b border-brass/30 px-5 py-4 bg-paper/50">
-          <MagnifyingGlass size={22} weight="bold" className="text-brass mr-3 shrink-0" />
+        <div className="relative flex items-center border-b border-brass/30 px-3.5 sm:px-5 py-3 sm:py-4 bg-paper/50 gap-2">
+          <MagnifyingGlass size={20} weight="bold" className="text-brass shrink-0" />
           <input
             ref={inputRef}
             type="text"
@@ -140,14 +140,14 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
               setQuery(e.target.value);
               setSelectedIndex(0);
             }}
-            placeholder="Search by locality, project name, 2/3 BHK, or budget..."
+            placeholder="Search locality, 2/3 BHK, budget..."
             className="w-full bg-transparent text-base font-medium text-ink placeholder:text-muted outline-hidden"
           />
           {query ? (
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="rounded-full p-1 text-muted hover:text-ink mr-2"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-ink active:scale-90 shrink-0"
               title="Clear search"
             >
               <X size={16} />
@@ -156,9 +156,11 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
           <button
             type="button"
             onClick={handleClose}
-            className="rounded-full border border-brass/35 bg-white px-2.5 py-1 text-xs font-semibold text-muted hover:border-brass hover:text-ink transition-colors"
+            aria-label="Close search"
+            className="flex h-9 w-9 sm:h-auto sm:w-auto items-center justify-center rounded-full border border-brass/35 bg-white sm:px-2.5 sm:py-1 text-xs font-semibold text-muted hover:border-brass hover:text-ink transition-colors shrink-0 active:scale-90"
           >
-            ESC
+            <X size={16} className="sm:hidden" />
+            <span className="hidden sm:inline">ESC</span>
           </button>
         </div>
 
@@ -252,12 +254,13 @@ export function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
         </div>
 
         {/* Footer info bar */}
-        <div className="border-t border-line px-5 py-2.5 bg-paper text-[11px] text-muted flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="border-t border-line px-4 sm:px-5 py-2.5 bg-paper text-[11px] text-muted flex items-center justify-between">
+          <div className="hidden sm:flex items-center gap-3">
             <span>Use <kbd className="rounded border bg-white px-1 font-mono">↑</kbd> <kbd className="rounded border bg-white px-1 font-mono">↓</kbd> to navigate</span>
             <span><kbd className="rounded border bg-white px-1 font-mono">Enter</kbd> to open</span>
           </div>
-          <span>Showing {filtered.length} verified listings</span>
+          <span className="sm:hidden text-muted font-medium">Tap to view residence</span>
+          <span>{filtered.length} verified listings</span>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 -- =====================================================================
--- SS Property - initial schema
+-- Luxury Real Estate Platform - initial schema
 -- Postgres 17 / Supabase. Idempotent: safe to re-run.
 -- =====================================================================
 
@@ -104,7 +104,7 @@ create table if not exists public.blog_posts (
   slug          text unique not null,
   title         text not null,
   publish_date  date not null default current_date,
-  author        text not null default 'SS Property',
+  author        text not null default 'Editorial Team',
   cover_image   text default '',
   cover_thumb   text default '',
   content       text not null,

@@ -20,14 +20,14 @@ export const Route = createFileRoute("/journal/")({
   },
   head: () => ({
     meta: [
-      { title: "Journal · SS Property" },
-      { name: "description", content: "Kolkata market notes, buyer guides and honest advice from SS Property." },
-      { property: "og:title", content: "The Journal · SS Property Kolkata" },
-      { property: "og:description", content: "Kolkata market notes, buyer guides and honest advice from SS Property." },
-      { property: "og:image", content: "/images/og-banner.jpg" },
+      { title: "Journal · Architectural & Market Intelligence · Apex Living" },
+      { name: "description", content: "Market notes, buyer dossiers, and strategic advice on luxury real estate." },
+      { property: "og:title", content: "The Journal · Apex Living" },
+      { property: "og:description", content: "Market notes, buyer dossiers, and strategic advice on luxury real estate." },
+      { property: "og:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "The Journal · SS Property Kolkata" },
-      { name: "twitter:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:title", content: "The Journal · Apex Living" },
+      { name: "twitter:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
     ],
   }),
   component: JournalPage,
@@ -46,7 +46,7 @@ function JournalPage() {
     <div className="min-h-dvh bg-paper">
       <Header />
       <FloatingConcierge />
-      <main className="pt-14 lg:pt-16">
+      <main className="pt-20 sm:pt-24 lg:pt-28">
         <section className="border-b border-line bg-paper-2/60">
           <div className="shell py-14 md:py-20">
             <p className="eyebrow text-brass">Notes from the ground</p>

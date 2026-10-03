@@ -14,22 +14,22 @@ export const Route = createFileRoute("/sell")({
   loader: async () => ({ settings: await getSiteSettings(getSupabaseForRoute()) }),
   head: () => ({
     meta: [
-      { title: "Sell or Lease Your Kolkata Property · SS Property" },
+      { title: "Sell or Lease Your Property · Apex Living" },
       {
         name: "description",
         content:
-          "List your Kolkata flat, penthouse, or commercial space with SS Property. Accurate market valuation, professional photography, verified HNI buyers, zero spam.",
+          "List your flat, penthouse, or commercial space with our advisory. Accurate market valuation, professional photography, verified HNI buyers, zero spam.",
       },
-      { property: "og:title", content: "Sell or Lease Your Kolkata Property · SS Property" },
+      { property: "og:title", content: "Sell or Lease Your Property · Apex Living" },
       {
         property: "og:description",
         content:
-          "List your Kolkata flat, penthouse, or commercial space with SS Property. Accurate market valuation, professional photography, verified HNI buyers.",
+          "List your flat, penthouse, or commercial space with our advisory. Accurate market valuation, professional photography, verified HNI buyers.",
       },
-      { property: "og:image", content: "/images/og-banner.jpg" },
+      { property: "og:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Sell or Lease Your Kolkata Property · SS Property" },
-      { name: "twitter:image", content: "/images/og-banner.jpg" },
+      { name: "twitter:title", content: "Sell or Lease Your Property · Apex Living" },
+      { name: "twitter:image", content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg" },
     ],
   }),
   component: SellPage,
@@ -71,7 +71,7 @@ function SellPage() {
         <Header />
         <FloatingConcierge />
 
-        <main className="pt-14 lg:pt-20">
+        <main className="pt-20 sm:pt-24 lg:pt-28">
           <section className="border-b border-line bg-paper-2/70 py-14 md:py-20">
             <div className="shell-wide">
               <div className="inline-flex items-center gap-2 rounded-full border border-brass/40 bg-white px-3.5 py-1 text-xs font-semibold text-ink shadow-sm">
@@ -83,7 +83,7 @@ function SellPage() {
               </h1>
               <p className="mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-muted">
                 {settings.sell_intro ??
-                  "SS Property connects your flat, penthouse or commercial floor directly with high-intent buyers across Lake Town, Newtown, Kasba, and Greater Kolkata."}
+                  "Our platform connects your flat, penthouse or commercial floor directly with high-intent buyers across Lake Town, Newtown, Kasba, and Greater Kolkata."}
               </p>
             </div>
           </section>
@@ -118,7 +118,7 @@ function SellPage() {
 
               <div className="mt-8 rounded-2xl bg-paper-2 border border-line p-6 text-xs text-muted leading-relaxed">
                 <p className="font-bold text-ink mb-1">Zero Upfront Listing Fee</p>
-                <p>Listing with SS Property is free of charge. We only succeed when your property is successfully closed with complete satisfaction.</p>
+                <p>Listing with our advisory is free of charge. We only succeed when your property is successfully closed with complete satisfaction.</p>
               </div>
             </div>
 

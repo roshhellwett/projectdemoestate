@@ -68,7 +68,7 @@ export function PropertyCard({
     e.preventDefault();
     e.stopPropagation();
     const text = encodeURIComponent(
-      `Hello SS Property, I am interested in "${property.title}" (${property.locality}, priced at ${formatPrice(property.price_inr, property.price_display)}). Please share verified details and schedule a walkthrough.`
+      `Hello, I am interested in "${property.title}" (${property.locality}, priced at ${formatPrice(property.price_inr, property.price_display)}). Please share verified details and schedule a walkthrough.`
     );
     window.open(`${SITE.whatsapp}?text=${text}`, "_blank");
   };
@@ -100,7 +100,7 @@ export function PropertyCard({
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center bg-paper-2 text-sm text-muted">
-                SS Property Residence
+                Luxury Residence
               </div>
             )}
             <CardBadges property={property} />
@@ -234,7 +234,7 @@ function GridCard({
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-paper-2 text-sm text-muted">
-            SS Property Residence
+            Luxury Residence
           </div>
         )}
 
@@ -330,7 +330,7 @@ function CardBadges({ property }: { property: Property }) {
   );
 }
 
-/** Top-right action buttons - ≥40px touch targets */
+/** Top-right action buttons - guaranteed 44px touch targets on mobile */
 function CardActions({
   onQuickView,
   onCompare,
@@ -345,16 +345,16 @@ function CardActions({
   favorited: boolean;
 }) {
   return (
-    <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 z-10">
+    <div className="absolute top-2 right-2 flex items-center gap-1.5 z-10">
       {onQuickView ? (
         <button
           type="button"
           onClick={onQuickView}
           aria-label="Quick preview"
           title="Quick View"
-          className="touch-sm flex h-10 w-10 items-center justify-center rounded-full border border-brass/35 bg-white/90 backdrop-blur-md text-ink shadow-sm transition-all hover:scale-110 hover:border-brass hover:shadow-brass/20 active:scale-95 cursor-pointer"
+          className="flex h-11 w-11 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-brass/35 bg-white/95 backdrop-blur-md text-ink shadow-sm transition-all hover:scale-110 hover:border-brass hover:shadow-brass/20 active:scale-90 cursor-pointer"
         >
-          <Eye size={17} />
+          <Eye size={18} />
         </button>
       ) : null}
 
@@ -363,23 +363,23 @@ function CardActions({
         onClick={onCompare}
         aria-label={compared ? "Remove from compare" : "Add to compare"}
         title={compared ? "Compared" : "Compare"}
-        className={`touch-sm flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur-md shadow-sm transition-all hover:scale-110 active:scale-95 cursor-pointer ${
+        className={`flex h-11 w-11 sm:h-9 sm:w-9 items-center justify-center rounded-full border backdrop-blur-md shadow-sm transition-all hover:scale-110 active:scale-90 cursor-pointer ${
           compared
             ? "border-brass bg-brass text-ink font-bold shadow-brass/20"
-            : "border-brass/35 bg-white/90 text-muted hover:border-brass hover:text-ink hover:shadow-brass/20"
+            : "border-brass/35 bg-white/95 text-muted hover:border-brass hover:text-ink hover:shadow-brass/20"
         }`}
       >
-        <Scales size={17} weight={compared ? "fill" : "regular"} />
+        <Scales size={18} weight={compared ? "fill" : "regular"} />
       </button>
 
       <button
         type="button"
         onClick={onFavorite}
         aria-label={favorited ? "Remove from favorites" : "Save to favorites"}
-        className="touch-sm flex h-10 w-10 items-center justify-center rounded-full border border-brass/35 bg-white/90 backdrop-blur-md text-ink shadow-sm transition-all hover:scale-110 hover:border-brass hover:shadow-brass/20 active:scale-95 cursor-pointer"
+        className="flex h-11 w-11 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-brass/35 bg-white/95 backdrop-blur-md text-ink shadow-sm transition-all hover:scale-110 hover:border-brass hover:shadow-brass/20 active:scale-90 cursor-pointer"
       >
         <Heart
-          size={18}
+          size={19}
           weight={favorited ? "fill" : "regular"}
           className={favorited ? "text-danger" : "text-muted"}
         />
@@ -417,7 +417,7 @@ function PropertySpecs({ property }: { property: Property }) {
   );
 }
 
-/** WhatsApp inquiry button - visible pill on mobile */
+/** WhatsApp inquiry button - thumb-friendly target on mobile */
 function WhatsAppButton({
   onClick,
   expanded = false,
@@ -430,14 +430,14 @@ function WhatsAppButton({
       type="button"
       onClick={onClick}
       aria-label="Inquire via WhatsApp"
-      className={`touch-sm flex items-center gap-1.5 rounded-full text-verdigris transition-colors cursor-pointer shrink-0 ${
+      className={`flex items-center justify-center gap-1.5 rounded-full text-verdigris transition-colors cursor-pointer shrink-0 active:scale-90 ${
         expanded
-          ? "border border-verdigris/40 bg-verdigris/10 px-3.5 py-2 text-xs font-semibold hover:bg-verdigris hover:text-white"
-          : "p-2 hover:bg-verdigris/10"
+          ? "min-h-[44px] border border-verdigris/40 bg-verdigris/10 px-4 py-2 text-xs font-semibold hover:bg-verdigris hover:text-white"
+          : "h-11 w-11 sm:h-9 sm:w-9 hover:bg-verdigris/15 bg-verdigris/5"
       }`}
       title="Inquire via WhatsApp"
     >
-      <WhatsappLogo size={expanded ? 15 : 20} weight="fill" />
+      <WhatsappLogo size={expanded ? 16 : 20} weight="fill" />
       {expanded ? <span>Inquire</span> : null}
     </button>
   );

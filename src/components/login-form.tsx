@@ -62,7 +62,7 @@ export function LoginForm() {
                   autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="writetous@ssproperty.in"
+                  placeholder="admin@apexliving-demo.com"
                   className="w-full rounded-xl border border-line bg-paper px-4 py-3 pl-10 text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:ring-1 focus:ring-brass/30 focus:outline-none min-h-[46px]"
                 />
                 <EnvelopeSimple size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
@@ -121,7 +121,7 @@ export function LoginForm() {
             to="/"
             className="text-xs font-semibold text-muted hover:text-brass transition-colors inline-flex items-center gap-1"
           >
-            <span>← Back to SS Property Public Portal</span>
+            <span>← Back to Public Website</span>
           </Link>
         </div>
       </div>

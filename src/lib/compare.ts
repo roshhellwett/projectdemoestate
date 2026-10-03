@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Property } from "./types";
 
-const COMPARE_STORAGE_KEY = "ssproperty_compare_items_v1";
+const COMPARE_STORAGE_KEY = "realty_compare_items_v1";
 const MAX_COMPARE_ITEMS = 4;
 
 export interface CompareItem {
@@ -54,7 +54,7 @@ function writeCompareStorage(items: CompareItem[]): void {
   if (typeof window === "undefined") return;
   try {
     localStorage.setItem(COMPARE_STORAGE_KEY, JSON.stringify(items));
-    window.dispatchEvent(new CustomEvent("ssproperty_compare_change", { detail: items }));
+    window.dispatchEvent(new CustomEvent("realty_compare_change", { detail: items }));
   } catch (err) {
     console.error("Failed to save comparison items", err);
   }
@@ -87,10 +87,10 @@ export function useCompare() {
     const handleUpdate = () => {
       setItems(readCompareStorage());
     };
-    window.addEventListener("ssproperty_compare_change", handleUpdate);
+    window.addEventListener("realty_compare_change", handleUpdate);
     window.addEventListener("storage", handleUpdate);
     return () => {
-      window.removeEventListener("ssproperty_compare_change", handleUpdate);
+      window.removeEventListener("realty_compare_change", handleUpdate);
       window.removeEventListener("storage", handleUpdate);
     };
   }, []);

@@ -6,7 +6,7 @@ import { House, MagnifyingGlass, Sparkle } from "@phosphor-icons/react";
 
 export const Route = createFileRoute("/$")({
   head: () => ({
-    meta: [{ title: "Page Not Found · SS Property Kolkata" }],
+    meta: [{ title: "Page Not Found · Apex Living" }],
   }),
   component: NotFoundPage,
 });

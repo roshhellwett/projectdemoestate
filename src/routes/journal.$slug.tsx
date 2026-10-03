@@ -21,19 +21,19 @@ export const Route = createFileRoute("/journal/$slug")({
   },
   head: ({ loaderData }) => {
     const post = loaderData?.post;
-    const desc = post?.excerpt || post?.content?.slice(0, 150) || "SS Property Kolkata Journal article.";
-    const img = post?.cover_image || "/images/og-banner.jpg";
+    const desc = post?.excerpt || post?.content?.slice(0, 150) || "Apex Living Journal article.";
+    const img = post?.cover_image || "/images/properties/luxury_penthouse_terrace_1790945979055.jpg";
     return {
       meta: post
         ? [
-            { title: `${post.title} · SS Property` },
+            { title: `${post.title} · Apex Living` },
             { name: "description", content: desc },
-            { property: "og:title", content: `${post.title} · SS Property Kolkata` },
+            { property: "og:title", content: `${post.title} · Apex Living` },
             { property: "og:description", content: desc },
             { property: "og:image", content: img },
             { property: "og:type", content: "article" },
             { name: "twitter:card", content: "summary_large_image" },
-            { name: "twitter:title", content: `${post.title} · SS Property Kolkata` },
+            { name: "twitter:title", content: `${post.title} · Apex Living` },
             { name: "twitter:description", content: desc },
             { name: "twitter:image", content: img },
           ]
@@ -55,7 +55,7 @@ function JournalPostPage() {
     <div className="min-h-dvh bg-paper">
       <Header />
       <FloatingConcierge />
-      <main className="pt-14 lg:pt-16">
+      <main className="pt-20 sm:pt-24 lg:pt-28">
         <article className="shell max-w-[760px] py-10 sm:py-14">
           <nav className="mb-6 flex items-center gap-2 text-xs font-semibold text-brass">
             <Link

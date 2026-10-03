@@ -74,7 +74,7 @@ export function EnquiryForm({ property }: { property: Property }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             autoComplete="name"
-            className="w-full rounded-[var(--radius-input)] border border-line bg-paper px-4 py-3 text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:outline-none min-h-[48px]"
+            className="w-full rounded-[var(--radius-input)] border border-line bg-paper px-4 py-3 text-base sm:text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:outline-none min-h-[48px]"
             placeholder="Full name"
           />
         </div>
@@ -91,7 +91,7 @@ export function EnquiryForm({ property }: { property: Property }) {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             autoComplete="tel"
-            className="w-full rounded-[var(--radius-input)] border border-line bg-paper px-4 py-2.5 text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:outline-none min-h-[48px]"
+            className="w-full rounded-[var(--radius-input)] border border-line bg-paper px-4 py-2.5 text-base sm:text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:outline-none min-h-[48px]"
             placeholder="10-digit mobile"
           />
         </div>
@@ -104,7 +104,7 @@ export function EnquiryForm({ property }: { property: Property }) {
             rows={3}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="w-full resize-none rounded-[var(--radius-input)] border border-line bg-paper px-4 py-2.5 text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:outline-none"
+            className="w-full resize-none rounded-[var(--radius-input)] border border-line bg-paper px-4 py-2.5 text-base sm:text-sm text-ink placeholder:text-muted-2 focus:border-brass focus:outline-none"
             placeholder="Preferred visit time, questions..."
           />
         </div>

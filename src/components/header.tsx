@@ -25,6 +25,8 @@ import {
 import { SpotlightSearch } from "./spotlight-search";
 import { InstagramIcon } from "./instagram-icon";
 
+import { DemoBanner } from "./demo-banner";
+
 /* Icon map for sidebar nav items */
 const NAV_ICONS: Record<string, React.ElementType> = {
   "/properties": House,
@@ -105,9 +107,10 @@ export function Header() {
             : "border-b border-brass/25 bg-paper/85 backdrop-blur-md"
         }`}
       >
+        <DemoBanner />
         <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between gap-4 h-14 lg:h-20">
           {/* Brand Logo */}
-          <Link to="/" aria-label="SS Property home" onClick={() => setOpen(false)} className="flex items-center shrink-0">
+          <Link to="/" aria-label={`${SITE.name} home`} onClick={() => setOpen(false)} className="flex items-center shrink-0">
             <LogoImage className="h-8 lg:h-10 transition-transform hover:scale-[1.02]" />
           </Link>
 
@@ -291,20 +294,20 @@ export function Header() {
       >
         <div className="flex h-full flex-col overflow-y-auto overscroll-contain">
           {/* Sidebar Header */}
-          <div className="flex items-center justify-between border-b border-brass/30 px-5 py-4">
-            <span className="font-display text-lg font-semibold text-ink">Menu</span>
+          <div className="flex items-center justify-between border-b border-brass/30 px-5 py-3.5">
+            <span className="font-display text-lg font-semibold text-ink">Navigation</span>
             <button
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close menu"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-brass/40 hover:border-brass hover:bg-paper-2 transition-colors cursor-pointer"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-brass/40 hover:border-brass hover:bg-paper-2 transition-colors cursor-pointer active:scale-90"
             >
               <X size={20} weight="bold" />
             </button>
           </div>
 
           {/* Navigation Links */}
-          <nav className="flex-1 px-4 py-4" aria-label="Mobile navigation">
+          <nav className="flex-1 px-4 py-3" aria-label="Mobile navigation">
             <div className="flex flex-col gap-1">
               {NAV_LINKS.map((link) => {
                 const active = !!matchRoute({ to: link.to, fuzzy: true });
@@ -314,7 +317,7 @@ export function Header() {
                     key={link.to}
                     to={link.to}
                     onClick={() => setOpen(false)}
-                    className={`flex items-center gap-3 rounded-xl px-4 py-3.5 transition-colors ${
+                    className={`flex items-center gap-3 rounded-xl px-4 py-3.5 transition-colors active:scale-[0.98] ${
                       active
                         ? "bg-brass-ghost font-semibold text-ink border border-brass/30"
                         : "text-muted hover:text-ink hover:bg-paper-2"
@@ -338,21 +341,29 @@ export function Header() {
           </nav>
 
           {/* Sidebar Footer - Contact Actions */}
-          <div className="border-t border-brass/30 px-4 py-4 pb-6 space-y-3" style={{ paddingBottom: "max(24px, env(safe-area-inset-bottom))" }}>
+          <div className="border-t border-brass/30 px-4 py-4 space-y-2.5" style={{ paddingBottom: "max(24px, env(safe-area-inset-bottom))" }}>
+            {SITE.isDemo ? (
+              <a
+                href="mailto:zenithprojects@icloud.com?subject=Agency%20Website%20Demo%20Inquiry&body=Hi%20Zenith%20Projects%2C%0A%0AI%20am%20interested%20in%20customizing%20this%20luxury%20real%20estate%20platform%20for%20my%20agency."
+                className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brass via-brass-2 to-brass py-3 text-xs font-bold uppercase tracking-wider text-ink shadow-md active:scale-[0.98] transition-transform cursor-pointer"
+              >
+                <span>✨ Claim This Template</span>
+              </a>
+            ) : null}
             <a
               href={SITE.whatsapp}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center justify-center gap-2.5 rounded-xl bg-verdigris py-3.5 text-sm font-semibold text-white shadow-sm transition-transform active:scale-[0.98] cursor-pointer"
+              className="flex items-center justify-center gap-2.5 rounded-xl bg-verdigris py-3 text-sm font-semibold text-white shadow-sm transition-transform active:scale-[0.98] cursor-pointer"
             >
               <WhatsappLogo size={20} weight="fill" />
               <span>WhatsApp an Advisor</span>
             </a>
             <a
               href={SITE.phoneHref}
-              className="flex items-center justify-center gap-2.5 rounded-xl border border-brass/35 bg-paper-2 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-brass cursor-pointer"
+              className="flex items-center justify-center gap-2.5 rounded-xl border border-brass/35 bg-paper-2 py-3 text-sm font-semibold text-ink transition-colors hover:border-brass cursor-pointer"
             >
-              <PhoneCall size={20} className="text-brass" />
+              <PhoneCall size={18} className="text-brass" />
               <span>Call: {SITE.phone}</span>
             </a>
           </div>
