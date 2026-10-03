@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Architectural Crest -->
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EBE0C8"/>
+      <stop offset="40%" stop-color="#C9A24B"/>
+      <stop offset="100%" stop-color="#8C6E25"/>
+    </linearGradient>
+  </defs>
+  <rect x="5" y="5" width="90" height="90" rx="24" fill="#12100E" stroke="url(#goldGrad)" stroke-width="2.5"/>
+  <g transform="translate(10, 10)">
+    <path d="M40 8L72 40L40 72L8 40L40 8Z" stroke="url(#goldGrad)" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M40 8V72" stroke="#C9A24B" stroke-width="2" stroke-dasharray="3 2" opacity="0.8"/>
+    <path d="M8 40H72" stroke="#C9A24B" stroke-width="2" opacity="0.8"/>
+    <polygon points="40,24 56,40 40,56 24,40" fill="#A9862F" fill-opacity="0.25" stroke="url(#goldGrad)" stroke-width="2.5"/>
+    <circle cx="40" cy="40" r="4.5" fill="#FAF7F2"/>
+  </g>
+</svg>

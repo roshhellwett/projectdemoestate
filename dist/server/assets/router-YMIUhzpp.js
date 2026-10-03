@@ -1,0 +1,1515 @@
+import { a as useHydrated, l as __exportAll, n as useRouter, o as require_jsx_runtime, s as require_react, u as __toESM } from "./useStore-DOgV22Lo.js";
+import { n as Outlet, s as notFound } from "./Match-PAaURLE2.js";
+import { r as redirect } from "./redirect-jkG3vMHM.js";
+import { D as escapeHtml } from "./utils-pXzjPIMk.js";
+import { o as createNonReactiveMutableStore, r as RouterCore, s as createNonReactiveReadonlyStore, t as _getAssetMatches } from "./load-server-q-07CHFd.js";
+import { i as applySettings } from "./site-DOsTXA2M.js";
+import { a as getScriptPreloadAttrs, c as resolveManifestCssLink, i as getAssetCrossOrigin, t as appendUniqueUserTags } from "./manifest-C1Z7yn7o.js";
+import { n as createFileRoute, r as createRootRoute, t as lazyRouteComponent } from "./lazyRouteComponent-Zgd-dmbL.js";
+import { t as getSupabaseBrowser } from "./supabase-DLBQfxwj.js";
+import { t as getSupabaseForRoute } from "./route-supabase-KILB8YO0.js";
+import { a as getSiteSettings, c as listLocalities, d as listPublishedTestimonials, f as listReels, i as getSimilarProperties, l as listPartners, n as getImagesForProperty, o as listBlogPosts, r as getPropertyBySlug, s as listFaqs, t as getBlogPostBySlug, u as listProperties } from "./queries-DbW82INj.js";
+import { r as formatPrice } from "./format-CHtBtEr_.js";
+//#region node_modules/@tanstack/store/dist/esm/alien.js
+var ReactiveFlags = /* @__PURE__ */ ((ReactiveFlags2) => {
+	ReactiveFlags2[ReactiveFlags2["None"] = 0] = "None";
+	ReactiveFlags2[ReactiveFlags2["Mutable"] = 1] = "Mutable";
+	ReactiveFlags2[ReactiveFlags2["Watching"] = 2] = "Watching";
+	ReactiveFlags2[ReactiveFlags2["RecursedCheck"] = 4] = "RecursedCheck";
+	ReactiveFlags2[ReactiveFlags2["Recursed"] = 8] = "Recursed";
+	ReactiveFlags2[ReactiveFlags2["Dirty"] = 16] = "Dirty";
+	ReactiveFlags2[ReactiveFlags2["Pending"] = 32] = "Pending";
+	return ReactiveFlags2;
+})(ReactiveFlags || {});
+// @__NO_SIDE_EFFECTS__
+function createReactiveSystem({ update, notify, unwatched }) {
+	return {
+		link,
+		unlink,
+		propagate,
+		checkDirty,
+		shallowPropagate
+	};
+	function link(dep, sub, version) {
+		const prevDep = sub.depsTail;
+		if (prevDep !== void 0 && prevDep.dep === dep) return;
+		const nextDep = prevDep !== void 0 ? prevDep.nextDep : sub.deps;
+		if (nextDep !== void 0 && nextDep.dep === dep) {
+			nextDep.version = version;
+			sub.depsTail = nextDep;
+			return;
+		}
+		const prevSub = dep.subsTail;
+		if (prevSub !== void 0 && prevSub.version === version && prevSub.sub === sub) return;
+		const newLink = sub.depsTail = dep.subsTail = {
+			version,
+			dep,
+			sub,
+			prevDep,
+			nextDep,
+			prevSub,
+			nextSub: void 0
+		};
+		if (nextDep !== void 0) nextDep.prevDep = newLink;
+		if (prevDep !== void 0) prevDep.nextDep = newLink;
+		else sub.deps = newLink;
+		if (prevSub !== void 0) prevSub.nextSub = newLink;
+		else dep.subs = newLink;
+	}
+	function unlink(link2, sub = link2.sub) {
+		const dep = link2.dep;
+		const prevDep = link2.prevDep;
+		const nextDep = link2.nextDep;
+		const nextSub = link2.nextSub;
+		const prevSub = link2.prevSub;
+		if (nextDep !== void 0) nextDep.prevDep = prevDep;
+		else sub.depsTail = prevDep;
+		if (prevDep !== void 0) prevDep.nextDep = nextDep;
+		else sub.deps = nextDep;
+		if (nextSub !== void 0) nextSub.prevSub = prevSub;
+		else dep.subsTail = prevSub;
+		if (prevSub !== void 0) prevSub.nextSub = nextSub;
+		else if ((dep.subs = nextSub) === void 0) unwatched(dep);
+		return nextDep;
+	}
+	function propagate(link2) {
+		let next = link2.nextSub;
+		let stack;
+		top: do {
+			const sub = link2.sub;
+			let flags = sub.flags;
+			if (!(flags & 60)) sub.flags = flags | 32;
+			else if (!(flags & 12)) flags = 0;
+			else if (!(flags & 4)) sub.flags = flags & -9 | 32;
+			else if (!(flags & 48) && isValidLink(link2, sub)) {
+				sub.flags = flags | 40;
+				flags &= 1;
+			} else flags = 0;
+			if (flags & 2) notify(sub);
+			if (flags & 1) {
+				const subSubs = sub.subs;
+				if (subSubs !== void 0) {
+					const nextSub = (link2 = subSubs).nextSub;
+					if (nextSub !== void 0) {
+						stack = {
+							value: next,
+							prev: stack
+						};
+						next = nextSub;
+					}
+					continue;
+				}
+			}
+			if ((link2 = next) !== void 0) {
+				next = link2.nextSub;
+				continue;
+			}
+			while (stack !== void 0) {
+				link2 = stack.value;
+				stack = stack.prev;
+				if (link2 !== void 0) {
+					next = link2.nextSub;
+					continue top;
+				}
+			}
+			break;
+		} while (true);
+	}
+	function checkDirty(link2, sub) {
+		let stack;
+		let checkDepth = 0;
+		let dirty = false;
+		top: do {
+			const dep = link2.dep;
+			const flags = dep.flags;
+			if (sub.flags & 16) dirty = true;
+			else if ((flags & 17) === 17) {
+				if (update(dep)) {
+					const subs = dep.subs;
+					if (subs.nextSub !== void 0) shallowPropagate(subs);
+					dirty = true;
+				}
+			} else if ((flags & 33) === 33) {
+				if (link2.nextSub !== void 0 || link2.prevSub !== void 0) stack = {
+					value: link2,
+					prev: stack
+				};
+				link2 = dep.deps;
+				sub = dep;
+				++checkDepth;
+				continue;
+			}
+			if (!dirty) {
+				const nextDep = link2.nextDep;
+				if (nextDep !== void 0) {
+					link2 = nextDep;
+					continue;
+				}
+			}
+			while (checkDepth--) {
+				const firstSub = sub.subs;
+				const hasMultipleSubs = firstSub.nextSub !== void 0;
+				if (hasMultipleSubs) {
+					link2 = stack.value;
+					stack = stack.prev;
+				} else link2 = firstSub;
+				if (dirty) {
+					if (update(sub)) {
+						if (hasMultipleSubs) shallowPropagate(firstSub);
+						sub = link2.sub;
+						continue;
+					}
+					dirty = false;
+				} else sub.flags &= -33;
+				sub = link2.sub;
+				const nextDep = link2.nextDep;
+				if (nextDep !== void 0) {
+					link2 = nextDep;
+					continue top;
+				}
+			}
+			return dirty;
+		} while (true);
+	}
+	function shallowPropagate(link2) {
+		do {
+			const sub = link2.sub;
+			const flags = sub.flags;
+			if ((flags & 48) === 32) {
+				sub.flags = flags | 16;
+				if ((flags & 6) === 2) notify(sub);
+			}
+		} while ((link2 = link2.nextSub) !== void 0);
+	}
+	function isValidLink(checkLink, sub) {
+		let link2 = sub.depsTail;
+		while (link2 !== void 0) {
+			if (link2 === checkLink) return true;
+			link2 = link2.prevDep;
+		}
+		return false;
+	}
+}
+var queuedEffects = [];
+var { link, unlink, propagate, checkDirty, shallowPropagate } = /* @__PURE__ */ createReactiveSystem({
+	update(atom) {
+		return atom._update();
+	},
+	notify(effect2) {
+		queuedEffects[queuedEffectsLength++] = effect2;
+		effect2.flags &= ~ReactiveFlags.Watching;
+	},
+	unwatched(atom) {
+		if (atom.depsTail !== void 0) {
+			atom.depsTail = void 0;
+			atom.flags = ReactiveFlags.Mutable | ReactiveFlags.Dirty;
+			purgeDeps(atom);
+		}
+	}
+});
+var queuedEffectsLength = 0;
+function purgeDeps(sub) {
+	const depsTail = sub.depsTail;
+	let dep = depsTail !== void 0 ? depsTail.nextDep : sub.deps;
+	while (dep !== void 0) dep = unlink(dep, sub);
+}
+//#endregion
+//#region node_modules/@tanstack/react-router/dist/esm/routerStores.js
+var getStoreFactory = (opts) => {
+	return {
+		createMutableStore: createNonReactiveMutableStore,
+		createReadonlyStore: createNonReactiveReadonlyStore,
+		batch: (fn) => fn()
+	};
+};
+//#endregion
+//#region node_modules/@tanstack/react-router/dist/esm/router.js
+/**
+* Creates a new Router instance for React.
+*
+* Pass the returned router to `RouterProvider` to enable routing.
+* Notable options: `routeTree` (your route definitions) and `context`
+* (required if the root route was created with `createRootRouteWithContext`).
+*
+* @param options Router options used to configure the router.
+* @returns A Router instance to be provided to `RouterProvider`.
+* @link https://tanstack.com/router/latest/docs/framework/react/api/router/createRouterFunction
+*/
+var createRouter = (options) => {
+	return new Router(options);
+};
+var Router = class extends RouterCore {
+	constructor(options) {
+		super(options, getStoreFactory);
+	}
+};
+//#endregion
+//#region node_modules/@tanstack/react-router/dist/esm/Asset.js
+var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
+var import_jsx_runtime = require_jsx_runtime();
+var noopScriptHandler = () => {};
+function setScriptAttrs(script, attrs) {
+	if (!attrs) return;
+	for (const [key, value] of Object.entries(attrs)) if (key !== "suppressHydrationWarning" && value !== void 0 && value !== false) script.setAttribute(key, typeof value === "boolean" ? "" : String(value));
+}
+function Asset(asset) {
+	const { attrs, children, nonce, preventScriptHoist } = asset;
+	const innerHTML = import_react.useMemo(() => children === void 0 ? void 0 : { __html: children }, [children]);
+	switch (asset.tag) {
+		case "title": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("title", {
+			...attrs,
+			suppressHydrationWarning: true,
+			children
+		});
+		case "meta": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("meta", {
+			...attrs,
+			suppressHydrationWarning: true
+		});
+		case "link": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("link", {
+			...attrs,
+			precedence: attrs?.precedence ?? (attrs?.rel === "stylesheet" ? "default" : void 0),
+			nonce,
+			suppressHydrationWarning: true
+		});
+		case "style":
+			if (asset.inlineCss && false);
+			return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", {
+				...attrs,
+				dangerouslySetInnerHTML: innerHTML,
+				nonce
+			});
+		case "script": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Script, {
+			attrs,
+			preventScriptHoist,
+			children
+		});
+		default: return null;
+	}
+}
+function Script({ attrs, children, preventScriptHoist }) {
+	useRouter();
+	useHydrated();
+	const innerHTML = import_react.useMemo(() => children === void 0 ? void 0 : { __html: children }, [children]);
+	const dataScript = typeof attrs?.type === "string" && attrs.type !== "" && attrs.type !== "text/javascript" && attrs.type !== "module";
+	import_react.useEffect(() => {
+		if (dataScript) return;
+		if (attrs?.src) {
+			const link = document.createElement("a");
+			link.href = attrs.src;
+			const normSrc = link.href;
+			for (const el of document.scripts) if (el.src === normSrc) return;
+			const script = document.createElement("script");
+			setScriptAttrs(script, attrs);
+			document.head.appendChild(script);
+			return () => script.remove();
+		}
+		if (typeof children === "string") {
+			const typeAttr = typeof attrs?.type === "string" ? attrs.type : "text/javascript";
+			const nonceAttr = typeof attrs?.nonce === "string" ? attrs.nonce : void 0;
+			for (const el of document.scripts) {
+				if (el.hasAttribute("src")) continue;
+				const sType = el.getAttribute("type") ?? "text/javascript";
+				const sNonce = el.getAttribute("nonce") ?? void 0;
+				if (el.textContent === children && sType === typeAttr && sNonce === nonceAttr) return;
+			}
+			const script = document.createElement("script");
+			script.textContent = children;
+			setScriptAttrs(script, attrs);
+			document.head.appendChild(script);
+			return () => script.remove();
+		}
+	}, [
+		attrs,
+		children,
+		dataScript
+	]);
+	if (attrs?.src) {
+		if (!preventScriptHoist) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("script", {
+			...attrs,
+			suppressHydrationWarning: true
+		});
+		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("script", {
+			...attrs,
+			onLoad: noopScriptHandler,
+			suppressHydrationWarning: true
+		});
+	}
+	if (typeof children === "string") return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("script", {
+		...attrs,
+		dangerouslySetInnerHTML: innerHTML,
+		suppressHydrationWarning: true
+	});
+	return null;
+}
+//#endregion
+//#region node_modules/@tanstack/react-router/dist/esm/headContentUtils.js
+function buildTagsFromMatches(router, nonce, matches, assetCrossOrigin) {
+	matches = _getAssetMatches(matches);
+	const routeMeta = matches.map((match) => match.meta).filter((meta) => meta !== void 0);
+	const resultMeta = [];
+	const metaByAttribute = {};
+	let title;
+	for (let i = routeMeta.length - 1; i >= 0; i--) {
+		const metas = routeMeta[i];
+		for (let j = metas.length - 1; j >= 0; j--) {
+			const m = metas[j];
+			if (!m) continue;
+			if (m.title) {
+				if (!title) title = {
+					tag: "title",
+					children: m.title
+				};
+			} else if ("script:ld+json" in m) try {
+				const json = JSON.stringify(m["script:ld+json"]);
+				resultMeta.push({
+					tag: "script",
+					attrs: { type: "application/ld+json" },
+					children: escapeHtml(json)
+				});
+			} catch {}
+			else {
+				const attribute = m.name ?? m.property;
+				if (attribute) if (metaByAttribute[attribute]) continue;
+				else metaByAttribute[attribute] = true;
+				resultMeta.push({
+					tag: "meta",
+					attrs: {
+						...m,
+						nonce
+					}
+				});
+			}
+		}
+	}
+	if (title) resultMeta.push(title);
+	if (nonce) resultMeta.push({
+		tag: "meta",
+		attrs: {
+			property: "csp-nonce",
+			content: nonce
+		}
+	});
+	resultMeta.reverse();
+	const constructedLinks = matches.flatMap((match) => match.links ?? []).filter((link) => link !== void 0).map((link) => ({
+		tag: "link",
+		attrs: {
+			...link,
+			nonce
+		}
+	}));
+	const manifest = router.ssr?.manifest;
+	const manifestCssTags = [];
+	if (manifest) {
+		matches.forEach((match) => {
+			(manifest.routes[match.routeId]?.css)?.forEach((link) => {
+				const resolvedLink = resolveManifestCssLink(link);
+				manifestCssTags.push({
+					tag: "link",
+					attrs: {
+						rel: "stylesheet",
+						...resolvedLink,
+						crossOrigin: getAssetCrossOrigin(assetCrossOrigin, "stylesheet") ?? resolvedLink.crossOrigin,
+						suppressHydrationWarning: true,
+						nonce
+					}
+				});
+			});
+		});
+		if (manifest.inlineStyle) manifestCssTags.push({
+			tag: "style",
+			attrs: {
+				...manifest.inlineStyle.attrs,
+				nonce
+			},
+			children: manifest.inlineStyle.children,
+			inlineCss: true
+		});
+	}
+	const preloadLinks = [];
+	if (manifest) matches.forEach((match) => {
+		manifest.routes[match.routeId]?.preloads?.forEach((preload) => {
+			preloadLinks.push({
+				tag: "link",
+				attrs: {
+					...getScriptPreloadAttrs(manifest, preload, assetCrossOrigin),
+					nonce
+				}
+			});
+		});
+	});
+	const styles = matches.flatMap((match) => match.styles ?? []).filter((style) => style !== void 0).map(({ children, ...attrs }) => ({
+		tag: "style",
+		attrs: {
+			...attrs,
+			nonce
+		},
+		children
+	}));
+	const headScripts = matches.flatMap((match) => match.headScripts ?? []).filter((script) => script !== void 0).map(({ children, ...script }) => ({
+		tag: "script",
+		attrs: {
+			...script,
+			nonce
+		},
+		children
+	}));
+	const tags = [];
+	appendUniqueUserTags(tags, resultMeta);
+	tags.push(...preloadLinks);
+	appendUniqueUserTags(tags, constructedLinks);
+	tags.push(...manifestCssTags);
+	appendUniqueUserTags(tags, styles);
+	appendUniqueUserTags(tags, headScripts);
+	return tags;
+}
+/**
+* Build the head/link/meta/script tags from the renderable presented prefix.
+* Used internally by `HeadContent`.
+*/
+var useTags = (assetCrossOrigin) => {
+	const router = useRouter();
+	const nonce = router.options.ssr?.nonce;
+	return buildTagsFromMatches(router, nonce, router.stores.matches.get(), assetCrossOrigin);
+};
+//#endregion
+//#region node_modules/@tanstack/react-router/dist/esm/HeadContent.js
+/**
+* Render route-managed head tags (title, meta, links, styles, head scripts).
+* Place inside the document head of your app shell.
+* @link https://tanstack.com/router/latest/docs/framework/react/guide/document-head-management
+*/
+function HeadContent(props) {
+	const tags = useTags(props.assetCrossOrigin);
+	const nonce = useRouter().options.ssr?.nonce;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: tags.map((tag) => /* @__PURE__ */ (0, import_react.createElement)(Asset, {
+		...tag,
+		key: `tsr-meta-${JSON.stringify(tag)}`,
+		nonce
+	})) });
+}
+//#endregion
+//#region node_modules/@tanstack/react-router/dist/esm/Scripts.js
+/**
+* Render body script tags collected from route matches and SSR manifests.
+* Should be placed near the end of the document body.
+*/
+var Scripts = () => {
+	const router = useRouter();
+	const nonce = router.options.ssr?.nonce;
+	const getScripts = (matches) => {
+		matches = _getAssetMatches(matches);
+		const scripts = matches.flatMap((match) => match.scripts ?? []).filter(Boolean).map(({ children, ...script }) => ({
+			tag: "script",
+			attrs: {
+				...script,
+				suppressHydrationWarning: true,
+				nonce
+			},
+			children
+		}));
+		const manifest = router.ssr?.manifest;
+		if (!manifest) return scripts;
+		for (const match of matches) {
+			const manifestScripts = manifest.routes[match.routeId]?.scripts;
+			if (!manifestScripts) continue;
+			for (const asset of manifestScripts) scripts.push({
+				tag: "script",
+				attrs: {
+					...asset.attrs,
+					nonce
+				},
+				children: asset.children,
+				...typeof asset.attrs?.src === "string" ? { preventScriptHoist: true } : {}
+			});
+		}
+		return scripts;
+	};
+	return renderScripts(router, getScripts(router.stores.matches.get()));
+};
+function renderScripts(router, scripts) {
+	if (router.serverSsr) {
+		const serverBufferedScript = router.serverSsr.takeBufferedScripts();
+		if (serverBufferedScript) scripts.unshift(serverBufferedScript);
+	}
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: scripts.map((asset, i) => /* @__PURE__ */ (0, import_react.createElement)(Asset, {
+		...asset,
+		key: `tsr-scripts-${asset.tag}-${i}`
+	})) });
+}
+//#endregion
+//#region src/styles/app.css?url
+var app_default = "/assets/app-BjnjxAKv.css";
+//#endregion
+//#region src/routes/__root.tsx
+var Route$19 = createRootRoute({
+	head: () => ({
+		meta: [
+			{ charSet: "utf-8" },
+			{
+				name: "viewport",
+				content: "width=device-width, initial-scale=1, viewport-fit=cover"
+			},
+			{
+				name: "theme-color",
+				content: "#faf7f2"
+			},
+			{
+				name: "apple-mobile-web-app-capable",
+				content: "yes"
+			},
+			{
+				name: "apple-mobile-web-app-status-bar-style",
+				content: "default"
+			},
+			{
+				name: "format-detection",
+				content: "telephone=no"
+			},
+			{
+				property: "og:site_name",
+				content: "Apex Living · Luxury Real Estate Showcase"
+			},
+			{
+				property: "og:type",
+				content: "website"
+			},
+			{
+				property: "og:image",
+				content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+			},
+			{
+				property: "og:image:width",
+				content: "1200"
+			},
+			{
+				property: "og:image:height",
+				content: "630"
+			},
+			{
+				property: "og:image:alt",
+				content: "Apex Living - Verified Luxury Residences & Commercial Spaces"
+			},
+			{
+				name: "twitter:card",
+				content: "summary_large_image"
+			},
+			{
+				name: "twitter:image",
+				content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+			}
+		],
+		links: [
+			{
+				rel: "icon",
+				href: "/favicon.svg",
+				type: "image/svg+xml"
+			},
+			{
+				rel: "apple-touch-icon",
+				href: "/logo-icon.svg"
+			},
+			{
+				rel: "stylesheet",
+				href: app_default
+			},
+			{
+				rel: "preload",
+				href: app_default,
+				as: "style"
+			}
+		]
+	}),
+	component: RootDocument,
+	errorComponent: RootErrorComponent
+});
+function RootErrorComponent() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("html", {
+		lang: "en",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("head", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HeadContent, {}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("body", {
+			className: "min-h-screen bg-paper text-ink flex flex-col items-center justify-center p-6 text-center",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "max-w-md w-full rounded-3xl border border-brass/40 bg-white p-8 shadow-2xl shadow-brass/15",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brass-ghost text-brass text-xl font-bold font-display",
+						children: "✦"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+						className: "mt-4 font-display text-2xl font-semibold text-ink",
+						children: "Apex Living"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-1 text-xs uppercase tracking-widest text-brass",
+						children: "Verified Luxury Real Estate Demo"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "my-6 h-px bg-line/80" }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						className: "font-display text-lg font-medium text-ink",
+						children: "Temporary Connection Refresh"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-2 text-sm text-muted leading-relaxed",
+						children: "Our luxury advisory and physical property tours are fully active. Reach out directly to our principal advisor."
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "mt-6 flex flex-col gap-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "https://wa.me/919800000000",
+							target: "_blank",
+							rel: "noreferrer",
+							className: "flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-paper hover:bg-ink-2 transition-all shadow-md",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "WhatsApp Advisor (+91 98000 00000)" })
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "/",
+							className: "rounded-full border border-brass/40 bg-white px-6 py-2.5 text-xs font-semibold text-ink hover:border-brass transition-all",
+							children: "Return to Homepage"
+						})]
+					})
+				]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Scripts, {})]
+		})]
+	});
+}
+function RootDocument() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("html", {
+		lang: "en",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("head", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HeadContent, {}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("body", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Scripts, {})] })]
+	});
+}
+//#endregion
+//#region src/routes/index.tsx
+var $$splitComponentImporter$18 = () => import("./routes-DQQ1ZZYp.js");
+var Route$18 = createFileRoute("/")({
+	head: () => ({ meta: [
+		{ title: "Apex Living · Verified Luxury Residences & Commercial Spaces" },
+		{
+			name: "description",
+			content: "Premier luxury real estate advisory demo. Verified flats, penthouses and commercial spaces across prime residential enclaves. 100% physically inspected."
+		},
+		{
+			property: "og:title",
+			content: "Apex Living · Verified Luxury Residences & Commercial Spaces"
+		},
+		{
+			property: "og:description",
+			content: "Premier luxury real estate advisory demo. Verified flats, penthouses and commercial spaces across prime residential enclaves."
+		},
+		{
+			property: "og:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		},
+		{
+			name: "twitter:title",
+			content: "Apex Living · Verified Luxury Residences & Commercial Spaces"
+		},
+		{
+			name: "twitter:description",
+			content: "Premier luxury real estate advisory demo. Verified flats, penthouses and commercial spaces across prime residential enclaves."
+		},
+		{
+			name: "twitter:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		}
+	] }),
+	loader: async () => {
+		const supabase = getSupabaseForRoute();
+		const [featured, latest, reels, posts, faqs, testimonials, settings, localities] = await Promise.all([
+			listProperties(supabase, {
+				featuredOnly: true,
+				limit: 6
+			}),
+			listProperties(supabase, { limit: 12 }),
+			listReels(supabase),
+			listBlogPosts(supabase, 3),
+			listFaqs(supabase),
+			listPublishedTestimonials(supabase),
+			getSiteSettings(supabase),
+			listLocalities(supabase)
+		]);
+		const corridorCounts = {};
+		for (const loc of localities ?? []) corridorCounts[loc.locality] = loc.count;
+		return {
+			featured,
+			latest,
+			reels,
+			posts,
+			faqs,
+			testimonials,
+			settings,
+			corridorCounts,
+			site: applySettings(settings)
+		};
+	},
+	component: lazyRouteComponent($$splitComponentImporter$18, "component")
+});
+//#endregion
+//#region src/routes/$.tsx
+var $$splitComponentImporter$17 = () => import("./_-BntHafNl.js");
+var Route$17 = createFileRoute("/$")({
+	head: () => ({ meta: [{ title: "Page Not Found · Apex Living" }] }),
+	component: lazyRouteComponent($$splitComponentImporter$17, "component")
+});
+//#endregion
+//#region src/routes/about.tsx
+var $$splitComponentImporter$16 = () => import("./about-BPuzSwVH.js");
+var Route$16 = createFileRoute("/about")({
+	loader: async () => {
+		const supabase = getSupabaseForRoute();
+		const [properties, settings] = await Promise.all([listProperties(supabase, {}), getSiteSettings(supabase)]);
+		return {
+			count: properties.length,
+			settings
+		};
+	},
+	head: () => ({ meta: [
+		{ title: "About Us · Apex Living · Built Around Trust" },
+		{
+			name: "description",
+			content: "Apex Living is a premier luxury real estate advisory and property showcase platform dedicated to physically verified listings, video tours, and transparent advisory."
+		},
+		{
+			property: "og:title",
+			content: "About Us · Apex Living · Built Around Trust"
+		},
+		{
+			property: "og:description",
+			content: "Apex Living is a premier luxury real estate advisory and property showcase platform dedicated to physically verified listings, video tours, and transparent advisory."
+		},
+		{
+			property: "og:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		},
+		{
+			name: "twitter:card",
+			content: "summary_large_image"
+		},
+		{
+			name: "twitter:title",
+			content: "About Us · Apex Living · Built Around Trust"
+		},
+		{
+			name: "twitter:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		}
+	] }),
+	component: lazyRouteComponent($$splitComponentImporter$16, "component")
+});
+//#endregion
+//#region src/routes/admin.tsx
+var $$splitComponentImporter$15 = () => import("./admin-BauzGrn0.js");
+/**
+* /admin layout route: auth guard + shared chrome. Child routes
+* (admin.index.tsx dashboard, admin.new.tsx, admin.property.$id.tsx)
+* render through <Outlet />.
+*
+* The guard runs in the browser only: the session lives in localStorage,
+* which does not exist during SSR. RLS still protects every query, so an
+* unauthenticated visitor sees an empty dashboard at worst.
+*/
+var Route$15 = createFileRoute("/admin")({
+	head: () => ({ meta: [{ title: "Admin Dashboard · Agency Portal Demo" }, {
+		name: "robots",
+		content: "noindex"
+	}] }),
+	beforeLoad: async () => {
+		if (typeof window === "undefined") return;
+		const { data } = await getSupabaseBrowser().auth.getSession();
+		if (!data.session) throw redirect({ to: "/login" });
+	},
+	component: lazyRouteComponent($$splitComponentImporter$15, "component")
+});
+//#endregion
+//#region src/routes/calculator.tsx
+var $$splitComponentImporter$14 = () => import("./calculator-CIHwTBXU.js");
+var Route$14 = createFileRoute("/calculator")({
+	head: () => ({ meta: [
+		{ title: "Home Loan EMI & Stamp Duty Calculator · Apex Living" },
+		{
+			name: "description",
+			content: "Calculate monthly home loan EMIs, municipal stamp duty, and registration charges for residential and commercial luxury properties."
+		},
+		{
+			property: "og:title",
+			content: "Home Loan EMI & Stamp Duty Calculator · Apex Living"
+		},
+		{
+			property: "og:description",
+			content: "Calculate monthly home loan EMIs, municipal stamp duty, and registration charges for luxury properties."
+		},
+		{
+			property: "og:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		},
+		{
+			name: "twitter:card",
+			content: "summary_large_image"
+		},
+		{
+			name: "twitter:title",
+			content: "Home Loan EMI & Stamp Duty Calculator · Apex Living"
+		},
+		{
+			name: "twitter:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		}
+	] }),
+	loader: async () => {
+		const supabase = getSupabaseForRoute();
+		return { settings: await getSiteSettings(supabase) };
+	},
+	component: lazyRouteComponent($$splitComponentImporter$14, "component")
+});
+//#endregion
+//#region src/routes/compare.tsx
+var $$splitComponentImporter$13 = () => import("./compare-C-mgZApf.js");
+var Route$13 = createFileRoute("/compare")({
+	head: () => ({ meta: [
+		{ title: "Compare Residences · Architectural Dossier · Apex Living" },
+		{
+			name: "description",
+			content: "Side-by-side comparison of luxury residences. Compare super built-up areas, price per sq.ft., orientations, and transaction breakdowns."
+		},
+		{
+			property: "og:title",
+			content: "Compare Residences · Apex Living"
+		},
+		{
+			property: "og:description",
+			content: "Side-by-side comparison of luxury residences. Compare super built-up areas, price per sq.ft., and transaction breakdowns."
+		},
+		{
+			property: "og:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		},
+		{
+			name: "twitter:card",
+			content: "summary_large_image"
+		},
+		{
+			name: "twitter:title",
+			content: "Compare Residences · Apex Living"
+		},
+		{
+			name: "twitter:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		}
+	] }),
+	loader: async () => {
+		const supabase = getSupabaseForRoute();
+		const [allProperties, settings] = await Promise.all([listProperties(supabase, { limit: 50 }), getSiteSettings(supabase)]);
+		return {
+			allProperties,
+			settings
+		};
+	},
+	component: lazyRouteComponent($$splitComponentImporter$13, "component")
+});
+//#endregion
+//#region src/routes/instagram.tsx
+var $$splitComponentImporter$12 = () => import("./instagram-BBDA5de8.js");
+var Route$12 = createFileRoute("/instagram")({
+	loader: async () => {
+		const supabase = getSupabaseForRoute();
+		const [reels, settings] = await Promise.all([listReels(supabase), getSiteSettings(supabase)]);
+		return {
+			reels,
+			settings
+		};
+	},
+	head: () => ({ meta: [
+		{ title: "Walkthroughs & Cinema Reels · Apex Living" },
+		{
+			name: "description",
+			content: "Verified architectural walkthroughs, luxury site visits, and market insights straight from our social channels."
+		},
+		{
+			property: "og:title",
+			content: "Walkthroughs & Cinema Reels · Apex Living"
+		},
+		{
+			property: "og:description",
+			content: "Verified architectural walkthroughs, luxury site visits, and market insights straight from our social channels."
+		},
+		{
+			property: "og:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		},
+		{
+			name: "twitter:card",
+			content: "summary_large_image"
+		},
+		{
+			name: "twitter:title",
+			content: "Walkthroughs & Cinema Reels · Apex Living"
+		},
+		{
+			name: "twitter:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		}
+	] }),
+	component: lazyRouteComponent($$splitComponentImporter$12, "component")
+});
+//#endregion
+//#region src/routes/journal.tsx
+var $$splitComponentImporter$11 = () => import("./journal-NUBtRNY6.js");
+/**
+* /journal layout route: renders child routes (/journal/ index and /journal/$slug)
+* through <Outlet />.
+*/
+var Route$11 = createFileRoute("/journal")({ component: lazyRouteComponent($$splitComponentImporter$11, "component") });
+//#endregion
+//#region src/routes/login.tsx
+var $$splitComponentImporter$10 = () => import("./login-BsEicqmg.js");
+var Route$10 = createFileRoute("/login")({
+	head: () => ({ meta: [{ title: "Sign In · Agency Portal Demo" }, {
+		name: "robots",
+		content: "noindex"
+	}] }),
+	beforeLoad: async () => {
+		if (typeof window === "undefined") return;
+		const { data } = await getSupabaseBrowser().auth.getSession();
+		if (data.session) throw redirect({ to: "/admin" });
+	},
+	component: lazyRouteComponent($$splitComponentImporter$10, "component")
+});
+//#endregion
+//#region src/routes/partner.tsx
+var $$splitComponentImporter$9 = () => import("./partner-BOkVBe5r.js");
+var Route$9 = createFileRoute("/partner")({
+	beforeLoad: () => {
+		throw redirect({ to: "/partners" });
+	},
+	component: lazyRouteComponent($$splitComponentImporter$9, "component")
+});
+//#endregion
+//#region src/routes/partners.tsx
+var $$splitComponentImporter$8 = () => import("./partners-BwMTDnFn.js");
+var Route$8 = createFileRoute("/partners")({
+	loader: async () => {
+		const supabase = getSupabaseForRoute();
+		const [partners, settings] = await Promise.all([listPartners(supabase), getSiteSettings(supabase)]);
+		return {
+			partners,
+			settings
+		};
+	},
+	head: () => ({ meta: [
+		{ title: "Builders & Brand Partners · Apex Living" },
+		{
+			name: "description",
+			content: "Discover trusted developers, CREDAI certified builders, and institutional partners working with our advisory platform."
+		},
+		{
+			property: "og:title",
+			content: "Builders & Brand Partners · Apex Living"
+		},
+		{
+			property: "og:description",
+			content: "Discover trusted developers, CREDAI certified builders, and institutional partners working with our advisory platform."
+		},
+		{
+			property: "og:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		},
+		{
+			name: "twitter:card",
+			content: "summary_large_image"
+		},
+		{
+			name: "twitter:title",
+			content: "Builders & Brand Partners · Apex Living"
+		},
+		{
+			name: "twitter:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		}
+	] }),
+	component: lazyRouteComponent($$splitComponentImporter$8, "component")
+});
+/**
+* Static, non-moving partner card.
+* Displays logo static with crisp presentation, description, and link.
+*/
+//#endregion
+//#region src/routes/properties.tsx
+var $$splitComponentImporter$7 = () => import("./properties-DXtK4K5v.js");
+var Route$7 = createFileRoute("/properties")({
+	head: () => ({ meta: [
+		{ title: "Luxury Properties for Sale & Lease · Apex Living" },
+		{
+			name: "description",
+			content: "Browse verified flats, penthouses and commercial spaces across prime residential and commercial corridors. Filter by locality, budget, and BHK."
+		},
+		{
+			property: "og:title",
+			content: "Luxury Properties for Sale & Lease · Apex Living"
+		},
+		{
+			property: "og:description",
+			content: "Browse verified flats, penthouses and commercial spaces across prime residential and commercial corridors."
+		},
+		{
+			property: "og:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		},
+		{
+			name: "twitter:card",
+			content: "summary_large_image"
+		},
+		{
+			name: "twitter:title",
+			content: "Luxury Properties for Sale & Lease · Apex Living"
+		},
+		{
+			name: "twitter:description",
+			content: "Browse verified flats, penthouses and commercial spaces across prime residential and commercial corridors."
+		},
+		{
+			name: "twitter:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		}
+	] }),
+	validateSearch: (search) => ({
+		q: typeof search.q === "string" ? search.q : "",
+		locality: typeof search.locality === "string" ? search.locality : "All",
+		bhk: typeof search.bhk === "string" ? search.bhk : "",
+		budget: typeof search.budget === "string" ? search.budget : "",
+		possession: typeof search.possession === "string" ? search.possession : "",
+		furnishing: typeof search.furnishing === "string" ? search.furnishing : "",
+		sort: typeof search.sort === "string" ? search.sort : "featured",
+		view: search.view === "list" ? "list" : "grid",
+		savedOnly: search.savedOnly === true || search.savedOnly === "true"
+	}),
+	loaderDeps: ({ search }) => ({
+		q: search.q || "",
+		locality: search.locality || "All",
+		bhk: search.bhk || "",
+		budget: search.budget || "",
+		possession: search.possession || "",
+		furnishing: search.furnishing || "",
+		sort: search.sort || "featured",
+		view: search.view || "grid",
+		savedOnly: !!search.savedOnly
+	}),
+	loader: async ({ deps }) => {
+		const supabase = getSupabaseForRoute();
+		let minPrice;
+		let maxPrice;
+		if (deps.budget === "under-75") maxPrice = 75e5;
+		else if (deps.budget === "75-150") {
+			minPrice = 75e5;
+			maxPrice = 15e6;
+		} else if (deps.budget === "150-plus") minPrice = 15e6;
+		const [properties, localities, settings] = await Promise.all([
+			listProperties(supabase, {
+				q: deps.q || void 0,
+				locality: deps.locality,
+				bhk: deps.bhk || void 0,
+				minPrice,
+				maxPrice,
+				possession: deps.possession || void 0,
+				furnishing: deps.furnishing || void 0,
+				sort: deps.sort
+			}),
+			listLocalities(supabase),
+			getSiteSettings(supabase)
+		]);
+		return {
+			properties,
+			localities,
+			settings
+		};
+	},
+	component: lazyRouteComponent($$splitComponentImporter$7, "component")
+});
+//#endregion
+//#region src/routes/sell.tsx
+var $$splitComponentImporter$6 = () => import("./sell-Q7BnYiMQ.js");
+var Route$6 = createFileRoute("/sell")({
+	loader: async () => ({ settings: await getSiteSettings(getSupabaseForRoute()) }),
+	head: () => ({ meta: [
+		{ title: "Sell or Lease Your Property · Apex Living" },
+		{
+			name: "description",
+			content: "List your flat, penthouse, or commercial space with our advisory. Accurate market valuation, professional photography, verified HNI buyers, zero spam."
+		},
+		{
+			property: "og:title",
+			content: "Sell or Lease Your Property · Apex Living"
+		},
+		{
+			property: "og:description",
+			content: "List your flat, penthouse, or commercial space with our advisory. Accurate market valuation, professional photography, verified HNI buyers."
+		},
+		{
+			property: "og:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		},
+		{
+			name: "twitter:card",
+			content: "summary_large_image"
+		},
+		{
+			name: "twitter:title",
+			content: "Sell or Lease Your Property · Apex Living"
+		},
+		{
+			name: "twitter:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		}
+	] }),
+	component: lazyRouteComponent($$splitComponentImporter$6, "component")
+});
+//#endregion
+//#region src/routes/admin.index.tsx
+var $$splitComponentImporter$5 = () => import("./admin.index-BSwGk4CL.js");
+/**
+* /admin index: listings table + enquiries inbox. Guarded by the /admin
+* layout route (admin.tsx).
+*/
+var Route$5 = createFileRoute("/admin/")({
+	head: () => ({ meta: [{ title: "Admin Dashboard · Agency Portal Demo" }, {
+		name: "robots",
+		content: "noindex"
+	}] }),
+	component: lazyRouteComponent($$splitComponentImporter$5, "component")
+});
+//#endregion
+//#region src/routes/admin.new.tsx
+var $$splitComponentImporter$4 = () => import("./admin.new-BCnxg3GS.js");
+var Route$4 = createFileRoute("/admin/new")({
+	head: () => ({ meta: [{ title: "New Listing · Admin" }, {
+		name: "robots",
+		content: "noindex"
+	}] }),
+	beforeLoad: async () => {
+		if (typeof window === "undefined") return;
+		const { data } = await getSupabaseBrowser().auth.getSession();
+		if (!data.session) throw redirect({ to: "/login" });
+	},
+	component: lazyRouteComponent($$splitComponentImporter$4, "component")
+});
+//#endregion
+//#region src/routes/journal.index.tsx
+var $$splitComponentImporter$3 = () => import("./journal.index-DAZzIBzm.js");
+var Route$3 = createFileRoute("/journal/")({
+	loader: async () => {
+		const supabase = getSupabaseForRoute();
+		const [posts, settings] = await Promise.all([listBlogPosts(supabase), getSiteSettings(supabase)]);
+		return {
+			posts,
+			settings
+		};
+	},
+	head: () => ({ meta: [
+		{ title: "Journal · Architectural & Market Intelligence · Apex Living" },
+		{
+			name: "description",
+			content: "Market notes, buyer dossiers, and strategic advice on luxury real estate."
+		},
+		{
+			property: "og:title",
+			content: "The Journal · Apex Living"
+		},
+		{
+			property: "og:description",
+			content: "Market notes, buyer dossiers, and strategic advice on luxury real estate."
+		},
+		{
+			property: "og:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		},
+		{
+			name: "twitter:card",
+			content: "summary_large_image"
+		},
+		{
+			name: "twitter:title",
+			content: "The Journal · Apex Living"
+		},
+		{
+			name: "twitter:image",
+			content: "/images/properties/luxury_penthouse_terrace_1790945979055.jpg"
+		}
+	] }),
+	component: lazyRouteComponent($$splitComponentImporter$3, "component")
+});
+//#endregion
+//#region src/routes/journal.$slug.tsx
+var $$splitComponentImporter$2 = () => import("./journal._slug-IBxtmXMw.js");
+var Route$2 = createFileRoute("/journal/$slug")({
+	loader: async ({ params }) => {
+		const supabase = getSupabaseForRoute();
+		const [post, settings] = await Promise.all([getBlogPostBySlug(supabase, params.slug), getSiteSettings(supabase)]);
+		if (!post) throw notFound();
+		return {
+			post,
+			settings
+		};
+	},
+	head: ({ loaderData }) => {
+		const post = loaderData?.post;
+		const desc = post?.excerpt || post?.content?.slice(0, 150) || "Apex Living Journal article.";
+		const img = post?.cover_image || "/images/properties/luxury_penthouse_terrace_1790945979055.jpg";
+		return { meta: post ? [
+			{ title: `${post.title} · Apex Living` },
+			{
+				name: "description",
+				content: desc
+			},
+			{
+				property: "og:title",
+				content: `${post.title} · Apex Living`
+			},
+			{
+				property: "og:description",
+				content: desc
+			},
+			{
+				property: "og:image",
+				content: img
+			},
+			{
+				property: "og:type",
+				content: "article"
+			},
+			{
+				name: "twitter:card",
+				content: "summary_large_image"
+			},
+			{
+				name: "twitter:title",
+				content: `${post.title} · Apex Living`
+			},
+			{
+				name: "twitter:description",
+				content: desc
+			},
+			{
+				name: "twitter:image",
+				content: img
+			}
+		] : [] };
+	},
+	component: lazyRouteComponent($$splitComponentImporter$2, "component")
+});
+//#endregion
+//#region src/routes/property.$slug.tsx
+var $$splitComponentImporter$1 = () => import("./property._slug-DmFiUI5L.js");
+var Route$1 = createFileRoute("/property/$slug")({
+	loader: async ({ params }) => {
+		const supabase = getSupabaseForRoute();
+		const property = await getPropertyBySlug(supabase, params.slug);
+		if (!property) throw notFound();
+		const [images, similar, settings] = await Promise.all([
+			getImagesForProperty(supabase, property.id),
+			getSimilarProperties(supabase, property, 3),
+			getSiteSettings(supabase)
+		]);
+		return {
+			property,
+			images,
+			similar,
+			settings
+		};
+	},
+	head: ({ loaderData }) => {
+		const p = loaderData?.property;
+		const desc = p ? `${p.bhk_type} in ${p.locality || p.location}. ${formatPrice(p.price_inr, p.price_display)}. 100% physically inspected & title verified luxury residence.` : "Verified luxury property showcase.";
+		const img = p?.main_image || "/images/properties/luxury_penthouse_terrace_1790945979055.jpg";
+		return { meta: p ? [
+			{ title: `${p.title} · Verified Luxury Residence` },
+			{
+				name: "description",
+				content: desc
+			},
+			{
+				property: "og:title",
+				content: `${p.title} · Verified Luxury Residence`
+			},
+			{
+				property: "og:description",
+				content: desc
+			},
+			{
+				property: "og:image",
+				content: img
+			},
+			{
+				property: "og:type",
+				content: "article"
+			},
+			{
+				name: "twitter:card",
+				content: "summary_large_image"
+			},
+			{
+				name: "twitter:title",
+				content: `${p.title} · Verified Luxury Residence`
+			},
+			{
+				name: "twitter:description",
+				content: desc
+			},
+			{
+				name: "twitter:image",
+				content: img
+			}
+		] : [] };
+	},
+	component: lazyRouteComponent($$splitComponentImporter$1, "component")
+});
+//#endregion
+//#region src/routes/admin.property.$id.tsx
+var $$splitComponentImporter = () => import("./admin.property._id-BCC8hoYn.js");
+var Route = createFileRoute("/admin/property/$id")({
+	head: () => ({ meta: [{ title: "Edit Listing · Admin" }, {
+		name: "robots",
+		content: "noindex"
+	}] }),
+	beforeLoad: async () => {
+		if (typeof window === "undefined") return;
+		const { data } = await getSupabaseBrowser().auth.getSession();
+		if (!data.session) throw redirect({ to: "/login" });
+	},
+	component: lazyRouteComponent($$splitComponentImporter, "component")
+});
+//#endregion
+//#region src/routeTree.gen.ts
+var IndexRoute = Route$18.update({
+	id: "/",
+	path: "/",
+	getParentRoute: () => Route$19
+});
+var SplatRoute = Route$17.update({
+	id: "/$",
+	path: "/$",
+	getParentRoute: () => Route$19
+});
+var AboutRoute = Route$16.update({
+	id: "/about",
+	path: "/about",
+	getParentRoute: () => Route$19
+});
+var AdminRoute = Route$15.update({
+	id: "/admin",
+	path: "/admin",
+	getParentRoute: () => Route$19
+});
+var CalculatorRoute = Route$14.update({
+	id: "/calculator",
+	path: "/calculator",
+	getParentRoute: () => Route$19
+});
+var CompareRoute = Route$13.update({
+	id: "/compare",
+	path: "/compare",
+	getParentRoute: () => Route$19
+});
+var InstagramRoute = Route$12.update({
+	id: "/instagram",
+	path: "/instagram",
+	getParentRoute: () => Route$19
+});
+var JournalRoute = Route$11.update({
+	id: "/journal",
+	path: "/journal",
+	getParentRoute: () => Route$19
+});
+var LoginRoute = Route$10.update({
+	id: "/login",
+	path: "/login",
+	getParentRoute: () => Route$19
+});
+var PartnerRoute = Route$9.update({
+	id: "/partner",
+	path: "/partner",
+	getParentRoute: () => Route$19
+});
+var PartnersRoute = Route$8.update({
+	id: "/partners",
+	path: "/partners",
+	getParentRoute: () => Route$19
+});
+var PropertiesRoute = Route$7.update({
+	id: "/properties",
+	path: "/properties",
+	getParentRoute: () => Route$19
+});
+var SellRoute = Route$6.update({
+	id: "/sell",
+	path: "/sell",
+	getParentRoute: () => Route$19
+});
+var AdminIndexRoute = Route$5.update({
+	id: "/",
+	path: "/",
+	getParentRoute: () => AdminRoute
+});
+var AdminNewRoute = Route$4.update({
+	id: "/new",
+	path: "/new",
+	getParentRoute: () => AdminRoute
+});
+var JournalIndexRoute = Route$3.update({
+	id: "/",
+	path: "/",
+	getParentRoute: () => JournalRoute
+});
+var JournalSlugRoute = Route$2.update({
+	id: "/$slug",
+	path: "/$slug",
+	getParentRoute: () => JournalRoute
+});
+var PropertySlugRoute = Route$1.update({
+	id: "/property/$slug",
+	path: "/property/$slug",
+	getParentRoute: () => Route$19
+});
+var AdminRouteChildren = {
+	AdminNewRoute,
+	AdminIndexRoute,
+	AdminPropertyIdRoute: Route.update({
+		id: "/property/$id",
+		path: "/property/$id",
+		getParentRoute: () => AdminRoute
+	})
+};
+var AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren);
+var JournalRouteChildren = {
+	JournalSlugRoute,
+	JournalIndexRoute
+};
+var rootRouteChildren = {
+	IndexRoute,
+	SplatRoute,
+	AboutRoute,
+	AdminRoute: AdminRouteWithChildren,
+	CalculatorRoute,
+	CompareRoute,
+	InstagramRoute,
+	JournalRoute: JournalRoute._addFileChildren(JournalRouteChildren),
+	LoginRoute,
+	PartnerRoute,
+	PartnersRoute,
+	PropertiesRoute,
+	SellRoute,
+	PropertySlugRoute
+};
+var routeTree = Route$19._addFileChildren(rootRouteChildren)._addFileTypes();
+//#endregion
+//#region src/router.tsx
+var router_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
+/**
+* App router. Route files live in src/routes/; the route tree is generated
+* into routeTree.gen.ts by the TanStack router plugin (never edit by hand).
+*/
+function getRouter() {
+	return createRouter({
+		routeTree,
+		defaultPreload: "intent",
+		scrollRestoration: true
+	});
+}
+//#endregion
+export { Route$3 as a, Route$8 as c, Route$14 as d, Route$16 as f, getRouter, Route$2 as i, Route$12 as l, Route as n, Route$6 as o, Route$18 as p, Route$1 as r, Route$7 as s, router_exports as t, Route$13 as u };

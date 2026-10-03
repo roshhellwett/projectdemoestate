@@ -1,8 +1,6 @@
-# SS Property - Kolkata Real Estate
+# Apex Living · Luxury Real Estate Demo Platform
 
-Production website + CMS for SS Property (Kolkata).
-
-**Live:** https://ssproperty.roshhellwett.workers.dev (Cloudflare Worker `ssproperty`)
+Turnkey luxury real estate website + CMS showcase. Ready to rebrand and deploy for any real estate agency or developer with their custom logo, colors, domain, and inventory.
 
 ## Stack
 
@@ -35,7 +33,7 @@ Production website + CMS for SS Property (Kolkata).
 ├── supabase/migrations/0001_initial_schema.sql   # tables, RLS, triggers
 ├── originals-archive/       # byte-identical source photos (local only)
 ├── partners/                # partner brand assets (DTC.png)
-├── wrangler.jsonc            # worker name: ssproperty
+├── wrangler.jsonc            # worker name: luxury-estate-demo
 └── vite.config.ts
 ```
 
@@ -70,8 +68,7 @@ Route structure: `admin.tsx` is the guard + layout (`<Outlet />`);
 `admin.index.tsx` is the dashboard; editor pages are children that render
 inside the layout.
 
-Admin account (first login): `writetous@ssproperty.in` - change the password
-immediately via Supabase Dashboard -> Authentication.
+Admin account (first login): Configure your admin email via Supabase Dashboard -> Authentication.
 
 ## Media pipeline
 

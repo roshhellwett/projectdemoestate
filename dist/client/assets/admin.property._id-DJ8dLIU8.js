@@ -1,0 +1,1 @@
+import{o as e}from"./useStore-Dxrb0cwB.js";import{t}from"./index-BlwE7FFi.js";import{n}from"./property-editor-CgCNisgK.js";var r=e();function i(){let{id:e}=t.useParams();return(0,r.jsx)(n,{propertyId:e})}export{i as component};

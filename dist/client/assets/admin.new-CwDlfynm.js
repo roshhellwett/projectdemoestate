@@ -1,1 +1,0 @@
-import{o as e}from"./useStore-Dxrb0cwB.js";import{t}from"./property-editor-Ci2bu3ty.js";var n=e(),r=()=>(0,n.jsx)(t,{});export{r as component};
