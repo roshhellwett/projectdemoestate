@@ -64,9 +64,10 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Prevent horizontal overflow globally on mobile */
-    overflow-x: hidden;
-    max-width: 100vw;
+    /* overflow-x: hidden removed from html — it caused browsers to promote
+       overflow-y to auto on the viewport, which combined with body's
+       overflow-x: hidden created a containment conflict blocking vertical
+       scroll. body's overflow-x: hidden alone is sufficient. */
   }
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -82,7 +83,6 @@
     /* Full viewport height including mobile browser chrome */
     min-height: 100dvh;
     overflow-x: hidden;
-    max-width: 100vw;
   }
 
   ::selection {
